@@ -18,6 +18,7 @@ class Post(db.Model):
     community = db.relationship("Community", back_populates="posts")
     images = db.relationship("Image", back_populates="post")
     tags = db.relationship("Tag", secondary=posts_tags)
+    threads = db.relationship("Thread", back_populates="post")
 
     def to_dict(self):
         return {

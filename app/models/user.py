@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .db import db
 from .saved_post import saved_posts
+from .saved_comment import saved_comments
 
 
 class User(db.Model, UserMixin):
@@ -16,6 +17,7 @@ class User(db.Model, UserMixin):
 
     posts = db.relationship("Post", back_populates="user")
     saved_posts = db.relationship("Post", secondary=saved_posts)
+    saved_comments = db.relationship("Comment", secondary=saved_comments)
 
     @property
     def password(self):
