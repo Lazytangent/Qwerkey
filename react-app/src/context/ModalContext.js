@@ -1,10 +1,9 @@
 import { createContext, useRef, useState, useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom';
-import './Modal.css';
 
 const ModalContext = createContext();
 
-export const ModalProvider = ({ children }) => {
+const ModalProvider = ({ children }) => {
   const modalRef = useRef();
   const [value, setValue] = useState();
 
@@ -27,12 +26,14 @@ export const Modal = ({ onClose, children }) => {
   if (!modalNode) return null;
 
   return ReactDOM.createPortal(
-    <div id="modal">
-      <div id="modal-background" onClick={onClose} />
-      <div id="modal-content">
+    <div className="fixed inset-0 flex justify-center items-center">
+      <div className="fixed inset-0 bg-black bg-opacity-70" onClick={onClose} />
+      <div className="absolute top-1/3 bg-black w-auto">
         {children}
       </div>
     </div>,
     modalNode
   );
 };
+
+export default ModalProvider;

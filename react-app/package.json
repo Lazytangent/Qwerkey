@@ -46,5 +46,6 @@
     "postcss": "^7.0.35",
     "redux-logger": "^3.0.6",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
