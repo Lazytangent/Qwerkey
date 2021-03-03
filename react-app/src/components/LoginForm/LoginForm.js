@@ -10,12 +10,12 @@ const LoginForm = () => {
 
   const { setShowLoginModal, authenticated, setAuthenticated } = useAuthContext();
   const [errors, setErrors] = useState([]);
-  const [email, setEmail] = useState("");
+  const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const user = await dispatch(login(email, password));
+    const user = await dispatch(login(credential, password));
     if (!user.errors) {
       setAuthenticated(true);
       setShowLoginModal(false);
@@ -24,8 +24,8 @@ const LoginForm = () => {
     }
   };
 
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
+  const updateCredential = (e) => {
+    setCredential(e.target.value);
   };
 
   const updatePassword = (e) => {
@@ -48,9 +48,9 @@ const LoginForm = () => {
         <input
           name="email"
           type="text"
-          placeholder="Email"
-          value={email}
-          onChange={updateEmail}
+          placeholder="Username or Email"
+          value={credential}
+          onChange={updateCredential}
         />
       </div>
       <div>
