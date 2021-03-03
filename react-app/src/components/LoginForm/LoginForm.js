@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 
