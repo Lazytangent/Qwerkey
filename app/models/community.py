@@ -10,7 +10,7 @@ class Community(db.Model):
     description = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullabe=False,
+    updated_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.utcnow)
 
     posts = db.relationship("Post", back_populates="community")

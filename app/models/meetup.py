@@ -6,7 +6,7 @@ class Meetup(db.Model):
     __tablename__ = "meetups"
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, nullable=False, db.ForeignKey("users.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text, nullable=False)
     city = db.Column(db.String(50), nullable=False)
@@ -14,7 +14,7 @@ class Meetup(db.Model):
     date = db.Column(db.DateTime, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullabe=False,
+    updated_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.utcnow)
 
     user = db.relationship("User", back_populates="meetups")

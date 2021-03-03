@@ -6,13 +6,13 @@ class CommentRating(db.Model):
     __tablename__ = "comment_ratings"
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, nullable=False, db.ForeignKey("users.id"))
-    comment_id = db.Column(db.Integer, nullable=False,
-                           db.ForeignKey("comments.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    comment_id = db.Column(db.Integer,
+                           db.ForeignKey("comments.id"), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullabe=False,
+    updated_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.utcnow)
 
     user = db.relationship("User")

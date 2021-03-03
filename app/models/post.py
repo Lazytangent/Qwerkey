@@ -7,9 +7,9 @@ class Post(db.Model):
     __tablename__ = 'posts'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, nullable=False, db.ForeignKey("users.id"))
-    community_id = db.Column(db.Integer, nullable=False,
-                             db.ForeignKey("communities.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    community_id = db.Column(db.Integer,
+                             db.ForeignKey("communities.id"), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     body = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)

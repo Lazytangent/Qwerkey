@@ -7,17 +7,17 @@ class Message(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(db.Integer,
-                          nullable=False,
-                          db.ForeignKey("users.id"))
+                          db.ForeignKey("users.id"),
+                          nullable=False)
     recipient_id = db.Column(db.Integer,
-                             nullable=False,
-                             db.ForeignKey("users.id"))
+                             db.ForeignKey("users.id"),
+                             nullable=False)
     body = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime,
                            nullable=False,
                            default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime,
-                           nullabe=False,
+                           nullable=False,
                            default=datetime.datetime.utcnow)
 
     sender = db.relationship("User",

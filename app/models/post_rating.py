@@ -6,12 +6,12 @@ class PostRating(db.Model):
     __tablename__ = "post_ratings"
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, nullable=False, db.ForeignKey("users.id"))
-    post_id = db.Column(db.Integer, nullable=False, db.ForeignKey("posts.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullabe=False,
+    updated_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.utcnow)
 
     user = db.relationship("User")

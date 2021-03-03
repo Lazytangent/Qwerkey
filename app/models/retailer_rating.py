@@ -6,13 +6,16 @@ class RetailerRating(db.Model):
     __tablename__ = "retailer_ratings"
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, nullable=False, db.ForeignKey("users.id"))
-    retailer_id = db.Column(db.Integer, nullable=False,
-                            db.ForeignKey("retailers.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    retailer_id = db.Column(db.Integer,
+                            db.ForeignKey("retailers.id"),
+                            nullable=False)
     rating = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False,
+    created_at = db.Column(db.DateTime,
+                           nullable=False,
                            default=datetime.datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullabe=False,
+    updated_at = db.Column(db.DateTime,
+                           nullable=False,
                            default=datetime.datetime.utcnow)
 
     user = db.relationship("User")

@@ -6,7 +6,7 @@ class PostsImage(db.Model):
     __tablename__ = "posts_images"
 
     id = db.Column(db.Integer, primary_key=True)
-    post_id = db.Column(db.Integer, nullable=False, db.ForeignKey("posts.id"))
+    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), nullable=False)
     image_url = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
