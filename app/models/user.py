@@ -13,6 +13,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
+    posts = db.relationship("Post", back_populates="user")
+
     @property
     def password(self):
         return self.hashed_password
@@ -24,9 +26,19 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    def to_simple_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "created_at": self.created_at
+        }
+
     def to_dict(self):
         return {
             "id": self.id,
             "username": self.username,
-            "email": self.email
+            "email": self.email,
+            "created_at": self.created_at,
+            "posts": self.posts
         }
