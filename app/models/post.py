@@ -15,6 +15,7 @@ class Post(db.Model):
 
     user = db.relationship("User", back_populates="posts")
     community = db.relationship("Community", back_populates="posts")
+    images = db.relationship("Image", back_populates="post")
 
     def to_dict(self):
         return {
@@ -23,5 +24,6 @@ class Post(db.Model):
             "community": self.community.name,
             "title": self.title,
             "body": self.body,
+            "images": [image.image_url for image in self.images],
             "created_at": self.created_at
         }
