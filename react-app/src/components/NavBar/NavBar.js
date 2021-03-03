@@ -3,8 +3,8 @@ import LogoutButton from '../LogoutButton';
 
 const NavBar = ({ setAuthenticated }) => {
   return (
-    <nav>
-      <ul>
+    <nav className="bg-green">
+      <ul className="grid grid-cols-3">
         <li>
           <NavLink to="/" exact={true} activeClassName="active">
             Home
