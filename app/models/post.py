@@ -16,7 +16,7 @@ class Post(db.Model):
 
     user = db.relationship("User", back_populates="posts")
     community = db.relationship("Community", back_populates="posts")
-    images = db.relationship("Image", back_populates="post")
+    images = db.relationship("PostsImage", back_populates="post")
     tags = db.relationship("Tag", secondary=posts_tags)
     threads = db.relationship("Thread", back_populates="post")
     ratings = db.relationship("PostRating", back_populates="post")

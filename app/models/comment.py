@@ -25,9 +25,6 @@ class Comment(db.Model):
 
     thread = db.relationship("Thread", back_populates="comments")
     user = db.relationship("User", back_populates="comments")
-    parent = db.relationship("Comment",
-                             remote_side=[id],
-                             back_populates="children")
     children = db.relationship("Comment",
                                backref=db.backref("parent", remote_side=[id]))
     ratings = db.relationship("CommentRating", back_populates="comment")
