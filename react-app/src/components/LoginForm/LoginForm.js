@@ -37,7 +37,7 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
+    <form className="p-2 bg-white rounded" onSubmit={onLogin}>
       <div>
         {errors.map((error) => (
           <div>{error}</div>
@@ -45,6 +45,7 @@ const LoginForm = () => {
       </div>
       <div>
         <input
+          className="p-2 mb-1 rounded"
           name="email"
           type="text"
           placeholder="Username or Email"
@@ -54,6 +55,7 @@ const LoginForm = () => {
       </div>
       <div>
         <input
+          className="p-2 rounded mb-2"
           name="password"
           type="password"
           placeholder="Password"
@@ -61,7 +63,9 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
       </div>
-      <button type="submit" className="text-white">Login</button>
+      <div className="flex justify-center p-2">
+        <button type="submit" className="p-2 border rounded">Login</button>
+      </div>
     </form>
   );
 };

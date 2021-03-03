@@ -54,6 +54,7 @@ const SignUpForm = () => {
           placeholder="Username"
           onChange={updateUsername}
           value={username}
+          required={true}
         ></input>
       </div>
       <div>
@@ -63,6 +64,7 @@ const SignUpForm = () => {
           placeholder="Email"
           onChange={updateEmail}
           value={email}
+          required={true}
         ></input>
       </div>
       <div>
@@ -72,6 +74,7 @@ const SignUpForm = () => {
           placeholder="Password"
           onChange={updatePassword}
           value={password}
+          required={true}
         ></input>
       </div>
       <div>
