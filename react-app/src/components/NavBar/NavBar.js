@@ -28,7 +28,7 @@ const NavBar = () => {
           </li>
         </div>
         {!authenticated && (
-          <div className="flex justify-around col-start-3">
+          <div className="flex justify-end col-start-3">
             <li>
               <NavButton name="Login" onClick={loginBtnClickHandler}>
                 <LoginModal />
@@ -42,7 +42,7 @@ const NavBar = () => {
           </div>
         )}
         {authenticated && (
-          <div className="flex justify-around col-start-3">
+          <div className="flex justify-end col-start-3">
             <li>
               <LogoutButton />
             </li>

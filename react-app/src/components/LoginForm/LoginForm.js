@@ -8,7 +8,7 @@ import { useAuthContext } from '../../context/AuthContext';
 const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const { authenticated, setAuthenticated } = useAuthContext();
+  const { setShowLoginModal, authenticated, setAuthenticated } = useAuthContext();
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +18,7 @@ const LoginForm = () => {
     const user = await dispatch(login(email, password));
     if (!user.errors) {
       setAuthenticated(true);
+      setShowLoginModal(false);
     } else {
       setErrors(user.errors);
     }

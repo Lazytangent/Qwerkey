@@ -8,7 +8,7 @@ import { useAuthContext } from '../../context/AuthContext';
 const SignUpForm = () => {
   const dispatch = useDispatch();
 
-  const { authenticated, setAuthenticated } = useAuthContext();
+  const { setShowSignUpModal, authenticated, setAuthenticated } = useAuthContext();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +20,7 @@ const SignUpForm = () => {
       const user = await dispatch(signUp(username, email, password));
       if (!user.errors) {
         setAuthenticated(true);
+        setShowSignUpModal(false);
       }
     }
   };
