@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import { useAuthContext } from './context/AuthContext';
 import { authenticate } from './store/session';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -8,7 +9,7 @@ import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 
 const App = () => {
-  const [authenticated, setAuthenticated] = useState(false);
+  const { authenticated, setAuthenticated } = useAuthContext();
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const App = () => {
       }
       setLoaded(true);
     })();
-  }, []);
+  }, [setAuthenticated]);
 
   if (!loaded) {
     return null;

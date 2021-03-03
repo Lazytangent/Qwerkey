@@ -3,10 +3,12 @@ import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { signUp } from '../../store/session';
+import { useAuthContext } from '../../context/AuthContext';
 
-const SignUpForm = ({authenticated, setAuthenticated}) => {
+const SignUpForm = () => {
   const dispatch = useDispatch();
 
+  const { authenticated, setAuthenticated } = useAuthContext();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

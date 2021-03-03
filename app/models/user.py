@@ -52,6 +52,6 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "email": self.email,
             "created_at": self.created_at,
-            "posts": self.posts,
+            "posts": [post.to_simple_dict() for post in self.posts],
             "meetups": [meetup.to_dict() for meetup in self.meetups]
         }

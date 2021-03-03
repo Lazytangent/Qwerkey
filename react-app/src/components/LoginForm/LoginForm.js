@@ -3,10 +3,12 @@ import { Redirect } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 
 import { login } from '../../store/session';
+import { useAuthContext } from '../../context/AuthContext';
 
-const LoginForm = ({ authenticated, setAuthenticated }) => {
+const LoginForm = () => {
   const dispatch = useDispatch();
 
+  const { authenticated, setAuthenticated } = useAuthContext();
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

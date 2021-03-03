@@ -2,10 +2,11 @@ import { NavLink } from 'react-router-dom';
 
 import { useAuthContext } from '../../context/AuthContext';
 import LoginModal from '../LoginForm';
+import SignUpModal from '../SignUpForm';
 import LogoutButton from '../LogoutButton';
 import NavButton from '../parts/NavButton';
 
-const NavBar = ({ setAuthenticated }) => {
+const NavBar = () => {
   const { setShowLoginModal, setShowSignUpModal } = useAuthContext();
 
   const loginBtnClickHandler = () => {
@@ -30,10 +31,12 @@ const NavBar = ({ setAuthenticated }) => {
           </NavButton>
         </li>
         <li>
-          <NavButton name="Sign Up" onClick={signUpBtnClickHandler} />
+          <NavButton name="Sign Up" onClick={signUpBtnClickHandler}>
+            <SignUpModal />
+          </NavButton>
         </li>
         <li>
-          <LogoutButton setAuthenticated={setAuthenticated} />
+          <LogoutButton />
         </li>
       </ul>
     </nav>
