@@ -2,8 +2,8 @@ import datetime
 from .db import db
 
 
-class Retailer(db.Model):
-    __tablename__ = "retailers"
+class Meetup(db.Model):
+    __tablename__ = "meetups"
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, nullable=False, db.ForeignKey("users.id"))
@@ -11,11 +11,10 @@ class Retailer(db.Model):
     description = db.Column(db.Text, nullable=False)
     city = db.Column(db.String(50), nullable=False)
     state = db.Column(db.String(25), nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullabe=False,
                            default=datetime.datetime.utcnow)
 
-    user = db.relationship("User")
-    images = db.relationship("RetailerImage", back_populates="retailer")
-    ratings = db.relationship("RetailerRating", back_populates="retailer")
+    user = db.relationship("User", back_populates="meetups")
