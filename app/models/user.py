@@ -19,6 +19,12 @@ class User(db.Model, UserMixin):
     saved_posts = db.relationship("Post", secondary=saved_posts)
     saved_comments = db.relationship("Comment", secondary=saved_comments)
     meetups = db.relationship("Meetup", back_populates="user")
+    sent_messages = db.relationship("Message",
+                                    foreign_keys="Message.sender_id",
+                                    back_populates="sender")
+    received_messages = db.relationship("Message",
+                                        foreign_keys="Message.recipient_id",
+                                        back_populates="recipient")
 
     @property
     def password(self):
