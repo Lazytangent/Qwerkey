@@ -1,7 +1,9 @@
 import datetime
-from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .db import db
+from .saved_post import saved_posts
+from .saved_comment import saved_comments
 
 
 class User(db.Model, UserMixin):
@@ -14,6 +16,15 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     posts = db.relationship("Post", back_populates="user")
+    saved_posts = db.relationship("Post", secondary=saved_posts)
+    saved_comments = db.relationship("Comment", secondary=saved_comments)
+    meetups = db.relationship("Meetup", back_populates="user")
+    sent_messages = db.relationship("Message",
+                                    foreign_keys="Message.sender_id",
+                                    back_populates="sender")
+    received_messages = db.relationship("Message",
+                                        foreign_keys="Message.recipient_id",
+                                        back_populates="recipient")
 
     @property
     def password(self):
@@ -40,5 +51,6 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "email": self.email,
             "created_at": self.created_at,
-            "posts": self.posts
+            "posts": self.posts,
+            "meetups": [meetup.to_dict() for meetup in self.meetups]
         }
