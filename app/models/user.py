@@ -1,7 +1,8 @@
 import datetime
-from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .db import db
+from .saved_post import saved_posts
 
 
 class User(db.Model, UserMixin):
@@ -14,6 +15,7 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     posts = db.relationship("Post", back_populates="user")
+    saved_posts = db.relationship("Post", secondary=saved_posts)
 
     @property
     def password(self):

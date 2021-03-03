@@ -1,5 +1,6 @@
 import datetime
 from .db import db
+from .posts_tag import posts_tags
 
 
 class Post(db.Model):
@@ -16,6 +17,7 @@ class Post(db.Model):
     user = db.relationship("User", back_populates="posts")
     community = db.relationship("Community", back_populates="posts")
     images = db.relationship("Image", back_populates="post")
+    tags = db.relationship("Tag", secondary=posts_tags)
 
     def to_dict(self):
         return {
@@ -25,5 +27,6 @@ class Post(db.Model):
             "title": self.title,
             "body": self.body,
             "images": [image.image_url for image in self.images],
+            "tags": [tag.name for tag in self.tags],
             "created_at": self.created_at
         }

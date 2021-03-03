@@ -2,14 +2,15 @@ import datetime
 from .db import db
 
 
-class PostRating(db.Model):
-    __tablename__ = "post_ratings"
+class Community(db.Model):
+    __tablename__ = "communities"
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, nullable=False, db.ForeignKey("users.id"))
-    post_id = db.Column(db.Integer, nullable=False, db.ForeignKey("posts.id"))
-    rating = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullabe=False,
                            default=datetime.datetime.utcnow)
+
+    posts = db.relationship("Post", back_populates="community")
