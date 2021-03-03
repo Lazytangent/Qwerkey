@@ -13,3 +13,10 @@ class Tag(db.Model):
     updated_at = db.Column(db.DateTime, nullabe=False,
                            default=datetime.datetime.utcnow)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "created_at": self.created_at,
+        }

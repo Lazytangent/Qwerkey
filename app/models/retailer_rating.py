@@ -15,4 +15,14 @@ class RetailerRating(db.Model):
     updated_at = db.Column(db.DateTime, nullabe=False,
                            default=datetime.datetime.utcnow)
 
+    user = db.relationship("User")
     retailer = db.relationship("Retailer", back_populates="ratings")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user": self.user.to_simple_dict(),
+            "retailer_id": self.retailer_id,
+            "rating": self.rating,
+            "created_at": self.created_at,
+        }

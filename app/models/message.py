@@ -26,3 +26,11 @@ class Message(db.Model):
     recipient = db.relationship("User",
                                 foreign_keys=[recipient_id],
                                 back_populates="received_messages")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "sender": self.sender.to_simple_dict(),
+            "recipient": self.recipient.to_simple_dict(),
+            "created_at": self.created_at,
+        }

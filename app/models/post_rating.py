@@ -13,3 +13,14 @@ class PostRating(db.Model):
                            default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullabe=False,
                            default=datetime.datetime.utcnow)
+
+    user = db.relationship("User")
+    post = db.relationship("Post", back_populates="ratings")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user": self.user.to_simple_dict(),
+            "post": self.post.to_simple_dict(),
+            "rating": self.rating,
+        }

@@ -19,3 +19,14 @@ class Retailer(db.Model):
     user = db.relationship("User")
     images = db.relationship("RetailerImage", back_populates="retailer")
     ratings = db.relationship("RetailerRating", back_populates="retailer")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "owner": self.user.to_simple_dict(),
+            "name": self.name,
+            "description": self.description,
+            "city": self.city,
+            "state": self.state,
+            "created_at": self.created_at,
+        }

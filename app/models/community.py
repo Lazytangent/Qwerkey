@@ -14,3 +14,11 @@ class Community(db.Model):
                            default=datetime.datetime.utcnow)
 
     posts = db.relationship("Post", back_populates="community")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "created_at": self.created_at,
+        }

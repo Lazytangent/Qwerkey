@@ -18,3 +18,16 @@ class Meetup(db.Model):
                            default=datetime.datetime.utcnow)
 
     user = db.relationship("User", back_populates="meetups")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user": self.user.to_simple_dict(),
+            "name": self.name,
+            "description": self.description,
+            "city": self.city,
+            "state": self.state,
+            "date": self.date,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
+        }

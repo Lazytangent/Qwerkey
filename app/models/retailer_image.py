@@ -15,3 +15,11 @@ class RetailerImage(db.Model):
                            default=datetime.datetime.utcnow)
 
     retailer = db.relationship("Retailer", back_populates="images")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "retailer_id": self.retailer_id,
+            "image_url": self.image_url,
+            "created_at": self.created_at,
+        }

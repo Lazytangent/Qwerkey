@@ -19,6 +19,15 @@ class Post(db.Model):
     images = db.relationship("Image", back_populates="post")
     tags = db.relationship("Tag", secondary=posts_tags)
     threads = db.relationship("Thread", back_populates="post")
+    ratings = db.relationship("PostRating", back_populates="post")
+
+    def to_simple_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "body": self.body,
+            "images": [image.image_url for image in self.images]
+        }
 
     def to_dict(self):
         return {

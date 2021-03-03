@@ -17,3 +17,11 @@ class CommentRating(db.Model):
 
     user = db.relationship("User")
     comment = db.relationship("Comment", back_populates="ratings")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user": self.user.to_simple_dict(),
+            "comment_id": self.comment_id,
+            "rating": self.rating,
+        }
