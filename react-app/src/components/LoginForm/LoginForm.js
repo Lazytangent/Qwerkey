@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { login, demoUserLogin } from '../../store/session';
 import { useAuthContext } from '../../context/AuthContext';
+import InputField from '../parts/InputField';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -58,26 +59,8 @@ const LoginForm = () => {
             <div>{error}</div>
           ))}
         </div>
-        <div className="flex justify-center p-2">
-          <input
-            className="w-3/4 p-2 mb-1 border rounded"
-            name="email"
-            type="text"
-            placeholder="Username or Email"
-            value={credential}
-            onChange={updateCredential}
-          />
-        </div>
-        <div className="flex justify-center p-2">
-          <input
-            className="w-3/4 p-2 mb-2 border rounded"
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={updatePassword}
-          />
-        </div>
+        <InputField name="credential" type="text" placeholder="Username or Email" value={credential} onChange={updateCredential} />
+        <InputField name="password" type="password" placeholder="Password" value={password} onChange={updatePassword} />
         <div className="flex justify-center p-2">
           <button type="submit" className="p-2 border rounded hover:border-green">Login</button>
         </div>
