@@ -33,16 +33,20 @@ const App = () => {
       <div className="row-span-1">
         <NavBar setAuthenticated={setAuthenticated} />
       </div>
-      <div className="row-span-1">
-        <Switch>
-          <Route path="/" exact>
-            <PostsContainer />
-          </Route>
-          <Route path="/q/:communityName(\w+)">
-            <PostsContainer />
-          </Route>
-        </Switch>
-        <Sidebar />
+      <div className="mx-auto max-w-screen-lg grid grid-cols-3 p-2 row-span-1">
+        <div className="col-span-2">
+          <Switch>
+            <Route path="/" exact>
+              <PostsContainer />
+            </Route>
+            <Route path="/q/:communityName(\w+)">
+              <PostsContainer />
+            </Route>
+          </Switch>
+        </div>
+        <div className="col-span-1 p-2">
+          <Sidebar />
+        </div>
       </div>
       <div className="row-span-1">
         <Footer />

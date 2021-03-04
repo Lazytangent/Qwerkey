@@ -30,4 +30,7 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  corePlugins: {
+    ringColor: false,
+  },
 }
