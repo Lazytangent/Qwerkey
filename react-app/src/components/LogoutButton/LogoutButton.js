@@ -12,7 +12,7 @@ const LogoutButton = () => {
     setAuthenticated(false);
   };
 
-  return <button className="m-1 p-2 rounded bg-purple hover:bg-purple-dark hover:text-white" onClick={onLogout}>Logout</button>;
+  return <button className="p-2 m-1 rounded bg-purple hover:bg-purple-dark hover:text-white" onClick={onLogout}>Logout</button>;
 };
 
 export default LogoutButton;
