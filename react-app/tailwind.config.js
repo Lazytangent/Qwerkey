@@ -20,10 +20,17 @@ module.exports = {
       big: ['Montserrat', ...defaultTheme.fontFamily.sans],
       sans: ['"Carrois Gothic"', ...defaultTheme.fontFamily.sans]
     },
-    extend: {},
+    extend: {
+      gridTemplateRows: {
+        'layout': 'auto minmax(900px, 1fr) auto',
+      },
+    },
   },
   variants: {
     extend: {},
   },
   plugins: [],
+  corePlugins: {
+    ringColor: false,
+  },
 }

@@ -15,16 +15,20 @@ const removeSession = () => {
 };
 
 export const authenticate = () => async (dispatch) => {
-  const response = await fetch('/api/auth/',{
-    headers: {
-      'Content-Type': 'application/json'
+  try {
+    const response = await fetch('/api/auth/',{
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const user = await response.json();
+    if (!user.errors) {
+      dispatch(setSession(user));
     }
-  });
-  const user = await response.json();
-  if (!user.errors) {
-    dispatch(setSession(user));
+    return user;
+  } catch (e) {
+    return e;
   }
-  return user;
 };
 
 export const demoUserLogin = () => async (dispatch) => {

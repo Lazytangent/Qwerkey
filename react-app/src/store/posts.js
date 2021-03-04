@@ -1,5 +1,13 @@
+const SET_MORE_POSTS = 'posts/SET_MORE_POSTS';
 const SET_POSTS = 'posts/SET_POSTS';
 const SET_POST = 'posts/SET_POST';
+
+const setMorePosts = (posts) => {
+  return {
+    type: SET_MORE_POSTS,
+    posts,
+  };
+};
 
 const setPosts = (posts) => {
   return {
@@ -15,12 +23,16 @@ const setPost = (post) => {
   };
 };
 
-export const getPosts = (page) => async (dispatch) => {
+export const getPosts = (page, communityName) => async (dispatch) => {
   try {
-    const res = await fetch(`/api/posts?page=${page}`);
+    const res = await fetch(`/api/posts?page=${page}${communityName ? `&community_name=${communityName}` : ''}`);
     if (!res.ok) throw res;
     const posts = await res.json();
-    dispatch(setPosts(posts));
+    if (page === 1) {
+      dispatch(setPosts(posts));
+    } else {
+      dispatch(setMorePosts(posts));
+    }
     return posts;
   } catch (e) {
     return e;
@@ -103,6 +115,8 @@ const initialState = {};
 
 const postsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_MORE_POSTS:
+      return { ...action.posts };
     case SET_POSTS:
       return { ...state, ...action.posts };
     case SET_POST:
