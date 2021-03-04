@@ -9,8 +9,10 @@ const PostsContainer = () => {
   const { communityName } = useParams();
   const dispatch = useDispatch();
 
+  const user = useSelector(state => state.session);
   const posts = useSelector(state => state.posts);
   const [page, setPage] = useState(1);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -18,10 +20,20 @@ const PostsContainer = () => {
     })();
   }, [dispatch, page, communityName]);
 
+  useEffect(() => {
+    if (user && posts) {
+      setIsLoaded(true);
+    }
+  }, [user, posts]);
+
+  if (!isLoaded) {
+    return null;
+  }
+
   return (
     <div>
       {Object.values(posts).map(post => (
-        <Post key={post.id} post={post} />
+        <Post key={post.id} post={post} userId={user.id} />
       ))}
     </div>
   );
