@@ -28,7 +28,7 @@ def create_post():
         db.session.commit()
 
         if 'images' in request.files:
-            images = request.files['images']
+            images = request.files.getlist('images')
             for image in images:
                 if allowed_file(image.filename):
                     image.filename = secure_filename(image.filename)
@@ -42,4 +42,33 @@ def create_post():
 
 @post_routes.route('/<int:post_id>', methods=["PUT", "DELETE"])
 def update_post(post_id):
-    pass
+    post = Post.query.get(post_id)
+    if request.method == "PUT":
+        form = CreatePost()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            form.populate_obj(post)
+            db.session.commit()
+
+            if 'images' in request.files:
+                images = request.files.getlist('images')
+                for image in images:
+                    if allowed_file(image.filename):
+                        image.filename = secure_filename(image.filename)
+                        image_url = upload_file_to_s3(image, Config.S3_BUCKET)
+                        image = PostsImage(post_id=post.id,
+                                           image_url=image_url)
+                        db.session.add(image)
+                db.session.commit()
+            return post.to_dict()
+        return {'errors': validation_errors_to_error_messages(form.errors)}
+    elif request.method == "DELETE":
+        post.title = "[DELETED]"
+        post.body = "[DELETED]"
+        posts_images = PostsImage.query.filter(PostsImage.post_id ==
+                                               post_id).all()
+        for image in posts_images:
+            db.session.delete(image)
+        db.session.commit()
+
+        return post.to_dict()
