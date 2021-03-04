@@ -61,7 +61,11 @@ const LoginForm = () => {
         <div className="flex justify-center p-2">
           <h3>Login</h3>
         </div>
-        <FormErrors errors={errors} />
+        {errors.length > 0 && (
+          <div>
+            <h5>The provided credentials were invalid.</h5>
+          </div>
+        )}
         <InputField
           name="credential"
           type="text"
