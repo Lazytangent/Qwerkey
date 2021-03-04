@@ -1,20 +1,43 @@
 from flask import Blueprint, jsonify, request
+from werkzeug.utils import secure_filename
+
+from app.config import Config
 from app.forms import CreatePost
-from app.models import db, Post
+from app.helpers import (upload_file_to_s3, allowed_file,
+                         validation_errors_to_error_messages)
+from app.models import db, Post, PostsImage
 
 post_routes = Blueprint('posts', __name__)
 
 
-@post_routes.route('/', methods=["GET", "POST"])
+@post_routes.route('/')
 def get_posts():
-    if request.method == "GET":
-        page = int(request.args.get('page'))
-        posts = Post.query.paginate(page=page, per_page=20)
-        return {post.id: post.to_dict() for post in posts.items}
+    page = int(request.args.get('page', 0))
+    posts = Post.query.paginate(page=page, per_page=20)
+    return {post.id: post.to_dict() for post in posts.items}
+
+
+@post_routes.route('/', methods=["POST"])
+def create_post():
     form = CreatePost()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        pass
+        post = Post()
+        form.populate_obj(post)
+        db.session.add(post)
+        db.session.commit()
+
+        if 'images' in request.files:
+            images = request.files['images']
+            for image in images:
+                if allowed_file(image.filename):
+                    image.filename = secure_filename(image.filename)
+                    image_url = upload_file_to_s3(image, Config.S3_BUCKET)
+                    image = PostsImage(post_id=post.id, image_url=image_url)
+                    db.session.add(image)
+            db.session.commit()
+        return post.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @post_routes.route('/<int:post_id>', methods=["PUT", "DELETE"])
