@@ -5,7 +5,7 @@ from app.config import Config
 from app.forms import CreatePost
 from app.helpers import (upload_file_to_s3, allowed_file,
                          validation_errors_to_error_messages)
-from app.models import db, Post, PostsImage
+from app.models import db, Post, PostsImage, Community
 
 post_routes = Blueprint('posts', __name__)
 
@@ -13,7 +13,14 @@ post_routes = Blueprint('posts', __name__)
 @post_routes.route('/')
 def get_posts():
     page = int(request.args.get('page', 0))
-    posts = Post.query.paginate(page=page, per_page=20)
+    community_name = request.args.get('community_name', '')
+    if community_name:
+        community = Community.query.filter(
+            Community.name == community_name).one()
+        posts = Post.query.filter(Post.community_id == community).paginate(
+            page=page, per_page=20)
+    else:
+        posts = Post.query.paginate(page=page, per_page=20)
     return {post.id: post.to_dict() for post in posts.items}
 
 
@@ -65,8 +72,8 @@ def update_post(post_id):
     elif request.method == "DELETE":
         post.title = "[DELETED]"
         post.body = "[DELETED]"
-        posts_images = PostsImage.query.filter(PostsImage.post_id ==
-                                               post_id).all()
+        posts_images = PostsImage.query.filter(
+            PostsImage.post_id == post_id).all()
         for image in posts_images:
             db.session.delete(image)
         db.session.commit()
