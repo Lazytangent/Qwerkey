@@ -1,4 +1,5 @@
 import EditButton from '../parts/EditButton';
+import DeleteButton from '../parts/DeleteButton';
 
 const Post = ({ key, post, userId }) => {
   return (
@@ -12,10 +13,10 @@ const Post = ({ key, post, userId }) => {
       {post.images.map(url => (
         <img src={url} alt={`for ${post.title}`} />
       ))}
-      {post.user_id === userId && (
+      {post.user.id === userId && (
         <>
           <EditButton label="Edit Post" />
-          <button>Delete Post</button>
+          <DeleteButton label="Delete Post" />
         </>
       )}
     </div>
