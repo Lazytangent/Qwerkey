@@ -1,14 +1,20 @@
 import { useState } from "react";
-import { useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
 
-import { signUp, demoUserLogin } from '../../store/session';
-import { useAuthContext } from '../../context/AuthContext';
+import { signUp, demoUserLogin } from "../../store/session";
+import { useAuthContext } from "../../context/AuthContext";
+import InputField from "../parts/InputField";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
 
-  const { setShowLoginModal, setShowSignUpModal, authenticated, setAuthenticated } = useAuthContext();
+  const {
+    setShowLoginModal,
+    setShowSignUpModal,
+    authenticated,
+    setAuthenticated,
+  } = useAuthContext();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -70,59 +76,64 @@ const SignUpForm = () => {
             <div>{error}</div>
           ))}
         </div>
+        <InputField
+          name="username"
+          type="text"
+          placeholder="Username"
+          onChange={updateUsername}
+          value={username}
+          required={true}
+        />
+        <InputField
+          name="email"
+          type="text"
+          placeholder="Email"
+          onChange={updateEmail}
+          value={email}
+          required={true}
+        />
+        <InputField
+          name="password"
+          type="password"
+          placeholder="Password"
+          onChange={updatePassword}
+          value={password}
+          required={true}
+        />
+        <InputField
+          name="repeat_password"
+          type="password"
+          placeholder="Confirm Password"
+          onChange={updateRepeatPassword}
+          value={repeatPassword}
+          required={true}
+        />
         <div className="flex justify-center p-2">
-          <input
-            type="text"
-            className="w-3/4 p-2 mb-1 border rounded"
-            name="username"
-            placeholder="Username"
-            onChange={updateUsername}
-            value={username}
-            required={true}
-          ></input>
-        </div>
-        <div className="flex justify-center p-2">
-          <input
-            className="w-3/4 p-2 mb-1 border rounded"
-            type="text"
-            name="email"
-            placeholder="Email"
-            onChange={updateEmail}
-            value={email}
-            required={true}
-          ></input>
-        </div>
-        <div className="flex justify-center p-2">
-          <input
-            className="w-3/4 p-2 mb-1 border rounded"
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={updatePassword}
-            value={password}
-            required={true}
-          ></input>
-        </div>
-        <div className="flex justify-center p-2">
-          <input
-            className="w-3/4 p-2 mb-1 border rounded"
-            type="password"
-            name="repeat_password"
-            placeholder="Confirm Password"
-            onChange={updateRepeatPassword}
-            value={repeatPassword}
-            required={true}
-          ></input>
-        </div>
-        <div className="flex justify-center p-2">
-          <button type="submit" className="p-2 border rounded hover:border-green">Sign Up</button>
+          <button
+            type="submit"
+            className="p-2 border rounded hover:border-green"
+          >
+            Sign Up
+          </button>
         </div>
       </form>
       <div className="text-center">
-        Already have an account? <span className="text-blue-500 cursor-pointer hover:underline" onClick={openLogin}>Log In Here.</span>
+        Already have an account?{" "}
+        <span
+          className="text-blue-500 cursor-pointer hover:underline"
+          onClick={openLogin}
+        >
+          Log In Here.
+        </span>
       </div>
       <div className="text-center">
-        Want to try out our app? <span className="cursor-pointer text-green hover:underline" onClick={demoLogin}>Sign In as a Demo account.</span>
+        Want to try out our app?{" "}
+        <span
+          className="cursor-pointer text-green hover:underline"
+          onClick={demoLogin}
+        >
+          Sign In as a Demo account.
+        </span>
       </div>
     </div>
   );
