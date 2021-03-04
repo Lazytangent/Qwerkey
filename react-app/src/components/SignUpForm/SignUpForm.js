@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { signUp } from '../../store/session';
+import { useAuthContext } from '../../context/AuthContext';
 
-const SignUpForm = ({authenticated, setAuthenticated}) => {
+const SignUpForm = () => {
   const dispatch = useDispatch();
 
+  const { setShowLoginModal, setShowSignUpModal, authenticated, setAuthenticated } = useAuthContext();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -18,8 +21,16 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
       const user = await dispatch(signUp(username, email, password));
       if (!user.errors) {
         setAuthenticated(true);
+        setShowSignUpModal(false);
+      } else {
+        setErrors(user.errors);
       }
     }
+  };
+
+  const openLogin = () => {
+    setShowSignUpModal(false);
+    setShowLoginModal(true);
   };
 
   const updateUsername = (e) => {
@@ -43,46 +54,68 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <div className="p-4 bg-white rounded">
+      <form onSubmit={onSignUp} className="p-2 bg-white rounded">
+        <div className="flex justify-center p-2">
+          <h3>Sign Up</h3>
+        </div>
+        <div>
+          {errors.map((error) => (
+            <div>{error}</div>
+          ))}
+        </div>
+        <div className="flex justify-center p-2">
+          <input
+            type="text"
+            className="w-3/4 p-2 mb-1 border rounded"
+            name="username"
+            placeholder="Username"
+            onChange={updateUsername}
+            value={username}
+            required={true}
+          ></input>
+        </div>
+        <div className="flex justify-center p-2">
+          <input
+            className="w-3/4 p-2 mb-1 border rounded"
+            type="text"
+            name="email"
+            placeholder="Email"
+            onChange={updateEmail}
+            value={email}
+            required={true}
+          ></input>
+        </div>
+        <div className="flex justify-center p-2">
+          <input
+            className="w-3/4 p-2 mb-1 border rounded"
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={updatePassword}
+            value={password}
+            required={true}
+          ></input>
+        </div>
+        <div className="flex justify-center p-2">
+          <input
+            className="w-3/4 p-2 mb-1 border rounded"
+            type="password"
+            name="repeat_password"
+            placeholder="Confirm Password"
+            onChange={updateRepeatPassword}
+            value={repeatPassword}
+            required={true}
+          ></input>
+        </div>
+        <div className="flex justify-center p-2">
+          <button type="submit" className="p-2 border rounded hover:border-green">Sign Up</button>
+        </div>
+      </form>
       <div>
-        <label>User Name</label>
-        <input
-          type="text"
-          name="username"
-          onChange={updateUsername}
-          value={username}
-        ></input>
+        Already have an account? <span className="text-blue-500 cursor-pointer hover:underline" onClick={openLogin}>Log In Here.</span>
       </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="text"
-          name="email"
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type="password"
-          name="repeat_password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type="submit">Sign Up</button>
-    </form>
+    </div>
   );
 };
 

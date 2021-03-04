@@ -1,34 +1,53 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LogoutButton from '../LogoutButton';
 
-const NavBar = ({ setAuthenticated }) => {
+import { useAuthContext } from '../../context/AuthContext';
+import LoginModal from '../LoginForm';
+import SignUpModal from '../SignUpForm';
+import LogoutButton from '../LogoutButton';
+import NavButton from '../parts/NavButton';
+
+const NavBar = () => {
+  const { setShowLoginModal, setShowSignUpModal, authenticated } = useAuthContext();
+
+  const loginBtnClickHandler = () => {
+    setShowLoginModal(prev => !prev);
+  };
+
+  const signUpBtnClickHandler = () => {
+    setShowSignUpModal(prev => !prev);
+  };
+
   return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink to="/" exact={true} activeClassName="active">
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/login" exact={true} activeClassName="active">
-            Login
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/sign-up" exact={true} activeClassName="active">
-            Sign Up
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/users" exact={true} activeClassName="active">
-            Users
-          </NavLink>
-        </li>
-        <li>
-          <LogoutButton setAuthenticated={setAuthenticated} />
-        </li>
+    <nav className="p-2 bg-green">
+      <ul className="grid grid-cols-3">
+        <div className="flex p-2">
+          <li>
+            <NavLink className="p-2 align-middle hover:underline hover:text-purple-dark" to="/" exact={true} activeClassName="active">
+              Home
+            </NavLink>
+          </li>
+        </div>
+        {!authenticated && (
+          <div className="flex justify-end col-start-3">
+            <li>
+              <NavButton name="Login" onClick={loginBtnClickHandler}>
+                <LoginModal />
+              </NavButton>
+            </li>
+            <li>
+              <NavButton name="Sign Up" onClick={signUpBtnClickHandler}>
+                <SignUpModal />
+              </NavButton>
+            </li>
+          </div>
+        )}
+        {authenticated && (
+          <div className="flex justify-end col-start-3">
+            <li>
+              <LogoutButton />
+            </li>
+          </div>
+        )}
       </ul>
     </nav>
   );

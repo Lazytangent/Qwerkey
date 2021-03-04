@@ -6,6 +6,8 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import configureStore from './store';
+import ModalProvider from './context/ModalContext';
+import AuthProvider from './context/AuthContext';
 
 const store = configureStore();
 
@@ -16,7 +18,11 @@ if (process.env.NODE_ENV !== 'production') {
 const Root = () => (
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+      <ModalProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </ModalProvider>
     </Provider>
   </BrowserRouter>
 );

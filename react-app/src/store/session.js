@@ -27,14 +27,14 @@ export const authenticate = () => async (dispatch) => {
   return user;
 };
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (credential, password) => async (dispatch) => {
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stingify({
-      email,
+    body: JSON.stringify({
+      credential,
       password
     })
   });

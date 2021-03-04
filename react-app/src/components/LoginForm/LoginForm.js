@@ -1,28 +1,36 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 
 import { login } from '../../store/session';
+import { useAuthContext } from '../../context/AuthContext';
 
-const LoginForm = ({ authenticated, setAuthenticated }) => {
+const LoginForm = () => {
   const dispatch = useDispatch();
 
+  const { setShowLoginModal, setShowSignUpModal, authenticated, setAuthenticated } = useAuthContext();
   const [errors, setErrors] = useState([]);
-  const [email, setEmail] = useState("");
+  const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const user = await dispatch(login(email, password));
+    const user = await dispatch(login(credential, password));
     if (!user.errors) {
       setAuthenticated(true);
+      setShowLoginModal(false);
     } else {
       setErrors(user.errors);
     }
   };
 
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
+  const openSignUp = () => {
+    setShowLoginModal(false);
+    setShowSignUpModal(true);
+  };
+
+  const updateCredential = (e) => {
+    setCredential(e.target.value);
   };
 
   const updatePassword = (e) => {
@@ -34,34 +42,44 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
   }
 
   return (
-    <form onSubmit={onLogin}>
+    <div className="p-4 bg-white rounded">
+      <form className="p-2 bg-white rounded" onSubmit={onLogin}>
+        <div className="flex justify-center p-2">
+          <h3>Login</h3>
+        </div>
+        <div>
+          {errors.map((error) => (
+            <div>{error}</div>
+          ))}
+        </div>
+        <div className="flex justify-center p-2">
+          <input
+            className="w-3/4 p-2 mb-1 border rounded"
+            name="email"
+            type="text"
+            placeholder="Username or Email"
+            value={credential}
+            onChange={updateCredential}
+          />
+        </div>
+        <div className="flex justify-center p-2">
+          <input
+            className="w-3/4 p-2 mb-2 border rounded"
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={updatePassword}
+          />
+        </div>
+        <div className="flex justify-center p-2">
+          <button type="submit" className="p-2 border rounded hover:border-green">Login</button>
+        </div>
+      </form>
       <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
+        Don't have an account? <span className="text-blue-500 cursor-pointer hover:underline" onClick={openSignUp}>Sign Up Here.</span>
       </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          name="email"
-          type="text"
-          placeholder="Email"
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type="submit">Login</button>
-      </div>
-    </form>
+    </div>
   );
 };
 
