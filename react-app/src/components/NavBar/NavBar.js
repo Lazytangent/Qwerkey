@@ -22,7 +22,7 @@ const NavBar = () => {
       <ul className="grid grid-cols-3">
         <div className="flex p-2">
           <li>
-            <NavLink className="hover:shadow-md p-2 align-middle hover:underline hover:text-purple-dark" to="/" exact={true} activeClassName="active">
+            <NavLink className="p-2 align-middle hover:underline hover:text-purple-dark" to="/" exact={true} activeClassName="active">
               Home
             </NavLink>
           </li>
