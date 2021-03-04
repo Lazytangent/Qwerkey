@@ -8,7 +8,7 @@ import { useAuthContext } from '../../context/AuthContext';
 const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const { setShowLoginModal, authenticated, setAuthenticated } = useAuthContext();
+  const { setShowLoginModal, setShowSignUpModal, authenticated, setAuthenticated } = useAuthContext();
   const [errors, setErrors] = useState([]);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +24,11 @@ const LoginForm = () => {
     }
   };
 
+  const openSignUp = () => {
+    setShowLoginModal(false);
+    setShowSignUpModal(true);
+  };
+
   const updateCredential = (e) => {
     setCredential(e.target.value);
   };
@@ -37,36 +42,44 @@ const LoginForm = () => {
   }
 
   return (
-    <form className="p-2 bg-white rounded" onSubmit={onLogin}>
+    <div className="p-4 bg-white rounded">
+      <form className="p-2 bg-white rounded" onSubmit={onLogin}>
+        <div className="flex justify-center p-2">
+          <h3>Login</h3>
+        </div>
+        <div>
+          {errors.map((error) => (
+            <div>{error}</div>
+          ))}
+        </div>
+        <div className="flex justify-center p-2">
+          <input
+            className="w-3/4 p-2 mb-1 border rounded"
+            name="email"
+            type="text"
+            placeholder="Username or Email"
+            value={credential}
+            onChange={updateCredential}
+          />
+        </div>
+        <div className="flex justify-center p-2">
+          <input
+            className="w-3/4 p-2 mb-2 border rounded"
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={updatePassword}
+          />
+        </div>
+        <div className="flex justify-center p-2">
+          <button type="submit" className="p-2 border rounded hover:border-green">Login</button>
+        </div>
+      </form>
       <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
+        Don't have an account? <span className="text-blue-500 cursor-pointer hover:underline" onClick={openSignUp}>Sign Up Here.</span>
       </div>
-      <div>
-        <input
-          className="p-2 mb-1 rounded"
-          name="email"
-          type="text"
-          placeholder="Username or Email"
-          value={credential}
-          onChange={updateCredential}
-        />
-      </div>
-      <div>
-        <input
-          className="p-2 rounded mb-2"
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={updatePassword}
-        />
-      </div>
-      <div className="flex justify-center p-2">
-        <button type="submit" className="p-2 border rounded">Login</button>
-      </div>
-    </form>
+    </div>
   );
 };
 

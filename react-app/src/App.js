@@ -5,8 +5,6 @@ import { useAuthContext } from './context/AuthContext';
 import { authenticate } from './store/session';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/ProtectedRoute';
-import LoginForm from './components/LoginForm';
-import SignUpForm from './components/SignUpForm';
 
 const App = () => {
   const { authenticated, setAuthenticated } = useAuthContext();
@@ -30,18 +28,6 @@ const App = () => {
     <>
       <NavBar setAuthenticated={setAuthenticated} />
       <Switch>
-        <Route path="/login" exact={true}>
-          <LoginForm
-            authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
-          />
-        </Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm
-            authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
-          />
-        </Route>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <h1>My Home Page</h1>
         </ProtectedRoute>
