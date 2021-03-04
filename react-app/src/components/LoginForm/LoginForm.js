@@ -6,7 +6,6 @@ import { login, demoUserLogin } from "../../store/session";
 import { useAuthContext } from "../../context/AuthContext";
 import InputField from "../parts/InputField";
 import SubmitFormButton from "../parts/SubmitFormButton";
-import FormErrors from "../parts/FormErrors";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
