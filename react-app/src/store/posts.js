@@ -27,8 +27,34 @@ export const getPosts = (page) => async (dispatch) => {
   }
 };
 
-const initialState = {};
+export const createPost = (post) => async (dispatch) => {
+  const { title, body, images } = post;
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('body', body);
+  if (images) {
+    for (const list of images) {
+      for (let i = 0; i < list.length; i++) {
+        formData.append('images', list[i]);
+      }
+    }
+  }
 
+  try {
+    const res = await fetch('/api/posts', {
+      method: "POST",
+      body: formData,
+    });
+    if (!res.ok) throw res;
+    const post = await res.json();
+    dispatch(setPost(post));
+    return post;
+  } catch (e) {
+    return e;
+  }
+};
+
+const initialState = {};
 
 const postsReducer = (state = initialState, action) => {
   switch (action.type) {
