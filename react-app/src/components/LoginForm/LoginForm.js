@@ -1,16 +1,22 @@
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
-import { login, demoUserLogin } from '../../store/session';
-import { useAuthContext } from '../../context/AuthContext';
-import InputField from '../parts/InputField';
-import SubmitFormButton from '../parts/SubmitFormButton';
+import { login, demoUserLogin } from "../../store/session";
+import { useAuthContext } from "../../context/AuthContext";
+import InputField from "../parts/InputField";
+import SubmitFormButton from "../parts/SubmitFormButton";
+import FormErrors from "../parts/FormErrors";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const { setShowLoginModal, setShowSignUpModal, authenticated, setAuthenticated } = useAuthContext();
+  const {
+    setShowLoginModal,
+    setShowSignUpModal,
+    authenticated,
+    setAuthenticated,
+  } = useAuthContext();
   const [errors, setErrors] = useState([]);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -55,20 +61,40 @@ const LoginForm = () => {
         <div className="flex justify-center p-2">
           <h3>Login</h3>
         </div>
-        <div>
-          {errors.map((error) => (
-            <div>{error}</div>
-          ))}
-        </div>
-        <InputField name="credential" type="text" placeholder="Username or Email" value={credential} onChange={updateCredential} />
-        <InputField name="password" type="password" placeholder="Password" value={password} onChange={updatePassword} />
+        <FormErrors errors={errors} />
+        <InputField
+          name="credential"
+          type="text"
+          placeholder="Username or Email"
+          value={credential}
+          onChange={updateCredential}
+        />
+        <InputField
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={updatePassword}
+        />
         <SubmitFormButton label="Login" />
       </form>
       <div className="text-center">
-        Don't have an account? <span className="text-blue-500 cursor-pointer hover:underline" onClick={openSignUp}>Sign Up Here.</span>
+        Don't have an account?{" "}
+        <span
+          className="text-blue-500 cursor-pointer hover:underline"
+          onClick={openSignUp}
+        >
+          Sign Up Here.
+        </span>
       </div>
       <div className="text-center">
-        Want to try out our app? <span className="cursor-pointer text-green hover:underline" onClick={demoLogin}>Sign In as a Demo account.</span>
+        Want to try out our app?{" "}
+        <span
+          className="cursor-pointer text-green hover:underline"
+          onClick={demoLogin}
+        >
+          Sign In as a Demo account.
+        </span>
       </div>
     </div>
   );

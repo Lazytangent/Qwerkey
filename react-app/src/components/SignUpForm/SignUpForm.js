@@ -5,6 +5,8 @@ import { Redirect } from "react-router-dom";
 import { signUp, demoUserLogin } from "../../store/session";
 import { useAuthContext } from "../../context/AuthContext";
 import InputField from "../parts/InputField";
+import SubmitFormButton from "../parts/SubmitFormButton";
+import FormErrors from "../parts/FormErrors";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -71,11 +73,7 @@ const SignUpForm = () => {
         <div className="flex justify-center p-2">
           <h3>Sign Up</h3>
         </div>
-        <div>
-          {errors.map((error) => (
-            <div>{error}</div>
-          ))}
-        </div>
+        <FormErrors errors={errors} />
         <InputField
           name="username"
           type="text"
@@ -108,14 +106,7 @@ const SignUpForm = () => {
           value={repeatPassword}
           required={true}
         />
-        <div className="flex justify-center p-2">
-          <button
-            type="submit"
-            className="p-2 border rounded hover:border-green"
-          >
-            Sign Up
-          </button>
-        </div>
+        <SubmitFormButton label="Sign Up" />
       </form>
       <div className="text-center">
         Already have an account?{" "}
