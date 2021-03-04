@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import { useAuthContext } from './context/AuthContext';
 import { authenticate } from './store/session';
 import NavBar from './components/NavBar';
+import PostsContainer from './components/PostsContainer';
 
 const App = () => {
   const { setAuthenticated } = useAuthContext();
@@ -28,7 +29,10 @@ const App = () => {
       <NavBar setAuthenticated={setAuthenticated} />
       <Switch>
         <Route path="/" exact>
-          <h1>My Home Page</h1>
+          <PostsContainer />
+        </Route>
+        <Route path="/q/:communityName(\w+)">
+          <PostsContainer />
         </Route>
       </Switch>
     </>
