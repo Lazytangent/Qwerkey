@@ -1,8 +1,8 @@
-const Post = () => {
+const Post = ({ key, post }) => {
   return (
-    <div>
-      <h3>This is a Title</h3>
-      <p>This is the body.</p>
+    <div key={key}>
+      <h3>{post.title}</h3>
+      <p>{post.body}</p>
     </div>
   );
 };

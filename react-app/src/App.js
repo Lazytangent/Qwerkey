@@ -4,7 +4,6 @@ import { Switch, Route } from 'react-router-dom';
 
 import { useAuthContext } from './context/AuthContext';
 import { authenticate } from './store/session';
-import { getPosts } from './store/posts';
 import NavBar from './components/NavBar';
 import PostsContainer from './components/PostsContainer';
 import Sidebar from './components/Sidebar';
@@ -21,7 +20,6 @@ const App = () => {
       if (!user.errors) {
         setAuthenticated(true);
       }
-      await dispatch(getPosts(1));
       setLoaded(true);
     })();
   }, [setAuthenticated, dispatch]);
