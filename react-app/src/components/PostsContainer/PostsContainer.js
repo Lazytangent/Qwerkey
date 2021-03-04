@@ -9,7 +9,7 @@ const PostsContainer = () => {
   const { communityName } = useParams();
   const dispatch = useDispatch();
 
-  const user = useSelector(state => state.session);
+  const user = useSelector(state => state.session.user);
   const posts = useSelector(state => state.posts);
   const [page, setPage] = useState(1);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -21,10 +21,10 @@ const PostsContainer = () => {
   }, [dispatch, page, communityName]);
 
   useEffect(() => {
-    if (user && posts) {
+    if (posts) {
       setIsLoaded(true);
     }
-  }, [user, posts]);
+  }, [posts]);
 
   if (!isLoaded) {
     return null;
@@ -33,7 +33,7 @@ const PostsContainer = () => {
   return (
     <div>
       {Object.values(posts).map(post => (
-        <Post key={post.id} post={post} userId={user.id} />
+        <Post key={post.id} post={post} userId={user ? user.id : null} />
       ))}
     </div>
   );
