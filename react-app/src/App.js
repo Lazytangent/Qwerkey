@@ -5,6 +5,8 @@ import { useAuthContext } from './context/AuthContext';
 import { authenticate } from './store/session';
 import NavBar from './components/NavBar';
 import PostsContainer from './components/PostsContainer';
+import Sidebar from './components/Sidebar';
+import Footer from './components/Footer';
 
 const App = () => {
   const { setAuthenticated } = useAuthContext();
@@ -25,17 +27,25 @@ const App = () => {
   }
 
   return (
-    <>
-      <NavBar setAuthenticated={setAuthenticated} />
-      <Switch>
-        <Route path="/" exact>
-          <PostsContainer />
-        </Route>
-        <Route path="/q/:communityName(\w+)">
-          <PostsContainer />
-        </Route>
-      </Switch>
-    </>
+    <div className="grid grid-rows-layout">
+      <div className="row-span-1">
+        <NavBar setAuthenticated={setAuthenticated} />
+      </div>
+      <div className="row-span-1">
+        <Switch>
+          <Route path="/" exact>
+            <PostsContainer />
+          </Route>
+          <Route path="/q/:communityName(\w+)">
+            <PostsContainer />
+          </Route>
+        </Switch>
+        <Sidebar />
+      </div>
+      <div className="row-span-1">
+        <Footer />
+      </div>
+    </div>
   );
 };
 
