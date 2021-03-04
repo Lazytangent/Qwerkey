@@ -17,7 +17,7 @@ const setPost = (post) => {
 
 export const getPosts = (page) => async (dispatch) => {
   try {
-    const res = await fetch(`/api/posts/?page=${page}`);
+    const res = await fetch(`/api/posts?page=${page}`);
     if (!res.ok) throw res;
     const posts = await res.json();
     dispatch(setPosts(posts));
@@ -28,10 +28,12 @@ export const getPosts = (page) => async (dispatch) => {
 };
 
 export const createPost = (post) => async (dispatch) => {
-  const { title, body, images } = post;
+  const { title, body, images, userId, communityId } = post;
   const formData = new FormData();
   formData.append('title', title);
   formData.append('body', body);
+  formData.append('user_id', userId);
+  formData.append('community_id', communityId);
   if (images) {
     for (const list of images) {
       for (let i = 0; i < list.length; i++) {
@@ -41,7 +43,7 @@ export const createPost = (post) => async (dispatch) => {
   }
 
   try {
-    const res = await fetch('/api/posts', {
+    const res = await fetch('/api/posts/', {
       method: "POST",
       body: formData,
     });
@@ -55,10 +57,12 @@ export const createPost = (post) => async (dispatch) => {
 };
 
 export const updatePost = (post) => async (dispatch) => {
-  const { title, body, images, postId } = post;
+  const { title, body, images, postId, userId, communityId } = post;
   const formData = new FormData();
   formData.append('title', title);
   formData.append('body', body);
+  formData.append('user_id', userId);
+  formData.append('community_id', communityId);
   if (images) {
     for (const list of images) {
       for (let i = 0; i < list.length; i++) {

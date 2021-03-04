@@ -9,10 +9,15 @@ import configureStore from './store';
 import ModalProvider from './context/ModalContext';
 import AuthProvider from './context/AuthContext';
 
+import * as sessionActions from './store/session';
+import * as postActions from './store/posts';
+
 const store = configureStore();
 
 if (process.env.NODE_ENV !== 'production') {
   window.store = store;
+  window.sessionActions = sessionActions;
+  window.postActions = postActions;
 }
 
 const Root = () => (
