@@ -15,10 +15,13 @@ def get_posts():
     page = int(request.args.get('page', 0))
     community_name = request.args.get('community_name', '')
     if community_name:
+        print(community_name)
         community = Community.query.filter(
-            Community.name == community_name).one()
-        posts = Post.query.filter(Post.community_id == community).paginate(
+            Community.name.ilike(community_name)).one()
+        print(community)
+        posts = Post.query.filter(Post.community_id == community.id).paginate(
             page=page, per_page=20)
+        print(posts)
     else:
         posts = Post.query.paginate(page=page, per_page=20)
     return {post.id: post.to_dict() for post in posts.items}
