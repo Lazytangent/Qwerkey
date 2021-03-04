@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { signUp } from '../../store/session';
+import { signUp, demoUserLogin } from '../../store/session';
 import { useAuthContext } from '../../context/AuthContext';
 
 const SignUpForm = () => {
@@ -26,6 +26,12 @@ const SignUpForm = () => {
         setErrors(user.errors);
       }
     }
+  };
+
+  const demoLogin = () => {
+    dispatch(demoUserLogin());
+    setShowSignUpModal(false);
+    setAuthenticated(true);
   };
 
   const openLogin = () => {
@@ -112,8 +118,11 @@ const SignUpForm = () => {
           <button type="submit" className="p-2 border rounded hover:border-green">Sign Up</button>
         </div>
       </form>
-      <div>
+      <div className="text-center">
         Already have an account? <span className="text-blue-500 cursor-pointer hover:underline" onClick={openLogin}>Log In Here.</span>
+      </div>
+      <div className="text-center">
+        Want to try out our app? <span className="cursor-pointer text-green hover:underline" onClick={demoLogin}>Sign In as a Demo account.</span>
       </div>
     </div>
   );
