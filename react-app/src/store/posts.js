@@ -54,6 +54,47 @@ export const createPost = (post) => async (dispatch) => {
   }
 };
 
+export const updatePost = (post) => async (dispatch) => {
+  const { title, body, images, postId } = post;
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('body', body);
+  if (images) {
+    for (const list of images) {
+      for (let i = 0; i < list.length; i++) {
+        formData.append('images', list[i]);
+      }
+    }
+  }
+
+  try {
+    const res = await fetch(`/api/posts/${postId}`, {
+      method: "PUT",
+      body: formData,
+    });
+    if (!res.ok) throw res;
+    const post = await res.json();
+    dispatch(setPost(post));
+    return post;
+  } catch (e) {
+    return e;
+  }
+};
+
+export const deletePost = (postId) => async (dispatch) => {
+  try {
+    const res = await fetch(`/api/posts/${postId}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) throw res;
+    const post = await res.json();
+    dispatch(setPost(post));
+    return post;
+  } catch (e) {
+    return e;
+  }
+};
+
 const initialState = {};
 
 const postsReducer = (state = initialState, action) => {
