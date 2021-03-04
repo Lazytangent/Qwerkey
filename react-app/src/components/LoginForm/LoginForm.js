@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { login, demoUserLogin } from '../../store/session';
 import { useAuthContext } from '../../context/AuthContext';
 import InputField from '../parts/InputField';
+import SubmitFormButton from '../parts/SubmitFormButton';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -61,9 +62,7 @@ const LoginForm = () => {
         </div>
         <InputField name="credential" type="text" placeholder="Username or Email" value={credential} onChange={updateCredential} />
         <InputField name="password" type="password" placeholder="Password" value={password} onChange={updatePassword} />
-        <div className="flex justify-center p-2">
-          <button type="submit" className="p-2 border rounded hover:border-green">Login</button>
-        </div>
+        <SubmitFormButton label="Login" />
       </form>
       <div className="text-center">
         Don't have an account? <span className="text-blue-500 cursor-pointer hover:underline" onClick={openSignUp}>Sign Up Here.</span>
