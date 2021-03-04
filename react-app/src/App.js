@@ -4,10 +4,9 @@ import { Switch, Route } from 'react-router-dom';
 import { useAuthContext } from './context/AuthContext';
 import { authenticate } from './store/session';
 import NavBar from './components/NavBar';
-import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
-  const { authenticated, setAuthenticated } = useAuthContext();
+  const { setAuthenticated } = useAuthContext();
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -28,9 +27,9 @@ const App = () => {
     <>
       <NavBar setAuthenticated={setAuthenticated} />
       <Switch>
-        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
+        <Route path="/" exact>
           <h1>My Home Page</h1>
-        </ProtectedRoute>
+        </Route>
       </Switch>
     </>
   );
