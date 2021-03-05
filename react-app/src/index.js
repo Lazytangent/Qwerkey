@@ -8,6 +8,7 @@ import App from './App';
 import configureStore from './store';
 import ModalProvider from './context/ModalContext';
 import AuthProvider from './context/AuthContext';
+import CreatePostProvider from './context/CreatePostContext';
 
 import * as sessionActions from './store/session';
 import * as postActions from './store/posts';
@@ -25,7 +26,9 @@ const Root = () => (
     <Provider store={store}>
       <ModalProvider>
         <AuthProvider>
-          <App />
+          <CreatePostProvider>
+            <App />
+          </CreatePostProvider>
         </AuthProvider>
       </ModalProvider>
     </Provider>
