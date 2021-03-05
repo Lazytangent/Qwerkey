@@ -79,3 +79,10 @@ def update_post(post_id):
         db.session.commit()
 
         return post.to_dict()
+
+
+@post_routes.route('/<int:post_id>/comments', methods=["POST"])
+def create_comment(post_id):
+    pass
+
+
