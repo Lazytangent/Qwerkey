@@ -16,6 +16,7 @@ const CreatePostForm = () => {
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [images, setImages] = useState([]);
   const [errors, setErrors] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -35,11 +36,13 @@ const CreatePostForm = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const post = await dispatch(createPost({ title, body, userId: user.id, communityId: 1 }));
-    if (!post.errors) {
-      setShowCreatePostModal(false);
-    } else {
-      setErrors(post.errors);
+    if (body || images.length) {
+      const post = await dispatch(createPost({ title, body, userId: user.id, communityId: 1 }));
+      if (!post.errors) {
+        setShowCreatePostModal(false);
+      } else {
+        setErrors(post.errors);
+      }
     }
   };
 
