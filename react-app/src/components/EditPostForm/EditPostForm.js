@@ -28,7 +28,7 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
 
   const updateNewImages = (e) => {
     const files = e.target.files;
-    if (files) setImages(prev => [...prev, files]);
+    if (files) setNewImages(prev => [...prev, files]);
   };
 
   const chooseAdditionalImage = () => {
@@ -37,7 +37,7 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (body || images.length) {
+    if (body || newImages.length || oldImages.length) {
       const post = await dispatch(updatePost({ title, body, images: newImages, postId, userId: post.user_id, communityId: post.community_id }));
       if (!post.errors) {
         setShowEditModal(false);
@@ -51,7 +51,7 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
     <div className="p-4 bg-white rounded md:w-96">
       <form onSubmit={submitHandler}>
         <FormTitle title="Update your Post" />
-        <FormErrors errors="errors" />
+        <FormErrors errors={errors} />
         <InputField
           name="title"
           type="text"
@@ -70,7 +70,7 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
         <div className="flex flex-col items-center">
           <h5>Images Chosen</h5>
           {oldImages && oldImages.map(imageUrl => {
-            return imageUrl.split("amazonaws.com/")[1];
+            return <div>{imageUrl.split("amazonaws.com/")[1]}</div>;
           })}
           {newImages && newImages.map(fileList => (
             Array.from(fileList).map(image => (

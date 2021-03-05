@@ -78,7 +78,6 @@ const CreatePostForm = () => {
           placeholder="Body"
           onChange={updateBody}
           value={body}
-          required={true}
         />
         <div className="flex flex-col items-center">
           <h5>Images Chosen</h5>
