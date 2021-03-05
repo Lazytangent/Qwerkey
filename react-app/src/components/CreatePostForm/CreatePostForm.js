@@ -34,10 +34,19 @@ const CreatePostForm = () => {
     setBody(e.target.value);
   };
 
+  const updateImages = (e) => {
+    const files = e.target.files;
+    if (files) setImages(prev => [...prev, files]);
+  }
+
+  const chooseAdditionalImage = () => {
+    document.getElementById("image-upload").click();
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     if (body || images.length) {
-      const post = await dispatch(createPost({ title, body, userId: user.id, communityId: 1 }));
+      const post = await dispatch(createPost({ title, body, images, userId: user.id, communityId: 1 }));
       if (!post.errors) {
         setShowCreatePostModal(false);
       } else {
@@ -51,7 +60,7 @@ const CreatePostForm = () => {
   }
 
   return (
-    <div className="p-4 bg-white rounded">
+    <div className="p-4 bg-white rounded md:w-96">
       <form onSubmit={submitHandler}>
         <FormTitle title="Create a Post" />
         <FormErrors errors={errors} />
@@ -71,8 +80,19 @@ const CreatePostForm = () => {
           value={body}
           required={true}
         />
-        <div>
-          <input type="button" />
+        <div className="flex flex-col items-center">
+          <h5>Images Chosen</h5>
+          {images && images.map(fileList => (
+            Array.from(fileList).map(image => (
+              <div>
+                {image.name}
+              </div>
+            ))
+          ))}
+        </div>
+        <div className="flex justify-center">
+          <button type="button" onClick={chooseAdditionalImage} className="p-2 border rounded hover:border-green">Upload Images</button>
+          <input type="file" onChange={updateImages} id="image-upload" multiple={true} className="hidden" />
         </div>
         <SubmitFormButton label="Create a Post" />
       </form>
