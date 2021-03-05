@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from werkzeug.utils import secure_filename
 
 from app.config import Config
-from app.forms import CreatePost
+from app.forms import CreatePost, CreateComment
 from app.helpers import (upload_file_to_s3, allowed_file,
                          validation_errors_to_error_messages)
 from app.models import db, Post, PostsImage, Community
@@ -83,6 +83,12 @@ def update_post(post_id):
 
 @post_routes.route('/<int:post_id>/comments', methods=["POST"])
 def create_comment(post_id):
-    pass
-
-
+    post = Post.query.get(post_id)
+    form = CreateComment()
+    if form.validate_on_submit():
+        comment = Comment()
+        form.populate_obj(comment)
+        db.session.add(comment)
+        db.session.commit()
+        return post.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}
