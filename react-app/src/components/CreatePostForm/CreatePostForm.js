@@ -71,6 +71,9 @@ const CreatePostForm = () => {
           value={body}
           required={true}
         />
+        <div>
+          <input type="button" />
+        </div>
         <SubmitFormButton label="Create a Post" />
       </form>
     </div>
