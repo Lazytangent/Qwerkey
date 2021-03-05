@@ -35,7 +35,7 @@ const App = () => {
       <div className="row-span-1">
         <NavBar setAuthenticated={setAuthenticated} />
       </div>
-      <div className="p-2 mx-auto max-w-screen-lg grid grid-cols-3 row-span-1">
+      <div className="p-2 mx-auto max-w-screen-lg md:grid md:grid-cols-3 row-span-1">
         <div className="col-span-2">
           <Switch>
             <Route path="/" exact>
@@ -52,7 +52,7 @@ const App = () => {
             </Route>
           </Switch>
         </div>
-        <div className="p-2 col-span-1">
+        <div className="hidden p-2 col-span-1 md:block">
           <Sidebar />
         </div>
       </div>

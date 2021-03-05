@@ -15,6 +15,7 @@ const PostPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(getPostById(postId));
   }, [dispatch, postId]);
 
