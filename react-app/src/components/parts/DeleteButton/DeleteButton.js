@@ -1,19 +1,8 @@
-import { useState } from 'react';
-
-import { Modal } from '../../../context/ModalContext';
-import DeleteConfirmation from '../DeleteConfirmation';
-
-const DeleteButton = ({ label }) => {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-
+const DeleteButton = ({ className, label, onClick, children }) => {
   return (
     <>
-      <button className="p-2 mx-2 border rounded hover:border-red-500 ease-in-out focus:bg-red-500 focus:outline-none">{label}</button>
-      {showDeleteModal && (
-        <Modal onClose={() => setShowDeleteModal(false)}>
-          <DeleteConfirmation setShowDeleteModal={setShowDeleteModal} />
-        </Modal>
-      )}
+      <button onClick={onClick} className={`${className} p-2 mx-2 border rounded hover:border-red-500 ease-in-out focus:bg-red-500 focus:outline-none`}>{label}</button>
+      { children }
     </>
   );
 };
