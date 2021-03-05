@@ -20,7 +20,7 @@ const Post = ({ post, userId }) => {
 
   return (
     <div key={post.id} className="p-2 mb-2 rounded shadow-sm hover:shadow-lg">
-      <NavLink to={`/q/${post.community.name}/${post.id}`}><h3>{post.title}</h3></NavLink>
+      <NavLink to={`/q/${post.community.name}/${post.id}`}><h3 className="hover:underline">{post.title}</h3></NavLink>
       <p>{post.body}</p>
       <p>{post.created_at}</p>
       {post.tags.map(tag => (

@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { getPostById } from '../../store/posts';
+import Post from '../Post';
 
 const PostPage = () => {
   const { postId } = useParams();
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
   const post = useSelector(state => state.posts[postId]);
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -16,10 +18,10 @@ const PostPage = () => {
   }, [dispatch, postId]);
 
   useEffect(() => {
-    if (post) {
+    if (post && user) {
       setIsLoaded(true);
     }
-  }, [post]);
+  }, [post, user]);
 
   if (!isLoaded) {
     return null;
@@ -27,7 +29,7 @@ const PostPage = () => {
 
   return (
     <>
-      <h3>{post.title}</h3>
+      <Post post={post} userId={user ? user.id : null} />
     </>
   );
 };
