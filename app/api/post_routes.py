@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify, request
-from werkzeug.utils import secure_filename
 
 from app.config import Config
 from app.forms import CreatePost, CreateComment
 from app.helpers import (upload_file_to_s3, allowed_file,
-                         validation_errors_to_error_messages)
+                         validation_errors_to_error_messages,
+                         get_unique_filename)
 from app.models import db, Post, PostsImage, Community, Comment, Thread
 
 post_routes = Blueprint('posts', __name__)
@@ -38,7 +38,7 @@ def create_post():
             images = request.files.getlist('images')
             for image in images:
                 if allowed_file(image.filename):
-                    image.filename = secure_filename(image.filename)
+                    image.filename = get_unique_filename(image.filename)
                     image_url = upload_file_to_s3(image, Config.S3_BUCKET)
                     image = PostsImage(post_id=post.id, image_url=image_url)
                     db.session.add(image)
@@ -63,7 +63,7 @@ def post_by_id(post_id):
                 images = request.files.getlist('images')
                 for image in images:
                     if allowed_file(image.filename):
-                        image.filename = secure_filename(image.filename)
+                        image.filename = get_unique_filename(image.filename)
                         image_url = upload_file_to_s3(image, Config.S3_BUCKET)
                         image = PostsImage(post_id=post.id,
                                            image_url=image_url)

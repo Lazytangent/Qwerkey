@@ -1,5 +1,6 @@
 import boto3
 import botocore
+import uuid
 from .config import Config
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'svg'}
@@ -23,7 +24,7 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
 
     except Exception as e:
         print("Something Happened: ", e)
-        return e
+        return {"errors": str(e)}
 
     return f"{Config.S3_LOCATION}{file.filename}"
 
@@ -31,6 +32,12 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
 def allowed_file(filename):
     return '.' in filename and \
         filename.split('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def get_unique_filename(filename):
+    ext = filename.rsplit(".", 1)[1].lower()
+    unique_filename = uuid.uuid4().hex
+    return f"{unique_filename}.{ext}"
 
 
 def validation_errors_to_error_messages(validation_errors):

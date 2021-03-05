@@ -79,7 +79,7 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
         <div className="flex flex-col items-center">
           <h5>Images Chosen</h5>
           {oldImages && oldImages.map(imageUrl => {
-            return <div key={imageUrl}>{imageUrl.split("amazonaws.com/")[1]}</div>;
+            return <div key={imageUrl}><img src={imageUrl} alt={imageUrl} /></div>;
           })}
           {newImages && newImages.map(fileList => (
             Array.from(fileList).map(image => (
