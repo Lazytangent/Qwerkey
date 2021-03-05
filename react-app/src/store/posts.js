@@ -39,7 +39,7 @@ export const getPosts = (page, communityName) => async (dispatch) => {
   }
 };
 
-export const getOnePost = (id) => async (dispatch) => {
+export const getPostById = (id) => async (dispatch) => {
   const res = await fetch(`/api/posts/${id}`);
   const post = await res.json();
   if (!post.errors) {
