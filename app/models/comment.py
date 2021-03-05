@@ -12,7 +12,7 @@ class Comment(db.Model):
                           nullable=False)
     comment_id = db.Column(db.Integer,
                            db.ForeignKey("comments.id"),
-                           nullable=False)
+                           nullable=True)
     path = db.Column(db.String(255), nullable=False)
     level = db.Column(db.Integer, nullable=False)
     body = db.Column(db.Text, nullable=False)
