@@ -48,7 +48,7 @@ def create_post():
 
 
 @post_routes.route('/<int:post_id>', methods=["GET", "PUT", "DELETE"])
-def update_post(post_id):
+def post_by_id(post_id):
     post = Post.query.get(post_id)
     if request.method == "GET":
         return post.to_dict()
