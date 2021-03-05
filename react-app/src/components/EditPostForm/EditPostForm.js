@@ -17,6 +17,11 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
   const [oldImages, setOldImages] = useState(post.images);
   const [newImages, setNewImages] = useState([]);
   const [errors, setErrors] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (user && post) setIsLoaded(true);
+  }, [user, post]);
 
   const updateTitle = (e) => {
     setTitle(e.target.value);
@@ -38,14 +43,18 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (body || newImages.length || oldImages.length) {
-      const post = await dispatch(updatePost({ title, body, images: newImages, postId, userId: post.user_id, communityId: post.community_id }));
-      if (!post.errors) {
+      const newPost = await dispatch(updatePost({ title, body, images: newImages, postId, userId: post.user_id, communityId: post.community_id }));
+      if (!newPost.errors) {
         setShowEditModal(false);
       } else {
-        setErrors(post.errors);
+        setErrors(newPost.errors);
       }
     }
   };
+
+  if (!isLoaded) {
+    return null;
+  }
 
   return (
     <div className="p-4 bg-white rounded md:w-96">
@@ -70,11 +79,11 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
         <div className="flex flex-col items-center">
           <h5>Images Chosen</h5>
           {oldImages && oldImages.map(imageUrl => {
-            return <div>{imageUrl.split("amazonaws.com/")[1]}</div>;
+            return <div key={imageUrl}>{imageUrl.split("amazonaws.com/")[1]}</div>;
           })}
           {newImages && newImages.map(fileList => (
             Array.from(fileList).map(image => (
-              <div>{image.name}</div>
+              <div key={image.name}>{image.name}</div>
             ))
           ))}
         </div>

@@ -83,7 +83,7 @@ const CreatePostForm = () => {
           <h5>Images Chosen</h5>
           {images && images.map(fileList => (
             Array.from(fileList).map(image => (
-              <div>
+              <div key={image.name}>
                 {image.name}
               </div>
             ))

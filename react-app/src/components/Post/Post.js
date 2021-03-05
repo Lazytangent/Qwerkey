@@ -26,7 +26,7 @@ const Post = ({ post, userId }) => {
         <p>{tag}</p>
       ))}
       {post.images.map(url => (
-        <img src={url} alt={`for ${post.title}`} />
+        <img src={url} alt={`for ${post.title}`} key={url}/>
       ))}
       {post.user.id === userId && (
         <>
