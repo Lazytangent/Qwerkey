@@ -38,5 +38,6 @@ class Post(db.Model):
             "body": self.body,
             "images": [image.image_url for image in self.images],
             "tags": [tag.name for tag in self.tags],
+            "threads": {thread.id: thread.to_dict() for thread in self.threads},
             "created_at": self.created_at
         }

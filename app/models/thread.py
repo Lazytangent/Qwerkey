@@ -13,7 +13,7 @@ class Thread(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "comments": [comment.to_simple_dict() for comment in
-                         self.comments],
+            "comments": {comment.id: comment.to_simple_dict() for comment in
+                         self.comments},
             "post_id": self.post_id,
         }
