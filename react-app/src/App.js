@@ -39,7 +39,7 @@ const App = () => {
             <Route path="/" exact>
               <PostsContainer />
             </Route>
-            <Route path="/q/:communityName(\w+)">
+            <Route path="/q/:communityName">
               <PostsContainer />
             </Route>
           </Switch>

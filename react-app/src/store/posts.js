@@ -25,7 +25,6 @@ const setPost = (post) => {
 
 export const getPosts = (page, communityName) => async (dispatch) => {
   try {
-    console.log(communityName);
     const res = await fetch(`/api/posts?page=${page}${communityName ? `&community_name=${communityName}` : ''}`);
     if (!res.ok) throw res;
     const posts = await res.json();
