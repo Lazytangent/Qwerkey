@@ -1,12 +1,19 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
+import { getPostById } from '../../store/posts';
 
 const PostPage = () => {
   const { postId } = useParams();
+  const dispatch = useDispatch();
   const post = useSelector(state => state.posts[postId]);
 
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    dispatch(getPostById(postId));
+  }, [dispatch, postId]);
 
   useEffect(() => {
     if (post) {
@@ -20,7 +27,7 @@ const PostPage = () => {
 
   return (
     <>
-      <h3>Placeholder for Post Page</h3>
+      <h3>{post.title}</h3>
     </>
   );
 };
