@@ -132,6 +132,32 @@ export const createComment = (comment) => async (dispatch) => {
   return post;
 };
 
+export const updateComment = (comment) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${comment.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(comment),
+  });
+  const post = await res.json();
+  if (!post.errors) {
+    dispatch(setPost(post));
+  }
+  return post;
+};
+
+export const deleteComment = (commentId) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${commentId}`, {
+    method: "DELETE",
+  });
+  const post = await res.json();
+  if (!post.errors) {
+    dispatch(setPost(post));
+  }
+  return post;
+};
+
 const initialState = {};
 
 const postsReducer = (state = initialState, action) => {
