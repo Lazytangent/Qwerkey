@@ -40,11 +40,11 @@ const App = () => {
             <Route path="/" exact>
               <PostsContainer />
             </Route>
-            <Route path="/q/:communityName">
-              <PostsContainer />
-            </Route>
             <Route path="/q/:communityName/:postId">
               <PostPage />
+            </Route>
+            <Route path="/q/:communityName">
+              <PostsContainer />
             </Route>
           </Switch>
         </div>
