@@ -43,7 +43,7 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (body || newImages.length || oldImages.length) {
-      const newPost = await dispatch(updatePost({ title, body, images: newImages, postId, userId: post.user_id, communityId: post.community_id }));
+      const newPost = await dispatch(updatePost({ title, body, images: newImages, postId, userId: post.user.id, communityId: post.community.id }));
       if (!newPost.errors) {
         setShowEditModal(false);
       } else {
