@@ -5,7 +5,7 @@ from app.config import Config
 from app.forms import CreatePost, CreateComment
 from app.helpers import (upload_file_to_s3, allowed_file,
                          validation_errors_to_error_messages)
-from app.models import db, Post, PostsImage, Community
+from app.models import db, Post, PostsImage, Community, Comment
 
 post_routes = Blueprint('posts', __name__)
 
