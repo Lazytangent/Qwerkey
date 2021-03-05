@@ -1,13 +1,20 @@
 import { NavLink } from 'react-router-dom';
 
 import { useAuthContext } from '../../context/AuthContext';
+import { useCreatePostContext } from '../../context/CreatePostContext';
 import LoginModal from '../LoginForm';
 import SignUpModal from '../SignUpForm';
 import LogoutButton from '../LogoutButton';
+import CreateFormModal from '../CreatePostForm';
 import NavButton from '../parts/NavButton';
 
 const NavBar = () => {
   const { setShowLoginModal, setShowSignUpModal, authenticated } = useAuthContext();
+  const { setShowCreatePostModal } = useCreatePostContext();
+
+  const createPostBtnHandler = () => {
+    setShowCreatePostModal(prev => !prev);
+  }
 
   const loginBtnClickHandler = () => {
     setShowLoginModal(prev => !prev);
@@ -43,6 +50,11 @@ const NavBar = () => {
         )}
         {authenticated && (
           <div className="flex justify-end col-start-3">
+            <li>
+              <NavButton name="Create Post" onClick={createPostBtnHandler}>
+                <CreateFormModal />
+              </NavButton>
+            </li>
             <li>
               <LogoutButton />
             </li>

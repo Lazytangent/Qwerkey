@@ -1,3 +1,3 @@
-import SubmitFormButton from './SubmifFormButton';
+import SubmitFormButton from './SubmitFormButton';
 
 export default SubmitFormButton;

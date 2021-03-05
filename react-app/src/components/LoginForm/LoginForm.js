@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { login, demoUserLogin } from "../../store/session";
 import { useAuthContext } from "../../context/AuthContext";
+import FormTitle from '../parts/FormTitle';
 import InputField from "../parts/InputField";
 import SubmitFormButton from "../parts/SubmitFormButton";
 
@@ -57,9 +58,7 @@ const LoginForm = () => {
   return (
     <div className="p-4 bg-white rounded">
       <form className="p-2 bg-white rounded" onSubmit={onLogin}>
-        <div className="flex justify-center p-2">
-          <h3>Login</h3>
-        </div>
+        <FormTitle title="Login" />
         {errors.length > 0 && (
           <div className="flex justify-center text-red-600">
             <h5>The provided credentials were invalid.</h5>

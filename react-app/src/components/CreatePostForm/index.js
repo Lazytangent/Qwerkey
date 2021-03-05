@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
 import { Modal } from '../../context/ModalContext';
+import { useCreatePostContext } from '../../context/CreatePostContext';
 import CreatePostForm from './CreatePostForm';
 
 const CreatePostModal = () => {
-  const [showCreatePostModal, setShowCreatePostModal] = useState(false);
+  const { showCreatePostModal, setShowCreatePostModal } = useCreatePostContext();
 
   return (
     <>

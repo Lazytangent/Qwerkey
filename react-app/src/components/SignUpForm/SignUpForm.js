@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 
 import { signUp, demoUserLogin } from "../../store/session";
 import { useAuthContext } from "../../context/AuthContext";
+import FormTitle from '../parts/FormTitle';
 import InputField from "../parts/InputField";
 import SubmitFormButton from "../parts/SubmitFormButton";
 import FormErrors from "../parts/FormErrors";
@@ -70,9 +71,7 @@ const SignUpForm = () => {
   return (
     <div className="p-4 bg-white rounded">
       <form onSubmit={onSignUp} className="p-2 bg-white rounded">
-        <div className="flex justify-center p-2">
-          <h3>Sign Up</h3>
-        </div>
+        <FormTitle title="Sign Up" />
         <FormErrors errors={errors} />
         <InputField
           name="username"
