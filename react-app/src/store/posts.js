@@ -61,7 +61,9 @@ export const createPost = (post) => async (dispatch) => {
     });
     if (!res.ok) throw res;
     const post = await res.json();
-    dispatch(setPost(post));
+    if (!post.errors) {
+      dispatch(setPost(post));
+    }
     return post;
   } catch (e) {
     return e;
