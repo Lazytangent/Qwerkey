@@ -47,10 +47,12 @@ def create_post():
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
-@post_routes.route('/<int:post_id>', methods=["PUT", "DELETE"])
+@post_routes.route('/<int:post_id>', methods=["GET", "PUT", "DELETE"])
 def update_post(post_id):
     post = Post.query.get(post_id)
-    if request.method == "PUT":
+    if request.method == "GET":
+        return post.to_dict()
+    elif request.method == "PUT":
         form = CreatePost()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
