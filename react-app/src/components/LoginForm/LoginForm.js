@@ -61,7 +61,7 @@ const LoginForm = () => {
           <h3>Login</h3>
         </div>
         {errors.length > 0 && (
-          <div>
+          <div className="flex justify-center text-red-600">
             <h5>The provided credentials were invalid.</h5>
           </div>
         )}

@@ -14,11 +14,9 @@ const FormErrors = ({ errors }) => {
   return (
     <>
       {errors.length > 0 && (
-        <div>
+        <div className="flex flex-col items-center text-red-600">
           <h5>The following fields are required:</h5>
-          {formattedErrors.map((error) => (
-            <div>{error}</div>
-          ))}
+          {formattedErrors.join(', ')}
         </div>
       )}
     </>
