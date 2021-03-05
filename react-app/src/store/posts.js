@@ -117,7 +117,7 @@ export const deletePost = (postId) => async (dispatch) => {
   }
 };
 
-export const createComment = (comment) => async (dispatch) => {
+export const createComment = (comment, postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${postId}/comments`, {
     method: "POST",
     headers: {
