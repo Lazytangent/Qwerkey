@@ -11,6 +11,7 @@ from .api import (
     user_routes,
     post_routes,
     posts_image_routes,
+    comment_routes,
 )
 
 from .seeds import seed_commands
@@ -37,6 +38,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(post_routes, url_prefix='/api/posts')
 app.register_blueprint(posts_image_routes, url_prefix='/api/post_images')
+app.register_blueprint(comment_routes, url_prefix='/api/comments')
 db.init_app(app)
 Migrate(app, db)
 
