@@ -93,7 +93,7 @@ def create_comment(post_id):
             db.session.add(thread)
             db.session.commit()
             form['thread_id'].data = thread.id
-            form['path'].data = f"{form['post_id'].data}"
+            form['path'].data = f"{post.id}"
             form['level'].data = 1
         form.populate_obj(comment)
         db.session.add(comment)
