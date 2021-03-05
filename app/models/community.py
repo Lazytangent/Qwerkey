@@ -15,6 +15,12 @@ class Community(db.Model):
 
     posts = db.relationship("Post", back_populates="community")
 
+    def to_simple_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+        }
+
     def to_dict(self):
         return {
             "id": self.id,

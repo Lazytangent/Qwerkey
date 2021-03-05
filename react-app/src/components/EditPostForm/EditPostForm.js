@@ -1,30 +1,27 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { createPost } from '../../store/posts';
-import { useCreatePostContext } from '../../context/CreatePostContext';
+import { updatePost } from '../../store/posts';
 import FormTitle from '../parts/FormTitle';
 import FormErrors from '../parts/FormErrors';
 import InputField from '../parts/InputField';
 import SubmitFormButton from '../parts/SubmitFormButton';
 
-const CreatePostForm = () => {
+const EditPostForm = ({ setShowEditModal, postId }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
+  const post = useSelector(state => state.posts[postId]);
 
-  const { setShowCreatePostModal } = useCreatePostContext();
-
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [images, setImages] = useState([]);
+  const [title, setTitle] = useState(post.title);
+  const [body, setBody] = useState(post.body);
+  const [oldImages, setOldImages] = useState(post.images);
+  const [newImages, setNewImages] = useState([]);
   const [errors, setErrors] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    if (user) {
-      setIsLoaded(true);
-    }
-  }, [user]);
+    if (user && post) setIsLoaded(true);
+  }, [user, post]);
 
   const updateTitle = (e) => {
     setTitle(e.target.value);
@@ -34,23 +31,23 @@ const CreatePostForm = () => {
     setBody(e.target.value);
   };
 
-  const updateImages = (e) => {
+  const updateNewImages = (e) => {
     const files = e.target.files;
-    if (files) setImages(prev => [...prev, files]);
-  }
+    if (files) setNewImages(prev => [...prev, files]);
+  };
 
   const chooseAdditionalImage = () => {
-    document.getElementById("image-upload-create-post").click();
+    document.getElementById("image-upload-edit-post").click();
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (body || images.length) {
-      const post = await dispatch(createPost({ title, body, images, userId: user.id, communityId: 1 }));
-      if (!post.errors) {
-        setShowCreatePostModal(false);
+    if (body || newImages.length || oldImages.length) {
+      const newPost = await dispatch(updatePost({ title, body, images: newImages, postId, userId: post.user.id, communityId: post.community.id }));
+      if (!newPost.errors) {
+        setShowEditModal(false);
       } else {
-        setErrors(post.errors);
+        setErrors(newPost.errors);
       }
     }
   };
@@ -62,7 +59,7 @@ const CreatePostForm = () => {
   return (
     <div className="p-4 bg-white rounded md:w-96">
       <form onSubmit={submitHandler}>
-        <FormTitle title="Create a Post" />
+        <FormTitle title="Update your Post" />
         <FormErrors errors={errors} />
         <InputField
           name="title"
@@ -81,22 +78,23 @@ const CreatePostForm = () => {
         />
         <div className="flex flex-col items-center">
           <h5>Images Chosen</h5>
-          {images && images.map(fileList => (
+          {oldImages && oldImages.map(imageUrl => {
+            return <div key={imageUrl}>{imageUrl.split("amazonaws.com/")[1]}</div>;
+          })}
+          {newImages && newImages.map(fileList => (
             Array.from(fileList).map(image => (
-              <div key={image.name}>
-                {image.name}
-              </div>
+              <div key={image.name}>{image.name}</div>
             ))
           ))}
         </div>
         <div className="flex justify-center">
           <button type="button" onClick={chooseAdditionalImage} className="p-2 border rounded hover:border-green">Upload Images</button>
-          <input type="file" onChange={updateImages} id="image-upload-create-post" multiple={true} className="hidden" />
+          <input type="file" onChange={updateNewImages} id="image-upload-edit-post" multiple={true} className="hidden" />
         </div>
-        <SubmitFormButton label="Create a Post" />
+        <SubmitFormButton label="Edit your Post" />
       </form>
     </div>
   );
 };
 
-export default CreatePostForm;
+export default EditPostForm;

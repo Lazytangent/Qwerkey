@@ -33,7 +33,7 @@ class Post(db.Model):
         return {
             "id": self.id,
             "user": self.user.to_simple_dict(),
-            "community": self.community.name,
+            "community": self.community.to_simple_dict(),
             "title": self.title,
             "body": self.body,
             "images": [image.image_url for image in self.images],
