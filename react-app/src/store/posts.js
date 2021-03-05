@@ -108,11 +108,28 @@ export const deletePost = (postId) => async (dispatch) => {
     });
     if (!res.ok) throw res;
     const post = await res.json();
-    dispatch(setPost(post));
+    if (!post.errors) {
+      dispatch(setPost(post));
+    }
     return post;
   } catch (e) {
     return e;
   }
+};
+
+export const createComment = (comment) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}/comments`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(comment),
+  });
+  const post = await res.json();
+  if (!post.errors) {
+    dispatch(setPost(post));
+  }
+  return post;
 };
 
 const initialState = {};
