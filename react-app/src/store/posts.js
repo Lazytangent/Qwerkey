@@ -163,9 +163,9 @@ const initialState = {};
 const postsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MORE_POSTS:
-      return { ...action.posts };
-    case SET_POSTS:
       return { ...state, ...action.posts };
+    case SET_POSTS:
+      return { ...action.posts };
     case SET_POST:
       return { ...state, [action.post.id]: action.post };
     default:
