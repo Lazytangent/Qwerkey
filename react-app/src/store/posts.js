@@ -39,6 +39,15 @@ export const getPosts = (page, communityName) => async (dispatch) => {
   }
 };
 
+export const getOnePost = (id) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${id}`);
+  const post = await res.json();
+  if (!post.errors) {
+    dispatch(setPost(post));
+  }
+  return post;
+};
+
 export const createPost = (post) => async (dispatch) => {
   const { title, body, images, userId, communityId } = post;
   const formData = new FormData();
