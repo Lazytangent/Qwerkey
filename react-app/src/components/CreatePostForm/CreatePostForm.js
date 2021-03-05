@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { createPost } from '../../store/posts';
 import { useCreatePostContext } from '../../context/CreatePostContext';
 import FormTitle from '../parts/FormTitle';
 import FormErrors from '../parts/FormErrors';
@@ -7,11 +9,21 @@ import InputField from '../parts/InputField';
 import SubmitFormButton from '../parts/SubmitFormButton';
 
 const CreatePostForm = () => {
-  const { showCreatePostModal, setShowCreatePostModal } = useCreatePostContext();
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
+
+  const { setShowCreatePostModal } = useCreatePostContext();
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [errors, setErrors] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setIsLoaded(true);
+    }
+  }, [user]);
 
   const updateTitle = (e) => {
     setTitle(e.target.value);
@@ -21,9 +33,23 @@ const CreatePostForm = () => {
     setBody(e.target.value);
   };
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const post = await dispatch(createPost({ title, body, userId: user.id, communityId: 1 }));
+    if (!post.errors) {
+      setShowCreatePostModal(false);
+    } else {
+      setErrors(post.errors);
+    }
+  };
+
+  if (!isLoaded) {
+    return null;
+  }
+
   return (
     <div className="p-4 bg-white rounded">
-      <form>
+      <form onSubmit={submitHandler}>
         <FormTitle title="Create a Post" />
         <FormErrors errors={errors} />
         <InputField

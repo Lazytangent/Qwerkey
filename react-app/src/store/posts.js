@@ -25,6 +25,7 @@ const setPost = (post) => {
 
 export const getPosts = (page, communityName) => async (dispatch) => {
   try {
+    console.log(communityName);
     const res = await fetch(`/api/posts?page=${page}${communityName ? `&community_name=${communityName}` : ''}`);
     if (!res.ok) throw res;
     const posts = await res.json();
@@ -61,7 +62,9 @@ export const createPost = (post) => async (dispatch) => {
     });
     if (!res.ok) throw res;
     const post = await res.json();
-    dispatch(setPost(post));
+    if (!post.errors) {
+      dispatch(setPost(post));
+    }
     return post;
   } catch (e) {
     return e;
