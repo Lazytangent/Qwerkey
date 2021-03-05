@@ -31,7 +31,7 @@ const Post = ({ post, userId }) => {
       {post.user.id === userId && (
         <>
           <EditButton label="Edit Post" onClick={editBtnHandler}>
-            <EditPostModal showEditModal={showEditModal} setShowEditModal={setShowEditModal} />
+            <EditPostModal showEditModal={showEditModal} setShowEditModal={setShowEditModal} postId={post.id} />
           </EditButton>
           <DeleteButton label="Delete Post" onClick={deleteBtnHandler}>
             <DeleteConfirmation showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} />

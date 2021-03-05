@@ -7,8 +7,85 @@ import FormErrors from '../parts/FormErrors';
 import InputField from '../parts/InputField';
 import SubmitFormButton from '../parts/SubmitFormButton';
 
-const EditPostForm = () => {
+const EditPostForm = ({ setShowEditModal, postId }) => {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
+  const post = useSelector(state => state.posts[postId]);
 
+  const [title, setTitle] = useState(post.title);
+  const [body, setBody] = useState(post.body);
+  const [oldImages, setOldImages] = useState(post.images);
+  const [newImages, setNewImages] = useState([]);
+  const [errors, setErrors] = useState([]);
+
+  const updateTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const updateBody = (e) => {
+    setBody(e.target.value);
+  };
+
+  const updateNewImages = (e) => {
+    const files = e.target.files;
+    if (files) setImages(prev => [...prev, files]);
+  };
+
+  const chooseAdditionalImage = () => {
+    document.getElementById("image-upload-edit-post").click();
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (body || images.length) {
+      const post = await dispatch(updatePost({ title, body, images: newImages, postId, userId: post.user_id, communityId: post.community_id }));
+      if (!post.errors) {
+        setShowEditModal(false);
+      } else {
+        setErrors(post.errors);
+      }
+    }
+  };
+
+  return (
+    <div className="p-4 bg-white rounded md:w-96">
+      <form onSubmit={submitHandler}>
+        <FormTitle title="Update your Post" />
+        <FormErrors errors="errors" />
+        <InputField
+          name="title"
+          type="text"
+          placeholder="Title"
+          onChange={updateTitle}
+          value={title}
+          required={true}
+        />
+        <InputField
+          name="body"
+          type="textarea"
+          placeholder="Body"
+          onChange={updateBody}
+          value={body}
+        />
+        <div className="flex flex-col items-center">
+          <h5>Images Chosen</h5>
+          {oldImages && oldImages.map(imageUrl => {
+            return imageUrl.split("amazonaws.com/")[1];
+          })}
+          {newImages && newImages.map(fileList => (
+            Array.from(fileList).map(image => (
+              <div>{image.name}</div>
+            ))
+          ))}
+        </div>
+        <div className="flex justify-center">
+          <button type="button" onClick={chooseAdditionalImage} className="p-2 border rounded hover:border-green">Upload Images</button>
+          <input type="file" onChange={updateNewImages} id="image-upload-edit-post" multiple={true} className="hidden" />
+        </div>
+        <SubmitFormButton label="Edit your Post" />
+      </form>
+    </div>
+  );
 };
 
 export default EditPostForm;

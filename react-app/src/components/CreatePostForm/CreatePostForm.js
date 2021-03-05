@@ -40,7 +40,7 @@ const CreatePostForm = () => {
   }
 
   const chooseAdditionalImage = () => {
-    document.getElementById("image-upload").click();
+    document.getElementById("image-upload-create-post").click();
   };
 
   const submitHandler = async (e) => {
@@ -92,7 +92,7 @@ const CreatePostForm = () => {
         </div>
         <div className="flex justify-center">
           <button type="button" onClick={chooseAdditionalImage} className="p-2 border rounded hover:border-green">Upload Images</button>
-          <input type="file" onChange={updateImages} id="image-upload" multiple={true} className="hidden" />
+          <input type="file" onChange={updateImages} id="image-upload-create-post" multiple={true} className="hidden" />
         </div>
         <SubmitFormButton label="Create a Post" />
       </form>
