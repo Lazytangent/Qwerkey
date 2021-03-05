@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { getPostById } from '../../store/posts';
 import Post from '../Post';
+import CommentsContainer from '../CommentsContainer';
 
 const PostPage = () => {
   const { postId } = useParams();
@@ -30,6 +31,7 @@ const PostPage = () => {
   return (
     <>
       <Post post={post} userId={user ? user.id : null} />
+      <CommentsContainer threads={post.threads} />
     </>
   );
 };

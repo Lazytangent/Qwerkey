@@ -1,7 +1,13 @@
-const CommentsContainer = () => {
+import Comment from '../Comment';
+
+const CommentsContainer = ({ threads }) => {
   return (
     <>
-      <h1>Placeholder for CommentsContainer</h1>
+      {Object.values(threads).map(thread =>
+        Object.values(thread.comments).map(comment => (
+          <Comment comment={comment} />
+        ))
+      )}
     </>
   );
 };
