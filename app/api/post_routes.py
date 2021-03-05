@@ -5,7 +5,7 @@ from app.config import Config
 from app.forms import CreatePost, CreateComment
 from app.helpers import (upload_file_to_s3, allowed_file,
                          validation_errors_to_error_messages)
-from app.models import db, Post, PostsImage, Community, Comment
+from app.models import db, Post, PostsImage, Community, Comment, Thread
 
 post_routes = Blueprint('posts', __name__)
 
@@ -85,8 +85,16 @@ def update_post(post_id):
 def create_comment(post_id):
     post = Post.query.get(post_id)
     form = CreateComment()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         comment = Comment()
+        if not form['comment_id'].data:
+            thread = Thread(post_id=post.id)
+            db.session.add(thread)
+            db.session.commit()
+            form['thread_id'].data = thread.id
+            form['path'].data = f"{form['post_id'].data}"
+            form['level'].data = 1
         form.populate_obj(comment)
         db.session.add(comment)
         db.session.commit()
