@@ -3,7 +3,7 @@ import { useState } from 'react';
 import EditButton from '../parts/EditButton';
 import DeleteButton from '../parts/DeleteButton';
 import EditPostModal from '../EditPostForm';
-import DeleteConfirmation from '../parts/DeleteConfirmation';
+import DeleteConfirmationModal from '../parts/DeleteConfirmation';
 
 const Post = ({ post, userId }) => {
   const [showEditModal, setShowEditModal] = useState(false);
@@ -34,7 +34,7 @@ const Post = ({ post, userId }) => {
             <EditPostModal showEditModal={showEditModal} setShowEditModal={setShowEditModal} postId={post.id} />
           </EditButton>
           <DeleteButton label="Delete Post" onClick={deleteBtnHandler}>
-            <DeleteConfirmation showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} />
+            <DeleteConfirmationModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} postId={post.id} />
           </DeleteButton>
         </>
       )}
