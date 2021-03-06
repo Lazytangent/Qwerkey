@@ -6,7 +6,6 @@ import EditButton from "../parts/EditButton";
 import DeleteButton from "../parts/DeleteButton";
 import EditPostModal from "../EditPostForm";
 import DeleteConfirmationModal from "../parts/DeleteConfirmation";
-import CreateCommentForm from "../CreateCommentForm";
 
 const Post = ({ post }) => {
   const user = useSelector(state => state.session.user);
@@ -53,11 +52,6 @@ const Post = ({ post }) => {
               />
             </DeleteButton>
           </>
-        )}
-      </div>
-      <div>
-        {user && post.user.id !== user.id && (
-          <CreateCommentForm userId={user.id} postId={post.id} />
         )}
       </div>
     </div>

@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import { getPostById } from '../../store/posts';
-import Post from '../Post';
-import CommentThreadContainer from '../CommentThreadContainer';
+import { getPostById } from "../../store/posts";
+import Post from "../Post";
+import CommentThreadContainer from "../CommentThreadContainer";
+import CreateCommentForm from "../CreateCommentForm";
 
 const PostPage = () => {
   const { postId } = useParams();
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
-  const post = useSelector(state => state.posts[postId]);
+  const user = useSelector((state) => state.session.user);
+  const post = useSelector((state) => state.posts[postId]);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -32,6 +33,11 @@ const PostPage = () => {
   return (
     <>
       <Post post={post} />
+      {user && post.user.id !== user.id && (
+        <div>
+          <CreateCommentForm userId={user.id} postId={post.id} />
+        </div>
+      )}
       <CommentThreadContainer threads={post.threads} />
     </>
   );
