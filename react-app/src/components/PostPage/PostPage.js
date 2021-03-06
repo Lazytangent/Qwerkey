@@ -20,10 +20,10 @@ const PostPage = () => {
   }, [dispatch, postId]);
 
   useEffect(() => {
-    if (post && user) {
+    if (post) {
       setIsLoaded(true);
     }
-  }, [post, user]);
+  }, [post]);
 
   if (!isLoaded) {
     return null;
