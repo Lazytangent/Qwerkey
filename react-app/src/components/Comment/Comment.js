@@ -24,7 +24,7 @@ const Comment = ({ comment, userId }) => {
       {comment.user.id === userId && (
         <>
           <EditButton label="Edit Comment" onClick={editBtnHandler}>
-            <EditCommentModal showEditModal={showEditModal} setShowEditModal={setShowEditModal} commentId={comment.id} />
+            <EditCommentModal showEditModal={showEditModal} setShowEditModal={setShowEditModal} comment={comment} />
           </EditButton>
           <DeleteButton label="Delete Comment" onClick={deleteBtnHandler}>
             <DeleteConfirmationModal showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} commentId={comment.id} />
