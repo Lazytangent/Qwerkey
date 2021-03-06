@@ -55,3 +55,10 @@ class User(db.Model, UserMixin):
             "posts": [post.to_simple_dict() for post in self.posts],
             "meetups": [meetup.to_dict() for meetup in self.meetups]
         }
+
+    @classmethod
+    def create(cls, username, email, password):
+        user = cls(username=username, email=email, password=password)
+        db.session.add(user)
+        db.session.commit()
+        return user
