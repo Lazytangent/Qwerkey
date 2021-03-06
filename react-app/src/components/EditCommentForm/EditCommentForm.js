@@ -41,9 +41,9 @@ const EditCommentForm = ({ setShowEditModal }) => {
       <form onSubmit={submitHandler}>
         {errors.length > 0 && (
           <div className="flex flex-col items-center text-red-600">
-            {errors.map(error) => (
+            {errors.map(error => (
               <p key={error}>{error}</p>
-            )}
+            ))}
           </div>
         )}
         <InputField
