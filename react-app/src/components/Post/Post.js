@@ -30,7 +30,7 @@ const Post = ({ post }) => {
         <p>{post.body}</p>
         <p>{post.created_at}</p>
         {post.tags.map((tag) => (
-          <p>{tag}</p>
+          <p key={tag}>{tag}</p>
         ))}
         {post.images.map((url) => (
           <img src={url} alt={`for ${post.title}`} key={url} />
