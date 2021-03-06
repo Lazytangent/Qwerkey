@@ -12,6 +12,7 @@ from .api import (
     post_routes,
     posts_image_routes,
     comment_routes,
+    retailer_routes,
 )
 
 from .seeds import seed_commands
@@ -30,7 +31,6 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-# Tell flask about our seed commands
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
@@ -39,17 +39,11 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(post_routes, url_prefix='/api/posts')
 app.register_blueprint(posts_image_routes, url_prefix='/api/post_images')
 app.register_blueprint(comment_routes, url_prefix='/api/comments')
+app.register_blueprint(retailer_routes, url_prefix='/api/retailers')
 db.init_app(app)
 Migrate(app, db)
 
-# Application Security
 CORS(app)
-
-# Since we are deploying with Docker and Flask,
-# we won't be using a buildpack when we deploy to Heroku.
-# Therefore, we need to make sure that in production any
-# request made over http is redirected to https.
-# Well.........
 
 
 @app.before_request
