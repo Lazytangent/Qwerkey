@@ -1,14 +1,18 @@
 import { useDispatch } from 'react-redux';
 
-import { deletePost } from '../../../store/posts';
+import { deletePost, deleteComment } from '../../../store/posts';
 import DeleteButton from '../DeleteButton';
 import EditButton from '../EditButton';
 
-const DeleteConfirmation = ({ setShowDeleteModal, postId }) => {
+const DeleteConfirmation = ({ setShowDeleteModal, postId, commentId }) => {
   const dispatch = useDispatch();
 
-  const deletePostHandler = () => {
-    dispatch(deletePost(postId));
+  const deleteHandler = () => {
+    if (postId) {
+      dispatch(deletePost(postId));
+    } else {
+      dispatch(deleteComment(commentId));
+    }
     setShowDeleteModal(false);
   };
 
@@ -22,7 +26,7 @@ const DeleteConfirmation = ({ setShowDeleteModal, postId }) => {
         <h4>Are you sure?</h4>
       </div>
       <div className="flex justify-around">
-        <DeleteButton className="w-1/3 hover:bg-red-500" onClick={deletePostHandler} label="Yes" />
+        <DeleteButton className="w-1/3 hover:bg-red-500" onClick={deleteHandler} label="Yes" />
         <EditButton className="w-1/3 hover:bg-yellow-500" onClick={cancelDeleteHandler} label="No" />
       </div>
     </div>

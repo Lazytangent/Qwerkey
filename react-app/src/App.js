@@ -6,6 +6,8 @@ import { useAuthContext } from './context/AuthContext';
 import { authenticate } from './store/session';
 import NavBar from './components/NavBar';
 import PostsContainer from './components/PostsContainer';
+import PostPage from './components/PostPage';
+import PageNotFound from './components/PageNotFound';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 
@@ -33,18 +35,24 @@ const App = () => {
       <div className="row-span-1">
         <NavBar setAuthenticated={setAuthenticated} />
       </div>
-      <div className="p-2 mx-auto max-w-screen-lg grid grid-cols-3 row-span-1">
+      <div className="p-2 mx-auto max-w-screen-lg md:grid md:grid-cols-3 row-span-1">
         <div className="col-span-2">
           <Switch>
             <Route path="/" exact>
               <PostsContainer />
             </Route>
-            <Route path="/q/:communityName">
+            <Route path="/q/:communityName/:postId(\d+)">
+              <PostPage />
+            </Route>
+            <Route path="/q/:communityName" exact={true}>
               <PostsContainer />
+            </Route>
+            <Route>
+              <PageNotFound />
             </Route>
           </Switch>
         </div>
-        <div className="p-2 col-span-1">
+        <div className="hidden p-2 col-span-1 md:block">
           <Sidebar />
         </div>
       </div>
