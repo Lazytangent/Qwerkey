@@ -5,6 +5,7 @@ import EditButton from '../parts/EditButton';
 import DeleteButton from '../parts/DeleteButton';
 import EditPostModal from '../EditPostForm';
 import DeleteConfirmationModal from '../parts/DeleteConfirmation';
+import CreateCommentForm from '../CreateCommentForm';
 
 const Post = ({ post, userId }) => {
   const [showEditModal, setShowEditModal] = useState(false);
@@ -29,6 +30,9 @@ const Post = ({ post, userId }) => {
       {post.images.map(url => (
         <img src={url} alt={`for ${post.title}`} key={url}/>
       ))}
+      {userId && post.user.id !== userId && (
+        <CreateCommentForm postId={post.id} />
+      )}
       {post.user.id === userId && (
         <>
           <EditButton label="Edit Post" onClick={editBtnHandler}>
