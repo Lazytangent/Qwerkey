@@ -31,7 +31,7 @@ const PostPage = () => {
 
   return (
     <>
-      <Post post={post} userId={user ? user.id : null} />
+      <Post post={post} />
       <CommentThreadContainer threads={post.threads} />
     </>
   );

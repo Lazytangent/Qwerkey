@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import EditButton from "../parts/EditButton";
@@ -7,7 +8,9 @@ import EditPostModal from "../EditPostForm";
 import DeleteConfirmationModal from "../parts/DeleteConfirmation";
 import CreateCommentForm from "../CreateCommentForm";
 
-const Post = ({ post, userId }) => {
+const Post = ({ post }) => {
+  const user = useSelector(state => state.session.user);
+
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -33,7 +36,7 @@ const Post = ({ post, userId }) => {
         {post.images.map((url) => (
           <img src={url} alt={`for ${post.title}`} key={url} />
         ))}
-        {post.user.id === userId && (
+        {user && post.user.id === user.id && (
           <>
             <EditButton label="Edit Post" onClick={editBtnHandler}>
               <EditPostModal
@@ -53,8 +56,8 @@ const Post = ({ post, userId }) => {
         )}
       </div>
       <div>
-        {userId && post.user.id !== userId && (
-          <CreateCommentForm postId={post.id} />
+        {user && post.user.id !== user.id && (
+          <CreateCommentForm userId={user.id} postId={post.id} />
         )}
       </div>
     </div>
