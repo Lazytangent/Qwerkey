@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { updateComment } from "../../store/posts";
 import { useCommentContext } from "../../context/CommentContext";
 import FormTitle from "../parts/FormTitle";
-import FormErrors from "../parts/FormErrors";
 import InputField from "../parts/InputField";
 import SubmitFormButton from "../parts/SubmitFormButton";
 
@@ -23,11 +22,11 @@ const EditCommentForm = ({ setShowEditModal }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const updatedComment = {
-      ...comment,
+      id: comment.id,
       body,
       user_id: comment.user.id,
     };
-    const post = await dispatch(updatedComment(updatedComment));
+    const post = await dispatch(updateComment(updatedComment));
     if (!post.errors) {
       setBody("");
       setShowEditModal(false);
@@ -46,6 +45,7 @@ const EditCommentForm = ({ setShowEditModal }) => {
             ))}
           </div>
         )}
+        <FormTitle title="Update your Comment" />
         <InputField
           name="commentBody"
           type="textarea"

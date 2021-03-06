@@ -14,6 +14,9 @@ def update_comment(comment_id):
         form = CreateComment()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
+            form['thread_id'].data = comment.thread_id
+            form['path'].data = comment.path
+            form['level'].data = comment.level
             form.populate_obj(comment)
             db.session.commit()
             post = Post.query.get(comment.thread.post_id)
