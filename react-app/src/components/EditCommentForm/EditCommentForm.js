@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 
 import { updateComment } from "../../store/posts";
 import { useCommentContext } from "../../context/CommentContext";
 import FormTitle from "../parts/FormTitle";
-import InputField from "../parts/InputField";
 import SubmitFormButton from "../parts/SubmitFormButton";
 
 const EditCommentForm = ({ setShowEditModal }) => {
@@ -14,6 +13,13 @@ const EditCommentForm = ({ setShowEditModal }) => {
 
   const [body, setBody] = useState(comment.body);
   const [errors, setErrors] = useState([]);
+  const textAreaRef = useRef();
+
+  useEffect(() => {
+    const commentLength = body.length;
+    textAreaRef.current.focus();
+    textAreaRef.current.setSelectionRange(commentLength, commentLength);
+  }, [body.length]);
 
   const updateBody = (e) => {
     setBody(e.target.value);
@@ -40,19 +46,22 @@ const EditCommentForm = ({ setShowEditModal }) => {
       <form onSubmit={submitHandler}>
         {errors.length > 0 && (
           <div className="flex flex-col items-center text-red-600">
-            {errors.map(error => (
+            {errors.map((error) => (
               <p key={error}>{error}</p>
             ))}
           </div>
         )}
         <FormTitle title="Update your Comment" />
-        <InputField
-          name="commentBody"
-          type="textarea"
-          placeholder="Update your Comment"
-          value={body}
-          onChange={updateBody}
-        />
+        <div className="flex justify-center p-2">
+          <textarea
+            className="w-3/4 p-2 mb-1 border rounded"
+            name="commentBody"
+            placeholder="Update your Comment"
+            value={body}
+            onChange={updateBody}
+            ref={textAreaRef}
+          />
+        </div>
         <SubmitFormButton label="Update Comment" />
       </form>
     </div>
