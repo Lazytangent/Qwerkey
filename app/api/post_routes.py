@@ -10,7 +10,7 @@ from app.models import db, Post, PostsImage, Community, Comment, Thread
 post_routes = Blueprint('posts', __name__)
 
 
-@post_routes.route('/')
+@post_routes.route('')
 def get_posts():
     page = int(request.args.get('page', 0))
     community_name = request.args.get('community_name', '')
