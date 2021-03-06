@@ -30,6 +30,7 @@ PyJWT = "==1.7.1"
 boto3 = "*"
 sqlalchemy-utils = "*"
 pytest = "*"
+pytest-dotenv = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
