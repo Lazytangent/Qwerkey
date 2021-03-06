@@ -1,12 +1,12 @@
 import { Modal } from '../../context/ModalContext';
 import EditCommentForm from './EditCommentForm';
 
-const EditCommentModal = ({ showEditModal, setShowEditModal, commentId }) => {
+const EditCommentModal = ({ showEditModal, setShowEditModal }) => {
   return (
     <>
       {showEditModal && (
         <Modal onClose={() => setShowEditModal(false)}>
-          <EditCommentForm setShowEditModal={setShowEditModal} commentId={commentId} />
+          <EditCommentForm setShowEditModal={setShowEditModal} />
         </Modal>
       )}
     </>
