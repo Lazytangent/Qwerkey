@@ -14,6 +14,7 @@ import DarkModeProvider from "./context/DarkModeContext";
 
 import * as sessionActions from "./store/session";
 import * as postActions from "./store/posts";
+import * as retailerActions from "./store/retailers";
 
 const store = configureStore();
 
@@ -21,6 +22,7 @@ if (process.env.NODE_ENV !== "production") {
   window.store = store;
   window.sessionActions = sessionActions;
   window.postActions = postActions;
+  window.retailerActions = retailerActions;
 }
 
 const Root = () => (
