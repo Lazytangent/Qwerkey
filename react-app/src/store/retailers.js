@@ -24,7 +24,7 @@ const setRetailer = (retailer) => {
 };
 
 export const getRetailers = (page) => async (dispatch) => {
-  const res = await fetch(`/api/retailers/${page ? `?page=${page}` : ''}`);
+  const res = await fetch(`/api/retailers${page ? `?page=${page}` : ''}`);
   const retailers = await res.json();
   if (page === 1) {
     dispatch(setRetailers(retailers));

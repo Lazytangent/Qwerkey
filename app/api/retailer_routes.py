@@ -27,7 +27,8 @@ def post_rating(retailer_id):
     form = CreateRetailerRating()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        rating = Rating.query.filter(user_id=form['user_id'].data)
+        rating = \
+            RetailerRating.query.filter_by(user_id=form['user_id'].data).first()
         if rating:
             rating.rating = form['rating'].data
             db.session.commit()
