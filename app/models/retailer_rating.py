@@ -29,3 +29,10 @@ class RetailerRating(db.Model):
             "rating": self.rating,
             "created_at": self.created_at,
         }
+
+    def to_simple_dict(self):
+        return {
+            "id": self.id,
+            "user": self.user.to_simple_dict(),
+            "rating": self.rating,
+        }
