@@ -30,7 +30,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="p-2 bg-green">
+    <nav className="p-2 bg-green dark:bg-gray-500">
       <ul className="grid grid-cols-3">
         <div className="flex p-2">
           <li>
