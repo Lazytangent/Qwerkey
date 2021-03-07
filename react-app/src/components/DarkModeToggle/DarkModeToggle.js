@@ -8,11 +8,10 @@ const DarkModeToggle = () => {
   };
 
   return (
-    <div className="flex justify-between items-center px-8 py-6">
+    <div className="flex items-center justify-between px-8 py-6">
       <p>{isDarkMode ? "Dark Mode" : "Light Mode"}</p>
-      {/* <input type="checkbox" value={isDarkMode} className="w-16 h-10 bg-gray-300 rounded-full flex-shrink-0 p-1" onChange={toggleDarkMode} /> */}
-      <div className="w-16 h-10 bg-gray-300 rounded-full flex-shrink-0 p-1">
-        <div className="bg-white w-8 h-8 rounded-full shadow-md"></div>
+      <div onClick={toggleDarkMode} className={`flex-shrink-0 w-16 h-10 p-1 rounded-full ${isDarkMode ? 'bg-green' : 'bg-gray-300'}`}>
+        <div className={`w-8 h-8 bg-white rounded-full shadow-md transform duration-300 ease-in-out ${isDarkMode ? 'translate-x-6' : ''}`}></div>
       </div>
       <span></span>
     </div>
