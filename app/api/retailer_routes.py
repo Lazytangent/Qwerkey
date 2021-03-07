@@ -12,7 +12,7 @@ retailer_routes = Blueprint("retailers", __name__)
 def get_paginated_retailers():
     page = int(request.args.get('page', 0))
     retailers = Retailer.query.paginate(page=page, per_page=20)
-    return {retailer.id: retailer.to_simple_dict() for retailer in retailers.items}
+    return {retailer.id: retailer.to_dict() for retailer in retailers.items}
 
 
 @retailer_routes.route('/')
