@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 
+from app.forms import CreateRetailerRating
 from app.models import db, Retailer, RetailerRating
 
 retailer_routes = Blueprint("retailers", __name__)
