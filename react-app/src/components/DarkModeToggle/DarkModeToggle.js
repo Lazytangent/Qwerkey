@@ -8,12 +8,11 @@ const DarkModeToggle = () => {
   };
 
   return (
-    <div className="flex items-center justify-between px-8 py-6">
+    <div className="flex items-center justify-between p-2">
       <p>{isDarkMode ? "Dark Mode" : "Light Mode"}</p>
-      <div onClick={toggleDarkMode} className={`flex-shrink-0 w-16 h-10 p-1 rounded-full ${isDarkMode ? 'bg-green' : 'bg-gray-300'}`}>
-        <div className={`w-8 h-8 bg-white rounded-full shadow-md transform duration-300 ease-in-out ${isDarkMode ? 'translate-x-6' : ''}`}></div>
+      <div onClick={toggleDarkMode} className={`flex-shrink-0 w-14 h-8 p-1 rounded-full ${isDarkMode ? 'bg-green' : 'bg-gray-300'}`}>
+        <div className={`w-6 h-6 bg-white rounded-full shadow-md transform duration-300 ease-in-out ${isDarkMode ? 'translate-x-6' : ''}`}></div>
       </div>
-      <span></span>
     </div>
   );
 };
