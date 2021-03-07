@@ -2,6 +2,13 @@ const SET_MORE_RETAILERS = 'retailers/SET_MORE_RETAILERS';
 const SET_RETAILERS = 'retailers/SET_RETAILERS';
 const SET_RETAILER = 'retailers/SET_RETAILER';
 
+const setMoreRetailers = (retailers) => {
+  return {
+    type: SET_MORE_RETAILERS,
+    retailers,
+  };
+};
+
 const setRetailers = (retailers) => {
   return {
     type: SET_RETAILERS,
@@ -19,8 +26,10 @@ const setRetailer = (retailer) => {
 export const getRetailers = (page) => async (dispatch) => {
   const res = await fetch(`/api/retailers/${page ? `?page=${page}` : ''}`);
   const retailers = await res.json();
-  if (!retailers.errors) {
+  if (page === 1) {
     dispatch(setRetailers(retailers));
+  } else {
+    dispatch(setMoreRetailers(retailers));
   }
   return retailers;
 };
