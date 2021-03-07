@@ -20,7 +20,7 @@ class Retailer(db.Model):
     images = db.relationship("RetailerImage", back_populates="retailer")
     ratings = db.relationship("RetailerRating", back_populates="retailer")
 
-    def to_dict(self):
+    def to_simple_dict(self):
         return {
             "id": self.id,
             "owner": self.user.to_simple_dict(),
@@ -29,4 +29,5 @@ class Retailer(db.Model):
             "city": self.city,
             "state": self.state,
             "created_at": self.created_at,
+            "images": [image.image_url for image in self.images]
         }
