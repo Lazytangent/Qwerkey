@@ -11,7 +11,7 @@ post_routes = Blueprint('posts', __name__)
 
 
 @post_routes.route('')
-def get_posts():
+def get_paginated_posts():
     page = int(request.args.get('page', 0))
     community_name = request.args.get('community_name', '')
     if community_name:
@@ -22,6 +22,12 @@ def get_posts():
     else:
         posts = Post.query.paginate(page=page, per_page=20)
     return {post.id: post.to_dict() for post in posts.items}
+
+
+@post_routes.route('/')
+def get_posts():
+    posts = Post.query.limit(20).all()
+    return {post.id: post.to_dict() for post in posts}
 
 
 @post_routes.route('/', methods=["POST"])
