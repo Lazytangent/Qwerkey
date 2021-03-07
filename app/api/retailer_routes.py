@@ -45,9 +45,9 @@ def post_rating(retailer_id):
 
 @retailer_routes.route('/<int:retailer_id>/ratings',
                        methods=["PUT", "DELETE"])
-def update_rating(retailer_id, rating_id):
+def update_rating(retailer_id):
     retailer = Retailer.query.get(retailer_id)
-    rating = RetailerRating.query.get(rating_id)
+    rating = RetailerRating.query.filter(user_id=form['user_id'].data).one()
     if request.method == "PUT":
         form = CreateRetailerRating()
         form['csrf_token'].data = request.cookies['csrf_token']
