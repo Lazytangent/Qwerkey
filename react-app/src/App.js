@@ -1,19 +1,22 @@
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Switch, Route } from "react-router-dom";
 
-import { useAuthContext } from './context/AuthContext';
-import { authenticate } from './store/session';
-import NavBar from './components/NavBar';
-import PostsContainer from './components/PostsContainer';
-import PostPage from './components/PostPage';
-import PageNotFound from './components/PageNotFound';
-import Sidebar from './components/Sidebar';
-import Footer from './components/Footer';
+import { useAuthContext } from "./context/AuthContext";
+import { useDarkModeContext } from "./context/DarkModeContext";
+import { authenticate } from "./store/session";
+import NavBar from "./components/NavBar";
+import PostsContainer from "./components/PostsContainer";
+import PostPage from "./components/PostPage";
+import PageNotFound from "./components/PageNotFound";
+import Sidebar from "./components/Sidebar";
+import Footer from "./components/Footer";
 
 const App = () => {
   const dispatch = useDispatch();
+
   const { setAuthenticated } = useAuthContext();
+  const { isDarkMode } = useDarkModeContext();
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -31,11 +34,11 @@ const App = () => {
   }
 
   return (
-    <div className="grid grid-rows-layout">
+    <div className={`grid grid-rows-layout ${isDarkMode ? "dark bg-gray-800" : ""}`}>
       <div className="row-span-1">
         <NavBar setAuthenticated={setAuthenticated} />
       </div>
-      <div className="p-2 mx-auto max-w-screen-lg md:grid md:grid-cols-3 row-span-1">
+      <div className="p-2 mx-auto dark:text-gray-50 max-w-screen-lg md:grid md:grid-cols-3 row-span-1">
         <div className="col-span-2">
           <Switch>
             <Route path="/" exact>

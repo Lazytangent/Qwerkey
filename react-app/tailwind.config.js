@@ -3,8 +3,13 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
+    boxShadow: {
+      ...defaultTheme.boxShadow,
+      light: '0 1px 3px 0 rgba(255, 255, 255, 0.1), 0 1px 2px 0 rgba(255, 255, 255, 0.06)',
+      'light-lg': '0 10px 14px -3px rgba(255, 255, 255, 0.1), 0 2px 4px -1px rgba(255, 255, 255, 0.06)',
+    },
     colors: {
       ...colors,
       green: {
@@ -22,12 +27,14 @@ module.exports = {
     },
     extend: {
       gridTemplateRows: {
-        'layout': 'auto minmax(900px, 1fr) auto',
+        'layout': 'auto minmax(98vh, 1fr) auto',
       },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      boxShadow: ['dark'],
+    },
   },
   plugins: [],
   corePlugins: {
