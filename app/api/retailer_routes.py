@@ -27,8 +27,11 @@ def post_rating(retailer_id):
     form = CreateRetailerRating()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        rating = RetailerRating()
-        form.populate_obj(rating)
+        rating = RetailerRating(
+            user_id=form['user_id'].data,
+            retailer_id=retailer_id,
+            rating=form['rating'].data
+        )
         db.session.add(rating)
         db.session.commit()
         return retailer.to_dict()
