@@ -15,5 +15,5 @@ def seed_communities():
 
 
 def undo_communities():
-    db.session.execute('TRUNCATE communities CASCADE')
+    db.session.execute('TRUNCATE communities RESTART IDENTITY CASCADE')
     db.session.commit()
