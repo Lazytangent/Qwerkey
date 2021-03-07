@@ -8,17 +8,17 @@ from app.models import db, Retailer, RetailerRating
 retailer_routes = Blueprint("retailers", __name__)
 
 
-@retailer_routes.route('/')
-def get_retailers():
-    retailers = Retailer.query.limit(20).all()
-    return {retailer.id: retailer.to_dict() for retailer in retailers}
-
-
 @retailer_routes.route('')
 def get_paginated_retailers():
     page = int(request.args.get('page', 0))
     retailers = Retailer.query.paginate(page=page, per_page=20)
     return {retailer.id: retailer.to_simple_dict() for retailer in retailers.items}
+
+
+@retailer_routes.route('/')
+def get_retailers():
+    retailers = Retailer.query.limit(20).all()
+    return {retailer.id: retailer.to_dict() for retailer in retailers}
 
 
 @retailer_routes.route('/<int:retailer_id>/ratings', methods=["POST"])
