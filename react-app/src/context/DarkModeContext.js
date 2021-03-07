@@ -8,9 +8,9 @@ const DarkModeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
-    <DarkModeContext.DarkModeProvider value={{ isDarkMode, setIsDarkMode }}>
+    <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
       { children }
-    </DarkModeContext.DarkModeProvider>
+    </DarkModeContext.Provider>
   );
 };
 
