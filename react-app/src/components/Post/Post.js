@@ -22,8 +22,8 @@ const Post = ({ post }) => {
   };
 
   return (
-    <div>
-      <div key={post.id} className="p-2 mb-2 rounded shadow-sm hover:shadow-lg">
+    <>
+      <div key={post.id} className="p-2 mb-2 rounded shadow-sm hover:shadow-lg dark:bg-gray-600 dark:hover:shadow-light-lg dark:shadow-light transform duration-100 ease-in-out">
         <NavLink to={`/q/${post.community.name}/${post.id}`}>
           <h3 className="hover:underline">{post.title}</h3>
         </NavLink>
@@ -54,7 +54,7 @@ const Post = ({ post }) => {
           </>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

@@ -34,11 +34,11 @@ const App = () => {
   }
 
   return (
-    <div className={`grid grid-rows-layout ${isDarkMode ? "dark" : ""}`}>
+    <div className={`grid grid-rows-layout ${isDarkMode ? "dark bg-gray-800" : ""}`}>
       <div className="row-span-1">
         <NavBar setAuthenticated={setAuthenticated} />
       </div>
-      <div className="p-2 mx-auto max-w-screen-lg md:grid md:grid-cols-3 row-span-1">
+      <div className="p-2 mx-auto dark:text-gray-50 max-w-screen-lg md:grid md:grid-cols-3 row-span-1">
         <div className="col-span-2">
           <Switch>
             <Route path="/" exact>
