@@ -27,6 +27,11 @@ def post_rating(retailer_id):
     form = CreateRetailerRating()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        rating = Rating.query.filter(user_id=form['user_id'].data)
+        if rating:
+            rating.rating = form['rating'].data
+            db.session.commit()
+            return retailer.to_dict()
         rating = RetailerRating(
             user_id=form['user_id'].data,
             retailer_id=retailer_id,
@@ -38,7 +43,7 @@ def post_rating(retailer_id):
     return {"errors": validation_errors_to_error_messages(form.errors)}
 
 
-@retailer_routes.route('/<int:retailer_id>/ratings/<int:rating_id>',
+@retailer_routes.route('/<int:retailer_id>/ratings',
                        methods=["PUT", "DELETE"])
 def update_rating(retailer_id, rating_id):
     retailer = Retailer.query.get(retailer_id)
