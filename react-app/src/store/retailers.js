@@ -1,3 +1,4 @@
+const SET_MORE_RETAILERS = 'retailers/SET_MORE_RETAILERS';
 const SET_RETAILERS = 'retailers/SET_RETAILERS';
 const SET_RETAILER = 'retailers/SET_RETAILER';
 
@@ -40,7 +41,7 @@ export const createRetailerRating = (rating, retailer_id) => async (dispatch) =>
 };
 
 export const updateRetailerRating = (rating, retailer_id) => async (dispatch) => {
-  const res = await fetch(`/api/retailers/${retailer_id}/ratings`, {
+  const res = await fetch(`/api/retailers/${retailer_id}/ratings/${rating.id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -54,4 +55,30 @@ export const updateRetailerRating = (rating, retailer_id) => async (dispatch) =>
   return retailer;
 };
 
-export const deleteRetailerRating
+export const deleteRetailerRating = (rating_id, retailer_id) => async (dispatch) => {
+  const res = await fetch(`/api/retailers/${retailer_id}/ratings/${rating_id}`, {
+    method: "DELETE",
+  });
+  const retailer = await res.json();
+  if (!retailer.errors) {
+    dispatch(setRetailer(retailer));
+  }
+  return retailer;
+};
+
+const initialState = {};
+
+const retailersReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SET_RETAILERS:
+      return { ...action.retailers };
+    case SET_MORE_RETAILERS:
+      return { ...state, ...action.retailers };
+    case SET_RETAILER:
+      return { ...state, [action.retailer.id]: action.retailer };
+    default:
+      return state;
+  }
+};
+
+export default retailersReducer;
