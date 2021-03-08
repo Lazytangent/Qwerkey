@@ -20,7 +20,6 @@ const DeleteConfirmation = ({ setShowDeleteModal, id, extraId, type }) => {
         dispatch(deleteRetailerRating(id, extraId));
         break;
       default:
-        console.log("Bad type for deletion.");
         break;
     }
     setShowDeleteModal(false);
@@ -31,7 +30,7 @@ const DeleteConfirmation = ({ setShowDeleteModal, id, extraId, type }) => {
   };
 
   return (
-    <div className="p-4 pb-6 bg-white dark:text-gray-50 rounded dark:bg-gray-800 md:w-60">
+    <div className="p-4 pb-6 bg-white rounded dark:text-gray-50 dark:bg-gray-800 md:w-60">
       <div className="flex justify-center p-2">
         <h4>Are you sure?</h4>
       </div>
