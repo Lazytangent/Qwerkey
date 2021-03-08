@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { createRetailerRating } from "../../store/retailers";
+import FormTitle from "../parts/FormTitle";
 import InputField from "../parts/InputField";
 import FormErrors from "../parts/FormErrors";
 import SubmitFormButton from "../parts/SubmitFormButton";
@@ -29,8 +30,8 @@ const RetailerRatingForm = ({ retailerId }) => {
 
   return (
     <>
-      <h2>Placeholder for RetailerRating</h2>
       <form onSubmit={submitHandler}>
+        <FormTitle title="Leave a Rating" />
         <FormErrors errors={errors} />
         <InputField
           name="rating"
