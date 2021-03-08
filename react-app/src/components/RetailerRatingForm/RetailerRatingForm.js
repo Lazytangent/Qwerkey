@@ -29,7 +29,7 @@ const RetailerRatingForm = ({ retailerId }) => {
   };
 
   return (
-    <div className="p-4 bg-white rounded">
+    <>
       <form onSubmit={submitHandler}>
         <FormTitle title="Leave a Rating" />
         <FormErrors errors={errors} />
@@ -42,7 +42,7 @@ const RetailerRatingForm = ({ retailerId }) => {
         />
         <SubmitFormButton label="Submit Rating" />
       </form>
-    </div>
+    </>
   );
 };
 
