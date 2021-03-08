@@ -40,6 +40,7 @@ const RetailerRating = ({ rating }) => {
               showDeleteModal={showDeleteModal}
               setShowDeleteModal={setShowDeleteModal}
               id={rating.id}
+              extraId={rating.retailer_id}
               type="retailerRating"
             />
           </DeleteButton>

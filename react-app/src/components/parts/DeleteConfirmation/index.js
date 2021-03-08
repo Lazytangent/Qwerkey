@@ -1,12 +1,12 @@
 import { Modal } from '../../../context/ModalContext';
 import DeleteConfirmation from './DeleteConfirmation';
 
-const DeleteConfirmationModal = ({ showDeleteModal, setShowDeleteModal, postId, commentId, ratingId }) => {
+const DeleteConfirmationModal = ({ showDeleteModal, setShowDeleteModal, id, extraId, type }) => {
   return (
     <>
       {showDeleteModal && (
         <Modal onClose={() => setShowDeleteModal(false)}>
-          <DeleteConfirmation setShowDeleteModal={setShowDeleteModal} postId={postId} commentId={commentId} ratingId={ratingId} />
+          <DeleteConfirmation setShowDeleteModal={setShowDeleteModal} id={id} extraId={extraId} type={type} />
         </Modal>
       )}
     </>
