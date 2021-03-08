@@ -11,6 +11,7 @@ const RetailerPage = () => {
   const { retailerId } = useParams();
   const dispatch = useDispatch();
   const retailer = useSelector(state => state.retailers[retailerId]);
+  const user = useSelector(state => state.session.user);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -33,7 +34,7 @@ const RetailerPage = () => {
       {retailer && (
         <>
           <Retailer retailer={retailer} />
-          <RetailerRatingForm retailerId={retailer.id} />
+          {user && retailer.owner.id !== user.id && (<RetailerRatingForm retailerId={retailer.id} />)}
           <RetailerRatingsContainer retailerId={retailer.id} />
         </>
       )}
