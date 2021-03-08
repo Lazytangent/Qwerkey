@@ -24,9 +24,11 @@ const Post = ({ post }) => {
   return (
     <>
       <div key={post.id} className="p-2 mb-2 rounded shadow-sm hover:shadow-lg dark:bg-gray-600 dark:hover:shadow-light-lg dark:shadow-light transform duration-100 ease-in-out">
-        <NavLink to={`/q/${post.community.name}/${post.id}`}>
-          <h3 className="hover:underline">{post.title}</h3>
-        </NavLink>
+        <h3>
+          <NavLink to={`/q/${post.community.name}/${post.id}`}>
+            <span className="hover:underline">{post.title}</span>
+          </NavLink>
+        </h3>
         <p>{post.body}</p>
         <p>{post.created_at}</p>
         {post.tags.map((tag) => (

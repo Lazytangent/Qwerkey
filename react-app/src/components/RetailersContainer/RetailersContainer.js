@@ -7,7 +7,7 @@ import Retailer from "../Retailer";
 
 const RetailersContainer = () => {
   const dispatch = useDispatch();
-  const retailers = useSelector(state => state.retailers);
+  const retailers = useSelector((state) => state.retailers);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -27,10 +27,8 @@ const RetailersContainer = () => {
 
   return (
     <>
-      {Object.values(retailers).map(retailer => (
-        <>
-          <Retailer key={retailer.id} retailer={retailer} />
-        </>
+      {Object.values(retailers).map((retailer) => (
+        <Retailer key={retailer.id} retailer={retailer} />
       ))}
     </>
   );
