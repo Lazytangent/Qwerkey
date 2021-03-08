@@ -31,7 +31,7 @@ const DeleteConfirmation = ({ setShowDeleteModal, id, extraId, type }) => {
   };
 
   return (
-    <div className="p-4 pb-6 bg-white rounded md:w-60">
+    <div className="p-4 pb-6 bg-white dark:text-gray-50 rounded dark:bg-gray-800 md:w-60">
       <div className="flex justify-center p-2">
         <h4>Are you sure?</h4>
       </div>
