@@ -1,12 +1,19 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { getRetailers } from "../../store/retailers";
 
 import Retailer from "../Retailer";
 
 const RetailersContainer = () => {
+  const dispatch = useDispatch();
   const retailers = useSelector(state => state.retailers);
 
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    dispatch(getRetailers(1));
+  }, [dispatch]);
 
   useEffect(() => {
     if (retailers) {
