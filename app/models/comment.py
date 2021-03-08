@@ -34,6 +34,7 @@ class Comment(db.Model):
             "id": self.id,
             "body": self.body,
             "user": self.user.to_simple_dict(),
+            "comment_id": self.comment_id,
         }
 
     def to_dict(self):
