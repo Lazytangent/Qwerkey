@@ -39,7 +39,8 @@ const RetailerRating = ({ rating }) => {
             <DeleteConfirmationModal
               showDeleteModal={showDeleteModal}
               setShowDeleteModal={setShowDeleteModal}
-              ratingId={rating.id}
+              id={rating.id}
+              type="retailerRating"
             />
           </DeleteButton>
         </>

@@ -40,7 +40,8 @@ const Comment = ({ comment, userId }) => {
             <DeleteConfirmationModal
               showDeleteModal={showDeleteModal}
               setShowDeleteModal={setShowDeleteModal}
-              commentId={comment.id}
+              id={comment.id}
+              type="comment"
             />
           </DeleteButton>
         </>

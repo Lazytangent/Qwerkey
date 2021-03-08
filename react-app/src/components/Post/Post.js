@@ -50,7 +50,8 @@ const Post = ({ post }) => {
               <DeleteConfirmationModal
                 showDeleteModal={showDeleteModal}
                 setShowDeleteModal={setShowDeleteModal}
-                postId={post.id}
+                id={post.id}
+                type="post"
               />
             </DeleteButton>
           </>
