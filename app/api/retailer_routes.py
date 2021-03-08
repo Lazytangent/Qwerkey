@@ -21,6 +21,12 @@ def get_retailers():
     return {retailer.id: retailer.to_dict() for retailer in retailers}
 
 
+@retailer_routes.route('/<int:retailer_id>')
+def get_one_retailer(retailer_id):
+    retailer = Retailer.query.get(retailer_id)
+    return retailer.to_dict()
+
+
 @retailer_routes.route('/<int:retailer_id>/ratings', methods=["POST"])
 def post_rating(retailer_id):
     retailer = Retailer.query.get(retailer_id)

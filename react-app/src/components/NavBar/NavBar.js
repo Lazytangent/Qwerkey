@@ -43,6 +43,18 @@ const NavBar = () => {
               Home
             </NavLink>
           </li>
+          {authenticated && (
+            <li>
+              <NavLink
+                className="p-2 align-middle hover:underline text-purple-dark"
+                to="/retailers"
+                exact={true}
+                activeClassName="active"
+              >
+                Retailers
+              </NavLink>
+            </li>
+          )}
         </div>
         <div className="flex justify-end col-start-3">
           <DarkModeToggle />
