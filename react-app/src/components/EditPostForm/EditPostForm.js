@@ -57,7 +57,7 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
   }
 
   return (
-    <div className="dark:bg-gray-800 dark:text-gray-50 p-4 bg-white rounded md:w-96">
+    <div className="p-4 bg-white rounded dark:bg-gray-800 dark:text-gray-50 md:w-96">
       <form onSubmit={submitHandler}>
         <FormTitle title="Update your Post" />
         <FormErrors errors={errors} />
