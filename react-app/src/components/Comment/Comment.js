@@ -23,7 +23,7 @@ const Comment = ({ comment, userId }) => {
 
   return (
     <div
-      className="p-2 mb-2 rounded shadow max-h-36 md:max-h-96"
+      className="p-2 mb-2 rounded shadow max-h-36 md:max-h-96 hover:shadow-lg dark:bg-gray-600 dark:hover:shadow-light-lg dark:shadow-light transform duration-100 ease-in-out"
       key={comment.id}
     >
       <h1>{comment.body}</h1>
@@ -40,7 +40,8 @@ const Comment = ({ comment, userId }) => {
             <DeleteConfirmationModal
               showDeleteModal={showDeleteModal}
               setShowDeleteModal={setShowDeleteModal}
-              commentId={comment.id}
+              id={comment.id}
+              type="comment"
             />
           </DeleteButton>
         </>

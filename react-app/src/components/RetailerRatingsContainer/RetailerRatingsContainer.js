@@ -20,7 +20,6 @@ const RetailerRatingsContainer = ({ retailerId }) => {
 
   return (
     <>
-      <h2>Placeholder for RetailerRatingsContainer</h2>
       {retailer.ratings.map(rating => (
         <RetailerRating key={rating.id} rating={rating} />
       ))}

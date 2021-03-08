@@ -1,17 +1,27 @@
 import { useDispatch } from 'react-redux';
 
 import { deletePost, deleteComment } from '../../../store/posts';
+import { deleteRetailerRating } from "../../../store/retailers";
 import DeleteButton from '../DeleteButton';
 import EditButton from '../EditButton';
 
-const DeleteConfirmation = ({ setShowDeleteModal, postId, commentId }) => {
+const DeleteConfirmation = ({ setShowDeleteModal, id, extraId, type }) => {
   const dispatch = useDispatch();
 
   const deleteHandler = () => {
-    if (postId) {
-      dispatch(deletePost(postId));
-    } else {
-      dispatch(deleteComment(commentId));
+    switch (type) {
+      case "post":
+        dispatch(deletePost(id));
+        break;
+      case "comment":
+        dispatch(deleteComment(id));
+        break;
+      case "retailerRating":
+        dispatch(deleteRetailerRating(id, extraId));
+        break;
+      default:
+        console.log("Bad type for deletion.");
+        break;
     }
     setShowDeleteModal(false);
   };

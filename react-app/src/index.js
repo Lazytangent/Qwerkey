@@ -11,6 +11,7 @@ import AuthProvider from "./context/AuthContext";
 import CreatePostProvider from "./context/CreatePostContext";
 import CommentProvider from "./context/CommentContext";
 import DarkModeProvider from "./context/DarkModeContext";
+import RetailerRatingProvider from "./context/RetailerRatingContext";
 
 import * as sessionActions from "./store/session";
 import * as postActions from "./store/posts";
@@ -33,7 +34,9 @@ const Root = () => (
           <CreatePostProvider>
             <CommentProvider>
               <DarkModeProvider>
-                <App />
+                <RetailerRatingProvider>
+                  <App />
+                </RetailerRatingProvider>
               </DarkModeProvider>
             </CommentProvider>
           </CreatePostProvider>
