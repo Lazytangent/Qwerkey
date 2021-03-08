@@ -27,7 +27,6 @@ const RetailersContainer = () => {
 
   return (
     <>
-      <h2>Placeholder for RetailersContainer</h2>
       {Object.values(retailers).map(retailer => (
         <>
           <Retailer key={retailer.id} retailer={retailer} />
