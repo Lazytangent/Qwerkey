@@ -42,7 +42,7 @@ const EditCommentForm = ({ setShowEditModal }) => {
   };
 
   return (
-    <div className="p-4 bg-white rounded">
+    <div className="p-4 bg-white rounded dark:bg-gray-800 dark:text-gray-50">
       <form onSubmit={submitHandler}>
         {errors.length > 0 && (
           <div className="flex flex-col items-center text-red-600">
@@ -54,7 +54,7 @@ const EditCommentForm = ({ setShowEditModal }) => {
         <FormTitle title="Update your Comment" />
         <div className="flex justify-center p-2">
           <textarea
-            className="w-3/4 p-2 mb-1 border rounded"
+            className="w-3/4 p-2 mb-1 border rounded dark:bg-gray-800 dark:text-gray-50"
             name="commentBody"
             placeholder="Update your Comment"
             value={body}
