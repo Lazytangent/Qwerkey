@@ -30,5 +30,5 @@ class Retailer(db.Model):
             "state": self.state,
             "created_at": self.created_at,
             "images": [image.image_url for image in self.images],
-            "ratings": [rating.to_simple_dict() for rating in self.ratings],
+            "ratings": [rating.to_dict() for rating in self.ratings],
         }
