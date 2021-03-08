@@ -13,7 +13,7 @@ const EditRetailerRatingForm = ({ setShowEditModal }) => {
   const user = useSelector(state => state.session.user);
 
   const { retailerRating } = useRetailerRatingContext();
-  const [rating, setRating] = useState()
+  const [rating, setRating] = useState(retailerRating.rating);
   const [errors, setErrors] = useState([]);
 
   const updateRating = (e) => {
@@ -31,12 +31,13 @@ const EditRetailerRatingForm = ({ setShowEditModal }) => {
     if (!retailer.errors) {
       setShowEditModal(false);
     } else {
+      console.log(retailer.errors);
       setErrors(retailer.errors);
     }
   };
 
   return (
-    <>
+    <div className="p-4 bg-white rounded">
       <form onSubmit={submitHandler}>
         <FormTitle title="Update your Rating" />
         <FormErrors errors={errors} />
@@ -49,7 +50,7 @@ const EditRetailerRatingForm = ({ setShowEditModal }) => {
         />
         <SubmitFormButton label="Update Rating" />
       </form>
-    </>
+    </div>
   );
 };
 
