@@ -47,7 +47,7 @@ def post_rating(retailer_id):
         db.session.add(rating)
         db.session.commit()
         return retailer.to_dict()
-    return {"errors": validation_errors_to_error_messages(form.errors)}
+    return {"errors": form.errors}
 
 
 @retailer_routes.route('/<int:retailer_id>/ratings/<int:rating_id>',
@@ -63,7 +63,7 @@ def update_rating(retailer_id, rating_id):
             rating.updated_at = datetime.utcnow()
             db.session.commit()
             return retailer.to_dict()
-        return {"errors": validation_errors_to_error_messages(form.errors)}
+        return {"errors": form.errors}
     elif request.method == "DELETE":
         db.session.delete(rating)
         db.session.commit()
