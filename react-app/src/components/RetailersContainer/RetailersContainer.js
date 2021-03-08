@@ -30,7 +30,7 @@ const RetailersContainer = () => {
       <h2>Placeholder for RetailersContainer</h2>
       {Object.values(retailers).map(retailer => (
         <>
-          <Retailer retailer={retailer} />
+          <Retailer key={retailer.id} retailer={retailer} />
         </>
       ))}
     </>

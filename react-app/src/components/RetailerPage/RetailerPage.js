@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
+import { getOneRetailer } from "../../store/retailers";
 import Retailer from "../Retailer";
 
 const RetailerPage = () => {
   const { retailerId } = useParams();
-  const retailer = useSelector(state => state.retailer ? state.retailers[retailerId] : null);
+  const dispatch = useDispatch();
+  const retailer = useSelector(state => state.retailers[retailerId]);
 
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    dispatch(getOneRetailer(retailerId));
+  }, [dispatch, retailerId]);
 
   useEffect(() => {
     if (retailer) {
@@ -22,7 +28,6 @@ const RetailerPage = () => {
 
   return (
     <>
-      <h2>Placeholder for RetailerPage</h2>
       {retailer && (
         <>
           <Retailer retailer={retailer} />
