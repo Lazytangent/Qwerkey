@@ -1,4 +1,7 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+
+import { Person} from "@material-ui/icons";
 
 import { useAuthContext } from "../../context/AuthContext";
 import { useCreatePostContext } from "../../context/CreatePostContext";
@@ -8,6 +11,7 @@ import LogoutButton from "../LogoutButton";
 import CreateFormModal from "../CreatePostForm";
 import DarkModeToggle from "../DarkModeToggle";
 import NavButton from "../parts/NavButton";
+import UserMenu from "../parts/UserMenu";
 
 const NavBar = () => {
   const {
@@ -16,6 +20,7 @@ const NavBar = () => {
     authenticated,
   } = useAuthContext();
   const { setShowCreatePostModal } = useCreatePostContext();
+  const [showUserMenu, setShowUserMenu] = useState(false);
 
   const createPostBtnHandler = () => {
     setShowCreatePostModal((prev) => !prev);
@@ -27,6 +32,10 @@ const NavBar = () => {
 
   const signUpBtnClickHandler = () => {
     setShowSignUpModal((prev) => !prev);
+  };
+
+  const openUserMenu = () => {
+    setShowUserMenu(prev => !prev);
   };
 
   return (
@@ -72,14 +81,24 @@ const NavBar = () => {
           )}
           {authenticated && (
             <>
-              <li>
-                <NavButton name="Create Post" onClick={createPostBtnHandler}>
-                  <CreateFormModal />
-                </NavButton>
+              <li className="relative md:hidden">
+                <div className="p-2" onClick={openUserMenu}>
+                  <Person />
+                </div>
               </li>
-              <li>
-                <LogoutButton />
-              </li>
+              {showUserMenu && (
+                <UserMenu />
+              )}
+              <div className="hidden md:block">
+                <li>
+                  <NavButton name="Create Post" onClick={createPostBtnHandler}>
+                    <CreateFormModal />
+                  </NavButton>
+                </li>
+                <li>
+                  <LogoutButton />
+                </li>
+              </div>
             </>
           )}
         </div>
