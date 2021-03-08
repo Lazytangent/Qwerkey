@@ -22,7 +22,7 @@ const RetailerRatingsContainer = ({ retailerId }) => {
     <>
       <h2>Placeholder for RetailerRatingsContainer</h2>
       {retailer.ratings.map(rating => (
-        <RetailerRating rating={rating} />
+        <RetailerRating key={rating.id} rating={rating} />
       ))}
     </>
   );

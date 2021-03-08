@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { createRetailerRating } from "../../store/retailers";
+import InputField from "../parts/InputField";
 import FormErrors from "../parts/FormErrors";
 import SubmitFormButton from "../parts/SubmitFormButton";
 
@@ -18,7 +19,7 @@ const RetailerRatingForm = ({ retailerId }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const retailer = await dispatch(createRetailerRating({ rating, userId: user.id }, retailerId));
+    const retailer = await dispatch(createRetailerRating({ rating, user_id: user.id }, retailerId));
     if (retailer.errors) {
       setErrors(retailer.errors);
     } else {
@@ -31,7 +32,13 @@ const RetailerRatingForm = ({ retailerId }) => {
       <h2>Placeholder for RetailerRating</h2>
       <form onSubmit={submitHandler}>
         <FormErrors errors={errors} />
-        <input type="number" value={rating} onChange={updateRating} />
+        <InputField
+          name="rating"
+          type="number"
+          placeholder="Rating"
+          value={rating}
+          onChange={updateRating}
+        />
         <SubmitFormButton label="Submit Rating" />
       </form>
     </>
