@@ -8,6 +8,7 @@ import { authenticate } from "./store/session";
 import NavBar from "./components/NavBar";
 import PostsContainer from "./components/PostsContainer";
 import PostPage from "./components/PostPage";
+import RetailersContainer from "./components/RetailersContainer";
 import PageNotFound from "./components/PageNotFound";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
@@ -49,6 +50,9 @@ const App = () => {
             </Route>
             <Route path="/q/:communityName" exact={true}>
               <PostsContainer />
+            </Route>
+            <Route path="/retailers">
+              <RetailersContainer />
             </Route>
             <Route>
               <PageNotFound />
