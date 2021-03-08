@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateRetailerRating } from "../../store/retailers";
 import { useRetailerRatingContext } from "../../context/RetailerRatingContext";
 import FormTitle from "../parts/FormTitle";
-import FormErrors from "../parts/FormErrors";
 import InputField from "../parts/InputField";
 import SubmitFormButton from "../parts/SubmitFormButton";
+import convertFormErrors from "../../utils/convertFormErrors";
 
 const EditRetailerRatingForm = ({ setShowEditModal }) => {
   const dispatch = useDispatch();
@@ -31,8 +31,9 @@ const EditRetailerRatingForm = ({ setShowEditModal }) => {
     if (!retailer.errors) {
       setShowEditModal(false);
     } else {
-      console.log(retailer.errors);
-      setErrors(retailer.errors);
+      const newErrors = convertFormErrors(retailer.errors);
+      setErrors(newErrors);
+      console.log(errors);
     }
   };
 
@@ -40,7 +41,11 @@ const EditRetailerRatingForm = ({ setShowEditModal }) => {
     <div className="p-4 bg-white rounded">
       <form onSubmit={submitHandler}>
         <FormTitle title="Update your Rating" />
-        <FormErrors errors={errors} />
+        {errors.length > 0 && (
+          <div className="flex flex-col items-center text-red-600">
+            {errors.map(error => (<p>{error}</p>))}
+          </div>
+        )}
         <InputField
           name="rating"
           type="number"
