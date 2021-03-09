@@ -24,8 +24,25 @@ def search_function():
 
 
 @search_routes.route('/posts')
-def search_function_filter():
+def search_posts():
     query = request.args.get("query")
     field = request.args.get("field")
-    if field:
+    if field == "title":
         pass
+    elif field == "body":
+        pass
+    else:
+        posts = Post.query.filter(
+            or_(Post.title.ilike(f"%{query}%"),
+                Post.body.ilike(f"%{query}%"))).all()
+        return {"posts": [post.to_dict() for post in posts]}
+
+
+@search_routes.route('/comments')
+def search_comments():
+    pass
+
+
+@search_routes.route('/retailers')
+def search_retailers():
+    pass
