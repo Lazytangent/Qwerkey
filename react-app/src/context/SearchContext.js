@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 const SearchContext = createContext();
 
-export useSearchContext = () => useContext(SearchContext);
+export const useSearchContext = () => useContext(SearchContext);
 
 const SearchProvider = ({ children }) => {
   const [searchInput, setSearchInput] = useState("");
