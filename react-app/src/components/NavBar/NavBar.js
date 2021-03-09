@@ -13,6 +13,7 @@ import CreateFormModal from "../CreatePostForm";
 import DarkModeToggle from "../DarkModeToggle";
 import NavButton from "../parts/NavButton";
 import UserMenu from "../parts/UserMenu";
+import SearchBar from "../SearchBar";
 
 const NavBar = () => {
   const {
@@ -46,7 +47,7 @@ const NavBar = () => {
 
   return (
     <nav className="p-2 bg-green dark:bg-gray-500">
-      <ul className="grid grid-cols-3">
+      <ul className="grid grid-cols-7">
         <div className="p-2 md:hidden" onClick={toggleSidebar}>
           <Menu />
         </div>
@@ -72,7 +73,8 @@ const NavBar = () => {
             </NavLink>
           </li>
         </div>
-        <div className="flex justify-end col-start-3">
+        <div className="flex justify-end col-start-4 col-span-4">
+          {authenticated && <SearchBar />}
           <DarkModeToggle />
           {!authenticated && (
             <>
@@ -98,7 +100,7 @@ const NavBar = () => {
               {showUserMenu && (
                 <UserMenu />
               )}
-              <div className="hidden md:block">
+              <div className="hidden md:flex">
                 <li>
                   <NavButton name="Create Post" onClick={createPostBtnHandler}>
                     <CreateFormModal />
