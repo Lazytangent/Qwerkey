@@ -23,6 +23,10 @@ const setRetailers = (retailers) => {
   };
 };
 
+const getQuery = (queryString, type, field) => async (dispatch) => {
+  const res = await fetch(`/api/search`)
+}
+
 const initialState = {
   posts: [],
   comments: [],
