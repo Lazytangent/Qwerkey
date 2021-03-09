@@ -36,7 +36,7 @@ const searchReducer = (state = initialState, action) => {
     case SET_COMMENTS:
       return { ...state, comments: action.comments };
     case SET_RETAILERS:
-      return { ...state, retailers: aciton.retailers };
+      return { ...state, retailers: action.retailers };
     default:
       return state;
   }
