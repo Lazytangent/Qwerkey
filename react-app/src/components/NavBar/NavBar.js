@@ -1,13 +1,18 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+
+import { Person, Menu } from "@material-ui/icons";
 
 import { useAuthContext } from "../../context/AuthContext";
 import { useCreatePostContext } from "../../context/CreatePostContext";
+import { useCollapsedSidebarContext } from "../../context/CollapsedSidebarContext";
 import LoginModal from "../LoginForm";
 import SignUpModal from "../SignUpForm";
 import LogoutButton from "../LogoutButton";
 import CreateFormModal from "../CreatePostForm";
 import DarkModeToggle from "../DarkModeToggle";
 import NavButton from "../parts/NavButton";
+import UserMenu from "../parts/UserMenu";
 
 const NavBar = () => {
   const {
@@ -16,6 +21,8 @@ const NavBar = () => {
     authenticated,
   } = useAuthContext();
   const { setShowCreatePostModal } = useCreatePostContext();
+  const { setShowCollapsedSidebar } = useCollapsedSidebarContext();
+  const [showUserMenu, setShowUserMenu] = useState(false);
 
   const createPostBtnHandler = () => {
     setShowCreatePostModal((prev) => !prev);
@@ -29,10 +36,21 @@ const NavBar = () => {
     setShowSignUpModal((prev) => !prev);
   };
 
+  const openUserMenu = () => {
+    setShowUserMenu(prev => !prev);
+  };
+
+  const toggleSidebar = () => {
+    setShowCollapsedSidebar(prev => !prev);
+  };
+
   return (
     <nav className="p-2 bg-green dark:bg-gray-500">
       <ul className="grid grid-cols-3">
-        <div className="flex p-2">
+        <div className="p-2 md:hidden" onClick={toggleSidebar}>
+          <Menu />
+        </div>
+        <div className="flex hidden p-2 md:block">
           <li>
             <NavLink
               className="p-2 align-middle hover:underline hover:text-purple-dark"
@@ -72,14 +90,24 @@ const NavBar = () => {
           )}
           {authenticated && (
             <>
-              <li>
-                <NavButton name="Create Post" onClick={createPostBtnHandler}>
-                  <CreateFormModal />
-                </NavButton>
+              <li className="relative md:hidden">
+                <div className="p-2" onClick={openUserMenu}>
+                  <Person />
+                </div>
               </li>
-              <li>
-                <LogoutButton />
-              </li>
+              {showUserMenu && (
+                <UserMenu />
+              )}
+              <div className="hidden md:block">
+                <li>
+                  <NavButton name="Create Post" onClick={createPostBtnHandler}>
+                    <CreateFormModal />
+                  </NavButton>
+                </li>
+                <li>
+                  <LogoutButton />
+                </li>
+              </div>
             </>
           )}
         </div>

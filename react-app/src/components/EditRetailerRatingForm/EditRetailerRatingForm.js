@@ -38,7 +38,7 @@ const EditRetailerRatingForm = ({ setShowEditModal }) => {
   };
 
   return (
-    <div className="p-4 bg-white rounded">
+    <div className="p-4 bg-white rounded dark:bg-gray-800 dark:text-gray-50">
       <form onSubmit={submitHandler}>
         <FormTitle title="Update your Rating" />
         {errors.length > 0 && (

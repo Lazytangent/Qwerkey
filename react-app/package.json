@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.1",
+    "@headlessui/react": "^0.3.1",
+    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
@@ -43,6 +45,7 @@
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "autoprefixer": "^9.8.6",
+    "babel-plugin-import": "^1.13.3",
     "postcss": "^7.0.35",
     "redux-logger": "^3.0.6",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
