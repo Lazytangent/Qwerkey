@@ -13,6 +13,7 @@ import RetailerPage from "./components/RetailerPage";
 import PageNotFound from "./components/PageNotFound";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
+import CollapsedSidebar from "./components/CollpasedSidebar";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const App = () => {
 
   return (
     <div className={`grid grid-rows-layout ${isDarkMode ? "dark bg-gray-800" : ""}`}>
+      <CollapsedSidebar />
       <div className="row-span-1">
         <NavBar setAuthenticated={setAuthenticated} />
       </div>
