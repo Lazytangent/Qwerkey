@@ -1,19 +1,30 @@
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import { useSearchContext } from "../../context/SearchContext";
+import { getQuery } from "../../store/search";
 import Post from "../Post";
 import Comment from "../Comment";
 import Retailer from "../Retailer";
 
 const SearchResults = () => {
   const location = useLocation();
-  console.log(location.search);
+  const dispatch = useDispatch();
 
-  const { searchInput, setSearchInput } = useSearchContext();
+  const { searched, setSearched } = useSearchContext();
   const results = useSelector(state => state.search);
   const user = useSelector(state => state.session.user);
   const { posts, comments, retailers } = results;
+
+  useEffect(() => {
+    if (!searched) {
+      const queryString = location.search.slice(1);
+      const queryArr = queryString.split('&').map(chunk => chunk.split('=')[1]);
+      dispatch(getQuery(...queryArr));
+      setSearched(true);
+    }
+  }, [dispatch, searched, location.search, setSearched]);
 
   return (
     <>
