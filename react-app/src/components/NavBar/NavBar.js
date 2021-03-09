@@ -50,7 +50,7 @@ const NavBar = () => {
         <div className="p-2 md:hidden" onClick={toggleSidebar}>
           <Menu />
         </div>
-        <div className="flex hidden p-2 md:block">
+        <div className="hidden p-2 md:flex">
           <li>
             <NavLink
               className="p-2 align-middle hover:underline hover:text-purple-dark"

@@ -23,7 +23,7 @@ const Comment = ({ comment, userId }) => {
 
   return (
     <div
-      className="p-2 mb-2 rounded shadow max-h-36 md:max-h-96 hover:shadow-lg dark:bg-gray-800 dark:hover:shadow-light-lg dark:shadow-light transform duration-100 ease-in-out"
+      className="p-2 mb-2 rounded shadow md:max-h-36 md:max-h-96 hover:shadow-lg dark:bg-gray-800 dark:hover:shadow-light-lg dark:shadow-light transform duration-100 ease-in-out"
       key={comment.id}
     >
       <p className="p-2">{comment.body}</p>
