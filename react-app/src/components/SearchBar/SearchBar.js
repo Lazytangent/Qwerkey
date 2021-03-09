@@ -23,7 +23,7 @@ const SearchBar = () => {
   return (
     <div className="flex items-center px-2">
       <form onSubmit={submitHandler}>
-        <input type="search" placeholder="Search..." className="p-2 rounded" value={searchInput} onChange={updateSearchInput} />
+        <input type="search" placeholder="Search..." className="p-2 rounded dark:bg-gray-600" value={searchInput} onChange={updateSearchInput} />
       </form>
     </div>
   );
