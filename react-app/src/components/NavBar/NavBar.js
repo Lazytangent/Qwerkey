@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import { Person} from "@material-ui/icons";
+import { Person, Menu } from "@material-ui/icons";
 
 import { useAuthContext } from "../../context/AuthContext";
 import { useCreatePostContext } from "../../context/CreatePostContext";
@@ -41,7 +41,10 @@ const NavBar = () => {
   return (
     <nav className="p-2 bg-green dark:bg-gray-500">
       <ul className="grid grid-cols-3">
-        <div className="flex p-2">
+        <div className="p-2 md:hidden">
+          <Menu />
+        </div>
+        <div className="flex hidden p-2 md:block">
           <li>
             <NavLink
               className="p-2 align-middle hover:underline hover:text-purple-dark"
