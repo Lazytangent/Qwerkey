@@ -11,11 +11,11 @@ def search_function():
     query = request.args.get("query")
     posts = Post.query.filter(
         or_(Post.title.ilike(f"%{query}%"),
-            Post.body.ilike(f"%{query}%"))).all()
-    comments = Comment.query.filter(Comment.body.ilike(f"%{query}%")).all()
+            Post.body.ilike(f"%{query}%"))).limit(5).all()
+    comments = Comment.query.filter(Comment.body.ilike(f"%{query}%")).limit(5).all()
     retailers = Retailer.query.filter(
         or_(Retailer.name.ilike(f"%{query}%"),
-            Retailer.description.ilike(f"%{query}%"))).all()
+            Retailer.description.ilike(f"%{query}%"))).limit(5).all()
     return {
         "posts": [post.to_dict() for post in posts],
         "comments": [comment.to_dict() for comment in comments],
@@ -34,7 +34,7 @@ def search_posts():
     else:
         posts = Post.query.filter(
             or_(Post.title.ilike(f"%{query}%"),
-                Post.body.ilike(f"%{query}%"))).all()
+                Post.body.ilike(f"%{query}%"))).limit(5).all()
         return {"posts": [post.to_dict() for post in posts]}
 
 
