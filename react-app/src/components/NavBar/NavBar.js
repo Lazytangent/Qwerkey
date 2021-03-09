@@ -5,6 +5,7 @@ import { Person, Menu } from "@material-ui/icons";
 
 import { useAuthContext } from "../../context/AuthContext";
 import { useCreatePostContext } from "../../context/CreatePostContext";
+import { useCollapsedSidebarContext } from "../../context/CollapsedSidebarContext";
 import LoginModal from "../LoginForm";
 import SignUpModal from "../SignUpForm";
 import LogoutButton from "../LogoutButton";
@@ -20,6 +21,7 @@ const NavBar = () => {
     authenticated,
   } = useAuthContext();
   const { setShowCreatePostModal } = useCreatePostContext();
+  const { setShowCollapsedSidebar } = useCollapsedSidebarContext();
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   const createPostBtnHandler = () => {
@@ -38,10 +40,14 @@ const NavBar = () => {
     setShowUserMenu(prev => !prev);
   };
 
+  const toggleSidebar = () => {
+    setShowCollapsedSidebar(prev => !prev);
+  };
+
   return (
     <nav className="p-2 bg-green dark:bg-gray-500">
       <ul className="grid grid-cols-3">
-        <div className="p-2 md:hidden">
+        <div className="p-2 md:hidden" onClick={toggleSidebar}>
           <Menu />
         </div>
         <div className="flex hidden p-2 md:block">

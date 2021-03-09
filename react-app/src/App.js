@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 
 import { useAuthContext } from "./context/AuthContext";
 import { useDarkModeContext } from "./context/DarkModeContext";
+import { useCollapsedSidebarContext } from "./context/CollapsedSidebarContext";
 import { authenticate } from "./store/session";
 import NavBar from "./components/NavBar";
 import PostsContainer from "./components/PostsContainer";
@@ -20,6 +21,7 @@ const App = () => {
 
   const { setAuthenticated } = useAuthContext();
   const { isDarkMode } = useDarkModeContext();
+  const { showCollapsedSidebar } = useCollapsedSidebarContext();
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -37,42 +39,44 @@ const App = () => {
   }
 
   return (
-    <div className={`grid grid-rows-layout ${isDarkMode ? "dark bg-gray-800" : ""}`}>
+    <>
       <CollapsedSidebar />
-      <div className="row-span-1">
-        <NavBar setAuthenticated={setAuthenticated} />
-      </div>
-      <div className="p-2 mx-auto dark:text-gray-50 max-w-screen-lg md:grid md:grid-cols-3 row-span-1">
-        <div className="col-span-2">
-          <Switch>
-            <Route path="/" exact>
-              <PostsContainer />
-            </Route>
-            <Route path="/q/:communityName/:postId(\d+)">
-              <PostPage />
-            </Route>
-            <Route path="/q/:communityName" exact={true}>
-              <PostsContainer />
-            </Route>
-            <Route path="/retailers" exact={true}>
-              <RetailersContainer />
-            </Route>
-            <Route path="/retailers/:retailerId(\d+)">
-              <RetailerPage />
-            </Route>
-            <Route>
-              <PageNotFound />
-            </Route>
-          </Switch>
+      <div className={`grid grid-rows-layout ${isDarkMode ? "dark bg-gray-800" : ""} ${showCollapsedSidebar ? "ml-40" : "ml-0"} duration-500`}>
+        <div className="row-span-1">
+          <NavBar setAuthenticated={setAuthenticated} />
         </div>
-        <div className="hidden p-2 col-span-1 md:block">
-          <Sidebar />
+        <div className="p-2 mx-auto dark:text-gray-50 max-w-screen-lg md:grid md:grid-cols-3 row-span-1">
+          <div className="col-span-2">
+            <Switch>
+              <Route path="/" exact>
+                <PostsContainer />
+              </Route>
+              <Route path="/q/:communityName/:postId(\d+)">
+                <PostPage />
+              </Route>
+              <Route path="/q/:communityName" exact={true}>
+                <PostsContainer />
+              </Route>
+              <Route path="/retailers" exact={true}>
+                <RetailersContainer />
+              </Route>
+              <Route path="/retailers/:retailerId(\d+)">
+                <RetailerPage />
+              </Route>
+              <Route>
+                <PageNotFound />
+              </Route>
+            </Switch>
+          </div>
+          <div className="hidden p-2 col-span-1 md:block">
+            <Sidebar />
+          </div>
+        </div>
+        <div className="row-span-1">
+          <Footer />
         </div>
       </div>
-      <div className="row-span-1">
-        <Footer />
-      </div>
-    </div>
+    </>
   );
 };
 
