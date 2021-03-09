@@ -7,7 +7,7 @@ import { useSearchContext } from "../../context/SearchContext";
 const SearchBar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { searchInput, setSearchInput } = useSearchContext();
+  const { searchInput, setSearchInput, setSearched } = useSearchContext();
 
   const updateSearchInput = (e) => {
     setSearchInput(e.target.value);
@@ -16,6 +16,7 @@ const SearchBar = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(getQuery(searchInput));
+    setSearched(true);
     history.push(`/search?query=${searchInput}`);
   };
 
