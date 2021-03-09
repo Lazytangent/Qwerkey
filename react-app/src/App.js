@@ -11,6 +11,7 @@ import PostsContainer from "./components/PostsContainer";
 import PostPage from "./components/PostPage";
 import RetailersContainer from "./components/RetailersContainer";
 import RetailerPage from "./components/RetailerPage";
+import SearchResults from "./components/SearchResults";
 import PageNotFound from "./components/PageNotFound";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
@@ -62,6 +63,9 @@ const App = () => {
               </Route>
               <Route path="/retailers/:retailerId(\d+)">
                 <RetailerPage />
+              </Route>
+              <Route path="/search">
+                <SearchResults />
               </Route>
               <Route>
                 <PageNotFound />
