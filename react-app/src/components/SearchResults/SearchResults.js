@@ -7,6 +7,7 @@ import { getQuery } from "../../store/search";
 import Post from "../Post";
 import Comment from "../Comment";
 import Retailer from "../Retailer";
+import AdvSearchBar from "../AdvSearchBar";
 
 const SearchResults = () => {
   const location = useLocation();
@@ -40,6 +41,7 @@ const SearchResults = () => {
 
   return (
     <>
+      <AdvSearchBar />
       {noResults && (
         <div className="p-2 text-center">
           <h3>
