@@ -1,4 +1,4 @@
-import { GitHub, Code, LinkedIn } from "@material-ui/icons";
+import { GitHub, Code, LinkedIn, FolderShared } from "@material-ui/icons";
 
 const About = () => {
   return (
@@ -10,6 +10,7 @@ const About = () => {
         <a href="https://github.com/Lazytangent"><GitHub /></a>
         <a href="https://github.com/Lazytangent/Qwerkey"><Code /></a>
         <a href="https://www.linkedin.com/in/petertnmai/"><LinkedIn /></a>
+        <a href="https://lazytangent.github.io"><FolderShared /></a>
       </div>
     </div>
   );
