@@ -8,7 +8,7 @@ community_routes = Blueprint("communities", __name__)
 
 @community_routes.route('')
 def get_communities():
-    page = int(request.args.get("page"))
+    page = int(request.args.get("page", 1))
     communities = Community.query.paginate(page=page, per_page=20)
     return {
         community.id: community.to_dict()
