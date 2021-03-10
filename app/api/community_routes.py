@@ -11,7 +11,10 @@ def get_communities():
     communities = Community.query.join(Post). \
         group_by(Community.id). \
         order_by(desc(func.count(Post.community_id))).limit(5).all()
-    return {community.id: community.to_simple_dict() for community in communities}
+    return {
+        community.id: community.to_simple_dict()
+        for community in communities
+    }
 
 
 @community_routes.route('/<int:community_id>')
