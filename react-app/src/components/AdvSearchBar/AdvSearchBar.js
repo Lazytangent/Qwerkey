@@ -11,8 +11,8 @@ const AdvSearchBar = () => {
   const { setSearched } = useSearchContext();
 
   const [searchInput, setSearchInput] = useState("");
-  const [type, setType] = useState("");
-  const [field, setField] = useState("");
+  const [type, setType] = useState("Type...");
+  const [field, setField] = useState("Field...");
 
   const updateSearchInput = (e) => {
     setSearchInput(e.target.value);
@@ -33,13 +33,56 @@ const AdvSearchBar = () => {
     setSearched(true);
   };
 
+  const types = [
+    "Post",
+    "Comment",
+    "Retailer",
+  ];
+
+  const postFields = [
+    "title",
+    "body",
+  ];
+
+  const commentFields = [
+    "body",
+  ];
+
+  const retailerFields = [
+    "name",
+    "description",
+    "rating",
+  ];
+
   return (
     <div className="p-2">
       <h3>Placeholder for AdvSearchBar</h3>
       <form onSubmit={submitHandler}>
-        <input type="search" value={searchInput} onChange={updateSearchInput} />
-        <select value={type} onChange={updateType}></select>
-        {type && <select value={field} onChange={updateField}></select>}
+        <input type="search" value={searchInput} placeholder="Advanced Search..." onChange={updateSearchInput} />
+        <select value={type} onChange={updateType}>
+          <option disabled={true} value="Type...">Type...</option>
+          {types.map(type => <option value={type}>{type}</option>)}
+        </select>
+        {type !== "Type..." && (
+          <select value={field} onChange={updateField}>
+            <option disabled={true} value="Field...">Field...</option>
+            {type === "Post" && (
+              <>
+                {postFields.map(field => <option value={field}>{field}</option>)}
+              </>
+            )}
+            {type === "Comment" && (
+              <>
+                {commentFields.map(field => <option value={field}>{field}</option>)}
+              </>
+            )}
+            {type === "Retailer" && (
+              <>
+                {retailerFields.map(field => <option value={field}>{field}</option>)}
+              </>
+            )}
+          </select>
+        )}
       </form>
     </div>
   );
