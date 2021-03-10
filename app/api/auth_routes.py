@@ -16,7 +16,7 @@ def authenticate():
     """
     if current_user.is_authenticated:
         return current_user.to_dict()
-    return {'errors': ['Unauthorized']}, 401
+    return {'errors': ['Unauthorized']}
 
 
 @auth_routes.route('/login', methods=['POST'])
@@ -35,7 +35,7 @@ def login():
                 User.username == credential)).first()
         login_user(user)
         return user.to_simple_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @auth_routes.route('/logout')
@@ -70,4 +70,4 @@ def unauthorized():
     """
     Returns unauthorized JSON when flask-login authentication fails
     """
-    return {'errors': ['Unauthorized']}, 401
+    return {'errors': ['Unauthorized']}
