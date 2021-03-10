@@ -26,15 +26,25 @@ const setRetailers = (retailers) => {
 export const getQuery = (queryString, type, field) => async (dispatch) => {
   const res = await fetch(`/api/search?query=${queryString}${type ? `&type=${type}` : ""}${field ? `&field=${field}` : ""}`);
   const data = await res.json();
+
   if (data.posts) {
     dispatch(setPosts(data.posts));
+  } else {
+    dispatch(setPosts([]));
   }
+
   if (data.comments) {
     dispatch(setComments(data.comments));
+  } else {
+    dispatch(setComments([]));
   }
+
   if (data.retailers) {
     dispatch(setRetailers(data.retailers));
+  } else {
+    dispatch(setRetailers([]));
   }
+
   return data;
 };
 
