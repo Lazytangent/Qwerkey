@@ -29,7 +29,7 @@ const AdvSearchBar = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     await dispatch(getQuery(searchInput, type, field));
-    history.push(`/search?query=${searchInput}${type ? `&type=${type}` : ""}${field ? `&field=${field}` : ""}`);
+    history.push(`/search?query=${searchInput}${type !== "Type..." ? `&type=${type}` : ""}${field !== "Field..." ? `&field=${field}` : ""}`);
     setSearched(true);
   };
 

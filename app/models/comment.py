@@ -41,6 +41,7 @@ class Comment(db.Model):
         return {
             "id": self.id,
             "user": self.user.to_simple_dict(),
+            "body": self.body,
             "thread_id": self.thread_id,
             "path": self.path,
             "level": self.level,
