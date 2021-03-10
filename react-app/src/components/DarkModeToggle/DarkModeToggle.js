@@ -17,7 +17,6 @@ const DarkModeToggle = () => {
 
   return (
     <div className="items-center justify-between hidden p-2 md:flex">
-      {/* <p className="px-2">{isDarkMode ? "Dark Mode" : "Light Mode"}</p> */}
       <div className="pr-1">
         <Brightness7 />
       </div>
