@@ -56,33 +56,35 @@ const AdvSearchBar = () => {
 
   return (
     <div className="p-2">
-      <h3>Placeholder for AdvSearchBar</h3>
-      <form onSubmit={submitHandler}>
-        <input type="search" value={searchInput} placeholder="Advanced Search..." onChange={updateSearchInput} />
-        <select value={type} onChange={updateType}>
+      <form onSubmit={submitHandler} className="flex flex-col items-center">
+        <input className="p-2 mx-2 rounded" type="search" value={searchInput} placeholder="Advanced Search..." onChange={updateSearchInput} />
+        <div className="w-3/4 grid grid-cols-2">
+        <select value={type} className="p-2 rounded col-start-1" onChange={updateType}>
           <option disabled={true} value="Type...">Type...</option>
-          {types.map(type => <option value={type}>{type}</option>)}
+          {types.map(type => <option value={type} key={type}>{type}</option>)}
         </select>
         {type !== "Type..." && (
-          <select value={field} onChange={updateField}>
+          <select value={field} onChange={updateField} className="p-2 rounded col-start-2">
             <option disabled={true} value="Field...">Field...</option>
             {type === "Post" && (
               <>
-                {postFields.map(field => <option value={field}>{field}</option>)}
+                {postFields.map(field => <option value={field} key={field}>{field}</option>)}
               </>
             )}
             {type === "Comment" && (
               <>
-                {commentFields.map(field => <option value={field}>{field}</option>)}
+                {commentFields.map(field => <option value={field} key={field}>{field}</option>)}
               </>
             )}
             {type === "Retailer" && (
               <>
-                {retailerFields.map(field => <option value={field}>{field}</option>)}
+                {retailerFields.map(field => <option value={field} key={field}>{field}</option>)}
               </>
             )}
           </select>
         )}
+        </div>
+        <button className="w-1/4 p-2 mx-2 border rounded hover:border-green focus:bg-green">Search</button>
       </form>
     </div>
   );
