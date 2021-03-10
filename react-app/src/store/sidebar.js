@@ -7,7 +7,7 @@ const setCommunities = (communities) => {
   };
 };
 
-export const getCommunities = () => async (dispatch) => {
+export const getPopularCommunities = () => async (dispatch) => {
   const res = await fetch(`/api/communities/popular`);
   const communities = await res.json();
   dispatch(setCommunities(communities));
