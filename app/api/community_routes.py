@@ -24,8 +24,13 @@ def get_popular_communities():
     return jsonify([community.to_simple_dict() for community in communities])
 
 
-
 @community_routes.route('/<int:community_id>')
 def get_community(community_id):
     community = Community.query.get(community_id)
+    return community.to_dict()
+
+
+@community_routes.route('/<string:community_name>')
+def get_community_by_name(community_name):
+    community = Community.query.filter_by(name = community_name).first()
     return community.to_dict()
