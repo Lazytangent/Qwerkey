@@ -26,7 +26,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="p-2">
+      <div className="p-2 border border-gray-600 rounded">
         <h3>Top 5 Communities</h3>
         {popularCommunities.map((community) => (
           <div className="p-2">
