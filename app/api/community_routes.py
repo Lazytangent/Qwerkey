@@ -32,5 +32,5 @@ def get_community(community_id):
 
 @community_routes.route('/<string:community_name>')
 def get_community_by_name(community_name):
-    community = Community.query.filter_by(name = community_name).first()
+    community = Community.query.filter_by(name=community_name).first()
     return community.to_dict()
