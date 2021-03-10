@@ -63,7 +63,7 @@ const App = () => {
               <Route path="/q/:communityName/:postId(\d+)">
                 <PostPage />
               </Route>
-              <Route path="/q/:communityName" exact={true}>
+              <Route path="/q/:communityName">
                 <PostsContainer />
               </Route>
               <Route path="/retailers" exact={true}>
