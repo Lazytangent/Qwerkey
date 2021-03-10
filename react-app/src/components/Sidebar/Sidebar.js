@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import { getPopularCommunities } from "../../store/sidebar";
+import About from "../About";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const Sidebar = () => {
           </span>
         </div>
       ))}
+      <About />
     </div>
   );
 };
