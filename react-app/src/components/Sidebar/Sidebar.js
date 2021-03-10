@@ -29,7 +29,7 @@ const Sidebar = () => {
       <div className="p-2 border border-gray-600 rounded">
         <h3>Top 5 Communities</h3>
         {popularCommunities.map((community) => (
-          <div className="p-2">
+          <div key={community.id} className="p-2">
             <span className="hover:text-green hover:underline">
               <NavLink to={`/q/${community.name}`}>{community.name}</NavLink>
             </span>
