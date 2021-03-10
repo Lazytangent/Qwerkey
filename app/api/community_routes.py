@@ -19,5 +19,5 @@ def get_communities():
 
 @community_routes.route('/<int:community_id>')
 def get_community(community_id):
-    community = Community.query.get(community_id).first()
+    community = Community.query.get(community_id)
     return community.to_dict()
