@@ -41,6 +41,8 @@ export const getCommunity = (communityId) => async (dispatch) => {
   return community;
 };
 
+const initialState = {};
+
 const communityReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_COMMUNITIES:
