@@ -90,7 +90,7 @@ const CreatePostForm = () => {
           ))}
         </div>
         <div className="flex justify-center">
-          <button type="button" onClick={chooseAdditionalImage} className="duration-300 p-2 border rounded hover:border-green">Upload Images</button>
+          <button type="button" onClick={chooseAdditionalImage} className="p-2 border rounded duration-300 hover:border-green">Upload Images</button>
           <input type="file" onChange={updateImages} id="image-upload-create-post" multiple={true} className="hidden" />
         </div>
         <SubmitFormButton label="Create a Post" />
