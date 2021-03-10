@@ -36,6 +36,8 @@ const SearchResults = () => {
   useEffect(() => {
     if (!(posts.length || comments.length || retailers.length) && searched) {
       setNoResults(true);
+    } else {
+      setNoResults(false);
     }
   }, [posts.length, comments.length, retailers.length, searched]);
 
