@@ -7,7 +7,7 @@ import About from "../About";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
-  const popularCommunities = useSelector(state => state.sidebar.popular);
+  const popularCommunities = useSelector((state) => state.sidebar.popular);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -25,17 +25,19 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="p-2">
-      <h3>Top 5 Communities</h3>
-      {popularCommunities.map(community => (
-        <div className="p-2">
-          <span className="hover:text-green hover:underline">
-            <NavLink to={`/q/${community.name}`}>{community.name}</NavLink>
-          </span>
-        </div>
-      ))}
+    <>
+      <div className="p-2">
+        <h3>Top 5 Communities</h3>
+        {popularCommunities.map((community) => (
+          <div className="p-2">
+            <span className="hover:text-green hover:underline">
+              <NavLink to={`/q/${community.name}`}>{community.name}</NavLink>
+            </span>
+          </div>
+        ))}
+      </div>
       <About />
-    </div>
+    </>
   );
 };
 
