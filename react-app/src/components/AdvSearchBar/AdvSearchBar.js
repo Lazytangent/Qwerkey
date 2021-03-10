@@ -57,14 +57,14 @@ const AdvSearchBar = () => {
   return (
     <div className="p-2">
       <form onSubmit={submitHandler} className="flex flex-col items-center">
-        <input className="p-2 mx-2 rounded" type="search" value={searchInput} placeholder="Advanced Search..." onChange={updateSearchInput} />
+        <input className="w-3/4 p-2 mx-2 mb-2 border rounded outline-none focus:border-green" type="search" value={searchInput} placeholder="Advanced Search..." onChange={updateSearchInput} />
         <div className="w-3/4 grid grid-cols-2">
-        <select value={type} className="p-2 rounded col-start-1" onChange={updateType}>
+        <select value={type} className="p-2 mb-2 rounded col-start-1" onChange={updateType}>
           <option disabled={true} value="Type...">Type...</option>
           {types.map(type => <option value={type} key={type}>{type}</option>)}
         </select>
         {type !== "Type..." && (
-          <select value={field} onChange={updateField} className="p-2 rounded col-start-2">
+          <select value={field} onChange={updateField} className="p-2 mb-2 rounded col-start-2">
             <option disabled={true} value="Field...">Field...</option>
             {type === "Post" && (
               <>
