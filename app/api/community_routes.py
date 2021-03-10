@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from sqlalchemy import desc, func
 
 from app.models import Community, Post
@@ -12,7 +12,7 @@ def get_communities():
     communities = Community.query.paginate(page=page, per_page=20)
     return {
         community.id: community.to_dict()
-        for community in communities
+        for community in communities.items
     }
 
 
@@ -21,7 +21,7 @@ def get_popular_communities():
     communities = Community.query.join(Post). \
         group_by(Community.id). \
         order_by(desc(func.count(Post.community_id))).limit(5).all()
-    return [community.to_simple_dict() for community in communities]
+    return jsonify([community.to_simple_dict() for community in communities])
 
 
 

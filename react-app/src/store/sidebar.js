@@ -14,12 +14,14 @@ export const getCommunities = () => async (dispatch) => {
   return communities;
 };
 
-const initialState = {};
+const initialState = {
+  popular: [],
+};
 
 const sidebarReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_COMMUNITIES:
-      return { ...action.communities };
+      return { popular: action.communities };
     default:
       return state;
   }
