@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 
 import { useAuthContext } from "./context/AuthContext";
 import { useDarkModeContext } from "./context/DarkModeContext";
 import { useCollapsedSidebarContext } from "./context/CollapsedSidebarContext";
+import { useSearchContext } from "./context/SearchContext";
 import { authenticate } from "./store/session";
 import NavBar from "./components/NavBar";
 import PostsContainer from "./components/PostsContainer";
 import PostPage from "./components/PostPage";
 import RetailersContainer from "./components/RetailersContainer";
 import RetailerPage from "./components/RetailerPage";
+import SearchResults from "./components/SearchResults";
 import PageNotFound from "./components/PageNotFound";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
@@ -18,10 +20,12 @@ import CollapsedSidebar from "./components/CollpasedSidebar";
 
 const App = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const { setAuthenticated } = useAuthContext();
   const { isDarkMode } = useDarkModeContext();
   const { showCollapsedSidebar } = useCollapsedSidebarContext();
+  const { setSearchInput } = useSearchContext();
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -33,6 +37,12 @@ const App = () => {
       setLoaded(true);
     })();
   }, [setAuthenticated, dispatch]);
+
+  useEffect(() => {
+    if (location.pathname !== "/search") {
+      setSearchInput("");
+    }
+  }, [location, setSearchInput]);
 
   if (!loaded) {
     return null;
@@ -62,6 +72,9 @@ const App = () => {
               </Route>
               <Route path="/retailers/:retailerId(\d+)">
                 <RetailerPage />
+              </Route>
+              <Route path="/search">
+                <SearchResults />
               </Route>
               <Route>
                 <PageNotFound />
