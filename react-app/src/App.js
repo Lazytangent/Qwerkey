@@ -15,7 +15,6 @@ import RetailerPage from "./components/RetailerPage";
 import SearchResults from "./components/SearchResults";
 import PageNotFound from "./components/PageNotFound";
 import Sidebar from "./components/Sidebar";
-import Footer from "./components/Footer";
 import CollapsedSidebar from "./components/CollpasedSidebar";
 
 const App = () => {
@@ -84,9 +83,6 @@ const App = () => {
           <div className="hidden p-2 col-span-1 md:block">
             <Sidebar />
           </div>
-        </div>
-        <div className="row-span-1">
-          <Footer />
         </div>
       </div>
     </>
