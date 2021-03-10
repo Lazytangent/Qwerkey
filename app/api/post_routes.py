@@ -87,6 +87,7 @@ def post_by_id(post_id):
         db.session.commit()
 
         return post.to_dict()
+    return post.to_dict()
 
 
 @post_routes.route('/<int:post_id>/comments', methods=["POST"])
