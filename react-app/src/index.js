@@ -18,6 +18,9 @@ import SearchProvider from "./context/SearchContext";
 import * as sessionActions from "./store/session";
 import * as postActions from "./store/posts";
 import * as retailerActions from "./store/retailers";
+import * as searchActions from "./store/search";
+import * as communityActions from "./store/communities";
+import * as sidebarActions from "./store/sidebar";
 
 const store = configureStore();
 
@@ -26,6 +29,9 @@ if (process.env.NODE_ENV !== "production") {
   window.sessionActions = sessionActions;
   window.postActions = postActions;
   window.retailerActions = retailerActions;
+  window.searchActions = searchActions;
+  window.communityActions = communityActions;
+  window.sidebarActions = sidebarActions;
 }
 
 const Root = () => (
