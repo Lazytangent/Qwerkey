@@ -15,41 +15,41 @@ def search_function():
         if field == "title":
             posts = \
                 Post.query.filter(Post.title.ilike(
-                    f"%{query}%")).limit(5).all()
+                    f"%{query}%")).limit(10).all()
             return {"posts": [post.to_dict() for post in posts]}
         elif field == "body":
             posts = \
                 Post.query.filter(Post.body.ilike(
-                    f"%{query}%")).limit(5).all()
+                    f"%{query}%")).limit(10).all()
             return {"posts": [post.to_dict() for post in posts]}
         else:
             posts = Post.query.filter(
                 or_(Post.title.ilike(f"%{query}%"),
-                    Post.body.ilike(f"%{query}%"))).limit(5).all()
+                    Post.body.ilike(f"%{query}%"))).limit(10).all()
             return {"posts": [post.to_dict() for post in posts]}
     elif type_ == "Comment":
         comments = Comment.query.filter(
-            Comment.body.ilike(f"%{query}%")).limit(5).all()
+            Comment.body.ilike(f"%{query}%")).limit(10).all()
         return {"comments": [comment.to_dict() for comment in comments]}
     elif type_ == "Retailer":
         if field == "name":
             retailers = \
                 Retailer.query.filter(Retailer.name.ilike(
-                    f"%{query}%")).limit(5).all()
+                    f"%{query}%")).limit(10).all()
             return {
                 "retailers": [retailer.to_dict() for retailer in retailers]
             }
         elif field == "description":
             retailers = \
                 Retailer.query.filter(Retailer.description.ilike(
-                    f"%{query}%")).limit(5).all()
+                    f"%{query}%")).limit(10).all()
             return {
                 "retailers": [retailer.to_dict() for retailer in retailers]
             }
         else:
             retailers = Retailer.query.filter(
                 or_(Retailer.name.ilike(f"%{query}%"),
-                    Retailer.description.ilike(f"%{query}%"))).limit(5).all()
+                    Retailer.description.ilike(f"%{query}%"))).limit(10).all()
             return {
                 "retailers": [retailer.to_dict() for retailer in retailers]
             }
