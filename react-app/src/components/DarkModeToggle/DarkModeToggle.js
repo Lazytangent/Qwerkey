@@ -16,7 +16,7 @@ const DarkModeToggle = () => {
   };
 
   return (
-    <div className="items-center justify-between hidden p-2 md:flex">
+    <div className="flex items-center justify-between p-2">
       <div className="pr-1">
         <Brightness7 />
       </div>
