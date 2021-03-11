@@ -1,6 +1,14 @@
 const SET_MORE_COMMUNITIES = 'communities/SET_MORE_COMMUNITIES';
 const SET_COMMUNITIES = 'communities/SET_COMMUNITIES';
-const SET_COMMUNITY = 'community/SET_COMMUNITY';
+const SET_COMMUNITY = 'communities/SET_COMMUNITY';
+const SET_MAX = 'communities/SET_MAX';
+
+const setMaxNumberOfCommunities = (number) => {
+  return {
+    type: SET_MAX,
+    number,
+  };
+};
 
 const setMoreCommunities = (communities) => {
   return {
@@ -41,16 +49,69 @@ export const getCommunity = (communityId) => async (dispatch) => {
   return community;
 };
 
-const initialState = {};
+export const getMaxNumberOfCommunities = () => async (dispatch) => {
+  const res = await fetch('/api/communities/max');
+  const number = await res.json();
+  dispatch(setMaxNumberOfCommunities(number.max));
+  return number;
+};
+
+export const createCommunity = (community) => async (dispatch) => {
+  const res = await fetch('/api/communities', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(community),
+  });
+  const community = await res.json();
+  if (!community.errors) {
+    dispatch(setCommunity(community));
+  }
+  return community;
+};
+
+export const updateCommunity = (community) => async (dispatch) => {
+  const res = await fetch(`/api/communities/${community.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(community),
+  });
+  const community = await res.json();
+  if (!community.errors) {
+    dispatch(setCommunity(community));
+  }
+  return community;
+};
+
+export const deleteCommunity = (communityId) => async (dispatch) => {
+  const res = await fetch(`/api/communities/${communityId}`, {
+    method: "DELETE",
+  });
+  const communities = await res.json();
+  if (!communities.errors) {
+    dispatch(setCommunities(communities));
+  }
+  return communities;
+};
+
+const initialState = {
+  communities: {},
+  max: null,
+};
 
 const communityReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_COMMUNITIES:
-      return { ...action.communities };
+      return { ...state, communities: { ...action.communities } };
     case SET_MORE_COMMUNITIES:
-      return { ...state, ...action.communities };
+      return { ...state, communities: { ...state.communities, ...action.communities } };
     case SET_COMMUNITY:
-      return { ...state, [action.community.id]: action.community };
+      return { ...state, communities: { ...state.communities, [action.community.id]: action.community } };
+    case SET_MAX:
+      return { ...state, max: action.number };
     default:
       return state;
   }
