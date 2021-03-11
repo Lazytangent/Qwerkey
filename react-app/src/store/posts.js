@@ -1,6 +1,14 @@
 const SET_MORE_POSTS = 'posts/SET_MORE_POSTS';
 const SET_POSTS = 'posts/SET_POSTS';
 const SET_POST = 'posts/SET_POST';
+const SET_MAX = 'posts/SET_MAX';
+
+const setMaxNumberOfPosts = (number) => {
+  return {
+    type: SET_MAX,
+    number,
+  };
+};
 
 const setMorePosts = (posts) => {
   return {
@@ -21,6 +29,13 @@ const setPost = (post) => {
     type: SET_POST,
     post,
   };
+};
+
+export const getMaxNumberOfPosts = () => async (dispatch) => {
+  const res = await fetch('/api/posts/max');
+  const number = await res.json();
+  dispatch(setMaxNumberOfPosts(number));
+  return number;
 };
 
 export const getPosts = (page, communityName) => async (dispatch) => {

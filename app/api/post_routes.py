@@ -34,6 +34,12 @@ def get_posts():
     return {post.id: post.to_dict() for post in posts}
 
 
+@post_routes.route('/max')
+def max_number_of_posts():
+    number = Post.query.count()
+    return {"max": number}
+
+
 @post_routes.route('/', methods=["POST"])
 def create_post():
     form = CreatePost()

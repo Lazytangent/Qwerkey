@@ -39,6 +39,7 @@ const PostsContainer = () => {
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = scroll / height;
       if (Object.values(posts).length === page * 20 && scrolled > 0.9) {
+        console.log("here")
         setPage(prev => prev + 1);
       }
     };
