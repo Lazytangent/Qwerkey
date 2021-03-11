@@ -8,6 +8,7 @@ import About from "../About";
 const Sidebar = () => {
   const dispatch = useDispatch();
   const popularCommunities = useSelector((state) => state.sidebar.popular);
+  const currentCommunity = useSelector((state) => state.sidebar.community);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -25,10 +26,15 @@ const Sidebar = () => {
   }
 
   return (
-    <>
-      <div className="p-2 border border-gray-600 rounded">
+    <div className="fixed p-2">
+      {currentCommunity && (
+        <div className="p-2 border border-gray-600 rounded">
+          <h3 className="text-center">{currentCommunity.name}</h3>
+          <p className="p-2">{currentCommunity.description}</p>
+        </div>
+      )}
+      <div className="p-2 mt-2 border border-gray-600 rounded">
         <h3>Top 5 Communities</h3>
-        {}
         {popularCommunities.map((community) => (
           <div key={community.id} className="p-2">
             <span className="hover:text-green hover:underline">
@@ -38,7 +44,7 @@ const Sidebar = () => {
         ))}
       </div>
       <About />
-    </>
+    </div>
   );
 };
 
