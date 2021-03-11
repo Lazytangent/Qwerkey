@@ -41,7 +41,7 @@ const PostsContainer = () => {
     const scrollListener = () => {
       const scroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = scroll / height;
+      const scrolled = (scroll / height);
       if (page < maxPosts / 20 - 1 && Object.values(posts).length < maxPosts && scrolled > 0.9) {
         setPage(prev => prev + 1);
       }
