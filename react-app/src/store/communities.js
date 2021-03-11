@@ -57,7 +57,7 @@ export const getMaxNumberOfCommunities = () => async (dispatch) => {
 };
 
 export const createCommunity = (community) => async (dispatch) => {
-  const res = await fetch('/api/communities', {
+  const res = await fetch('/api/communities/', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
