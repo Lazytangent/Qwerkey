@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { getPosts } from '../../store/posts';
+import { getPosts, getMaxNumberOfPosts } from '../../store/posts';
 import { getCommunityByName } from "../../store/sidebar";
 import Post from '../Post';
 
@@ -16,6 +16,10 @@ const PostsContainer = () => {
 
   const [page, setPage] = useState(1);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    dispatch(getMaxNumberOfPosts());
+  }, [dispatch]);
 
   useEffect(() => {
     (async () => {
@@ -40,8 +44,7 @@ const PostsContainer = () => {
       const scroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = scroll / height;
-      if (Object.values(posts).length < maxPosts && scrolled > 0.9) {
-        console.log("here")
+      if (page < maxPosts / 20 - 1 && Object.values(posts).length < maxPosts && scrolled > 0.9) {
         setPage(prev => prev + 1);
       }
     };

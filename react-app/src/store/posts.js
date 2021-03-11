@@ -34,7 +34,7 @@ const setPost = (post) => {
 export const getMaxNumberOfPosts = () => async (dispatch) => {
   const res = await fetch('/api/posts/max');
   const number = await res.json();
-  dispatch(setMaxNumberOfPosts(number));
+  dispatch(setMaxNumberOfPosts(number.max));
   return number;
 };
 
