@@ -56,8 +56,8 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="p-4 bg-white rounded">
-      <form className="p-2 bg-white rounded" onSubmit={onLogin}>
+    <div className="p-4 bg-white rounded dark:bg-gray-800 dark:text-gray-50">
+      <form className="p-2 bg-white rounded dark:bg-gray-800 dark:text-gray-50" onSubmit={onLogin}>
         <FormTitle title="Login" />
         {errors.length > 0 && (
           <div className="flex justify-center text-red-600">
