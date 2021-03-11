@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from sqlalchemy import desc, func
 
 from app.forms import CreateCommunity
+from app.helpers import validation_errors_to_error_messages
 from app.models import Community, Post, db
 
 community_routes = Blueprint("communities", __name__)
@@ -46,3 +47,11 @@ def get_community_by_name(community_name):
 @community_routes.route('/', methods=["POST"])
 def create_community():
     form = CreateCommunity()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        community = Community()
+        form.populate_obj(community)
+        db.session.add(community)
+        db.session.commit()
+        return community.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}
