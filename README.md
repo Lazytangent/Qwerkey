@@ -12,4 +12,6 @@
 
 ## Developing
 
-## 
+## Challenges
+
+## Code Snippets
