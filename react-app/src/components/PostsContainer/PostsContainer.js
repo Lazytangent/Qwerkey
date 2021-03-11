@@ -18,15 +18,34 @@ const PostsContainer = () => {
   useEffect(() => {
     (async () => {
       await dispatch(getPosts(page, communityName));
-      await dispatch(getCommunityByName(communityName));
     })();
   }, [dispatch, page, communityName]);
+
+  useEffect(() => {
+    if (communityName) {
+      dispatch(getCommunityByName(communityName));
+    }
+  }, [dispatch, communityName]);
 
   useEffect(() => {
     if (posts) {
       setIsLoaded(true);
     }
   }, [posts]);
+
+  useEffect(() => {
+    const scrollListener = () => {
+      const scroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = scroll / height;
+      if (Object.values(posts).length === page * 20 && scrolled > 0.9) {
+        setPage(prev => prev + 1);
+      }
+    };
+
+    window.addEventListener("scroll", scrollListener);
+    return () => window.removeEventListener("scroll", scrollListener);
+  }, []);
 
   if (!isLoaded) {
     return null;

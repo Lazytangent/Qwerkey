@@ -18,8 +18,9 @@ def get_paginated_posts():
         community = Community.query.filter(
             Community.name.ilike(community_name)).first()
         if community:
-            posts = Post.query.filter(Post.community_id == community.id).paginate(
-                page=page, per_page=20)
+            posts = Post.query.filter(
+                Post.community_id == community.id).paginate(page=page,
+                                                            per_page=20)
         else:
             return {"errors": ["Invalid Community Name."]}
     else:

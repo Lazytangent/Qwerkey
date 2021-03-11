@@ -33,7 +33,7 @@ export const getCommunityByName = (name) => async (dispatch) => {
 
 const initialState = {
   popular: [],
-  community: {},
+  community: null,
 };
 
 const sidebarReducer = (state = initialState, action) => {
