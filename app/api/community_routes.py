@@ -55,3 +55,31 @@ def create_community():
         db.session.commit()
         return community.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@community_routes.route('/<int:community_id>', methods=["PUT", "DELETE"])
+def update_community(community_id):
+    if community_id == 1:
+        return {"errors": ["The first community cannot be deleted."]}
+    community = Community.query.get(community_id)
+    if request.method == "PUT":
+        form = CreateCommunity()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            community.name = form['name'].data
+            community.description = form['description'].data
+            db.session.commit()
+            return community.to_dict()
+        return {"errors": validation_errors_to_error_messages(form.errors)}
+    elif request.method == "DELETE":
+        posts = Post.query.filter_by(community_id = community.id).all()
+        for post in posts:
+            post.community_id = 1
+        db.session.commit()
+        db.session.delete(community)
+        db.session.commit()
+        communities = Community.query.paginate(page=1, per_page=20)
+        return {community.id: community.to_dict() for community in
+                communities.items}
+    return {"errors": ["Invalid Route"]}
+
