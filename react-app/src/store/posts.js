@@ -1,6 +1,14 @@
 const SET_MORE_POSTS = 'posts/SET_MORE_POSTS';
 const SET_POSTS = 'posts/SET_POSTS';
 const SET_POST = 'posts/SET_POST';
+const SET_MAX = 'posts/SET_MAX';
+
+const setMaxNumberOfPosts = (number) => {
+  return {
+    type: SET_MAX,
+    number,
+  };
+};
 
 const setMorePosts = (posts) => {
   return {
@@ -21,6 +29,13 @@ const setPost = (post) => {
     type: SET_POST,
     post,
   };
+};
+
+export const getMaxNumberOfPosts = () => async (dispatch) => {
+  const res = await fetch('/api/posts/max');
+  const number = await res.json();
+  dispatch(setMaxNumberOfPosts(number.max));
+  return number;
 };
 
 export const getPosts = (page, communityName) => async (dispatch) => {
@@ -167,16 +182,21 @@ export const deleteComment = (commentId) => async (dispatch) => {
   return post;
 };
 
-const initialState = {};
+const initialState = {
+  posts: {},
+  max: null,
+};
 
 const postsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MORE_POSTS:
-      return { ...state, ...action.posts };
+      return { ...state, posts: { ...state.posts, ...action.posts } };
     case SET_POSTS:
-      return { ...action.posts };
+      return { ...state, posts: { ...action.posts } };
     case SET_POST:
-      return { ...state, [action.post.id]: action.post };
+      return { ...state, posts: { [action.post.id]: action.post, ...action.posts } };
+    case SET_MAX:
+      return { ...state, max: action.number };
     default:
       return state;
   }

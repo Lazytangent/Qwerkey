@@ -10,8 +10,9 @@ import CreateCommentForm from "../CreateCommentForm";
 const PostPage = () => {
   const { postId } = useParams();
   const dispatch = useDispatch();
+
   const user = useSelector((state) => state.session.user);
-  const post = useSelector((state) => state.posts[postId]);
+  const post = useSelector((state) => state.posts.posts[postId]);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
