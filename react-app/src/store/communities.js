@@ -57,18 +57,18 @@ export const getMaxNumberOfCommunities = () => async (dispatch) => {
 };
 
 export const createCommunity = (community) => async (dispatch) => {
-  const res = await fetch('/api/communities', {
+  const res = await fetch('/api/communities/', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(community),
   });
-  const community = await res.json();
-  if (!community.errors) {
-    dispatch(setCommunity(community));
+  const newCommunity = await res.json();
+  if (!newCommunity.errors) {
+    dispatch(setCommunity(newCommunity));
   }
-  return community;
+  return newCommunity;
 };
 
 export const updateCommunity = (community) => async (dispatch) => {
@@ -79,11 +79,11 @@ export const updateCommunity = (community) => async (dispatch) => {
     },
     body: JSON.stringify(community),
   });
-  const community = await res.json();
-  if (!community.errors) {
-    dispatch(setCommunity(community));
+  const updatedCommunity = await res.json();
+  if (!updatedCommunity.errors) {
+    dispatch(setCommunity(updatedCommunity));
   }
-  return community;
+  return updatedCommunity;
 };
 
 export const deleteCommunity = (communityId) => async (dispatch) => {
