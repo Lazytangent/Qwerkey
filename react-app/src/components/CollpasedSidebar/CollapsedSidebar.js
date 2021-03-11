@@ -1,10 +1,26 @@
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import { useCollapsedSidebarContext } from "../../context/CollapsedSidebarContext";
 import SearchBar from "../SearchBar";
+import About from "../About";
 
 const CollapsedSidebar = () => {
   const { showCollapsedSidebar } = useCollapsedSidebarContext();
+  const popularCommunities = useSelector(state => state.sidebar.popular);
+  const currentCommunity = useSelector(state => state.sidebar.community);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (popularCommunities) {
+      setIsLoaded(true);
+    }
+  }, [popularCommunities]);
+
+  if (!isLoaded) {
+    return null;
+  }
 
   return (
     <div
@@ -37,7 +53,29 @@ const CollapsedSidebar = () => {
           </li>
         </ul>
       </div>
-      <SearchBar />
+      <div>
+        <h5 className="p-2">Search</h5>
+        <SearchBar />
+      </div>
+      <div className="">
+        {currentCommunity && (
+          <div className="p-2 border border-gray-600 rounded">
+            <h5 className="text-center">{currentCommunity.name}</h5>
+            <p className="p-2">{currentCommunity.description}</p>
+          </div>
+        )}
+        <div className="p-2 mt-2 border border-gray-600 rounded">
+          <h5>Top 5 Communities</h5>
+          {popularCommunities.map((community) => (
+            <div key={community.id} className="py-2">
+              <span className="hover:text-green hover:underline">
+                <NavLink to={`/q/${community.name}`}>{community.name}</NavLink>
+              </span>
+            </div>
+          ))}
+        </div>
+        <About />
+      </div>
     </div>
   );
 };
