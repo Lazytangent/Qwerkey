@@ -11,7 +11,9 @@ const PostsContainer = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(state => state.session.user);
-  const posts = useSelector(state => state.posts);
+  const posts = useSelector(state => state.posts.posts);
+  const maxPosts = useSelector(state => state.posts.max);
+
   const [page, setPage] = useState(1);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -38,7 +40,7 @@ const PostsContainer = () => {
       const scroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = scroll / height;
-      if (Object.values(posts).length === page * 20 && scrolled > 0.9) {
+      if (Object.values(posts).length < maxPosts && scrolled > 0.9) {
         console.log("here")
         setPage(prev => prev + 1);
       }
@@ -46,7 +48,7 @@ const PostsContainer = () => {
 
     window.addEventListener("scroll", scrollListener);
     return () => window.removeEventListener("scroll", scrollListener);
-  }, []);
+  }, [page, maxPosts, posts]);
 
   if (!isLoaded) {
     return null;
