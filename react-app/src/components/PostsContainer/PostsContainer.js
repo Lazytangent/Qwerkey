@@ -22,9 +22,7 @@ const PostsContainer = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    (async () => {
-      await dispatch(getPosts(page, communityName));
-    })();
+    dispatch(getPosts(page, communityName));
   }, [dispatch, page, communityName]);
 
   useEffect(() => {
