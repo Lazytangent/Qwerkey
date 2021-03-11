@@ -71,7 +71,7 @@ const CreatePostForm = () => {
   }
 
   return (
-    <div className="p-4 bg-white rounded dark:text-gray-50 dark:bg-gray-800 md:w-96">
+    <div className="z-20 p-4 bg-white rounded dark:text-gray-50 dark:bg-gray-800 md:w-96">
       <form onSubmit={submitHandler}>
         <FormTitle title="Create a Post" />
         <FormErrors errors={errors} />

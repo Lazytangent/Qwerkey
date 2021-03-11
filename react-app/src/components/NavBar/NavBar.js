@@ -9,7 +9,7 @@ import { useCollapsedSidebarContext } from "../../context/CollapsedSidebarContex
 import LoginModal from "../LoginForm";
 import SignUpModal from "../SignUpForm";
 import LogoutButton from "../LogoutButton";
-import CreateFormModal from "../CreatePostForm";
+import CreatePostModal from "../CreatePostForm";
 import DarkModeToggle from "../DarkModeToggle";
 import NavButton from "../parts/NavButton";
 import UserMenu from "../parts/UserMenu";
@@ -22,7 +22,7 @@ const NavBar = () => {
     authenticated,
   } = useAuthContext();
   const { setShowCreatePostModal } = useCreatePostContext();
-  const { showCollapsedSidebar, setShowCollapsedSidebar } = useCollapsedSidebarContext();
+  const { setShowCollapsedSidebar } = useCollapsedSidebarContext();
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   const createPostBtnHandler = () => {
@@ -79,7 +79,9 @@ const NavBar = () => {
               <SearchBar />
            </div>
           }
-          <DarkModeToggle />
+          <div className="hidden md:block">
+            <DarkModeToggle />
+          </div>
           {!authenticated && (
             <>
               <li>
@@ -102,12 +104,12 @@ const NavBar = () => {
                 </div>
               </li>
               {showUserMenu && (
-                <UserMenu />
+                <UserMenu createPostBtnHandler={createPostBtnHandler} />
               )}
               <div className="hidden md:flex">
                 <li>
                   <NavButton name="Create Post" onClick={createPostBtnHandler}>
-                    <CreateFormModal />
+                    <CreatePostModal />
                   </NavButton>
                 </li>
                 <li>
