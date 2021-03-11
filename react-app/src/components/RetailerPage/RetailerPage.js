@@ -10,7 +10,7 @@ import RetailerRatingForm from "../RetailerRatingForm";
 const RetailerPage = () => {
   const { retailerId } = useParams();
   const dispatch = useDispatch();
-  const retailer = useSelector(state => state.retailers[retailerId]);
+  const retailer = useSelector(state => state.retailers.retailers[retailerId]);
   const user = useSelector(state => state.session.user);
 
   const [isLoaded, setIsLoaded] = useState(false);

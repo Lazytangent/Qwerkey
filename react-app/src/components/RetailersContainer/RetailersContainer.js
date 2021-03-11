@@ -7,7 +7,7 @@ import Retailer from "../Retailer";
 
 const RetailersContainer = () => {
   const dispatch = useDispatch();
-  const retailers = useSelector((state) => state.retailers);
+  const retailers = useSelector((state) => state.retailers.retailers);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
