@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { getPopularCommunities } from "../../store/sidebar";
 import About from "../About";
 
 const Sidebar = () => {
-  const { communityName } = useParams();
   const dispatch = useDispatch();
   const popularCommunities = useSelector((state) => state.sidebar.popular);
   const [isLoaded, setIsLoaded] = useState(false);
-  console.log(communityName);
 
   useEffect(() => {
     dispatch(getPopularCommunities());

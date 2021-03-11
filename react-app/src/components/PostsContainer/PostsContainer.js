@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { getPosts } from '../../store/posts';
+import { getCommunityByName } from "../../store/sidebar";
 import Post from '../Post';
 
 const PostsContainer = () => {
@@ -17,6 +18,7 @@ const PostsContainer = () => {
   useEffect(() => {
     (async () => {
       await dispatch(getPosts(page, communityName));
+      await dispatch(getCommunityByName(communityName));
     })();
   }, [dispatch, page, communityName]);
 
