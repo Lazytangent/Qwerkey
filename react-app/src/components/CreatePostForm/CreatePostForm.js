@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { createPost } from '../../store/posts';
+import { getCommunities } from "../../store/communities";
 import { useCreatePostContext } from '../../context/CreatePostContext';
 import FormTitle from '../parts/FormTitle';
 import FormErrors from '../parts/FormErrors';
@@ -21,6 +22,10 @@ const CreatePostForm = () => {
   const [communityId, setCommunityId] = useState(1);
   const [errors, setErrors] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    dispatch(getCommunities());
+  }, [dispatch]);
 
   useEffect(() => {
     if (user) {
@@ -85,8 +90,9 @@ const CreatePostForm = () => {
           onChange={updateBody}
           value={body}
         />
-        <div>
-          <select value={communityId} onChange={updateCommunityId}>
+        <div className="flex flex-col items-center pb-2">
+          <label htmlFor="community-select" className="mb-2">Select a Community</label>
+          <select id="community-select" className="p-2 border rounded outline-none focus:border-green dark:bg-gray-800 dark:text-gray-50 border-gray-50" value={communityId} onChange={updateCommunityId}>
             {Object.values(communities).map(community => (
               <option value={community.id} key={community.id}>{community.name}</option>
             ))}
