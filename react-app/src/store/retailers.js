@@ -1,6 +1,14 @@
 const SET_MORE_RETAILERS = 'retailers/SET_MORE_RETAILERS';
 const SET_RETAILERS = 'retailers/SET_RETAILERS';
 const SET_RETAILER = 'retailers/SET_RETAILER';
+const SET_MAX = 'retailers/SET_MAX';
+
+const setMaxNumberOfRetailers = (number) => {
+  return {
+    type: SET_MAX,
+    number,
+  };
+};
 
 const setMoreRetailers = (retailers) => {
   return {
@@ -21,6 +29,13 @@ const setRetailer = (retailer) => {
     type: SET_RETAILER,
     retailer,
   };
+};
+
+export const getMaxNumberOfRetailers = () => async (dispatch) => {
+  const res = await fetch('/api/retailers/max');
+  const number = await res.json();
+  dispatch(setMaxNumberOfRetailers(number.max));
+  return number;
 };
 
 export const getRetailers = (page) => async (dispatch) => {
@@ -82,16 +97,21 @@ export const deleteRetailerRating = (rating_id, retailer_id) => async (dispatch)
   return retailer;
 };
 
-const initialState = {};
+const initialState = {
+  retailers: {},
+  max: null,
+};
 
 const retailersReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_RETAILERS:
-      return { ...action.retailers };
+      return { ...state, retailers: { ...action.retailers } };
     case SET_MORE_RETAILERS:
-      return { ...state, ...action.retailers };
+      return { ...state, retailers: { ...state.retailers, ...action.retailers } };
     case SET_RETAILER:
-      return { ...state, [action.retailer.id]: action.retailer };
+      return { ...state, retailers: { ...state.retailers, [action.retailer.id]: action.retailer } };
+    case SET_MAX:
+      return { ...state, max: action.number };
     default:
       return state;
   }
