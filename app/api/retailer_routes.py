@@ -21,6 +21,12 @@ def get_retailers():
     return {retailer.id: retailer.to_dict() for retailer in retailers}
 
 
+@retailer_routes.route('/max')
+def get_max_number_of_retailers():
+    number = Retailer.query.count()
+    return {"max": number}
+
+
 @retailer_routes.route('/<int:retailer_id>')
 def get_one_retailer(retailer_id):
     retailer = Retailer.query.get(retailer_id)
