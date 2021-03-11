@@ -7,10 +7,10 @@ const About = () => {
         <h5>Created by Peter Mai &copy; 2021</h5>
       </div>
       <div className="flex justify-around p-2">
-        <a href="https://github.com/Lazytangent"><GitHub /></a>
-        <a href="https://github.com/Lazytangent/Qwerkey"><Code /></a>
-        <a href="https://www.linkedin.com/in/petertnmai/"><LinkedIn /></a>
-        <a href="https://lazytangent.github.io"><FolderShared /></a>
+        <a className="hover:text-green" href="https://github.com/Lazytangent"><GitHub /></a>
+        <a className="hover:text-green" href="https://github.com/Lazytangent/Qwerkey"><Code /></a>
+        <a className="hover:text-green" href="https://www.linkedin.com/in/petertnmai/"><LinkedIn /></a>
+        <a className="hover:text-green" href="https://lazytangent.github.io"><FolderShared /></a>
       </div>
     </div>
   );
