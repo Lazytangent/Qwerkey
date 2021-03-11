@@ -74,11 +74,11 @@ const NavBar = () => {
           </li>
         </div>
         <div className="flex justify-end col-start-4 col-span-4">
-          {authenticated && (
-            <div className="md:block hidden">
+          {authenticated &&
+            <div className="hidden md:block">
               <SearchBar />
-            </div>
-          )}
+           </div>
+          }
           <DarkModeToggle />
           {!authenticated && (
             <>
