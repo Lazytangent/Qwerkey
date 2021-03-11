@@ -92,7 +92,7 @@ const CreatePostForm = () => {
         />
         <div className="flex flex-col items-center pb-2">
           <label htmlFor="community-select" className="mb-2">Select a Community</label>
-          <select id="community-select" className="p-2 border rounded outline-none focus:border-green dark:bg-gray-800 dark:text-gray-50 border-gray-50" value={communityId} onChange={updateCommunityId}>
+          <select id="community-select" className="p-2 border rounded outline-none focus:border-green dark:bg-gray-800 dark:text-gray-50 dark:border-gray-50" value={communityId} onChange={updateCommunityId}>
             {Object.values(communities).map(community => (
               <option value={community.id} key={community.id}>{community.name}</option>
             ))}
