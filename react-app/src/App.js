@@ -48,7 +48,7 @@ const App = () => {
   }
 
   return (
-    <>
+    <div className={`${isDarkMode ? "dark" : ""}`}>
       <CollapsedSidebar />
       <div className={`grid grid-rows-layout ${isDarkMode ? "dark bg-gray-800" : ""} ${showCollapsedSidebar ? "ml-40 md:ml-0" : "ml-0"} duration-500`}>
         <div className="row-span-1">
@@ -85,7 +85,7 @@ const App = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
