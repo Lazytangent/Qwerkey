@@ -22,7 +22,7 @@ const NavBar = () => {
     authenticated,
   } = useAuthContext();
   const { setShowCreatePostModal } = useCreatePostContext();
-  const { setShowCollapsedSidebar } = useCollapsedSidebarContext();
+  const { showCollapsedSidebar, setShowCollapsedSidebar } = useCollapsedSidebarContext();
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   const createPostBtnHandler = () => {
@@ -46,7 +46,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="p-2 bg-green dark:bg-gray-500">
+    <nav className={`p-2 bg-green dark:bg-gray-500`}>
       <ul className="grid grid-cols-7">
         <div className="p-2 md:hidden" onClick={toggleSidebar}>
           <Menu />
@@ -74,7 +74,11 @@ const NavBar = () => {
           </li>
         </div>
         <div className="flex justify-end col-start-4 col-span-4">
-          {authenticated && <SearchBar />}
+          {authenticated && (
+            <div className="md:block hidden">
+              <SearchBar />
+            </div>
+          )}
           <DarkModeToggle />
           {!authenticated && (
             <>
