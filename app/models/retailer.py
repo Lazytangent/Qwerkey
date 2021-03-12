@@ -11,6 +11,8 @@ class Retailer(db.Model):
     description = db.Column(db.Text, nullable=False)
     city = db.Column(db.String(50), nullable=False)
     state = db.Column(db.String(25), nullable=False)
+    lat = db.Column(db.Numeric(scale=7))
+    lng = db.Column(db.Numeric(scale=7))
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False,
@@ -28,6 +30,8 @@ class Retailer(db.Model):
             "description": self.description,
             "city": self.city,
             "state": self.state,
+            "lat": float(self.lat),
+            "lng": float(self.lng),
             "created_at": self.created_at,
             "images": [image.image_url for image in self.images],
             "ratings": [rating.to_dict() for rating in self.ratings],
