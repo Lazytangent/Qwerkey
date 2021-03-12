@@ -37,7 +37,6 @@ const CreateCommunityForm = () => {
 
   return (
     <>
-      <h3>Placeholder for CreateCommunityForm</h3>
       <form onSubmit={submitHandler}>
         <FormTitle title="Create a Community" />
         <FormErrors errors={errors} />
