@@ -9,9 +9,9 @@
 * [Link link](https://qwerkey.herokuapp.com)
 * [Feature List](https://github.com/Lazytangent/Qwerkey/wiki/MVP-Features-List)
 
-## What is it?
-
 ## Technologies
+
+## What is it?
 
 ## Developing
 
