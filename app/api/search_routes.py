@@ -1,7 +1,7 @@
 from flask import Blueprint, request
-from sqlalchemy import or_
+from sqlalchemy import or_, func
 
-from app.models import Post, Comment, Retailer
+from app.models import Post, Comment, Retailer, RetailerRating
 
 search_routes = Blueprint("search", __name__)
 
@@ -60,6 +60,14 @@ def search_function():
             return {
                 "retailers": [retailer.to_dict() for retailer in retailers]
             }
+        elif field == "rating":
+            rating = request.args.get("rating")
+            retailers = Retailer.query.join(RetailerRating). \
+                group_by(Retailer.id). \
+                having(func.count(RetailerRating.retailer_id) >= rating).all()
+            return {
+                "retailers": [retailer.to_dict() for retailer in retailers]
+            }
         else:
             retailers = Retailer.query.filter(
                 or_(Retailer.name.ilike(f"%{query}%"),
@@ -75,7 +83,9 @@ def search_function():
         Comment.body.ilike(f"%{query}%")).limit(5).all()
     retailers = Retailer.query.filter(
         or_(Retailer.name.ilike(f"%{query}%"),
-            Retailer.description.ilike(f"%{query}%"))).limit(5).all()
+            Retailer.description.ilike(f"%{query}%"),
+            Retailer.city.ilike(f"%{query}%"),
+            Retailer.state.ilike(f"%{query}%"))).limit(5).all()
     return {
         "posts": [post.to_dict() for post in posts],
         "comments": [comment.to_dict() for comment in comments],
