@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { createCommunity } from "../../store/communities";
 import FormTitle from "../parts/FormTitle";
@@ -8,6 +9,7 @@ import InputField from "../parts/InputField";
 import SubmitFormButton from "../parts/SubmitFormButton";
 
 const CreateCommunityForm = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
@@ -31,6 +33,8 @@ const CreateCommunityForm = () => {
     const newCommunity = await dispatch(createCommunity(community));
     if (newCommunity.errors) {
       setErrors(newCommunity.errors);
+    } else {
+      history.push(`/q/${newCommunity.name}`);
     }
   };
 
