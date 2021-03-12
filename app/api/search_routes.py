@@ -46,6 +46,20 @@ def search_function():
             return {
                 "retailers": [retailer.to_dict() for retailer in retailers]
             }
+        elif field == "location":
+            city = request.args.get("city")
+            state = request.args.get("state")
+            if city:
+                retailers = Retailer.query.filter(
+                    Retailer.city.ilike(f"%{city}%"),
+                    Retailer.state.ilike(f"%{state}%")).all()
+            else:
+                retailers = Retailer.query.filter(
+                    Retailer.state.ilike(f"%{state}%")
+                ).all()
+            return {
+                "retailers": [retailer.to_dict() for retailer in retailers]
+            }
         else:
             retailers = Retailer.query.filter(
                 or_(Retailer.name.ilike(f"%{query}%"),
