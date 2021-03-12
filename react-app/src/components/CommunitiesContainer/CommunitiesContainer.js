@@ -1,3 +1,7 @@
+import { useSelector } from "react-redux";
+
+import Community from "./components/Community";
+
 const CommunitiesContainer = () => {
   return (
     <>
