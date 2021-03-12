@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { v4 as uuidv4 } from "uuid";
 
 import { getPosts, getMaxNumberOfPosts } from '../../store/posts';
 import { getCommunityByName } from "../../store/sidebar";
@@ -15,6 +16,7 @@ const PostsContainer = () => {
   const maxPosts = useSelector(state => state.posts.max);
 
   const [page, setPage] = useState(1);
+  const [currentPosts, setCurrentPosts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -22,8 +24,10 @@ const PostsContainer = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getPosts(page, communityName));
-  }, [dispatch, page, communityName]);
+    if (page * 20 - maxPosts < 20) {
+      dispatch(getPosts(page, communityName));
+    }
+  }, [dispatch, page, communityName, maxPosts]);
 
   useEffect(() => {
     if (communityName) {
@@ -34,15 +38,22 @@ const PostsContainer = () => {
   useEffect(() => {
     if (posts) {
       setIsLoaded(true);
+      setCurrentPosts(Object.values(posts));
     }
   }, [posts]);
+
+  useEffect(() => {
+    if (page * 20 > maxPosts) {
+      setCurrentPosts(prev => prev.concat(Object.values(posts).slice(0, page * 20 % maxPosts)));
+    }
+  }, [posts, maxPosts, page]);
 
   useEffect(() => {
     const scrollListener = () => {
       const scroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (scroll / height);
-      if (page < maxPosts / 20 - 1 && Object.values(posts).length < maxPosts && scrolled > 0.9) {
+      if (scrolled > 0.9) {
         setPage(prev => prev + 1);
       }
     };
@@ -57,8 +68,8 @@ const PostsContainer = () => {
 
   return (
     <div>
-      {Object.values(posts).map(post => (
-        <Post key={post.id} post={post} userId={user ? user.id : null} />
+      {currentPosts.map(post => (
+        <Post key={uuidv4()} post={post} userId={user ? user.id : null} />
       ))}
     </div>
   );
