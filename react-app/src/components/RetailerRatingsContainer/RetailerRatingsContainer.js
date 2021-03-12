@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import RetailerRating from "../RetailerRating";
 
 const RetailerRatingsContainer = ({ retailerId }) => {
-  const retailer = useSelector(state => state.retailers[retailerId]);
+  const retailer = useSelector(state => state.retailers.retailers[retailerId]);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -19,11 +19,11 @@ const RetailerRatingsContainer = ({ retailerId }) => {
   }
 
   return (
-    <>
+    <div className="mt-2">
       {retailer.ratings.map(rating => (
         <RetailerRating key={rating.id} rating={rating} />
       ))}
-    </>
+    </div>
   );
 };
 
