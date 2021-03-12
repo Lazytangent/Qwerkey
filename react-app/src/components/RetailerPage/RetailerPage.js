@@ -42,15 +42,15 @@ const RetailerPage = () => {
       {retailer && (
         <>
           <Retailer retailer={retailer} />
+          {retailer.lat && retailer.lng && (
+            <Map long={retailer.lng} lat={retailer.lat} />
+          )}
           {user && retailer.owner.id !== user.id && (
             <RetailerRatingForm retailerId={retailer.id} />
           )}
+          <RetailerRatingsContainer retailerId={retailer.id} />
         </>
       )}
-      {retailer.lat && retailer.lng &&
-        <Map long={retailer.lng} lat={retailer.lat} />
-      }
-      <RetailerRatingsContainer retailerId={retailer.id} />
     </>
   );
 };
