@@ -23,7 +23,13 @@ const AdvSearchBar = () => {
   useEffect(() => {
     if (stateCode !== "State...") {
       setCities(csc.getCitiesOfState("US", stateCode));
-      setState(csc.getStatesOfCountry("US").find(state => state.isoCode === stateCode));
+      setState(
+        csc
+          .getStatesOfCountry("US")
+          .find((state) => state.isoCode === stateCode)
+      );
+    } else {
+      setState("");
     }
   }, [stateCode]);
 
@@ -55,11 +61,13 @@ const AdvSearchBar = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    await dispatch(getQuery(searchInput, type, field, stateName, city));
+    await dispatch(getQuery(searchInput, type, field, stateName, city !== "City..." ? city : undefined));
     history.push(
       `/search?query=${searchInput}${
         type !== "Type..." ? `&type=${type}` : ""
-      }${field !== "Field..." ? `&field=${field}` : ""}`
+      }${field !== "Field..." ? `&field=${field}` : ""}${
+        stateName && field === "Location" ? `&state=${stateName}` : ""
+      }${city !== "City..." ? `&city=${city}` : ""}`
     );
     setSearched(true);
   };
@@ -145,7 +153,7 @@ const AdvSearchBar = () => {
               onChange={updateState}
               className="px-1 py-2 mb-2 border rounded dark:bg-gray-800 dark:text-gray-50 col-start-1"
             >
-              <option disabled={true} value="State...">
+              <option value="State...">
                 State...
               </option>
               {states &&
@@ -162,7 +170,7 @@ const AdvSearchBar = () => {
               onChange={updateCity}
               className="px-1 py-2 mb-2 border rounded dark:bg-gray-800 dark:text-gray-50 col-start-2"
             >
-              <option disabled={true} value="City...">
+              <option value="City...">
                 City...
               </option>
               {cities.map((city) => (

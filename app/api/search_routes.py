@@ -12,12 +12,12 @@ def search_function():
     type_ = request.args.get("type", "all")
     field = request.args.get("field", "all")
     if type_ == "Post":
-        if field == "title":
+        if field == "Title":
             posts = \
                 Post.query.filter(Post.title.ilike(
                     f"%{query}%")).limit(10).all()
             return {"posts": [post.to_dict() for post in posts]}
-        elif field == "body":
+        elif field == "Body":
             posts = \
                 Post.query.filter(Post.body.ilike(
                     f"%{query}%")).limit(10).all()
@@ -32,21 +32,21 @@ def search_function():
             Comment.body.ilike(f"%{query}%")).limit(10).all()
         return {"comments": [comment.to_dict() for comment in comments]}
     elif type_ == "Retailer":
-        if field == "name":
+        if field == "Name":
             retailers = \
                 Retailer.query.filter(Retailer.name.ilike(
                     f"%{query}%")).limit(10).all()
             return {
                 "retailers": [retailer.to_dict() for retailer in retailers]
             }
-        elif field == "description":
+        elif field == "Description":
             retailers = \
                 Retailer.query.filter(Retailer.description.ilike(
                     f"%{query}%")).limit(10).all()
             return {
                 "retailers": [retailer.to_dict() for retailer in retailers]
             }
-        elif field == "location":
+        elif field == "Location":
             city = request.args.get("city")
             state = request.args.get("state")
             if city and state:
@@ -64,7 +64,7 @@ def search_function():
             return {
                 "retailers": [retailer.to_dict() for retailer in retailers]
             }
-        elif field == "rating":
+        elif field == "Rating":
             retailers = Retailer.query.join(RetailerRating). \
                 group_by(Retailer.id). \
                 having(func.avg(RetailerRating.rating) >= query).all()
