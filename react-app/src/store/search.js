@@ -23,7 +23,7 @@ const setRetailers = (retailers) => {
   };
 };
 
-export const getQuery = (queryString, type, field, city, state) => async (dispatch) => {
+export const getQuery = (queryString, type, field, state, city) => async (dispatch) => {
   const res = await fetch(`/api/search?query=${queryString}${type ? `&type=${type}` : ""}${field ? `&field=${field}` : ""}${city ? `&city=${city}` : ""}${state ? `&state=${state}` : ""}`);
   const data = await res.json();
 
