@@ -9,7 +9,7 @@ import { useCollapsedSidebarContext } from "../../context/CollapsedSidebarContex
 import LoginModal from "../LoginForm";
 import SignUpModal from "../SignUpForm";
 import LogoutButton from "../LogoutButton";
-import CreateFormModal from "../CreatePostForm";
+import CreatePostModal from "../CreatePostForm";
 import DarkModeToggle from "../DarkModeToggle";
 import NavButton from "../parts/NavButton";
 import UserMenu from "../parts/UserMenu";
@@ -46,7 +46,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="p-2 bg-green dark:bg-gray-500">
+    <nav className={`p-2 bg-green dark:bg-gray-500`}>
       <ul className="grid grid-cols-7">
         <div className="p-2 md:hidden" onClick={toggleSidebar}>
           <Menu />
@@ -72,10 +72,26 @@ const NavBar = () => {
               Retailers
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              className="p-2 align-middle hover:underline hover:text-purple-dark"
+              to="/q"
+              exact={true}
+              activeClassName="active"
+            >
+              Communities
+            </NavLink>
+          </li>
         </div>
         <div className="flex justify-end col-start-4 col-span-4">
-          {authenticated && <SearchBar />}
-          <DarkModeToggle />
+          {authenticated &&
+            <div className="hidden md:block">
+              <SearchBar />
+           </div>
+          }
+          <div className="hidden md:block">
+            <DarkModeToggle />
+          </div>
           {!authenticated && (
             <>
               <li>
@@ -98,12 +114,12 @@ const NavBar = () => {
                 </div>
               </li>
               {showUserMenu && (
-                <UserMenu />
+                <UserMenu createPostBtnHandler={createPostBtnHandler} />
               )}
               <div className="hidden md:flex">
                 <li>
                   <NavButton name="Create Post" onClick={createPostBtnHandler}>
-                    <CreateFormModal />
+                    <CreatePostModal />
                   </NavButton>
                 </li>
                 <li>

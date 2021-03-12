@@ -16,6 +16,7 @@ import SearchResults from "./components/SearchResults";
 import PageNotFound from "./components/PageNotFound";
 import Sidebar from "./components/Sidebar";
 import CollapsedSidebar from "./components/CollpasedSidebar";
+import CommunitiesContainer from "./components/CommunitiesContainer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -48,9 +49,9 @@ const App = () => {
   }
 
   return (
-    <>
+    <div className={`${isDarkMode ? "dark" : ""}`}>
       <CollapsedSidebar />
-      <div className={`grid grid-rows-layout ${isDarkMode ? "dark bg-gray-800" : ""} ${showCollapsedSidebar ? "ml-40" : "ml-0"} duration-500`}>
+      <div className={`grid grid-rows-layout ${isDarkMode ? "dark bg-gray-800" : ""} ${showCollapsedSidebar ? "ml-40 md:ml-0" : "ml-0"} duration-500`}>
         <div className="row-span-1">
           <NavBar setAuthenticated={setAuthenticated} />
         </div>
@@ -65,6 +66,9 @@ const App = () => {
               </Route>
               <Route path="/q/:communityName">
                 <PostsContainer />
+              </Route>
+              <Route path="/q" exact={true}>
+                <CommunitiesContainer />
               </Route>
               <Route path="/retailers" exact={true}>
                 <RetailersContainer />
@@ -85,7 +89,7 @@ const App = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

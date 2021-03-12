@@ -14,7 +14,6 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
 
   const [title, setTitle] = useState(post.title);
   const [body, setBody] = useState(post.body);
-  const [oldImages, setOldImages] = useState(post.images);
   const [newImages, setNewImages] = useState([]);
   const [errors, setErrors] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -42,7 +41,7 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (body || newImages.length || oldImages.length) {
+    if (body || newImages.length) {
       const newPost = await dispatch(updatePost({ title, body, images: newImages, postId, userId: post.user.id, communityId: post.community.id }));
       if (!newPost.errors) {
         setShowEditModal(false);
@@ -78,7 +77,7 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
         />
         <div className="flex flex-col items-center">
           <h5>Images Chosen</h5>
-          {oldImages && oldImages.map(imageUrl => {
+          {post.images && post.images.map(imageUrl => {
             return <div key={imageUrl}><img src={imageUrl} alt={imageUrl} /></div>;
           })}
           {newImages && newImages.map(fileList => (

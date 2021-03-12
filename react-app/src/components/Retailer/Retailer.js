@@ -15,6 +15,7 @@ const Retailer = ({ retailer }) => {
       <p className="p-2">{retailer.description}</p>
       <hr />
       <p className="p-2">Est. {(new Date(retailer.created_at).toLocaleString(...options()))}</p>
+      <p className="px-2">Located in {retailer.city}, {retailer.state}</p>
     </div>
   );
 };

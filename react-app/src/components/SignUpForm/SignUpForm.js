@@ -69,8 +69,8 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className="p-4 bg-white rounded">
-      <form onSubmit={onSignUp} className="p-2 bg-white rounded">
+    <div className="p-4 bg-white rounded dark:bg-gray-800 dark:text-gray-50">
+      <form onSubmit={onSignUp} className="p-2 bg-white rounded dark:bg-gray-800 dark:text-gray-50">
         <FormTitle title="Sign Up" />
         <FormErrors errors={errors} />
         <InputField
