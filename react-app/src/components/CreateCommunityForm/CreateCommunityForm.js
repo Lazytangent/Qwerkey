@@ -23,7 +23,7 @@ const CreateCommunityForm = () => {
     setDescription(e.target.value);
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const community = {
       name,
@@ -57,6 +57,7 @@ const CreateCommunityForm = () => {
           onChange={updateDescription}
           required={true}
         />
+        <SubmitFormButton label="Create Community" />
       </form>
     </>
   );
