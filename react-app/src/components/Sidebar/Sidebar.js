@@ -28,7 +28,7 @@ const Sidebar = () => {
   return (
     <div className="fixed max-w-xs p-2 pt-0">
       {currentCommunity && (
-        <div className="p-2 border border-gray-600 rounded">
+        <div className="max-w-md p-2 border border-gray-600 rounded">
           <h3 className="text-center">{currentCommunity.name}</h3>
           <p className="p-2">{currentCommunity.description}</p>
         </div>
