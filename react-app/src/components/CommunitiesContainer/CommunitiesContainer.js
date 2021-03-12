@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 import { getCommunities } from "../../store/communities";
 import Community from "../Community";
@@ -8,7 +9,9 @@ const CommunitiesContainer = () => {
   const dispatch = useDispatch();
   const communities = useSelector(state => state.communities);
 
+  const [currentCommunities, setCurrentCommunities] = useState([]);
   const [currentMax, setCurrentMax] = useState(20);
+  const [max, setMax] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -18,8 +21,19 @@ const CommunitiesContainer = () => {
   useEffect(() => {
     if (communities) {
       setIsLoaded(true);
+      setMax(Object.values(communities).length);
     }
   }, [communities]);
+
+  useEffect(() => {
+    if (currentMax < max) {
+      setCurrentCommunities(Object.values(communities).slice(0, currentMax));
+    } else if (currentMax % max < 20) {
+      setCurrentCommunities(Object.values(communities));
+    } else {
+      setCurrentCommunities(prev => prev.concat(Object.values(communities).slice(0, currentMax % max)));
+    }
+  }, [currentMax, max, communities]);
 
   useEffect(() => {
     const scrollListener = () => {
@@ -42,8 +56,8 @@ const CommunitiesContainer = () => {
   return (
     <>
       <h3>Placeholder for CommunitiesContainer</h3>
-      {Object.values(communities).slice(0, currentMax).map(community => (
-        <Community community={community} key={community.id} />
+      {currentCommunities.map(community => (
+        <Community community={community} key={uuidv4()} />
       ))}
     </>
   );
