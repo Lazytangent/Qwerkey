@@ -1,3 +1,4 @@
+import requests
 from datetime import datetime
 from flask import Blueprint, request
 
@@ -30,6 +31,20 @@ def get_max_number_of_retailers():
 @retailer_routes.route('/<int:retailer_id>')
 def get_one_retailer(retailer_id):
     retailer = Retailer.query.get(retailer_id)
+    return retailer.to_dict()
+
+
+@retailer_routes.route('/<int:retailer_id>/location')
+def generate_location(retailer_id):
+    retailer = Retailer.query.get(retailer_id)
+    response = \
+        requests.get("http://0.0.0.0:5000/api/lat_long?" +
+                     f"city={retailer.city}" +
+                     f"&state={retailer.state}")
+    data = response.json()
+    retailer.lng = data["lng"]
+    retailer.lat = data["lat"]
+    db.session.commit()
     return retailer.to_dict()
 
 

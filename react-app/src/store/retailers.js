@@ -56,6 +56,13 @@ export const getOneRetailer = (retailerId) => async (dispatch) => {
   return retailer;
 };
 
+export const getOneRetailerLocation = (retailerId) => async (dispatch) => {
+  const res = await fetch(`/api/retailers/${retailerId}/location`);
+  const retailer = await res.json();
+  dispatch(setRetailer(retailer));
+  return retailer;
+};
+
 export const createRetailerRating = (rating, retailer_id) => async (dispatch) => {
   const res = await fetch(`/api/retailers/${retailer_id}/ratings`, {
     method: "POST",
