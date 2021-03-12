@@ -49,10 +49,14 @@ def search_function():
         elif field == "location":
             city = request.args.get("city")
             state = request.args.get("state")
-            if city:
+            if city and state:
                 retailers = Retailer.query.filter(
                     Retailer.city.ilike(f"%{city}%"),
                     Retailer.state.ilike(f"%{state}%")).all()
+            elif city:
+                retailers = Retailer.query.filter(
+                    Retailer.city.ilike(f"%{city}")
+                ).all()
             else:
                 retailers = Retailer.query.filter(
                     Retailer.state.ilike(f"%{state}%")
@@ -61,10 +65,9 @@ def search_function():
                 "retailers": [retailer.to_dict() for retailer in retailers]
             }
         elif field == "rating":
-            rating = request.args.get("rating")
             retailers = Retailer.query.join(RetailerRating). \
                 group_by(Retailer.id). \
-                having(func.count(RetailerRating.retailer_id) >= rating).all()
+                having(func.avg(RetailerRating.rating) >= query).all()
             return {
                 "retailers": [retailer.to_dict() for retailer in retailers]
             }
