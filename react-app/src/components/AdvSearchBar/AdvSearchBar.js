@@ -13,6 +13,8 @@ const AdvSearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
   const [type, setType] = useState("Type...");
   const [field, setField] = useState("Field...");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
 
   const updateSearchInput = (e) => {
     setSearchInput(e.target.value);
@@ -52,6 +54,7 @@ const AdvSearchBar = () => {
     "name",
     "description",
     "rating",
+    "state",
   ];
 
   return (
