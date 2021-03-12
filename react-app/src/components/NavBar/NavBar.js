@@ -72,6 +72,16 @@ const NavBar = () => {
               Retailers
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              className="p-2 align-middle hover:underline hover:text-purple-dark"
+              to="/q"
+              exact={true}
+              activeClassName="active"
+            >
+              Communities
+            </NavLink>
+          </li>
         </div>
         <div className="flex justify-end col-start-4 col-span-4">
           {authenticated &&

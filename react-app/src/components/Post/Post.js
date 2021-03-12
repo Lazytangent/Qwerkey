@@ -9,7 +9,7 @@ import DeleteConfirmationModal from "../parts/DeleteConfirmation";
 import options from "../../utils/localeDateString";
 
 const Post = ({ post }) => {
-  const user = useSelector(state => state.session.user);
+  const user = useSelector((state) => state.session.user);
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -23,45 +23,49 @@ const Post = ({ post }) => {
   };
 
   return (
-    <>
-      <div key={post.id} className="p-2 mb-2 rounded shadow-sm hover:shadow-lg dark:bg-gray-800 dark:hover:shadow-light-lg dark:shadow-light transform duration-100 ease-in-out">
-        <h3 className="p-2">
-          <NavLink to={`/q/${post.community.name}/${post.id}`}>
-            <span className="hover:underline">{post.title}</span>
-          </NavLink>
-        </h3>
-        <p className="p-2">{post.body}</p>
-        {post.tags.map((tag) => (
-          <p key={tag}>{tag}</p>
-        ))}
-        {post.images.map((url) => (
-          <img src={url} alt={`for ${post.title}`} key={url} />
-        ))}
-        <hr />
-        <div className="flex items-center justify-between p-2">
-          <p>by {post.user.username} on {(new Date(post.created_at).toLocaleString(...options()))}</p>
-          {user && post.user.id === user.id && (
-            <div>
-              <EditButton label="Edit Post" onClick={editBtnHandler}>
-                <EditPostModal
-                  showEditModal={showEditModal}
-                  setShowEditModal={setShowEditModal}
-                  postId={post.id}
-                />
-              </EditButton>
-              <DeleteButton label="Delete Post" onClick={deleteBtnHandler}>
-                <DeleteConfirmationModal
-                  showDeleteModal={showDeleteModal}
-                  setShowDeleteModal={setShowDeleteModal}
-                  id={post.id}
-                  type="post"
-                />
-              </DeleteButton>
-            </div>
-          )}
-        </div>
+    <div
+      key={post.id}
+      className="p-2 mb-2 rounded shadow-sm hover:shadow-lg dark:bg-gray-800 dark:hover:shadow-light-lg dark:shadow-light transform duration-100 ease-in-out"
+    >
+      <h3 className="p-2">
+        <NavLink to={`/q/${post.community.name}/${post.id}`}>
+          <span className="hover:underline">{post.title}</span>
+        </NavLink>
+      </h3>
+      <p className="p-2">{post.body}</p>
+      {post.tags.map((tag) => (
+        <p key={tag}>{tag}</p>
+      ))}
+      {post.images.map((url) => (
+        <img src={url} alt={`for ${post.title}`} key={url} />
+      ))}
+      <hr />
+      <div className="flex items-center justify-between p-2">
+        <p>
+          by {post.user.username} on{" "}
+          {new Date(post.created_at).toLocaleString(...options())}
+        </p>
+        {user && post.user.id === user.id && (
+          <div>
+            <EditButton label="Edit Post" onClick={editBtnHandler}>
+              <EditPostModal
+                showEditModal={showEditModal}
+                setShowEditModal={setShowEditModal}
+                postId={post.id}
+              />
+            </EditButton>
+            <DeleteButton label="Delete Post" onClick={deleteBtnHandler}>
+              <DeleteConfirmationModal
+                showDeleteModal={showDeleteModal}
+                setShowDeleteModal={setShowDeleteModal}
+                id={post.id}
+                type="post"
+              />
+            </DeleteButton>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -16,6 +16,7 @@ import SearchResults from "./components/SearchResults";
 import PageNotFound from "./components/PageNotFound";
 import Sidebar from "./components/Sidebar";
 import CollapsedSidebar from "./components/CollpasedSidebar";
+import CommunitiesContainer from "./components/CommunitiesContainer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -65,6 +66,9 @@ const App = () => {
               </Route>
               <Route path="/q/:communityName">
                 <PostsContainer />
+              </Route>
+              <Route path="/q" exact={true}>
+                <CommunitiesContainer />
               </Route>
               <Route path="/retailers" exact={true}>
                 <RetailersContainer />
