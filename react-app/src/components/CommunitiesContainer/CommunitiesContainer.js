@@ -4,10 +4,12 @@ import { v4 as uuidv4 } from "uuid";
 
 import { getCommunities } from "../../store/communities";
 import Community from "../Community";
+import CreateCommunityForm from "../CreateCommunityForm";
 
 const CommunitiesContainer = () => {
   const dispatch = useDispatch();
   const communities = useSelector(state => state.communities);
+  const user = useSelector(state => state.session.user);
 
   const [currentCommunities, setCurrentCommunities] = useState([]);
   const [currentMax, setCurrentMax] = useState(20);
@@ -55,7 +57,7 @@ const CommunitiesContainer = () => {
 
   return (
     <>
-      <h3>Placeholder for CommunitiesContainer</h3>
+      {user && <CreateCommunityForm />}
       {currentCommunities.map(community => (
         <Community community={community} key={uuidv4()} />
       ))}
