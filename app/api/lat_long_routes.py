@@ -15,5 +15,5 @@ def get_lat_long():
             "https://api.opencagedata.com/geocode/v1/json?" +
             f"key={Config.OPEN_CAGE_API_KEY}" +
             f"&q={city},{state},USA")
-    print(response)
-    return response.json()
+    data = response.json()
+    return data["results"][0]["geometry"]
