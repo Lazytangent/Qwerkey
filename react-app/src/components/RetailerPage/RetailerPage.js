@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { getOneRetailer } from "../../store/retailers";
+import { getOneRetailer, getOneRetailerLocation } from "../../store/retailers";
 import Retailer from "../Retailer";
 import RetailerRatingsContainer from "../RetailerRatingsContainer";
 import RetailerRatingForm from "../RetailerRatingForm";
@@ -23,13 +23,15 @@ const RetailerPage = () => {
   }, [dispatch, retailerId]);
 
   useEffect(() => {
-    if (retailer) {
-      setIsLoaded(true);
-      if (!(retailer.lng || retailer.lat)) {
-
+    (async () => {
+      if (retailer) {
+        if (!(retailer.lng || retailer.lat)) {
+          await dispatch(getOneRetailerLocation(retailerId));
+        }
+        setIsLoaded(true);
       }
-    }
-  }, [retailer]);
+    })();
+  }, [retailer, retailerId, dispatch]);
 
   if (!isLoaded) {
     return null;
@@ -45,7 +47,9 @@ const RetailerPage = () => {
           )}
         </>
       )}
-      <Map long={51.505} lat={-0.09} />
+      {retailer.lat && retailer.lng &&
+        <Map long={retailer.lng} lat={retailer.lat} />
+      }
       <RetailerRatingsContainer retailerId={retailer.id} />
     </>
   );

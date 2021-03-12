@@ -38,12 +38,12 @@ def get_one_retailer(retailer_id):
 def generate_location(retailer_id):
     retailer = Retailer.query.get(retailer_id)
     response = \
-        requests.get("/api/lat_long?" +
+        requests.get("http://0.0.0.0:5000/api/lat_long?" +
                      f"city={retailer.city}" +
                      f"&state={retailer.state}")
     data = response.json()
-    retailer.lng = data.lng
-    retailer.lat = data.lat
+    retailer.lng = data["lng"]
+    retailer.lat = data["lat"]
     db.session.commit()
     return retailer.to_dict()
 
