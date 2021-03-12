@@ -1,1 +1,3 @@
-export * from "./CommunitiesContainer";
+import CommunitiesContainer from "./CommunitiesContainer";
+
+export default CommunitiesContainer;
