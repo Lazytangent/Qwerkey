@@ -9,7 +9,6 @@ import SubmitFormButton from "../parts/SubmitFormButton";
 
 const CreateCommunityForm = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -30,7 +29,7 @@ const CreateCommunityForm = () => {
       description,
     };
     const newCommunity = await dispatch(createCommunity(community));
-    if (!newCommunity.errors) {
+    if (newCommunity.errors) {
       setErrors(newCommunity.errors);
     }
   };
