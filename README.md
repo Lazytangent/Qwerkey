@@ -11,6 +11,19 @@
 
 ## Technologies
 
+* React.js
+* Redux
+* JavaScript
+* Python
+* Flask
+* SQLAlchemy
+* Alembic
+* PostgreSQL
+* [OpenCageData](https://opencagedata.com)
+* [Leaflet](https://leafletjs.com)
+* [React Leaflet](https://react-leaflet.js.org)
+* [TailwindCSS](https://tailwindcss.com)
+
 ## What is it?
 
 ## Developing
