@@ -37,6 +37,9 @@ class Comment(db.Model):
             "comment_id": self.comment_id,
         }
 
+    def to_search_dict(self):
+        pass
+
     def to_dict(self):
         return {
             "id": self.id,
