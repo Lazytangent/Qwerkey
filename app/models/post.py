@@ -30,6 +30,15 @@ class Post(db.Model):
             "images": [image.image_url for image in self.images]
         }
 
+    def to_search_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "body": self.body,
+            "images": [image.image_url for image in self.images],
+            "community": self.community.name,
+        }
+
     def to_dict(self):
         return {
             "id": self.id,

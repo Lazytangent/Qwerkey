@@ -38,7 +38,12 @@ class Comment(db.Model):
         }
 
     def to_search_dict(self):
-        pass
+        return {
+            "id": self.id,
+            "body": self.body,
+            "user": self.user.to_simple_dict(),
+            "post": self.thread.post.to_search_dict(),
+        }
 
     def to_dict(self):
         return {

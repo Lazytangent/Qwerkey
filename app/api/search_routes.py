@@ -30,7 +30,7 @@ def search_function():
     elif type_ == "Comment":
         comments = Comment.query.filter(
             Comment.body.ilike(f"%{query}%")).limit(10).all()
-        return {"comments": [comment.to_dict() for comment in comments]}
+        return {"comments": [comment.to_search_dict() for comment in comments]}
     elif type_ == "Retailer":
         if field == "Name":
             retailers = \
@@ -91,6 +91,6 @@ def search_function():
             Retailer.state.ilike(f"%{query}%"))).limit(5).all()
     return {
         "posts": [post.to_dict() for post in posts],
-        "comments": [comment.to_dict() for comment in comments],
+        "comments": [comment.to_search_dict() for comment in comments],
         "retailers": [retailer.to_dict() for retailer in retailers]
     }

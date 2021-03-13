@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation, NavLink } from "react-router-dom";
 
 import { useCommentContext } from "../../context/CommentContext";
 import EditButton from "../parts/EditButton";
@@ -7,6 +8,8 @@ import EditCommentModal from "../EditCommentForm";
 import DeleteConfirmationModal from "../parts/DeleteConfirmation";
 
 const Comment = ({ comment, userId }) => {
+  const location = useLocation();
+
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -46,6 +49,13 @@ const Comment = ({ comment, userId }) => {
             />
           </DeleteButton>
         </>
+      )}
+      {location.pathname === "/search" && (
+        <NavLink to={`/q/${comment.post.community}/${comment.post.id}`}>
+          <span className="hover:text-green p-2">
+            Go to Post
+          </span>
+        </NavLink>
       )}
     </div>
   );
