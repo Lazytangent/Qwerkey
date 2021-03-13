@@ -26,6 +26,8 @@
 
 ## What is it?
 
+Qwerkey is a social media site for connecting with other mechanical keyboard enthusiasts.
+
 ## Developing
 
 ## Challenges
