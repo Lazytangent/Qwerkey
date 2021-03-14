@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
+import { savePost } from "../../store/users";
 import EditButton from "../parts/EditButton";
 import DeleteButton from "../parts/DeleteButton";
 import EditPostModal from "../EditPostForm";
 import DeleteConfirmationModal from "../parts/DeleteConfirmation";
+import SaveButton from "../parts/SaveButton";
 import options from "../../utils/localeDateString";
 
 const Post = ({ post }) => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
 
   const [showEditModal, setShowEditModal] = useState(false);
@@ -20,6 +23,10 @@ const Post = ({ post }) => {
 
   const deleteBtnHandler = () => {
     setShowDeleteModal(true);
+  };
+
+  const saveThisPost = () => {
+    dispatch(savePost(user.id, post.id));
   };
 
   return (
@@ -63,6 +70,9 @@ const Post = ({ post }) => {
               />
             </DeleteButton>
           </div>
+        )}
+        {user && post.user.id !== user.id && (
+          <SaveButton save={saveThisPost} isSaved={user.saved_posts.find(savedPost => savedPost.id === post.id)} />
         )}
       </div>
     </div>
