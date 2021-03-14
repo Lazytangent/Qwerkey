@@ -16,6 +16,7 @@ const Post = ({ post }) => {
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [isSaved, setIsSaved] = useState(user.saved_posts.find(savedPost => savedPost.id === post.id) || false);
 
   const editBtnHandler = () => {
     setShowEditModal(true);
@@ -25,8 +26,11 @@ const Post = ({ post }) => {
     setShowDeleteModal(true);
   };
 
-  const saveThisPost = () => {
-    dispatch(savePost(user.id, post.id));
+  const saveThisPost = async () => {
+    const updatedUser = await dispatch(savePost(user.id, post.id));
+    if (!updatedUser.errors) {
+      setIsSaved(prev => !prev);
+    }
   };
 
   return (
@@ -72,7 +76,7 @@ const Post = ({ post }) => {
           </div>
         )}
         {user && post.user.id !== user.id && (
-          <SaveButton save={saveThisPost} isSaved={user.saved_posts.find(savedPost => savedPost.id === post.id)} />
+          <SaveButton save={saveThisPost} isSaved={isSaved} />
         )}
       </div>
     </div>
