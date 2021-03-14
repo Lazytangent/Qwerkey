@@ -30,6 +30,13 @@ Qwerkey is a social media site for connecting with other mechanical keyboard ent
 
 ## Developing
 
+1. `git clone` this repo
+2. `cd` into the local repo
+3. Run `pipenv install -r --dev dev-requirements.txt && pipenv install -r requirements.txt`
+4. Open another terminal window and `cd` into the local repo, then `cd` into `react-app`
+5. Run `npm install`
+6. In the first terminal, run `pipenv shell` to activate the Pipenv environment.
+
 ## Challenges
 
 ## Code Snippets
