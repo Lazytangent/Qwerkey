@@ -36,3 +36,15 @@ class Retailer(db.Model):
             "images": [image.image_url for image in self.images],
             "ratings": [rating.to_dict() for rating in self.ratings],
         }
+
+    def to_simple_dict(self):
+        return {
+            "id": self.id,
+            "owner": self.user.to_simple_dict(),
+            "name": self.name,
+            "description": self.description,
+            "city": self.city,
+            "state": self.state,
+            "created_at": self.created_at,
+            "ratings": [rating.to_dict() for rating in self.ratings],
+        }

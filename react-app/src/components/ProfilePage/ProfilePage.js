@@ -11,8 +11,8 @@ import Retailer from "../Retailer";
 const ProfilePage = () => {
   const { userId } = useParams();
   const dispatch = useDispatch();
-  const sessionUser = useSelector(state => state.session.user);
-  const user = useSelector(state => state.users.users[userId]);
+  const sessionUser = useSelector((state) => state.session.user);
+  const user = useSelector((state) => state.users.users[userId]);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -33,10 +33,27 @@ const ProfilePage = () => {
   return (
     <>
       <UserCard user={user} />
-      <h5>Posts</h5>
-      {user.posts.map(post => <Post key={post.id} post={post} />)}
-      <h5>Comments</h5>
-      {user.comments.map(comment => <Comment key={comment.id} comment={comment} userId={sessionUser.id} />)}
+      <div className="p-2">
+        <h3>Posts</h3>
+        <hr />
+      </div>
+      {user.posts.map((post) => (
+        <Post key={post.id} post={post} />
+      ))}
+      <div className="p-2">
+        <h3>Comments</h3>
+        <hr />
+      </div>
+      {user.comments.map((comment) => (
+        <Comment key={comment.id} comment={comment} userId={sessionUser.id} />
+      ))}
+      <div className="p-2">
+        <h3>Retailers</h3>
+        <hr />
+      </div>
+      {user.retailers.map((retailer) => (
+        <Retailer retailer={retailer} key={retailer.id} />
+      ))}
     </>
   );
 };

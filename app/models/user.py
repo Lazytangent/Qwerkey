@@ -57,6 +57,7 @@ class User(db.Model, UserMixin):
             "meetups": [meetup.to_dict() for meetup in self.meetups],
             "comments":
             [comment.to_search_dict() for comment in self.comments],
+            "retailers": [retailer.to_simple_dict() for retailer in self.retailers],
         }
 
     @classmethod
