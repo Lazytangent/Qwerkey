@@ -17,7 +17,7 @@ const UserMenu = ({ createPostBtnHandler }) => {
     }
   }, [user]);
 
-  if (!isLoaded) {
+  if (!isLoaded || !user) {
     return null;
   }
 
