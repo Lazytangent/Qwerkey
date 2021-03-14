@@ -50,7 +50,7 @@ const Comment = ({ comment, userId }) => {
           </DeleteButton>
         </>
       )}
-      {location.pathname === "/search" && (
+      {(location.pathname === "/search" || location.pathname.startsWith("/users")) && (
         <NavLink to={`/q/${comment.post.community}/${comment.post.id}`}>
           <span className="hover:text-green p-2">
             Go to Post
