@@ -1,12 +1,11 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required, current_user
+from flask_login import current_user
 from app.models import db, User, Post, Comment
 
 user_routes = Blueprint('users', __name__)
 
 
 @user_routes.route('')
-@login_required
 def users():
     page = int(request.args.get('page', 1))
     users = User.query.paginate(page=page, per_page=20)
@@ -14,21 +13,18 @@ def users():
 
 
 @user_routes.route('/<int:id>')
-@login_required
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
 
 @user_routes.route('/max')
-@login_required
 def get_max_number_of_users():
     number = User.query.count()
     return {"max": number}
 
 
 @user_routes.route('/<int:user_id>/save/<string:type_>/<int:id>')
-@login_required
 def save_something(user_id, type_, id):
     user = User.query.get(user_id)
     if current_user.id != user_id:
