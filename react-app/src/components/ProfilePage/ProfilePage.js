@@ -60,20 +60,28 @@ const ProfilePage = () => {
       ))}
       {sessionUser.id === user.id && (
         <>
-          <div className="p-2">
-            <h3>Saved Posts</h3>
-            <hr />
-          </div>
-          {user.saved_posts.map((post) => (
-            <Post key={post.id} post={post} />
-          ))}
-          <div className="p-2">
-            <h3>Saved Comments</h3>
-            <hr />
-          </div>
-          {user.saved_comments.map((comment) => (
-            <Comment key={comment.id} comment={comment} userId={sessionUser.id} />
-          ))}
+          {user.saved_posts.length > 0 && (
+            <>
+              <div className="p-2">
+                <h3>Saved Posts</h3>
+                <hr />
+              </div>
+              {user.saved_posts.map((post) => (
+                <Post key={post.id} post={post} />
+              ))}
+            </>
+          )}
+          {user.saved_comments.length > 0 && (
+            <>
+              <div className="p-2">
+                <h3>Saved Comments</h3>
+                <hr />
+              </div>
+              {user.saved_comments.map((comment) => (
+                <Comment key={comment.id} comment={comment} userId={sessionUser.id} />
+              ))}
+            </>
+          )}
         </>
       )}
     </>

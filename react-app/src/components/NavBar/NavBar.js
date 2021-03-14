@@ -11,6 +11,7 @@ import SignUpModal from "../SignUpForm";
 import NavButton from "../parts/NavButton";
 import UserMenu from "../parts/UserMenu";
 import SearchBar from "../SearchBar";
+import DarkModeToggle from "../DarkModeToggle";
 
 const NavBar = () => {
   const {
@@ -35,11 +36,11 @@ const NavBar = () => {
   };
 
   const openUserMenu = () => {
-    setShowUserMenu(prev => !prev);
+    setShowUserMenu((prev) => !prev);
   };
 
   const toggleSidebar = () => {
-    setShowCollapsedSidebar(prev => !prev);
+    setShowCollapsedSidebar((prev) => !prev);
   };
 
   return (
@@ -80,39 +81,39 @@ const NavBar = () => {
             </NavLink>
           </li>
         </div>
-        <div className="flex justify-end col-start-4 col-span-4">
-          {authenticated &&
+        {!authenticated && (
+          <div className="flex col-start-6 col-span-2">
+            <DarkModeToggle />
+            <li>
+              <NavButton name="Login" onClick={loginBtnClickHandler}>
+                <LoginModal />
+              </NavButton>
+            </li>
+            <li>
+              <NavButton name="Sign Up" onClick={signUpBtnClickHandler}>
+                <SignUpModal />
+              </NavButton>
+            </li>
+          </div>
+        )}
+        {authenticated && (
+          <div className="relative flex justify-center col-start-6 col-span-2">
             <div className="hidden md:block">
               <SearchBar />
-           </div>
-          }
-          {!authenticated && (
-            <>
-              <li>
-                <NavButton name="Login" onClick={loginBtnClickHandler}>
-                  <LoginModal />
-                </NavButton>
-              </li>
-              <li>
-                <NavButton name="Sign Up" onClick={signUpBtnClickHandler}>
-                  <SignUpModal />
-                </NavButton>
-              </li>
-            </>
-          )}
-          {authenticated && (
-            <>
-              <li className="relative">
-                <div className="p-2 border rounded hover:border-green" onClick={openUserMenu}>
-                  <Person />
-                </div>
-              </li>
-              {showUserMenu && (
-                <UserMenu createPostBtnHandler={createPostBtnHandler} />
-              )}
-            </>
-          )}
-        </div>
+            </div>
+            <li className="relative">
+              <div
+                className="p-2 border rounded hover:border-purple dark:hover:border-green"
+                onClick={openUserMenu}
+              >
+                <Person />
+              </div>
+            </li>
+            {showUserMenu && (
+              <UserMenu createPostBtnHandler={createPostBtnHandler} />
+            )}
+          </div>
+        )}
       </ul>
     </nav>
   );
