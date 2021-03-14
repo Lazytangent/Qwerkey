@@ -1,21 +1,11 @@
-import { useSelector } from "react-redux";
-
-import Post from "../Post";
-import Comment from "../Comment";
-import Retailer from "../Retailer";
+import options from "../../utils/localeDateString";
 
 const UserCard = ({ user }) => {
-  const sessionUser = useSelector(state => state.session.user);
-
   return (
-    <>
-      <h3>Placeholder for UserCard</h3>
+    <div className="p-2 mb-2 rounded shadow-sm hover:shadow-lg dark:bg-gray-800 dark:hover:shadow-light-lg dark:shadow-light transform duration-100 ease-in-out">
       <h3>{user.username}</h3>
-      <h5>Posts</h5>
-      {user.posts.map(post => <Post key={post.id} post={post} />)}
-      <h5>Comments</h5>
-      {user.comments.map(comment => <Comment key={comment.id} comment={comment} userId={sessionUser.id} />)}
-    </>
+      <p>Account created on {(new Date(user.created_at).toLocaleString(...options()))}</p>
+    </div>
   );
 };
 

@@ -18,7 +18,7 @@ class Retailer(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.utcnow)
 
-    user = db.relationship("User")
+    user = db.relationship("User", back_populates="retailers")
     images = db.relationship("RetailerImage", back_populates="retailer")
     ratings = db.relationship("RetailerRating", back_populates="retailer")
 
