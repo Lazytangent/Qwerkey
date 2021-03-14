@@ -8,9 +8,9 @@ user_routes = Blueprint('users', __name__)
 @user_routes.route('')
 @login_required
 def users():
-    page = request.args.get('page')
+    page = int(request.args.get('page', 1))
     users = User.query.paginate(page=page, per_page=20)
-    return {user.id: user.to_dict() for user in users}
+    return {user.id: user.to_dict() for user in users.items}
 
 
 @user_routes.route('/<int:id>')
