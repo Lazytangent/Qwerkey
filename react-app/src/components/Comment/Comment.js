@@ -31,7 +31,7 @@ const Comment = ({ comment, userId }) => {
     >
       <p className="p-2">{comment.body}</p>
       <hr />
-      <p className="p-2">by {comment.user.username}</p>
+      <p className="p-2">by <NavLink to={`/users/${comment.user.id}`}><span className="hover:text-green hover:underline">{comment.user.username}</span></NavLink></p>
       {comment.user.id === userId && (
         <>
           <EditButton label="Edit Comment" onClick={editBtnHandler}>
@@ -50,9 +50,9 @@ const Comment = ({ comment, userId }) => {
           </DeleteButton>
         </>
       )}
-      {location.pathname === "/search" && (
+      {(location.pathname === "/search" || location.pathname.startsWith("/users")) && (
         <NavLink to={`/q/${comment.post.community}/${comment.post.id}`}>
-          <span className="hover:text-green p-2">
+          <span className="p-2 hover:text-green">
             Go to Post
           </span>
         </NavLink>

@@ -18,7 +18,7 @@ class Retailer(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.utcnow)
 
-    user = db.relationship("User")
+    user = db.relationship("User", back_populates="retailers")
     images = db.relationship("RetailerImage", back_populates="retailer")
     ratings = db.relationship("RetailerRating", back_populates="retailer")
 
@@ -34,5 +34,17 @@ class Retailer(db.Model):
             "lng": float(self.lng or 0),
             "created_at": self.created_at,
             "images": [image.image_url for image in self.images],
+            "ratings": [rating.to_dict() for rating in self.ratings],
+        }
+
+    def to_simple_dict(self):
+        return {
+            "id": self.id,
+            "owner": self.user.to_simple_dict(),
+            "name": self.name,
+            "description": self.description,
+            "city": self.city,
+            "state": self.state,
+            "created_at": self.created_at,
             "ratings": [rating.to_dict() for rating in self.ratings],
         }

@@ -7,6 +7,7 @@ import retailersReducer from './retailers';
 import searchReducer from "./search";
 import communitiesReducer from "./communities";
 import sidebarReducer from "./sidebar";
+import usersReducer from "./users";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   search: searchReducer,
   communities: communitiesReducer,
   sidebar: sidebarReducer,
+  users: usersReducer,
 });
 
 let enhancer;
