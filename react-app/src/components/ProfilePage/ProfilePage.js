@@ -21,10 +21,8 @@ const ProfilePage = () => {
   }, [dispatch, userId]);
 
   useEffect(() => {
-    if (user && user.id !== userId) {
-      setIsLoaded(false);
-    }
-  }, [userId, user]);
+    setIsLoaded(false);
+  }, [userId]);
 
   useEffect(() => {
     if (user) {
@@ -32,7 +30,7 @@ const ProfilePage = () => {
     }
   }, [user]);
 
-  if (!isLoaded) {
+  if (!isLoaded || !user) {
     return null;
   }
 
