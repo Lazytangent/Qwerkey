@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { getUser } from "../../store/users";
+import UserCard from "../UserCard";
 
 const ProfilePage = () => {
   const { userId } = useParams();
@@ -28,6 +29,7 @@ const ProfilePage = () => {
   return (
     <>
       <h3>Placeholder for ProfilePage</h3>
+      <UserCard />
     </>
   );
 };
