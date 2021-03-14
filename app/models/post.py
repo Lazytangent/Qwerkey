@@ -31,6 +31,7 @@ class Post(db.Model):
             "community": self.community.to_simple_dict(),
             "tags": [tag.name for tag in self.tags],
             "user": self.user.to_simple_dict(),
+            "created_at": self.created_at,
         }
 
     def to_search_dict(self):
