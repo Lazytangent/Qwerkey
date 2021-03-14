@@ -33,13 +33,13 @@ def save_something(user_id, type_, id):
     user = User.query.get(user_id)
     if current_user.id != user_id:
         return {"errors": ["Invalid user."]}
-    if type == "post":
+    if type_ == "post":
         post = Post.query.get(id)
         if post in user.saved_posts:
             user.saved_posts.remove(post)
         else:
             user.saved_posts.append(post)
-    elif type == "comment":
+    elif type_ == "comment":
         comment = Comment.query.get(id)
         if comment in user.saved_comments:
             user.saved_comments.remove(comment)
