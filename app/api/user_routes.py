@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
-from app.models import User
+from flask_login import login_required, current_user
+from app.models import db, User, Post, Comment
 
 user_routes = Blueprint('users', __name__)
 
@@ -21,6 +21,29 @@ def user(id):
 
 
 @user_routes.route('/max')
+@login_required
 def get_max_number_of_users():
     number = User.query.count()
     return {"max": number}
+
+
+@user_routes.route('/<int:user_id>/save/<string:type_>/<int:id>')
+@login_required
+def save_something(user_id, type_, id):
+    user = User.query.get(user_id)
+    if current_user.id != user_id:
+        return {"errors": ["Invalid user."]}
+    if type == "post":
+        post = Post.query.get(id)
+        if post in user.saved_posts:
+            user.saved_posts.remove(post)
+        else:
+            user.saved_posts.append(post)
+    elif type == "comment":
+        comment = Comment.query.get(id)
+        if comment in user.saved_comments:
+            user.saved_comments.remove(comment)
+        else:
+            user.saved_comments.append(comment)
+    db.session.commit()
+    return user.to_dict()
