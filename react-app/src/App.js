@@ -17,6 +17,7 @@ import PageNotFound from "./components/PageNotFound";
 import Sidebar from "./components/Sidebar";
 import CollapsedSidebar from "./components/CollpasedSidebar";
 import CommunitiesContainer from "./components/CommunitiesContainer";
+import ProfilePage from "./components/ProfilePage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -78,6 +79,9 @@ const App = () => {
               </Route>
               <Route path="/search">
                 <SearchResults />
+              </Route>
+              <Route path="/users/:userId">
+                <ProfilePage />
               </Route>
               <Route>
                 <PageNotFound />
