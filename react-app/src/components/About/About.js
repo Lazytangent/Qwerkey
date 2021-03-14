@@ -1,5 +1,7 @@
 import { GitHub, Code, LinkedIn, FolderShared } from "@material-ui/icons";
 
+import logo from "../../images/logo.png";
+
 const About = () => {
   return (
     <div className="p-2 mt-2 border border-gray-600 rounded">
@@ -11,6 +13,9 @@ const About = () => {
         <a className="hover:text-green" href="https://github.com/Lazytangent/Qwerkey"><Code /></a>
         <a className="hover:text-green" href="https://www.linkedin.com/in/petertnmai/"><LinkedIn /></a>
         <a className="hover:text-green" href="https://lazytangent.github.io"><FolderShared /></a>
+      </div>
+      <div>
+        <img src={logo} alt="Logo" />
       </div>
     </div>
   );
