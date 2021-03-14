@@ -16,7 +16,7 @@ const Post = ({ post }) => {
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [isSaved, setIsSaved] = useState(user.saved_posts.find(savedPost => savedPost.id === post.id) || false);
+  const [isSaved, setIsSaved] = useState((user && user.saved_posts.find(savedPost => savedPost.id === post.id)) || false);
 
   const editBtnHandler = () => {
     setShowEditModal(true);

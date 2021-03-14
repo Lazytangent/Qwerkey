@@ -18,9 +18,9 @@ const Comment = ({ comment, userId }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isSaved, setIsSaved] = useState(
-    user.saved_comments.find(
+    (user && user.saved_comments.find(
       (savedComment) => savedComment.id === comment.id
-    ) || false
+    )) || false
   );
 
   const { setComment } = useCommentContext();
