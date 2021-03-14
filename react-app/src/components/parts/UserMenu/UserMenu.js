@@ -23,7 +23,7 @@ const UserMenu = ({ createPostBtnHandler }) => {
 
   return (
     <div className="absolute z-10 flex flex-col items-center p-2 bg-gray-200 rounded top-16 dark:bg-gray-600">
-      <NavLink to={`/users/${user.id}`}>{user.username}</NavLink>
+      <NavLink to={`/users/${user.id}`}><span className="hover:text-green hover:underline">{user.username}</span></NavLink>
       <NavButton name="Create Post" onClick={createPostBtnHandler}>
         <CreatePostModal />
       </NavButton>
