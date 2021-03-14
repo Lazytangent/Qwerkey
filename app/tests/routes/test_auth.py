@@ -21,8 +21,10 @@ def test_valid_login(client):
         'password': "password"
     }, headers={'csrf_token': csrf_token})
     json_response = response.get_json()
+    user = User.query.filter_by(email='john@test.com').first()
+
+    assert json_response['username'] == user.username
+    assert json_response['email'] == user.email
+    assert json_response['id'] == user.id
     assert response.status_code == 200
 
-    user = User.query.filter_by(email='john@test.com').first()
-    assert user is not None
-    assert user.username == "johnthetester"
