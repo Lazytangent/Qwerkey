@@ -42,7 +42,7 @@ const Post = ({ post }) => {
       <hr />
       <div className="flex items-center justify-between p-2">
         <p>
-          by {post.user.username} on{" "}
+          by <NavLink to={`/users/${post.user.id}`}><span className="hover:text-green hover:underline">{post.user.username}</span></NavLink> on{" "}
           {new Date(post.created_at).toLocaleString(...options())}
         </p>
         {user && post.user.id === user.id && (
