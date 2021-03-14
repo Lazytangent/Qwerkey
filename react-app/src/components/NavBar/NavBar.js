@@ -80,7 +80,7 @@ const NavBar = () => {
             </NavLink>
           </li>
         </div>
-        <div className="flex justify-end col-start-4 col-span-4">
+        <div className="flex col-start-6 col-span-2 justify-center">
           {authenticated &&
             <div className="hidden md:block">
               <SearchBar />
