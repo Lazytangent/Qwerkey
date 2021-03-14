@@ -16,6 +16,7 @@ import CollapsedSidebarProvider from "./context/CollapsedSidebarContext";
 import SearchProvider from "./context/SearchContext";
 
 import * as sessionActions from "./store/session";
+import * as userActions from "./store/users";
 import * as postActions from "./store/posts";
 import * as retailerActions from "./store/retailers";
 import * as searchActions from "./store/search";
@@ -27,6 +28,7 @@ const store = configureStore();
 if (process.env.NODE_ENV !== "production") {
   window.store = store;
   window.sessionActions = sessionActions;
+  window.userActions = userActions;
   window.postActions = postActions;
   window.retailerActions = retailerActions;
   window.searchActions = searchActions;
