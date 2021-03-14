@@ -1,3 +1,6 @@
+const SET_MORE_USERS = "users/SET_MORE_USERS";
+const SET_USERS = "users/SET_USERS";
+const SET_USER = "users/SET_USER";
 const SET_MAX = "users/SET_MAX";
 
 const setMaxNumberOfUsers = (number) => {
@@ -7,8 +10,43 @@ const setMaxNumberOfUsers = (number) => {
   };
 };
 
-export const getUsers = (page) => async (dispatch) => {
+const setUser = (user) => {
+  return {
+    type: SET_USER,
+    user,
+  };
+};
 
+const setUsers = (users) => {
+  return {
+    type: SET_USERS,
+    users,
+  };
+};
+
+const setMoreUsers = (users) => {
+  return {
+    type: SET_MORE_USERS,
+    users,
+  };
+};
+
+export const getUsers = (page) => async (dispatch) => {
+  const res = await fetch(`/api/users?page=${page}`);
+  const users = await res.json();
+  if (page === 1) {
+    dispatch(setUsers(users));
+  } else {
+    dispatch(setMoreUsers(users));
+  }
+  return users;
+};
+
+export const getUser = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}`);
+  const user = await res.json();
+  dispatch(setUser(user));
+  return user;
 };
 
 export const getMaxNumberOfUsers = () => async (dispatch) => {
@@ -25,6 +63,12 @@ const initialState = {
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_USER:
+      return { ...state, users: { ...state.users, [action.user.id]: action.user } };
+    case SET_USERS:
+      return { ...state, users: { ...action.users } };
+    case SET_MORE_USERS:
+      return { ...state, users: { ...state.users, ...action.users } };
     case SET_MAX:
       return { ...state, max: action.number };
     default:
