@@ -60,6 +60,24 @@ const ProfilePage = () => {
       {user.retailers.map((retailer) => (
         <Retailer retailer={retailer} key={retailer.id} />
       ))}
+      {sessionUser.id === user.id && (
+        <>
+          <div className="p-2">
+            <h3>Saved Posts</h3>
+            <hr />
+          </div>
+          {user.saved_posts.map((post) => (
+            <Post key={post.id} post={post} />
+          ))}
+          <div className="p-2">
+            <h3>Saved Comments</h3>
+            <hr />
+          </div>
+          {user.saved_comments.map((comment) => (
+            <Comment key={comment.id} comment={comment} userId={sessionUser.id} />
+          ))}
+        </>
+      )}
     </>
   );
 };
