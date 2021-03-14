@@ -27,7 +27,10 @@ class Post(db.Model):
             "id": self.id,
             "title": self.title,
             "body": self.body,
-            "images": [image.image_url for image in self.images]
+            "images": [image.image_url for image in self.images],
+            "community": self.community.to_simple_dict(),
+            "tags": [tag.name for tag in self.tags],
+            "user": self.user.to_simple_dict(),
         }
 
     def to_search_dict(self):
