@@ -8,9 +8,6 @@ import { useCreatePostContext } from "../../context/CreatePostContext";
 import { useCollapsedSidebarContext } from "../../context/CollapsedSidebarContext";
 import LoginModal from "../LoginForm";
 import SignUpModal from "../SignUpForm";
-import LogoutButton from "../LogoutButton";
-import CreatePostModal from "../CreatePostForm";
-import DarkModeToggle from "../DarkModeToggle";
 import NavButton from "../parts/NavButton";
 import UserMenu from "../parts/UserMenu";
 import SearchBar from "../SearchBar";
@@ -47,7 +44,7 @@ const NavBar = () => {
 
   return (
     <nav className={`p-2 bg-green dark:bg-gray-500`}>
-      <ul className="grid grid-cols-7">
+      <ul className="mx-auto max-w-screen-lg grid grid-cols-7">
         <div className="p-2 md:hidden" onClick={toggleSidebar}>
           <Menu />
         </div>
@@ -89,9 +86,6 @@ const NavBar = () => {
               <SearchBar />
            </div>
           }
-          <div className="hidden md:block">
-            <DarkModeToggle />
-          </div>
           {!authenticated && (
             <>
               <li>
@@ -108,24 +102,14 @@ const NavBar = () => {
           )}
           {authenticated && (
             <>
-              <li className="relative md:hidden">
-                <div className="p-2" onClick={openUserMenu}>
+              <li className="relative">
+                <div className="p-2 border rounded hover:border-green" onClick={openUserMenu}>
                   <Person />
                 </div>
               </li>
               {showUserMenu && (
                 <UserMenu createPostBtnHandler={createPostBtnHandler} />
               )}
-              <div className="hidden md:flex">
-                <li>
-                  <NavButton name="Create Post" onClick={createPostBtnHandler}>
-                    <CreatePostModal />
-                  </NavButton>
-                </li>
-                <li>
-                  <LogoutButton />
-                </li>
-              </div>
             </>
           )}
         </div>
