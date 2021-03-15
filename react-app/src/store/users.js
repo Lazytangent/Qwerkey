@@ -56,24 +56,6 @@ export const getMaxNumberOfUsers = () => async (dispatch) => {
   return number;
 };
 
-export const savePost = (userId, postId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}/save/post/${postId}`);
-  const user = await res.json();
-  if (!user.errors) {
-    dispatch(setUser(user));
-  }
-  return user;
-};
-
-export const saveComment = (userId, commentId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}/save/comment/${commentId}`);
-  const user = await res.json();
-  if (!user.errors) {
-    dispatch(setUser(user));
-  }
-  return user;
-};
-
 const initialState = {
   users: {},
   max: null,

@@ -1,7 +1,7 @@
-const SET_SESSION = 'session/SET_SESSION';
+export const SET_SESSION = 'session/SET_SESSION';
 export const REMOVE_SESSION = 'session/REMOVE_SESSION';
 
-const setSession = (user) => {
+export const setSession = (user) => {
   return {
     type: SET_SESSION,
     user,
@@ -92,6 +92,24 @@ export const signUp = (username, email, password) => async (dispatch) => {
     }),
   });
   const user = await response.json();
+  if (!user.errors) {
+    dispatch(setSession(user));
+  }
+  return user;
+};
+
+export const savePost = (userId, postId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/save/post/${postId}`);
+  const user = await res.json();
+  if (!user.errors) {
+    dispatch(setSession(user));
+  }
+  return user;
+};
+
+export const saveComment = (userId, commentId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/save/comment/${commentId}`);
+  const user = await res.json();
   if (!user.errors) {
     dispatch(setSession(user));
   }

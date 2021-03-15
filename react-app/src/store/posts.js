@@ -38,6 +38,13 @@ export const getMaxNumberOfPosts = () => async (dispatch) => {
   return number;
 };
 
+export const getMaxNumberOfPostsByCommunity = (communityName) => async (dispatch) => {
+  const res = await fetch(`/api/posts/max/${communityName}`);
+  const number = await res.json();
+  dispatch(setMaxNumberOfPosts(number.max));
+  return number;
+};
+
 export const getPosts = (page, communityName) => async (dispatch) => {
   try {
     const res = await fetch(`/api/posts?page=${page}${communityName ? `&community_name=${communityName}` : ''}`);
@@ -194,7 +201,7 @@ const postsReducer = (state = initialState, action) => {
     case SET_POSTS:
       return { ...state, posts: { ...action.posts } };
     case SET_POST:
-      return { ...state, posts: { [action.post.id]: action.post, ...state.posts } };
+      return { ...state, posts: { ...state.posts, [action.post.id]: action.post } };
     case SET_MAX:
       return { ...state, max: action.number };
     default:

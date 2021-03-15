@@ -39,7 +39,7 @@ const PostPage = () => {
           <CreateCommentForm userId={user.id} postId={post.id} />
         </div>
       )}
-      <CommentThreadContainer threads={post.threads} />
+      <CommentThreadContainer postId={postId} />
     </>
   );
 };
