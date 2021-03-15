@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-import { savePost } from "../../store/users";
+import { savePost } from "../../store/session";
 import EditButton from "../parts/EditButton";
 import DeleteButton from "../parts/DeleteButton";
 import EditPostModal from "../EditPostForm";

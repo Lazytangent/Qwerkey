@@ -98,6 +98,24 @@ export const signUp = (username, email, password) => async (dispatch) => {
   return user;
 };
 
+export const savePost = (userId, postId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/save/post/${postId}`);
+  const user = await res.json();
+  if (!user.errors) {
+    dispatch(setSession(user));
+  }
+  return user;
+};
+
+export const saveComment = (userId, commentId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/save/comment/${commentId}`);
+  const user = await res.json();
+  if (!user.errors) {
+    dispatch(setSession(user));
+  }
+  return user;
+};
+
 const initialState = {
   user: null,
 };

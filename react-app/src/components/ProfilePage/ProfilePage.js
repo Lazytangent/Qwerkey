@@ -72,24 +72,24 @@ const ProfilePage = () => {
       )}
       {sessionUser && sessionUser.id === user.id && (
         <>
-          {user.saved_posts.length > 0 && (
+          {sessionUser.saved_posts.length > 0 && (
             <>
               <div className="p-2">
                 <h3>Saved Posts</h3>
                 <hr />
               </div>
-              {user.saved_posts.map((post) => (
+              {sessionUser.saved_posts.map((post) => (
                 <Post key={post.id} post={post} />
               ))}
             </>
           )}
-          {user.saved_comments.length > 0 && (
+          {sessionUser.saved_comments.length > 0 && (
             <>
               <div className="p-2">
                 <h3>Saved Comments</h3>
                 <hr />
               </div>
-              {user.saved_comments.map((comment) => (
+              {sessionUser.saved_comments.map((comment) => (
                 <Comment key={comment.id} comment={comment} userId={sessionUser?.id} />
               ))}
             </>

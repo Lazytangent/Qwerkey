@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, NavLink } from "react-router-dom";
 
-import { saveComment } from "../../store/users";
+import { saveComment } from "../../store/session";
 import { useCommentContext } from "../../context/CommentContext";
 import EditButton from "../parts/EditButton";
 import DeleteButton from "../parts/DeleteButton";

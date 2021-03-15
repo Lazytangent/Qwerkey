@@ -1,5 +1,3 @@
-import { setSession } from "./session";
-
 const SET_MORE_USERS = "users/SET_MORE_USERS";
 const SET_USERS = "users/SET_USERS";
 const SET_USER = "users/SET_USER";
@@ -56,26 +54,6 @@ export const getMaxNumberOfUsers = () => async (dispatch) => {
   const number = await res.json();
   dispatch(setMaxNumberOfUsers(number.max));
   return number;
-};
-
-export const savePost = (userId, postId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}/save/post/${postId}`);
-  const user = await res.json();
-  if (!user.errors) {
-    dispatch(setUser(user));
-    dispatch(setSession(user));
-  }
-  return user;
-};
-
-export const saveComment = (userId, commentId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}/save/comment/${commentId}`);
-  const user = await res.json();
-  if (!user.errors) {
-    dispatch(setUser(user));
-    dispatch(setSession(user));
-  }
-  return user;
 };
 
 const initialState = {
