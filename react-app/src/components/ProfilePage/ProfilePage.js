@@ -49,7 +49,7 @@ const ProfilePage = () => {
         <hr />
       </div>
       {user.comments.map((comment) => (
-        <Comment key={comment.id} comment={comment} userId={sessionUser.id} />
+        <Comment key={comment.id} comment={comment} userId={sessionUser?.id} />
       ))}
       <div className="p-2">
         <h3>Retailers</h3>
@@ -58,7 +58,7 @@ const ProfilePage = () => {
       {user.retailers.map((retailer) => (
         <Retailer retailer={retailer} key={retailer.id} />
       ))}
-      {sessionUser.id === user.id && (
+      {sessionUser && sessionUser.id === user.id && (
         <>
           {user.saved_posts.length > 0 && (
             <>
@@ -78,10 +78,10 @@ const ProfilePage = () => {
                 <hr />
               </div>
               {user.saved_comments.map((comment) => (
-                <Comment key={comment.id} comment={comment} userId={sessionUser.id} />
+                <Comment key={comment.id} comment={comment} userId={sessionUser?.id} />
               ))}
             </>
-          )}
+          )},
         </>
       )}
     </>
