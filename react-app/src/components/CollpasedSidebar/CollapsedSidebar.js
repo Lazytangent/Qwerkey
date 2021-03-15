@@ -5,9 +5,10 @@ import { NavLink } from "react-router-dom";
 import { useCollapsedSidebarContext } from "../../context/CollapsedSidebarContext";
 import SearchBar from "../SearchBar";
 import About from "../About";
+import NavButton from "../parts/NavButton";
 
 const CollapsedSidebar = () => {
-  const { showCollapsedSidebar } = useCollapsedSidebarContext();
+  const { showCollapsedSidebar, setShowCollapsedSidebar } = useCollapsedSidebarContext();
   const popularCommunities = useSelector(state => state.sidebar.popular);
   const currentCommunity = useSelector(state => state.sidebar.community);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -17,6 +18,10 @@ const CollapsedSidebar = () => {
       setIsLoaded(true);
     }
   }, [popularCommunities]);
+
+  const closeBtnHandler = () = {
+    setShowCollapsedSidebar(false);
+  };
 
   if (!isLoaded) {
     return null;
@@ -28,6 +33,10 @@ const CollapsedSidebar = () => {
         showCollapsedSidebar ? "w-52 md:w-0" : "w-0"
       } h-screen pt-12 overflow-x-hidden bg-gray-100 z-1 duration-500 dark:bg-gray-600 dark:text-gray-50`}
     >
+      <NavButton
+        name="Close"
+        onClick={closeBtnHandler}
+      />
       <div className="p-2">
         <h5>Navigation</h5>
         <ul>
