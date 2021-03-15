@@ -81,7 +81,7 @@ const ProfilePage = () => {
                 <Comment key={comment.id} comment={comment} userId={sessionUser?.id} />
               ))}
             </>
-          )},
+          )}
         </>
       )}
     </>
