@@ -50,7 +50,7 @@ const App = () => {
   }
 
   return (
-    <div className={`${isDarkMode ? "dark" : ""}`}>
+    <div className={`max-w-screen ${isDarkMode ? "dark" : ""}`}>
       <CollapsedSidebar />
       <div className={`${isDarkMode ? "dark bg-gray-800" : ""} ${showCollapsedSidebar ? "ml-52 md:ml-0" : "ml-0"} duration-500`}>
         <div className="fixed z-10 w-screen row-span-1">
