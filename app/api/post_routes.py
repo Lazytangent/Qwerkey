@@ -42,8 +42,8 @@ def max_number_of_posts():
 
 @post_routes.route('/max/<string:community_name>')
 def max_number_of_posts_by_community(community_name):
-    community = Community.query.filter(Community.name ==
-                                       community_name).first()
+    community = Community.query.filter(
+        Community.name == community_name).first()
     number = Post.query.filter(Post.community_id == community.id).count()
     return {"max": number}
 
