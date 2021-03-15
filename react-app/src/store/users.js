@@ -1,3 +1,5 @@
+import { setSession } from "./session";
+
 const SET_MORE_USERS = "users/SET_MORE_USERS";
 const SET_USERS = "users/SET_USERS";
 const SET_USER = "users/SET_USER";
@@ -61,6 +63,7 @@ export const savePost = (userId, postId) => async (dispatch) => {
   const user = await res.json();
   if (!user.errors) {
     dispatch(setUser(user));
+    dispatch(setSession(user));
   }
   return user;
 };
@@ -70,6 +73,7 @@ export const saveComment = (userId, commentId) => async (dispatch) => {
   const user = await res.json();
   if (!user.errors) {
     dispatch(setUser(user));
+    dispatch(setSession(user));
   }
   return user;
 };

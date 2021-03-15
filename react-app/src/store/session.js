@@ -1,7 +1,7 @@
-const SET_SESSION = 'session/SET_SESSION';
+export const SET_SESSION = 'session/SET_SESSION';
 export const REMOVE_SESSION = 'session/REMOVE_SESSION';
 
-const setSession = (user) => {
+export const setSession = (user) => {
   return {
     type: SET_SESSION,
     user,

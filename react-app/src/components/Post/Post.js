@@ -20,7 +20,7 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     if (user) {
-      setIsSaved(user.saved_posts.find(savedPost => savedPost.id === post.id));
+      setIsSaved(user.saved_posts.some(savedPost => savedPost.id === post.id));
     }
   }, [user, post]);
 
