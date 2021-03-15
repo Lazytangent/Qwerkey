@@ -6,6 +6,7 @@ from .comments import seed_comments, undo_comments
 from .retailers import seed_retailers, undo_retailers
 from .threads import seed_threads, undo_threads
 from .retailer_ratings import seed_retailer_ratings, undo_retailer_ratings
+from .post_images import seed_post_images, undo_post_images
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -21,11 +22,13 @@ def seed():
     seed_comments()
     seed_retailers()
     seed_retailer_ratings()
+    seed_post_images()
     # Add other seed functions here
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
+    undo_post_images()
     undo_retailer_ratings()
     undo_retailers()
     undo_comments()
