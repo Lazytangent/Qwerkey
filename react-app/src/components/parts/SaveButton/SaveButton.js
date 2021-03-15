@@ -3,7 +3,7 @@ import { BookmarkBorder, Bookmark } from "@material-ui/icons";
 const SaveButton = ({ save, isSaved }) => {
   return (
     <>
-      <button onClick={save}>
+      <button onClick={save} className="outline-none p-2">
         {isSaved ? (
           <Bookmark />
         ) : (
