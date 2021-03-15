@@ -49,7 +49,7 @@ const ProfilePage = () => {
         <hr />
       </div>
       {user.comments.map((comment) => (
-        <Comment key={comment.id} comment={comment} userId={sessionUser.id} />
+        <Comment key={comment.id} comment={comment} userId={sessionUser?.id} />
       ))}
       <div className="p-2">
         <h3>Retailers</h3>
@@ -78,7 +78,7 @@ const ProfilePage = () => {
                 <hr />
               </div>
               {user.saved_comments.map((comment) => (
-                <Comment key={comment.id} comment={comment} userId={sessionUser.id} />
+                <Comment key={comment.id} comment={comment} userId={sessionUser?.id} />
               ))}
             </>
           )}
