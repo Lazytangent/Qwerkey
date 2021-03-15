@@ -37,27 +37,39 @@ const ProfilePage = () => {
   return (
     <>
       <UserCard user={user} />
-      <div className="p-2">
-        <h3>Posts</h3>
-        <hr />
-      </div>
-      {user.posts.map((post) => (
-        <Post key={post.id} post={post} />
-      ))}
-      <div className="p-2">
-        <h3>Comments</h3>
-        <hr />
-      </div>
-      {user.comments.map((comment) => (
-        <Comment key={comment.id} comment={comment} userId={sessionUser?.id} />
-      ))}
-      <div className="p-2">
-        <h3>Retailers</h3>
-        <hr />
-      </div>
-      {user.retailers.map((retailer) => (
-        <Retailer retailer={retailer} key={retailer.id} />
-      ))}
+      {user.posts.length > 0 && (
+        <>
+        <div className="p-2">
+          <h3>Posts</h3>
+          <hr />
+        </div>
+          {user.posts.map((post) => (
+              <Post key={post.id} post={post} />
+          ))}
+        </>
+      )}
+      {user.comments.length > 0 && (
+        <>
+          <div className="p-2">
+            <h3>Comments</h3>
+            <hr />
+          </div>
+          {user.comments.map((comment) => (
+            <Comment key={comment.id} comment={comment} userId={sessionUser?.id} />
+          ))}
+        </>
+      )}
+      {user.retailers.length > 0 && (
+        <>
+        <div className="p-2">
+          <h3>Retailers</h3>
+          <hr />
+        </div>
+          {user.retailers.map((retailer) => (
+              <Retailer retailer={retailer} key={retailer.id} />
+          ))}
+        </>
+      )}
       {sessionUser && sessionUser.id === user.id && (
         <>
           {user.saved_posts.length > 0 && (
