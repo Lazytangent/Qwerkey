@@ -19,7 +19,7 @@ const CollapsedSidebar = () => {
     }
   }, [popularCommunities]);
 
-  const closeBtnHandler = () = {
+  const closeBtnHandler = () => {
     setShowCollapsedSidebar(false);
   };
 
