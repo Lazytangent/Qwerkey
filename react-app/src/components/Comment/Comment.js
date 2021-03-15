@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, NavLink } from "react-router-dom";
 
@@ -17,13 +17,15 @@ const Comment = ({ comment, userId }) => {
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [isSaved, setIsSaved] = useState(
-    (user && user.saved_comments.find(
-      (savedComment) => savedComment.id === comment.id
-    )) || false
-  );
+  const [isSaved, setIsSaved] = useState(false);
 
   const { setComment } = useCommentContext();
+
+  useEffect(() => {
+    if (user) {
+      setIsSaved(user.saved_comments.find(savedComment => savedComment.id === comment.id));
+    }
+  }, [user, comment]);
 
   const editBtnHandler = () => {
     setShowEditModal(true);

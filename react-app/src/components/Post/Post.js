@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
@@ -16,7 +16,13 @@ const Post = ({ post }) => {
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [isSaved, setIsSaved] = useState((user && user.saved_posts.find(savedPost => savedPost.id === post.id)) || false);
+  const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setIsSaved(user.saved_posts.find(savedPost => savedPost.id === post.id));
+    }
+  }, [user, post]);
 
   const editBtnHandler = () => {
     setShowEditModal(true);
