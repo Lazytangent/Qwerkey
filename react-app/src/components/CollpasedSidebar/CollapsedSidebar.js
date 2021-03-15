@@ -51,6 +51,16 @@ const CollapsedSidebar = () => {
               Retailers
             </NavLink>
           </li>
+          <li className="my-2">
+            <NavLink
+              className="p-4 align-middle hover:underline hover:text-purple-dark"
+              to="/q"
+              exact={true}
+              activeClassName="active"
+            >
+              Communities
+            </NavLink>
+          </li>
         </ul>
       </div>
       <div>
