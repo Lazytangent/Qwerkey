@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from "uuid";
 
-import { getPosts, getMaxNumberOfPosts } from '../../store/posts';
+import { getPosts, getMaxNumberOfPosts, getMaxNumberOfPostsByCommunity } from '../../store/posts';
 import { getCommunityByName } from "../../store/sidebar";
 import Post from '../Post';
 
@@ -32,6 +32,7 @@ const PostsContainer = () => {
   useEffect(() => {
     if (communityName) {
       dispatch(getCommunityByName(communityName));
+      dispatch(getMaxNumberOfPostsByCommunity(communityName));
     }
   }, [dispatch, communityName]);
 
@@ -44,7 +45,7 @@ const PostsContainer = () => {
 
   useEffect(() => {
     if (page * 20 > maxPosts) {
-      setCurrentPosts(prev => prev.concat(Object.values(posts).slice(0, page * 20 % maxPosts)));
+      setCurrentPosts(prev => prev.concat(Object.values(posts).slice(0, page * 20 % maxPosts || maxPosts)));
     }
   }, [posts, maxPosts, page]);
 
