@@ -14,5 +14,5 @@ def seed_post_images():
     db.session.commit()
 
 def undo_post_images():
-    db.session.execute('TRUNCATE post_images RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE posts_images RESTART IDENTITY CASCADE;')
     db.session.commit()
