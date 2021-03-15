@@ -45,7 +45,7 @@ const NavBar = () => {
 
   return (
     <nav className={`p-2 bg-green dark:bg-gray-500`}>
-      <ul className="mx-auto max-w-screen-lg grid grid-cols-7">
+      <ul className="mx-auto max-w-screen-lg grid grid-cols-3 md:grid-cols-7">
         <div className="p-2 md:hidden" onClick={toggleSidebar}>
           <Menu />
         </div>

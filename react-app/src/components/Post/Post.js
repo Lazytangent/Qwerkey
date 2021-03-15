@@ -54,7 +54,7 @@ const Post = ({ post }) => {
       <div className="flex items-center justify-between p-2">
         <p>
           by <NavLink to={`/users/${post.user.id}`}><span className="hover:text-green hover:underline">{post.user.username}</span></NavLink> on{" "}
-          {new Date(post.created_at).toLocaleString(...options())}
+          <span className="hidden md:block">{new Date(post.created_at).toLocaleString(...options())}</span>
         </p>
         {user && post.user.id === user.id && (
           <div>
