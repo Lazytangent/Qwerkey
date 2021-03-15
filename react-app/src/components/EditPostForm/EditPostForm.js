@@ -10,7 +10,7 @@ import SubmitFormButton from '../parts/SubmitFormButton';
 const EditPostForm = ({ setShowEditModal, postId }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
-  const post = useSelector(state => state.posts[postId]);
+  const post = useSelector(state => state.posts.posts[postId]);
 
   const [title, setTitle] = useState(post.title);
   const [body, setBody] = useState(post.body);
