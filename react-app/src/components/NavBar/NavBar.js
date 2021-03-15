@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 
 import { Person, Menu } from "@material-ui/icons";
@@ -22,6 +22,20 @@ const NavBar = () => {
   const { setShowCreatePostModal } = useCreatePostContext();
   const { setShowCollapsedSidebar } = useCollapsedSidebarContext();
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const userMenuRef = useRef();
+
+  useEffect(() => {
+    const closeUserMenu = (e) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setShowUserMenu(false);
+      }
+    };
+
+    if (showUserMenu) {
+      document.addEventListener("click", closeUserMenu);
+    }
+    return () => document.removeEventListener("click", closeUserMenu);
+  }, [showUserMenu]);
 
   const createPostBtnHandler = () => {
     setShowCreatePostModal((prev) => !prev);
@@ -110,7 +124,7 @@ const NavBar = () => {
               </div>
             </li>
             {showUserMenu && (
-              <UserMenu createPostBtnHandler={createPostBtnHandler} />
+              <UserMenu userMenuRef={userMenuRef} createPostBtnHandler={createPostBtnHandler} />
             )}
           </div>
         )}
