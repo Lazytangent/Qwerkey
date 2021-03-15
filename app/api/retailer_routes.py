@@ -2,6 +2,7 @@ import requests
 from datetime import datetime
 from flask import Blueprint, request
 
+from app.config import Config
 from app.helpers import validation_errors_to_error_messages
 from app.forms import CreateRetailerRating
 from app.models import db, Retailer, RetailerRating
@@ -37,13 +38,13 @@ def get_one_retailer(retailer_id):
 @retailer_routes.route('/<int:retailer_id>/location')
 def generate_location(retailer_id):
     retailer = Retailer.query.get(retailer_id)
-    response = \
-        requests.get("http://0.0.0.0:5000/api/lat_long?" +
-                     f"city={retailer.city}" +
-                     f"&state={retailer.state}")
+    response = requests.get(
+        "https://api.opencagedata.com/geocode/v1/json?" +
+        f"key={Config.OPEN_CAGE_API_KEY}" +
+        f"&q={retailer.city},{retailer.state},USA")
     data = response.json()
-    retailer.lng = data["lng"]
-    retailer.lat = data["lat"]
+    retailer.lng = data["results"][0]["geometry"]["lng"]
+    retailer.lat = data["results"][0]["geometry"]["lat"]
     db.session.commit()
     return retailer.to_dict()
 
