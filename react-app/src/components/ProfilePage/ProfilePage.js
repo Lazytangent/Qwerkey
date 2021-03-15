@@ -58,7 +58,7 @@ const ProfilePage = () => {
       {user.retailers.map((retailer) => (
         <Retailer retailer={retailer} key={retailer.id} />
       ))}
-      {sessionUser.id === user.id && (
+      {sessionUser && sessionUser.id === user.id && (
         <>
           {user.saved_posts.length > 0 && (
             <>
@@ -81,7 +81,7 @@ const ProfilePage = () => {
                 <Comment key={comment.id} comment={comment} userId={sessionUser?.id} />
               ))}
             </>
-          )}
+          )},
         </>
       )}
     </>
