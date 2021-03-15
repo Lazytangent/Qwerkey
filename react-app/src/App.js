@@ -52,11 +52,11 @@ const App = () => {
   return (
     <div className={`max-w-screen ${isDarkMode ? "dark" : ""}`}>
       <CollapsedSidebar />
-      <div className={`${isDarkMode ? "dark bg-gray-800" : ""} ${showCollapsedSidebar ? "ml-52 md:ml-0" : "ml-0"} duration-500`}>
-        <div className="fixed z-10 w-screen row-span-1">
+      <div className={`grid grid-rows-layout ${isDarkMode ? "dark bg-gray-800" : ""} ${showCollapsedSidebar ? "ml-52 md:ml-0" : "ml-0"} duration-500`}>
+        <div className="z-10 w-screen row-span-1">
           <NavBar setAuthenticated={setAuthenticated} />
         </div>
-        <div className="relative p-2 mx-auto top-16 dark:text-gray-50 max-w-screen-lg md:grid md:grid-cols-3">
+        <div className="relative p-2 mx-auto row-span-1 dark:text-gray-50 max-w-screen-lg md:grid md:grid-cols-3">
           <div className="col-span-2">
             <Switch>
               <Route path="/" exact>
