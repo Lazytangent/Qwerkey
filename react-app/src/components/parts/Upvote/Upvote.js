@@ -1,7 +1,11 @@
+import { ArrowUpward } from "@material-ui/icons";
+
 const Upvote = () => {
   return (
     <>
-      <h4>Placeholder for Upvote</h4>
+      <button className="p-2 mx-2 border rounded hover:border-green active:bg-green hover:text-green">
+        <ArrowUpward />
+      </button>
     </>
   );
 };

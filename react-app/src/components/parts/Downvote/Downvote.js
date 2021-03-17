@@ -1,7 +1,11 @@
+import { ArrowDownward } from "@material-ui/icons";
+
 const Downvote = () => {
   return (
     <>
-      <h4>Placeholder for Downvote</h4>
+      <button className="p-2 mx-2 border rounded hover:border-purple active:bg-purple hover:text-purple">
+        <ArrowDownward />
+      </button>
     </>
   );
 };

@@ -8,6 +8,8 @@ import DeleteButton from "../parts/DeleteButton";
 import EditPostModal from "../EditPostForm";
 import DeleteConfirmationModal from "../parts/DeleteConfirmation";
 import SaveButton from "../parts/SaveButton";
+import Downvote from "../parts/Downvote";
+import Upvote from "../parts/Upvote";
 import options from "../../utils/localeDateString";
 
 const Post = ({ post }) => {
@@ -82,7 +84,13 @@ const Post = ({ post }) => {
           </div>
         )}
         {user && post.user.id !== user.id && (
-          <SaveButton save={saveThisPost} isSaved={isSaved} />
+          <div className="flex">
+            <div className="flex justify-around p-2">
+              <Downvote />
+              <Upvote />
+            </div>
+            <SaveButton save={saveThisPost} isSaved={isSaved} />
+          </div>
         )}
       </div>
     </div>
