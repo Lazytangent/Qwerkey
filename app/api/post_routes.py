@@ -1,11 +1,12 @@
 from flask import Blueprint, jsonify, request
 
 from app.config import Config
-from app.forms import CreatePost, CreateComment
+from app.forms import CreatePost, CreateComment, CreatePostRating
 from app.helpers import (upload_file_to_s3, allowed_file,
                          validation_errors_to_error_messages,
                          get_unique_filename)
-from app.models import db, Post, PostsImage, Community, Comment, Thread
+from app.models import (db, Post, PostsImage, Community, Comment, Thread,
+                        PostRating)
 
 post_routes = Blueprint('posts', __name__)
 
@@ -127,3 +128,26 @@ def create_comment(post_id):
         db.session.commit()
         return post.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@post_routes.route('/<int:post_id>/rating', methods=["POST"])
+def rate_post(post_id):
+    post = Post.query.get(post_id)
+    form = CreatePostRating()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        user_id = form['user_id'].data
+        post_rating = PostRating.query.filter(PostRating.user_id == user_id,
+                                              PostRating.post_id ==
+                                              post_id).first()
+        if post_rating:
+            post_rating.rating = form['rating'].data
+            db.session.commit()
+            return post.to_dict()
+        post_rating = PostRating()
+        form.populate_obj(post_rating)
+        post_rating.post_id = post_id
+        db.session.add(post_rating)
+        db.session.commit()
+        return post.to_dict()
+    return {"errors": validation_errors_to_error_messages(form.errors)}

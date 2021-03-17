@@ -17,6 +17,12 @@ class PostRating(db.Model):
     user = db.relationship("User")
     post = db.relationship("Post", back_populates="ratings")
 
+    def to_simple_dict(self):
+        return {
+            "user_id": self.user_id,
+            "rating": self.rating,
+        }
+
     def to_dict(self):
         return {
             "id": self.id,

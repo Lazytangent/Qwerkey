@@ -8,6 +8,8 @@ import DeleteButton from "../parts/DeleteButton";
 import EditPostModal from "../EditPostForm";
 import DeleteConfirmationModal from "../parts/DeleteConfirmation";
 import SaveButton from "../parts/SaveButton";
+import Downvote from "../parts/Downvote";
+import Upvote from "../parts/Upvote";
 import options from "../../utils/localeDateString";
 
 const Post = ({ post }) => {
@@ -17,10 +19,14 @@ const Post = ({ post }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [rating, setRating] = useState();
 
   useEffect(() => {
     if (user) {
       setIsSaved(user.saved_posts.some(savedPost => savedPost.id === post.id));
+      if (post.ratings[user.id]) {
+        setRating(post.ratings[user.id].rating);
+      }
     }
   }, [user, post]);
 
@@ -82,7 +88,13 @@ const Post = ({ post }) => {
           </div>
         )}
         {user && post.user.id !== user.id && (
-          <SaveButton save={saveThisPost} isSaved={isSaved} />
+          <div className="flex">
+            <div className="flex justify-around p-2">
+              <Downvote postId={post.id} rating={rating} />
+              <Upvote postId={post.id} rating={rating} />
+            </div>
+            <SaveButton save={saveThisPost} isSaved={isSaved} />
+          </div>
         )}
       </div>
     </div>

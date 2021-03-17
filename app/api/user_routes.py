@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user
-from app.models import db, User, Post, Comment
+from app.models import db, User, Post, Comment, PostRating, CommentRating
 
 user_routes = Blueprint('users', __name__)
 
