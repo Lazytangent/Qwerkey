@@ -55,5 +55,7 @@ class Post(db.Model):
             "threads":
             {thread.id: thread.to_dict()
              for thread in self.threads},
-            "created_at": self.created_at
+            "created_at": self.created_at,
+            "ratings": {rating.id: rating.to_simple_dict() for rating in
+                        self.ratings},
         }
