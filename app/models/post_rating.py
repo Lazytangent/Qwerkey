@@ -19,7 +19,7 @@ class PostRating(db.Model):
 
     def to_simple_dict(self):
         return {
-            "id": self.id,
+            "user_id": self.user_id,
             "rating": self.rating,
         }
 
