@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user
-from app.models import db, User, Post, Comment
+from app.models import db, User, Post, Comment, PostRating, CommentRating
 
 user_routes = Blueprint('users', __name__)
 
@@ -43,3 +43,23 @@ def save_something(user_id, type_, id):
             user.saved_comments.append(comment)
     db.session.commit()
     return user.to_dict()
+
+
+@user_routes.route('/<int:user_id>/rate/<string:type_>/<int:id_>',
+                   methods=["POST"])
+def rate_something(user_id, type_, id_):
+    user = User.query.get(user_id)
+    if current_user.id != user_id:
+        return {"errors": ["Invalid user."]}
+    if type_ == "post":
+        post = Post.query.get(id_)
+        post_rating = PostRating.query.filter(PostRating.user_id == user.id,
+                                              PostRating.post_id ==
+                                              post.id).first()
+        if post_rating:
+            pass
+        pass
+    elif type_ == "comment":
+        pass
+    return user.to_dict()
+

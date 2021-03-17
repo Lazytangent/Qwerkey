@@ -18,6 +18,8 @@ class User(db.Model, UserMixin):
     posts = db.relationship("Post", back_populates="user")
     comments = db.relationship("Comment", back_populates="user")
     retailers = db.relationship("Retailer", back_populates="user")
+    rated_posts = db.relationship("PostRating")
+    rated_comments = db.relationship("CommentRating")
     saved_posts = db.relationship("Post", secondary=saved_posts)
     saved_comments = db.relationship("Comment", secondary=saved_comments)
     meetups = db.relationship("Meetup", back_populates="user")
