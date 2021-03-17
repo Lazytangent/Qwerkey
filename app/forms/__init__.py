@@ -5,3 +5,4 @@ from .create_comment import CreateComment
 from .create_retailer import CreateRetailer
 from .create_retailer_rating import CreateRetailerRating
 from .create_community import CreateCommunity
+from .create_post_rating import CreatePostRating
