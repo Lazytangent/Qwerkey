@@ -24,7 +24,7 @@ const Post = ({ post }) => {
   useEffect(() => {
     if (user) {
       setIsSaved(user.saved_posts.some(savedPost => savedPost.id === post.id));
-      if (post.ratings[user.id]) {
+      if (post.user.id !== user.id && post.ratings && post.ratings[user.id]) {
         setRating(post.ratings[user.id].rating);
       }
     }
