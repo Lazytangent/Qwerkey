@@ -33,19 +33,19 @@
     },
     {
         "user_id": 5,
-        "thread_id": 5,
+        "thread_id": 4,
         "comment_id": null,
-        "path": "placeholder",
-        "level": 5,
-        "body": "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est."
+        "path": "4",
+        "level": 1,
+        "body": "I've never used POM, only ABS and PBT however, I'm presuming you're referring to POM Jelly Keycaps which are OEM profile keycaps and according to Alexotos, they have a 'very fine texture on the top of the keycap to reduce some of that waxy soap like feeling'. Hope I could help"
     },
     {
         "user_id": 6,
-        "thread_id": 6,
+        "thread_id": 29,
         "comment_id": null,
-        "path": "placeholder",
-        "level": 6,
-        "body": "Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus."
+        "path": "29",
+        "level": 1,
+        "body": "i never had experience with pom keycap, so i can't comment on color accuracy but for the plastic itself i had a bit, and the waxy description seems rather adequate, it is not feeling as greasy as PTFE but definitely slicker than abs or pbt. and not as opaque, but i guess that can be dealt with using pigments."
     },
     {
         "user_id": 7,
