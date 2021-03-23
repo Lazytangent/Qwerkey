@@ -14,6 +14,7 @@ const Comment = ({ comment, userId }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const location = useLocation();
+  const locationArr = location.pathname.split("/");
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -39,7 +40,9 @@ const Comment = ({ comment, userId }) => {
   const saveThisComment = async () => {
     const updatedUser = await dispatch(saveComment(user.id, comment.id));
     if (!updatedUser.errors) {
-      setIsSaved((prev) => !prev);
+      if (!(locationArr[1] === "users" && locationArr[2] === String(user.id))) {
+        setIsSaved((prev) => !prev);
+      }
     }
   };
 
