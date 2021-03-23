@@ -68,7 +68,7 @@ const Post = ({ post }) => {
           by <NavLink to={`/users/${post.user.id}`}><span className="hover:text-green hover:underline">{post.user.username}</span></NavLink> on{" "}
           <span className="hidden md:block">{new Date(post.created_at).toLocaleString(...options())}</span>
         </p>
-        {user && post.user.id === user.id && (
+        {user && post.user.id === user.id && post.body !== "[DELETED]" && (
           <div>
             <EditButton label="Edit Post" onClick={editBtnHandler}>
               <EditPostModal

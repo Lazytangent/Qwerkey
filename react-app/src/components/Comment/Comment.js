@@ -63,7 +63,7 @@ const Comment = ({ comment, userId }) => {
           <SaveButton save={saveThisComment} isSaved={isSaved} />
         )}
       </div>
-      {comment.user.id === userId && (
+      {comment.user.id === userId && comment.body !== "[DELETED]" && (
         <>
           <EditButton label="Edit Comment" onClick={editBtnHandler}>
             <EditCommentModal
