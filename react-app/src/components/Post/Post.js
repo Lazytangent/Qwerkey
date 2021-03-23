@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import { savePost } from "../../store/session";
-import { getPostById } from "../../store/posts";
 import EditButton from "../parts/EditButton";
 import DeleteButton from "../parts/DeleteButton";
 import EditPostModal from "../EditPostForm";
@@ -32,7 +31,6 @@ const Post = ({ post }) => {
   }, [user, post]);
 
   const editBtnHandler = async () => {
-    await dispatch(getPostById(post.id));
     setShowEditModal(true);
   };
 

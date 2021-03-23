@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user
-from app.models import db, User, Post, Comment, PostRating, CommentRating
+from app.models import (db, User, Post, Comment, PostRating, CommentRating,
+                        Retailer)
 
 user_routes = Blueprint('users', __name__)
 
@@ -26,10 +27,14 @@ def get_max_number_of_users():
 
 @user_routes.route('/<int:id_>/posts')
 def get_users_posts(id_):
-    page = int(request.args.get('page', 1))
-    posts = Post.query.filter(Post.user_id == id_).paginate(page=page,
-                                                            per_page=20)
-    return {post.id: post.to_dict() for post in posts.items}
+    posts = Post.query.filter(Post.user_id == id_).all()
+    return {post.id: post.to_dict() for post in posts}
+
+
+@user_routes.route('/<int:id_>/retailers')
+def get_users_retailers(id_):
+    retailers = Retailer.query.filter(Retailer.user_id == id_).all()
+    return {retailer.id: retailer.to_dict() for retailer in retailers}
 
 
 @user_routes.route('/<int:user_id>/save/<string:type_>/<int:id>')

@@ -73,7 +73,7 @@ export const getPostById = (id) => async (dispatch) => {
 export const getPostsByUser = (userId) => async (dispatch) => {
   const res = await fetch(`/api/users/${userId}/posts`);
   const posts = await res.json();
-  if (!post.errors) {
+  if (!posts.errors) {
     dispatch(setPosts(posts));
   }
   return posts;
