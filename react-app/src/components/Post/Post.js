@@ -94,9 +94,9 @@ const Post = ({ post }) => {
         {user && post.user.id !== user.id && (
           <div className="flex">
             <div className="flex justify-around p-2">
-              <Downvote postId={post.id} rating={rating} />
+              <Downvote id={post.id} type="post" rating={rating} />
               <Score ratings={post.ratings} />
-              <Upvote postId={post.id} rating={rating} />
+              <Upvote id={post.id} type="post" rating={rating} />
             </div>
             <SaveButton save={saveThisPost} isSaved={isSaved} />
           </div>

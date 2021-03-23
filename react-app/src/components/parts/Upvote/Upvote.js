@@ -2,18 +2,36 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { ArrowUpward } from "@material-ui/icons";
 
-import { ratePost } from "../../../store/posts";
+import { ratePost, rateComment } from "../../../store/posts";
 
-const Upvote = ({ postId, rating }) => {
+const Upvote = ({ id, type, rating }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
 
   const onUpvote = () => {
-    dispatch(ratePost({ userId: user.id, postId, rating: 1 }));
+    switch (type) {
+      case "post":
+        dispatch(ratePost({ userId: user.id, postId: id, rating: 1 }));
+        break;
+      case "comment":
+        dispatch(rateComment({ userId: user.id, commentId: id, rating: 1 }));
+        break;
+      default:
+        break;
+    }
   };
 
   const onUnUpvote = () => {
-    dispatch(ratePost({ userId: user.id, postId, rating: 0 }));
+    switch (type) {
+      case "post":
+        dispatch(ratePost({ userId: user.id, postId: id, rating: 0 }));
+        break;
+      case "comment":
+        dispatch(rateComment({ userId: user.id, commentId: id, rating: 0 }));
+        break;
+      default:
+        break;
+    }
   };
 
   return (
