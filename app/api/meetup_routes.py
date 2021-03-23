@@ -50,3 +50,4 @@ def update_meetup(meetup_id):
         return {"errors": validation_errors_to_error_messages(form.errors)}
     elif request.method == "DELETE":
         db.session.delete(meetup)
+    return "Bad route", 404
