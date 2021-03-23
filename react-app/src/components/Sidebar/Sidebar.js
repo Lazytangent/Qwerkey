@@ -2,14 +2,19 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 
+import { useCreatePostContext } from "../../context/CreatePostContext";
 import { getPopularCommunities } from "../../store/sidebar";
 import About from "../About";
+import CreatePostModal from "../CreatePostForm";
+import NavButton from "../parts/NavButton";
 
 const Sidebar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const popularCommunities = useSelector((state) => state.sidebar.popular);
   const currentCommunity = useSelector((state) => state.sidebar.community);
+
+  const { setShowCreatePostModal } = useCreatePostContext();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -21,6 +26,10 @@ const Sidebar = () => {
       setIsLoaded(true);
     }
   }, [popularCommunities]);
+
+  const createPostBtnHandler = () => {
+    setShowCreatePostModal((prev) => !prev);
+  };
 
   if (!isLoaded) {
     return null;
@@ -45,6 +54,11 @@ const Sidebar = () => {
         ))}
       </div>
       <About />
+      <div className="p-2 mt-2 border border-gray-600 rounded flex justify-center">
+        <NavButton name="Create Post" onClick={createPostBtnHandler}>
+          <CreatePostModal />
+        </NavButton>
+      </div>
     </div>
   );
 };
