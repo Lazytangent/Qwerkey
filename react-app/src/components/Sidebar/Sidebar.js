@@ -13,6 +13,7 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const popularCommunities = useSelector((state) => state.sidebar.popular);
   const currentCommunity = useSelector((state) => state.sidebar.community);
+  const user = useSelector((state) => state.session.user);
 
   const { setShowCreatePostModal } = useCreatePostContext();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -54,11 +55,13 @@ const Sidebar = () => {
         ))}
       </div>
       <About />
-      <div className="p-2 mt-2 border border-gray-600 rounded flex justify-center">
-        <NavButton name="Create Post" onClick={createPostBtnHandler}>
-          <CreatePostModal />
-        </NavButton>
-      </div>
+      {user && (
+        <div className="flex justify-center p-2 mt-2 border border-gray-600 rounded">
+          <NavButton name="Create Post" onClick={createPostBtnHandler}>
+            <CreatePostModal />
+          </NavButton>
+        </div>
+      )}
     </div>
   );
 };

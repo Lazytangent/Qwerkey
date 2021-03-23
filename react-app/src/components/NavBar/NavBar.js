@@ -37,6 +37,12 @@ const NavBar = () => {
     return () => document.removeEventListener("click", closeUserMenu);
   }, [showUserMenu]);
 
+  useEffect(() => {
+    if (!authenticated) {
+      setShowUserMenu(false);
+    }
+  }, [authenticated]);
+
   const createPostBtnHandler = () => {
     setShowCreatePostModal((prev) => !prev);
   };
