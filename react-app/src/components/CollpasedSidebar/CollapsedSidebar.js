@@ -33,10 +33,12 @@ const CollapsedSidebar = () => {
         showCollapsedSidebar ? "w-52 md:w-0" : "w-0"
       } h-screen pt-12 overflow-x-hidden bg-gray-100 z-1 duration-500 dark:bg-gray-600 dark:text-gray-50`}
     >
-      <NavButton
-        name="Close"
-        onClick={closeBtnHandler}
-      />
+      <div className="p-2">
+        <NavButton
+          name="Close"
+          onClick={closeBtnHandler}
+        />
+      </div>
       <div className="p-2">
         <h5>Navigation</h5>
         <ul>
