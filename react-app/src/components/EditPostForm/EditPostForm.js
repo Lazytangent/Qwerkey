@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updatePost } from '../../store/posts';
+import { updatePost, getPostById } from '../../store/posts';
 import FormTitle from '../parts/FormTitle';
 import FormErrors from '../parts/FormErrors';
 import InputField from '../parts/InputField';
@@ -17,6 +17,10 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
   const [newImages, setNewImages] = useState([]);
   const [errors, setErrors] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    dispatch(getPostById(postId));
+  }, [dispatch, postId]);
 
   useEffect(() => {
     if (user && post) setIsLoaded(true);

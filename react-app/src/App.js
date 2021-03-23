@@ -56,7 +56,7 @@ const App = () => {
         <div className="z-10 w-screen row-span-1">
           <NavBar setAuthenticated={setAuthenticated} />
         </div>
-        <div className="relative p-2 mx-auto row-span-1 dark:text-gray-50 max-w-screen-lg md:grid md:grid-cols-3">
+        <div className="relative w-screen p-2 mx-auto row-span-1 dark:text-gray-50 max-w-screen-lg md:grid md:grid-cols-3">
           <div className="col-span-2">
             <Switch>
               <Route path="/" exact>

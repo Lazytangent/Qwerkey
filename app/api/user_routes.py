@@ -24,6 +24,14 @@ def get_max_number_of_users():
     return {"max": number}
 
 
+@user_routes.route('/<int:id_>/posts')
+def get_users_posts(id_):
+    page = int(request.args.get('page', 1))
+    posts = Post.query.filter(Post.user_id == id_).paginate(page=page,
+                                                            per_page=20)
+    return {post.id: post.to_dict() for post in posts.items}
+
+
 @user_routes.route('/<int:user_id>/save/<string:type_>/<int:id>')
 def save_something(user_id, type_, id):
     user = User.query.get(user_id)
