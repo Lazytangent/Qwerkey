@@ -15,6 +15,7 @@ from .api import (
     search_routes,
     community_routes,
     lat_long_routes,
+    meetup_routes,
 )
 from .config import Config
 from .models import db, User
@@ -45,6 +46,7 @@ app.register_blueprint(retailer_routes, url_prefix='/api/retailers')
 app.register_blueprint(search_routes, url_prefix='/api/search')
 app.register_blueprint(community_routes, url_prefix='/api/communities')
 app.register_blueprint(lat_long_routes, url_prefix='/api/lat_long')
+app.register_blueprint(meetup_routes, url_prefix='/api/meetups')
 db.init_app(app)
 Migrate(app, db)
 
