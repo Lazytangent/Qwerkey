@@ -10,6 +10,7 @@ import DeleteConfirmationModal from "../parts/DeleteConfirmation";
 import SaveButton from "../parts/SaveButton";
 import Downvote from "../parts/Downvote";
 import Upvote from "../parts/Upvote";
+import Score from "../parts/Score";
 import options from "../../utils/localeDateString";
 
 const Post = ({ post }) => {
@@ -94,6 +95,7 @@ const Post = ({ post }) => {
           <div className="flex">
             <div className="flex justify-around p-2">
               <Downvote postId={post.id} rating={rating} />
+              <Score ratings={post.ratings} />
               <Upvote postId={post.id} rating={rating} />
             </div>
             <SaveButton save={saveThisPost} isSaved={isSaved} />
