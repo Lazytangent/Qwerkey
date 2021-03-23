@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-import CreatePostModal from "../../CreatePostForm";
 import DarkModeToggle from "../../DarkModeToggle";
 import LogoutButton from "../../LogoutButton";
 import NavButton from "../NavButton";
