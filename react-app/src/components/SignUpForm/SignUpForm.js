@@ -27,7 +27,7 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await dispatch(signUp(username, email, password));
+      const user = await dispatch(signUp(username, email, password, repeatPassword));
       if (!user.errors) {
         setAuthenticated(true);
         setShowSignUpModal(false);
@@ -83,7 +83,7 @@ const SignUpForm = () => {
         />
         <InputField
           name="email"
-          type="text"
+          type="email"
           placeholder="Email"
           onChange={updateEmail}
           value={email}
