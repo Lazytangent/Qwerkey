@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import { savePost } from "../../store/session";
 import EditButton from "../parts/EditButton";
@@ -13,6 +13,7 @@ import Upvote from "../parts/Upvote";
 import options from "../../utils/localeDateString";
 
 const Post = ({ post }) => {
+  const locationArr = useLocation().pathname.split("/");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
 
@@ -41,7 +42,9 @@ const Post = ({ post }) => {
   const saveThisPost = async () => {
     const updatedUser = await dispatch(savePost(user.id, post.id));
     if (!updatedUser.errors) {
-      setIsSaved(prev => !prev);
+      if (!(locationArr[1] === "users" && locationArr[2] === String(user.id))) {
+        setIsSaved(prev => !prev);
+      }
     }
   };
 
