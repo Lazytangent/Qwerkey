@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 
+from app.forms import CreateMeetup
 from app.models import db, Meetup
 
 meetup_routes = Blueprint("meetups", __name__)
