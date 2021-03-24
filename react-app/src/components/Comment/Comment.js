@@ -30,6 +30,9 @@ const Comment = ({ comment, userId }) => {
   useEffect(() => {
     if (user) {
       setIsSaved(user.saved_comments.find(savedComment => savedComment.id === comment.id));
+      if (comment.user.id !== user.id && comment.ratings && comment.ratings[user.id]) {
+        setRating(comment.ratings[user.id].rating);
+      }
     }
   }, [user, comment]);
 
