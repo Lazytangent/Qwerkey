@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updatePost, getPostById } from '../../store/posts';
+import { updatePost } from '../../store/posts';
 import FormTitle from '../parts/FormTitle';
 import FormErrors from '../parts/FormErrors';
 import InputField from '../parts/InputField';
 import SubmitFormButton from '../parts/SubmitFormButton';
 
-const EditPostForm = ({ setShowEditModal, postId }) => {
+const EditPostForm = ({ postId }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const post = useSelector(state => state.posts.posts[postId]);
@@ -17,10 +17,6 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
   const [newImages, setNewImages] = useState([]);
   const [errors, setErrors] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    dispatch(getPostById(postId));
-  }, [dispatch, postId]);
 
   useEffect(() => {
     if (user && post) setIsLoaded(true);
@@ -47,9 +43,7 @@ const EditPostForm = ({ setShowEditModal, postId }) => {
     e.preventDefault();
     if (body || newImages.length) {
       const newPost = await dispatch(updatePost({ title, body, images: newImages, postId, userId: post.user.id, communityId: post.community.id }));
-      if (!newPost.errors) {
-        setShowEditModal(false);
-      } else {
+      if (newPost.errors) {
         setErrors(newPost.errors);
       }
     }

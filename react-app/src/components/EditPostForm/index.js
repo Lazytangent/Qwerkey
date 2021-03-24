@@ -6,7 +6,7 @@ const EditPostModal = ({ setShowEditModal, showEditModal, postId }) => {
     <>
       {showEditModal && (
         <Modal onClose={() => setShowEditModal(false)}>
-          <EditPostForm setShowEditModal={setShowEditModal} postId={postId} />
+          <EditPostForm postId={postId} />
         </Modal>
       )}
     </>
