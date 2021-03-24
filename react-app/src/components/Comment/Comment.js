@@ -12,6 +12,7 @@ import Downvote from "../parts/Downvote";
 import Upvote from "../parts/Upvote";
 import Score from "../parts/Score";
 import SaveButton from "../parts/SaveButton";
+import options from "../../utils/localeDateString";
 
 const Comment = ({ comment, userId }) => {
   const location = useLocation();
@@ -68,12 +69,9 @@ const Comment = ({ comment, userId }) => {
             <span className="hover:text-green hover:underline">
               {comment.user.username}
             </span>
-          </NavLink>
+          </NavLink> on{" "}
+          <span className="hidden md:block">{new Date(comment.created_at).toLocaleString(...options())}</span>
         </p>
-        {user && comment.user.id !== user.id && (
-          <SaveButton save={saveThisComment} isSaved={isSaved} />
-        )}
-      </div>
       {comment.user.id === userId && comment.body !== "[DELETED]" && (
         <>
           <EditButton label="Edit Comment" onClick={editBtnHandler}>
@@ -99,6 +97,7 @@ const Comment = ({ comment, userId }) => {
             <Score ratings={comment.ratings} />
             <Upvote id={comment.id} type="comment" rating={rating} />
           </div>
+          <SaveButton save={saveThisComment} isSaved={isSaved} />
         </div>
       )}
       {(location.pathname === "/search" ||
@@ -107,6 +106,7 @@ const Comment = ({ comment, userId }) => {
           <span className="p-2 hover:text-green">Go to Post</span>
         </NavLink>
       )}
+      </div>
     </div>
   );
 };
