@@ -60,8 +60,6 @@ class User(db.Model, UserMixin):
             "created_at":
             self.created_at,
             "meetups": [meetup.to_dict() for meetup in self.meetups],
-            "comments":
-            [comment.to_search_dict() for comment in self.comments],
             "saved_posts":
             [post.to_simple_dict() for post in self.saved_posts],
             "saved_comments":
