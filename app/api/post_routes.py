@@ -109,6 +109,13 @@ def post_by_id(post_id):
     return post.to_dict()
 
 
+@post_routes.route('/<int:post_id>/comments')
+def get_comments_on_post(post_id):
+    post = Post.query.get(post_id)
+    return {comment.id: comment.to_simple_dict() for
+            thread in post.threads for comment in thread.comments}
+
+
 @post_routes.route('/<int:post_id>/comments', methods=["POST"])
 def create_comment(post_id):
     post = Post.query.get(post_id)
