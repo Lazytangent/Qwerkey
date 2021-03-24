@@ -49,6 +49,17 @@ def max_number_of_posts_by_community(community_name):
     return {"max": number}
 
 
+@post_routes.route('/filter')
+def filter_posts():
+    type_ = request.args.get("type")
+    if type_ == "new":
+        posts = Post.query.order_by(Post.created_at).all()
+        return jsonify([post.id for post in posts])
+    elif type_ == "hot":
+        pass
+    return "Invalid type.", 405
+
+
 @post_routes.route('/', methods=["POST"])
 def create_post():
     form = CreatePost()
