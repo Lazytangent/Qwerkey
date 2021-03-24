@@ -73,7 +73,7 @@ const Comment = ({ comment, userId }) => {
           <span className="hidden md:block">{new Date(comment.created_at).toLocaleString(...options())}</span>
         </p>
       {comment.user.id === userId && comment.body !== "[DELETED]" && (
-        <>
+        <div className="flex items-center">
           <EditButton label="Edit Comment" onClick={editBtnHandler}>
             <EditCommentModal
               showEditModal={showEditModal}
@@ -88,7 +88,7 @@ const Comment = ({ comment, userId }) => {
               type="comment"
             />
           </DeleteButton>
-        </>
+        </div>
       )}
       {user && comment.user.id !== user.id && (
         <div className="flex">
