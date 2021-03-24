@@ -22,6 +22,11 @@ const PostsContainer = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    setPage(1);
+    window.scrollTo(0, 0);
+  }, [communityName]);
+
+  useEffect(() => {
     dispatch(getMaxNumberOfPosts());
   }, [dispatch]);
 

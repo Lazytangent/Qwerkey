@@ -21,6 +21,7 @@ const ProfilePage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(getUser(userId));
     dispatch(getPostsByUser(userId));
     dispatch(getRetailersByUser(userId));
