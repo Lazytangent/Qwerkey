@@ -62,7 +62,7 @@ const Comment = ({ comment, userId }) => {
     >
       <p className="p-2">{comment.body}</p>
       <hr />
-      <div className="flex justify-between px-2">
+      <div className="flex justify-between p-2">
         <p className="p-2">
           by{" "}
           <NavLink to={`/users/${comment.user.id}`}>
@@ -100,13 +100,13 @@ const Comment = ({ comment, userId }) => {
           <SaveButton save={saveThisComment} isSaved={isSaved} />
         </div>
       )}
+      </div>
       {(location.pathname === "/search" ||
         location.pathname.startsWith("/users")) && (
-        <NavLink to={`/q/${comment.post.community}/${comment.post.id}`}>
+        <NavLink className="p-2" to={`/q/${comment.post.community}/${comment.post.id}`}>
           <span className="p-2 hover:text-green">Go to Post</span>
         </NavLink>
       )}
-      </div>
     </div>
   );
 };

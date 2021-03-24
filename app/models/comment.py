@@ -46,6 +46,7 @@ class Comment(db.Model):
             "ratings":
             {rating.user_id: rating.to_dict()
              for rating in self.ratings},
+            "created_at": self.created_at,
         }
 
     def to_dict(self):
