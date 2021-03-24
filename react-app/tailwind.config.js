@@ -36,6 +36,7 @@ module.exports = {
       boxShadow: ['dark'],
       opacity: ['disabled'],
       cursor: ['disabled'],
+      borderColor: ['disabled'],
     },
   },
   plugins: [],

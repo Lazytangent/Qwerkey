@@ -36,6 +36,8 @@ const AdvSearchBar = () => {
   useEffect(() => {
     if (state) {
       setStateName(state.name);
+    } else {
+      setStateName("");
     }
   }, [state]);
 
@@ -178,7 +180,7 @@ const AdvSearchBar = () => {
             </select>
           )}
         </div>
-        <button className="w-1/4 p-2 mx-2 border rounded hover:border-green focus:bg-green">
+        <button disabled={field === "Location" && stateName.length === 0} className="w-1/4 p-2 mx-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed disabled:border-gray-500 hover:border-green focus:bg-green">
           Search
         </button>
       </form>
