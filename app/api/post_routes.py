@@ -60,7 +60,11 @@ def filter_posts():
         posts = Post.query.join(PostRating). \
             group_by(Post.id). \
             order_by(desc(func.sum(PostRating.rating))).all()
-        return jsonify([post.id for post in posts])
+        other_posts = Post.query.filter(
+            ~Post.id.in_([post.id for post in posts])). \
+            order_by(Post.created_at.desc()).all()
+        return jsonify([post.id
+                        for post in posts] + [post.id for post in other_posts])
     elif type_ == "controversial":
         pass
     return "Invalid type.", 405
@@ -129,8 +133,10 @@ def post_by_id(post_id):
 @post_routes.route('/<int:post_id>/comments')
 def get_comments_on_post(post_id):
     post = Post.query.get(post_id)
-    return {comment.id: comment.to_dict() for
-            thread in post.threads for comment in thread.comments}
+    return {
+        comment.id: comment.to_dict()
+        for thread in post.threads for comment in thread.comments
+    }
 
 
 @post_routes.route('/<int:post_id>/comments', methods=["POST"])
@@ -161,9 +167,9 @@ def rate_post(post_id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user_id = form['user_id'].data
-        post_rating = PostRating.query.filter(PostRating.user_id == user_id,
-                                              PostRating.post_id ==
-                                              post_id).first()
+        post_rating = PostRating.query.filter(
+            PostRating.user_id == user_id,
+            PostRating.post_id == post_id).first()
         if post_rating:
             post_rating.rating = form['rating'].data
             db.session.commit()
