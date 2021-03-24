@@ -83,10 +83,12 @@ const PostsContainer = () => {
 
   return (
     <div>
-      <select value={filterType} onChange={updateFilterType}>
-        <option disabled={true} value="Filter...">Filter...</option>
-        {filterTypes.map(type => <option value={type} key={type}>{type}</option>)}
-      </select>
+      <div className="flex justify-end p-2 pr-0">
+        <select className="w-1/4 px-1 py-2 mb-2 border rounded outline-none dark:bg-gray-800 dark:text-gray-50" value={filterType} onChange={updateFilterType}>
+          <option value="Filter...">Filter...</option>
+          {filterTypes.map(type => <option value={type} key={type}>{type}</option>)}
+        </select>
+      </div>
       {filterType === "Filter..." ? currentPosts.map(post => (
         <Post key={uuidv4()} post={post} userId={user ? user.id : null} />
       )) : order.map(postId => (
