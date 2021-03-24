@@ -19,14 +19,12 @@ def update_comment(comment_id):
             form['level'].data = comment.level
             form.populate_obj(comment)
             db.session.commit()
-            post = Post.query.get(comment.thread.post_id)
-            return post.to_dict()
+            return comment.to_dict()
         return {'errors': validation_errors_to_error_messages(form.errors)}
     elif request.method == "DELETE":
         comment.body = "[DELETED]"
         db.session.commit()
-        post = Post.query.get(comment.thread.post_id)
-        return post.to_dict()
+        return comment.to_dict()
     return "Bad route", 404
 
 

@@ -133,7 +133,7 @@ def create_comment(post_id):
         form.populate_obj(comment)
         db.session.add(comment)
         db.session.commit()
-        return post.to_dict()
+        return comment.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
