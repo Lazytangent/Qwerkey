@@ -74,6 +74,24 @@ export const deleteComment = (commentId) => async (dispatch) => {
   return deletedComment;
 };
 
+export const rateComment = ({ rating, userId, commentId }) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${commentId}/rating`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      rating,
+      user_id: userId,
+    }),
+  });
+  const comment = await res.json();
+  if (!comment.errors) {
+    dispatch(setComment(comment));
+  }
+  return comment;
+};
+
 const initialState = {
   comments: {},
 };

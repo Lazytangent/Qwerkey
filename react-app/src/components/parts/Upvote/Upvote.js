@@ -2,7 +2,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { ArrowUpward } from "@material-ui/icons";
 
-import { ratePost, rateComment } from "../../../store/posts";
+import { ratePost } from "../../../store/posts";
+import { rateComment } from "../../../store/comments";
 
 const Upvote = ({ id, type, rating }) => {
   const dispatch = useDispatch();
