@@ -2,6 +2,14 @@ const SET_MORE_POSTS = 'posts/SET_MORE_POSTS';
 const SET_POSTS = 'posts/SET_POSTS';
 const SET_POST = 'posts/SET_POST';
 const SET_MAX = 'posts/SET_MAX';
+const SET_ORDER = 'posts/SET_ORDER';
+
+const setOrderOfPosts = (array) => {
+  return {
+    type: SET_ORDER,
+    array,
+  };
+};
 
 const setMaxNumberOfPosts = (number) => {
   return {
@@ -29,6 +37,13 @@ const setPost = (post) => {
     type: SET_POST,
     post,
   };
+};
+
+export const getOrder = (type) => async (dispatch) => {
+  const res = await fetch(`/api/posts/filter?type=${type}`);
+  const array = await res.json();
+  dispatch(setOrderOfPosts(array));
+  return array;
 };
 
 export const getMaxNumberOfPosts = () => async (dispatch) => {
@@ -178,6 +193,7 @@ export const ratePost = ({ rating, userId, postId }) => async (dispatch) => {
 const initialState = {
   posts: {},
   max: null,
+  order: [],
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -190,6 +206,8 @@ const postsReducer = (state = initialState, action) => {
       return { ...state, posts: { ...state.posts, [action.post.id]: action.post } };
     case SET_MAX:
       return { ...state, max: action.number };
+    case SET_ORDER:
+      return { ...state, order: action.array };
     default:
       return state;
   }

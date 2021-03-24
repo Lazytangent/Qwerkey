@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from sqlalchemy import desc, func
 
 from app.config import Config
 from app.forms import CreatePost, CreateComment, CreatePostRating
@@ -47,6 +48,26 @@ def max_number_of_posts_by_community(community_name):
         Community.name == community_name).first()
     number = Post.query.filter(Post.community_id == community.id).count()
     return {"max": number}
+
+
+@post_routes.route('/filter')
+def filter_posts():
+    type_ = request.args.get("type")
+    if type_ == "new":
+        posts = Post.query.order_by(Post.created_at.desc()).all()
+        return jsonify([post.id for post in posts])
+    elif type_ == "hot":
+        posts = Post.query.join(PostRating). \
+            group_by(Post.id). \
+            order_by(desc(func.sum(PostRating.rating))).all()
+        other_posts = Post.query.filter(
+            ~Post.id.in_([post.id for post in posts])). \
+            order_by(Post.created_at.desc()).all()
+        return jsonify([post.id
+                        for post in posts] + [post.id for post in other_posts])
+    elif type_ == "controversial":
+        pass
+    return "Invalid type.", 405
 
 
 @post_routes.route('/', methods=["POST"])
@@ -112,8 +133,10 @@ def post_by_id(post_id):
 @post_routes.route('/<int:post_id>/comments')
 def get_comments_on_post(post_id):
     post = Post.query.get(post_id)
-    return {comment.id: comment.to_dict() for
-            thread in post.threads for comment in thread.comments}
+    return {
+        comment.id: comment.to_dict()
+        for thread in post.threads for comment in thread.comments
+    }
 
 
 @post_routes.route('/<int:post_id>/comments', methods=["POST"])
@@ -144,9 +167,9 @@ def rate_post(post_id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user_id = form['user_id'].data
-        post_rating = PostRating.query.filter(PostRating.user_id == user_id,
-                                              PostRating.post_id ==
-                                              post_id).first()
+        post_rating = PostRating.query.filter(
+            PostRating.user_id == user_id,
+            PostRating.post_id == post_id).first()
         if post_rating:
             post_rating.rating = form['rating'].data
             db.session.commit()

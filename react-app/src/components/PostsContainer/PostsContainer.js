@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from "uuid";
 
-import { getPosts, getMaxNumberOfPosts, getMaxNumberOfPostsByCommunity } from '../../store/posts';
+import { getOrder, getPosts, getMaxNumberOfPosts, getMaxNumberOfPostsByCommunity } from '../../store/posts';
 import { getCommunityByName } from "../../store/sidebar";
 import Post from '../Post';
 
@@ -14,9 +14,11 @@ const PostsContainer = () => {
   const user = useSelector(state => state.session.user);
   const posts = useSelector(state => state.posts.posts);
   const maxPosts = useSelector(state => state.posts.max);
+  const order = useSelector(state => state.posts.order);
 
   const [page, setPage] = useState(1);
   const [currentPosts, setCurrentPosts] = useState([]);
+  const [filterType, setFilterType] = useState("Filter...");
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -63,14 +65,34 @@ const PostsContainer = () => {
     return () => window.removeEventListener("scroll", scrollListener);
   }, [page, maxPosts, posts]);
 
+  useEffect(() => {
+    if (filterType !== "Filter...") {
+      dispatch(getOrder(filterType));
+    }
+  }, [filterType, dispatch]);
+
+  const updateFilterType = (e) => {
+    setFilterType(e.target.value);
+  };
+
+  const filterTypes = ["hot", "new"];
+
   if (!isLoaded) {
     return null;
   }
 
   return (
     <div>
-      {currentPosts.map(post => (
+      <div className="flex justify-end p-2 pr-0">
+        <select className="w-1/4 px-1 py-2 mb-2 border rounded outline-none dark:bg-gray-800 dark:text-gray-50" value={filterType} onChange={updateFilterType}>
+          <option value="Filter...">Filter...</option>
+          {filterTypes.map(type => <option value={type} key={type}>{type}</option>)}
+        </select>
+      </div>
+      {filterType === "Filter..." ? currentPosts.map(post => (
         <Post key={uuidv4()} post={post} userId={user ? user.id : null} />
+      )) : order.map(postId => (
+        posts[postId] ? <Post key={uuidv4()} post={posts[postId]} userId={user ? user.id : null} /> : null
       ))}
     </div>
   );
