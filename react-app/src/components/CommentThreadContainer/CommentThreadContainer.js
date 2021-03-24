@@ -2,23 +2,15 @@ import { useSelector } from 'react-redux';
 
 import Comment from "../Comment";
 
-const CommentsContainer = ({ postId }) => {
+const CommentsContainer = () => {
   const user = useSelector(state => state.session.user);
-  const post = useSelector(state => state.posts.posts[postId]);
+  const comments = useSelector(state => state.comments.comments);
 
   return (
     <>
-      {Object.values(post.threads).map((thread) => {
-        const comments = Object.values(thread.comments);
-        if (!comments.length) return null;
-        return (
-          <div key={comments[0].id}>
-            {comments.length > 0 && (
-              <Comment userId={user ? user.id : null} comment={comments[0]} key={comments[0].id} />
-            )}
-          </div>
-        );
-      })}
+      {Object.values(comments).map((comment) =>
+        <Comment key={comment.id} comment={comment} userId={user.id} />
+      )}
     </>
   );
 };

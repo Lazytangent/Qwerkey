@@ -3,23 +3,42 @@ import { useSelector, useDispatch } from "react-redux";
 import { ArrowDownward } from "@material-ui/icons";
 
 import { ratePost } from "../../../store/posts";
+import { rateComment } from "../../../store/comments";
 
-const Downvote = ({ postId, rating }) => {
+const Downvote = ({ id, type, rating }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
 
   const onDownvote = () => {
-    dispatch(ratePost({ userId: user.id, postId, rating: -1 }));
+    switch (type) {
+      case "post":
+        dispatch(ratePost({ userId: user.id, postId: id, rating: -1 }));
+        break;
+      case "comment":
+        dispatch(rateComment({ userId: user.id, commentId: id, rating: -1 }));
+        break;
+      default:
+        break;
+    }
   };
 
   const onUnDownvote = () => {
-    dispatch(ratePost({ userId: user.id, postId, rating: 0 }));
+    switch (type) {
+      case "post":
+        dispatch(ratePost({ userId: user.id, postId: id, rating: 0 }));
+        break;
+      case "comment":
+        dispatch(rateComment({ userId: user.id, commentId: id, rating: 0 }));
+        break;
+      default:
+        break;
+    }
   }
 
   return (
     <>
       {rating === -1 ? (
-        <button onClick={onUnDownvote} className="p-2 mx-2 border rounded border-purple text-purple hover:border-gray-50 active:bg-none hover:text-gray-50">
+        <button onClick={onUnDownvote} className="p-2 mx-2 border rounded border-purple text-purple active:outline-none focus:outline-none hover:border-gray-50 active:bg-none hover:text-gray-50">
           <ArrowDownward />
         </button>
       ) : (

@@ -10,6 +10,7 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const popularCommunities = useSelector((state) => state.sidebar.popular);
   const currentCommunity = useSelector((state) => state.sidebar.community);
+
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {

@@ -36,6 +36,8 @@ const AdvSearchBar = () => {
   useEffect(() => {
     if (state) {
       setStateName(state.name);
+    } else {
+      setStateName("");
     }
   }, [state]);
 
@@ -73,23 +75,20 @@ const AdvSearchBar = () => {
   };
 
   const types = ["Post", "Comment", "Retailer"];
-
   const postFields = ["Title", "Body"];
-
   const commentFields = ["Body"];
-
   const retailerFields = ["Name", "Description", "Rating", "Location"];
-
   const states = csc.getStatesOfCountry("US");
 
   return (
     <div className="p-2">
       <form onSubmit={submitHandler} className="flex flex-col items-center">
         <input
-          className="w-3/4 p-2 mx-2 mb-2 border rounded outline-none focus:border-green dark:bg-gray-800 dark:text-gray-50"
-          type="search"
+          className="w-3/4 p-2 mx-2 mb-2 border rounded outline-none disabled:opacity-50 disabled:cursor-not-allowed focus:border-green dark:bg-gray-800 dark:text-gray-50"
+          type={field === "Rating" ? "number" : "text"}
           value={searchInput}
           placeholder="Advanced Search..."
+          disabled={type === "Retailer" && field === "Location"}
           onChange={updateSearchInput}
         />
         <div className="w-3/4 grid grid-cols-2 gap-2">
@@ -181,7 +180,7 @@ const AdvSearchBar = () => {
             </select>
           )}
         </div>
-        <button className="w-1/4 p-2 mx-2 border rounded hover:border-green focus:bg-green">
+        <button disabled={field === "Location" && stateName.length === 0} className="w-1/4 p-2 mx-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed disabled:border-gray-500 hover:border-green focus:bg-green">
           Search
         </button>
       </form>

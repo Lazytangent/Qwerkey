@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import { savePost } from "../../store/session";
 import EditButton from "../parts/EditButton";
@@ -10,9 +10,11 @@ import DeleteConfirmationModal from "../parts/DeleteConfirmation";
 import SaveButton from "../parts/SaveButton";
 import Downvote from "../parts/Downvote";
 import Upvote from "../parts/Upvote";
+import Score from "../parts/Score";
 import options from "../../utils/localeDateString";
 
 const Post = ({ post }) => {
+  const locationArr = useLocation().pathname.split("/");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
 
@@ -30,7 +32,7 @@ const Post = ({ post }) => {
     }
   }, [user, post]);
 
-  const editBtnHandler = () => {
+  const editBtnHandler = async () => {
     setShowEditModal(true);
   };
 
@@ -41,7 +43,9 @@ const Post = ({ post }) => {
   const saveThisPost = async () => {
     const updatedUser = await dispatch(savePost(user.id, post.id));
     if (!updatedUser.errors) {
-      setIsSaved(prev => !prev);
+      if (!(locationArr[1] === "users" && locationArr[2] === String(user.id))) {
+        setIsSaved(prev => !prev);
+      }
     }
   };
 
@@ -68,7 +72,7 @@ const Post = ({ post }) => {
           by <NavLink to={`/users/${post.user.id}`}><span className="hover:text-green hover:underline">{post.user.username}</span></NavLink> on{" "}
           <span className="hidden md:block">{new Date(post.created_at).toLocaleString(...options())}</span>
         </p>
-        {user && post.user.id === user.id && (
+        {user && post.user.id === user.id && post.body !== "[DELETED]" && (
           <div>
             <EditButton label="Edit Post" onClick={editBtnHandler}>
               <EditPostModal
@@ -90,8 +94,9 @@ const Post = ({ post }) => {
         {user && post.user.id !== user.id && (
           <div className="flex">
             <div className="flex justify-around p-2">
-              <Downvote postId={post.id} rating={rating} />
-              <Upvote postId={post.id} rating={rating} />
+              <Downvote id={post.id} type="post" rating={rating} />
+              <Score ratings={post.ratings} />
+              <Upvote id={post.id} type="post" rating={rating} />
             </div>
             <SaveButton save={saveThisPost} isSaved={isSaved} />
           </div>

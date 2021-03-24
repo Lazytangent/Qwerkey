@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { getPostById } from "../../store/posts";
+import { getCommentsByPost } from "../../store/comments";
 import Post from "../Post";
 import CommentThreadContainer from "../CommentThreadContainer";
 import CreateCommentForm from "../CreateCommentForm";
@@ -19,6 +20,7 @@ const PostPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getPostById(postId));
+    dispatch(getCommentsByPost(postId));
   }, [dispatch, postId]);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ const PostPage = () => {
           <CreateCommentForm userId={user.id} postId={post.id} />
         </div>
       )}
-      <CommentThreadContainer postId={postId} />
+      <CommentThreadContainer />
     </>
   );
 };

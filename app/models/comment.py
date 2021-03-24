@@ -43,6 +43,10 @@ class Comment(db.Model):
             "body": self.body,
             "user": self.user.to_simple_dict(),
             "post": self.thread.post.to_search_dict(),
+            "ratings":
+            {rating.user_id: rating.to_dict()
+             for rating in self.ratings},
+            "created_at": self.created_at,
         }
 
     def to_dict(self):
@@ -55,5 +59,8 @@ class Comment(db.Model):
             "level": self.level,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
-            "children": [child.to_simple_dict() for child in self.children]
+            "children": [child.to_simple_dict() for child in self.children],
+            "ratings":
+            {rating.user_id: rating.to_dict()
+             for rating in self.ratings},
         }

@@ -8,22 +8,32 @@ import EditButton from "../parts/EditButton";
 import DeleteButton from "../parts/DeleteButton";
 import EditCommentModal from "../EditCommentForm";
 import DeleteConfirmationModal from "../parts/DeleteConfirmation";
+import Downvote from "../parts/Downvote";
+import Upvote from "../parts/Upvote";
+import Score from "../parts/Score";
 import SaveButton from "../parts/SaveButton";
+import options from "../../utils/localeDateString";
 
 const Comment = ({ comment, userId }) => {
+  const location = useLocation();
+  const locationArr = location.pathname.split("/");
+
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  const location = useLocation();
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [rating, setRating] = useState();
 
   const { setComment } = useCommentContext();
 
   useEffect(() => {
     if (user) {
       setIsSaved(user.saved_comments.find(savedComment => savedComment.id === comment.id));
+      if (comment.user.id !== user.id && comment.ratings && comment.ratings[user.id]) {
+        setRating(comment.ratings[user.id].rating);
+      }
     }
   }, [user, comment]);
 
@@ -39,7 +49,9 @@ const Comment = ({ comment, userId }) => {
   const saveThisComment = async () => {
     const updatedUser = await dispatch(saveComment(user.id, comment.id));
     if (!updatedUser.errors) {
-      setIsSaved((prev) => !prev);
+      if (!(locationArr[1] === "users" && locationArr[2] === String(user.id))) {
+        setIsSaved((prev) => !prev);
+      }
     }
   };
 
@@ -50,20 +62,17 @@ const Comment = ({ comment, userId }) => {
     >
       <p className="p-2">{comment.body}</p>
       <hr />
-      <div className="flex justify-between">
+      <div className="flex justify-between p-2">
         <p className="p-2">
           by{" "}
           <NavLink to={`/users/${comment.user.id}`}>
             <span className="hover:text-green hover:underline">
               {comment.user.username}
             </span>
-          </NavLink>
+          </NavLink> on{" "}
+          <span className="hidden md:block">{new Date(comment.created_at).toLocaleString(...options())}</span>
         </p>
-        {user && comment.user.id !== user.id && (
-          <SaveButton save={saveThisComment} isSaved={isSaved} />
-        )}
-      </div>
-      {comment.user.id === userId && (
+      {comment.user.id === userId && comment.body !== "[DELETED]" && (
         <>
           <EditButton label="Edit Comment" onClick={editBtnHandler}>
             <EditCommentModal
@@ -81,9 +90,20 @@ const Comment = ({ comment, userId }) => {
           </DeleteButton>
         </>
       )}
+      {user && comment.user.id !== user.id && (
+        <div className="flex">
+          <div className="flex justify-around p-2">
+            <Downvote id={comment.id} rating={rating} type="comment" />
+            <Score ratings={comment.ratings} />
+            <Upvote id={comment.id} type="comment" rating={rating} />
+          </div>
+          <SaveButton save={saveThisComment} isSaved={isSaved} />
+        </div>
+      )}
+      </div>
       {(location.pathname === "/search" ||
         location.pathname.startsWith("/users")) && (
-        <NavLink to={`/q/${comment.post.community}/${comment.post.id}`}>
+        <NavLink className="p-2" to={`/q/${comment.post.community}/${comment.post.id}`}>
           <span className="p-2 hover:text-green">Go to Post</span>
         </NavLink>
       )}

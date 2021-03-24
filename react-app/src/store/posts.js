@@ -70,6 +70,15 @@ export const getPostById = (id) => async (dispatch) => {
   return post;
 };
 
+export const getPostsByUser = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/posts`);
+  const posts = await res.json();
+  if (!posts.errors) {
+    dispatch(setPosts(posts));
+  }
+  return posts;
+};
+
 export const createPost = (post) => async (dispatch) => {
   const { title, body, images, userId, communityId } = post;
   const formData = new FormData();
@@ -146,47 +155,6 @@ export const deletePost = (postId) => async (dispatch) => {
   } catch (e) {
     return e;
   }
-};
-
-export const createComment = (comment, postId) => async (dispatch) => {
-  const res = await fetch(`/api/posts/${postId}/comments`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(comment),
-  });
-  const post = await res.json();
-  if (!post.errors) {
-    dispatch(setPost(post));
-  }
-  return post;
-};
-
-export const updateComment = (comment) => async (dispatch) => {
-  const res = await fetch(`/api/comments/${comment.id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(comment),
-  });
-  const post = await res.json();
-  if (!post.errors) {
-    dispatch(setPost(post));
-  }
-  return post;
-};
-
-export const deleteComment = (commentId) => async (dispatch) => {
-  const res = await fetch(`/api/comments/${commentId}`, {
-    method: "DELETE",
-  });
-  const post = await res.json();
-  if (!post.errors) {
-    dispatch(setPost(post));
-  }
-  return post;
 };
 
 export const ratePost = ({ rating, userId, postId }) => async (dispatch) => {

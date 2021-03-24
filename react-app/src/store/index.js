@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 
 import sessionReducer from './session';
 import postsReducer from './posts';
+import commentsReducer from "./comments";
 import retailersReducer from './retailers';
 import searchReducer from "./search";
 import communitiesReducer from "./communities";
@@ -12,6 +13,7 @@ import usersReducer from "./users";
 const rootReducer = combineReducers({
   session: sessionReducer,
   posts: postsReducer,
+  comments: commentsReducer,
   retailers: retailersReducer,
   search: searchReducer,
   communities: communitiesReducer,

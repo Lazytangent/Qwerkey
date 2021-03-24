@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { getUser } from "../../store/users";
+import { getPostsByUser } from "../../store/posts";
+import { getRetailersByUser } from "../../store/retailers";
 import UserCard from "../UserCard";
 import Post from "../Post";
 import Comment from "../Comment";
@@ -13,11 +15,15 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const user = useSelector((state) => state.users.users[userId]);
+  const posts = useSelector((state) => state.posts.posts);
+  const retailers = useSelector((state) => state.retailers.retailers);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(getUser(userId));
+    dispatch(getPostsByUser(userId));
+    dispatch(getRetailersByUser(userId));
   }, [dispatch, userId]);
 
   useEffect(() => {
@@ -37,13 +43,13 @@ const ProfilePage = () => {
   return (
     <>
       <UserCard user={user} />
-      {user.posts.length > 0 && (
+      {Object.values(posts).length > 0 && (
         <>
         <div className="p-2">
           <h3>Posts</h3>
           <hr />
         </div>
-          {user.posts.map((post) => (
+          {Object.values(posts).map((post) => (
               <Post key={post.id} post={post} />
           ))}
         </>
@@ -59,13 +65,13 @@ const ProfilePage = () => {
           ))}
         </>
       )}
-      {user.retailers.length > 0 && (
+      {Object.values(retailers).length > 0 && (
         <>
         <div className="p-2">
           <h3>Retailers</h3>
           <hr />
         </div>
-          {user.retailers.map((retailer) => (
+          {Object.values(retailers).map((retailer) => (
               <Retailer retailer={retailer} key={retailer.id} />
           ))}
         </>

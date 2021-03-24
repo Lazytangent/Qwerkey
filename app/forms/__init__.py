@@ -7,3 +7,4 @@ from .create_retailer_rating import CreateRetailerRating
 from .create_community import CreateCommunity
 from .create_post_rating import CreatePostRating
 from .create_meetup import CreateMeetup
+from .create_comment_rating import CreateCommentRating

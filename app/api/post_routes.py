@@ -109,6 +109,13 @@ def post_by_id(post_id):
     return post.to_dict()
 
 
+@post_routes.route('/<int:post_id>/comments')
+def get_comments_on_post(post_id):
+    post = Post.query.get(post_id)
+    return {comment.id: comment.to_dict() for
+            thread in post.threads for comment in thread.comments}
+
+
 @post_routes.route('/<int:post_id>/comments', methods=["POST"])
 def create_comment(post_id):
     post = Post.query.get(post_id)
@@ -126,7 +133,7 @@ def create_comment(post_id):
         form.populate_obj(comment)
         db.session.add(comment)
         db.session.commit()
-        return post.to_dict()
+        return comment.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 

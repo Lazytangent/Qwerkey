@@ -34,6 +34,9 @@ module.exports = {
   variants: {
     extend: {
       boxShadow: ['dark'],
+      opacity: ['disabled'],
+      cursor: ['disabled'],
+      borderColor: ['disabled'],
     },
   },
   plugins: [],

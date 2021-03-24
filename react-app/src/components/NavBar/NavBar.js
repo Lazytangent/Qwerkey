@@ -12,6 +12,7 @@ import NavButton from "../parts/NavButton";
 import UserMenu from "../parts/UserMenu";
 import SearchBar from "../SearchBar";
 import DarkModeToggle from "../DarkModeToggle";
+import CreatePostModal from "../CreatePostForm";
 
 const NavBar = () => {
   const {
@@ -37,7 +38,14 @@ const NavBar = () => {
     return () => document.removeEventListener("click", closeUserMenu);
   }, [showUserMenu]);
 
+  useEffect(() => {
+    if (!authenticated) {
+      setShowUserMenu(false);
+    }
+  }, [authenticated]);
+
   const createPostBtnHandler = () => {
+    setShowUserMenu(false);
     setShowCreatePostModal((prev) => !prev);
   };
 
@@ -127,6 +135,9 @@ const NavBar = () => {
               <UserMenu userMenuRef={userMenuRef} createPostBtnHandler={createPostBtnHandler} />
             )}
           </div>
+        )}
+        {authenticated && setShowCreatePostModal && (
+          <CreatePostModal />
         )}
       </ul>
     </nav>
