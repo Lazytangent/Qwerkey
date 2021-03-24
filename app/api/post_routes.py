@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from sqlalchemy import desc, func
 
 from app.config import Config
 from app.forms import CreatePost, CreateComment, CreatePostRating
@@ -53,9 +54,14 @@ def max_number_of_posts_by_community(community_name):
 def filter_posts():
     type_ = request.args.get("type")
     if type_ == "new":
-        posts = Post.query.order_by(Post.created_at).all()
+        posts = Post.query.order_by(Post.created_at.desc()).all()
         return jsonify([post.id for post in posts])
     elif type_ == "hot":
+        posts = Post.query.join(PostRating). \
+            group_by(Post.id). \
+            order_by(desc(func.sum(PostRating.rating))).all()
+        return jsonify([post.id for post in posts])
+    elif type_ == "controversial":
         pass
     return "Invalid type.", 405
 
