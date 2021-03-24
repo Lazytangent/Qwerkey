@@ -24,6 +24,15 @@ export const getCommentsByPost = (postId) => async (dispatch) => {
   return comments;
 };
 
+export const getCommentsByUser = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/comments`);
+  const comments = await res.json();
+  if (!comments.errors) {
+    dispatch(setComments(comments));
+  }
+  return comments;
+};
+
 export const createComment = (comment, postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${postId}/comments`, {
     method: "POST",
@@ -37,6 +46,32 @@ export const createComment = (comment, postId) => async (dispatch) => {
     dispatch(setComment(newComment));
   }
   return newComment;
+};
+
+export const updateComment = (comment) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${comment.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(comment),
+  });
+  const updatedComment = await res.json();
+  if (!updatedComment.errors) {
+    dispatch(setComment(updatedComment))
+  }
+  return updatedComment;
+};
+
+export const deleteComment = (commentId) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${commentId}`, {
+    method: "DELETE",
+  });
+  const deletedComment = await res.json();
+  if (!deletedComment.errors) {
+    dispatch(setComment(deletedComment));
+  }
+  return deletedComment;
 };
 
 const initialState = {
