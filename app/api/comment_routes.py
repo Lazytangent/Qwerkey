@@ -44,3 +44,10 @@ def rate_comment(comment_id):
             comment_rating.rating = form['rating'].data
             db.session.commit()
             return comment.to_dict()
+        comment_rating = CommentRating()
+        form.populate_obj(comment_rating)
+        comment_rating.comment_id = comment_id
+        db.session.add(comment_rating)
+        db.session.commit()
+        return comment.to_dict()
+    return {"errors": validation_errors_to_error_messages(form.errors)}

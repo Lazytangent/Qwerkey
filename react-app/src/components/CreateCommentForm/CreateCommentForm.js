@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { createComment } from "../../store/posts";
+import { createComment } from "../../store/comments";
 import InputField from "../parts/InputField";
 import SubmitFormButton from "../parts/SubmitFormButton";
 

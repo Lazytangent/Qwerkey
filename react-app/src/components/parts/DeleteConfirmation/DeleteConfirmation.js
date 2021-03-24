@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 
-import { deletePost, deleteComment } from '../../../store/posts';
+import { deletePost } from '../../../store/posts';
+import { deleteComment } from "../../../store/comments";
 import { deleteRetailerRating } from "../../../store/retailers";
 import DeleteButton from '../DeleteButton';
 import EditButton from '../EditButton';

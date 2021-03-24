@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 
-import { updateComment } from "../../store/posts";
+import { updateComment } from "../../store/comments";
 import { useCommentContext } from "../../context/CommentContext";
 import FormTitle from "../parts/FormTitle";
 import SubmitFormButton from "../parts/SubmitFormButton";

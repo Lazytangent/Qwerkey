@@ -55,5 +55,6 @@ class Comment(db.Model):
             "level": self.level,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
-            "children": [child.to_simple_dict() for child in self.children]
+            "children": [child.to_simple_dict() for child in self.children],
+            "ratings": [rating.to_dict() for rating in self.ratings],
         }
