@@ -38,7 +38,7 @@ const Downvote = ({ id, type, rating }) => {
   return (
     <>
       {rating === -1 ? (
-        <button onClick={onUnDownvote} className="p-2 mx-2 border rounded border-purple text-purple hover:border-gray-50 active:bg-none hover:text-gray-50">
+        <button onClick={onUnDownvote} className="p-2 mx-2 border rounded border-purple text-purple active:outline-none focus:outline-none hover:border-gray-50 active:bg-none hover:text-gray-50">
           <ArrowDownward />
         </button>
       ) : (
