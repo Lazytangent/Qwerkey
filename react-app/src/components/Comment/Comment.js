@@ -62,7 +62,7 @@ const Comment = ({ comment, userId }) => {
     >
       <p className="p-2">{comment.body}</p>
       <hr />
-      <div className="flex justify-between">
+      <div className="flex justify-between px-2">
         <p className="p-2">
           by{" "}
           <NavLink to={`/users/${comment.user.id}`}>
