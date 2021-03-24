@@ -41,6 +41,8 @@ class Post(db.Model):
             "body": self.body,
             "images": [image.image_url for image in self.images],
             "community": self.community.name,
+            "ratings": {rating.user_id: rating.to_simple_dict() for rating in
+                        self.ratings},
         }
 
     def to_dict(self):

@@ -43,6 +43,9 @@ class Comment(db.Model):
             "body": self.body,
             "user": self.user.to_simple_dict(),
             "post": self.thread.post.to_search_dict(),
+            "ratings":
+            {rating.user_id: rating.to_dict()
+             for rating in self.ratings},
         }
 
     def to_dict(self):
