@@ -8,17 +8,22 @@ import EditButton from "../parts/EditButton";
 import DeleteButton from "../parts/DeleteButton";
 import EditCommentModal from "../EditCommentForm";
 import DeleteConfirmationModal from "../parts/DeleteConfirmation";
+import Downvote from "../parts/Downvote";
+import Upvote from "../parts/Upvote";
+import Score from "../parts/Score";
 import SaveButton from "../parts/SaveButton";
 
 const Comment = ({ comment, userId }) => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
   const location = useLocation();
   const locationArr = location.pathname.split("/");
+
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [rating, setRating] = useState();
 
   const { setComment } = useCommentContext();
 
@@ -83,6 +88,15 @@ const Comment = ({ comment, userId }) => {
             />
           </DeleteButton>
         </>
+      )}
+      {user && comment.user.id !== user.id && (
+        <div className="flex">
+          <div className="flex justify-around p-2">
+            <Downvote id={comment.id} rating={rating} type="comment" />
+            <Score ratings={comment.ratings} />
+            <Upvote id={comment.id} type="comment" rating={rating} />
+          </div>
+        </div>
       )}
       {(location.pathname === "/search" ||
         location.pathname.startsWith("/users")) && (
