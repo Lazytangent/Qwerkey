@@ -63,4 +63,5 @@ class Comment(db.Model):
             "ratings":
             {rating.user_id: rating.to_dict()
              for rating in self.ratings},
+            "post": self.thread.post.to_search_dict(),
         }

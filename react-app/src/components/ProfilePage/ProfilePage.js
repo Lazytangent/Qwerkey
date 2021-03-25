@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 
 import { getUser } from "../../store/users";
 import { getPostsByUser } from "../../store/posts";
+import { getCommentsByUser } from "../../store/comments";
 import { getRetailersByUser } from "../../store/retailers";
 import UserCard from "../UserCard";
 import Post from "../Post";
@@ -32,6 +33,7 @@ const ProfilePage = () => {
         setInvalidUser(true);
       } else {
         await dispatch(getPostsByUser(userId));
+        await dispatch(getCommentsByUser(userId));
         await dispatch(getRetailersByUser(userId));
         setIsLoaded(true);
       }
@@ -72,7 +74,7 @@ const ProfilePage = () => {
             <h3>Comments</h3>
             <hr />
           </div>
-          {user.comments.map((comment) => (
+          {Object.values(comments).map((comment) => (
             <Comment key={comment.id} comment={comment} userId={sessionUser?.id} />
           ))}
         </>

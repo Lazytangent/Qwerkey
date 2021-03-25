@@ -33,6 +33,12 @@ def get_users_posts(id_):
     return {post.id: post.to_dict() for post in posts}
 
 
+@user_routes.route('/<int:id_>/comments')
+def get_users_comments(id_):
+    comments = Comment.query.filter(Comment.user_id == id_).all()
+    return {comment.id: comment.to_dict() for comment in comments}
+
+
 @user_routes.route('/<int:id_>/retailers')
 def get_users_retailers(id_):
     retailers = Retailer.query.filter(Retailer.user_id == id_).all()
