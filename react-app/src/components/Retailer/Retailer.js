@@ -16,7 +16,7 @@ const Retailer = ({ retailer }) => {
       </h2>
       <p className="p-2">
         Average rating of:{" "}
-        {retailer.ratings.reduce(
+        {Object.values(retailer.ratings).reduce(
           (acc, { rating }, idx) => (acc + rating) / (idx + 1),
           0
         )}

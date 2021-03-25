@@ -20,7 +20,7 @@ const RetailerRatingsContainer = ({ retailerId }) => {
 
   return (
     <div className="mt-2">
-      {retailer.ratings.map(rating => (
+      {Object.values(retailer.ratings).map(rating => (
         <RetailerRating key={rating.id} rating={rating} />
       ))}
     </div>

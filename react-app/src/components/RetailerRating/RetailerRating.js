@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 import { useRetailerRatingContext } from "../../context/RetailerRatingContext";
 import EditButton from "../parts/EditButton";
@@ -25,7 +26,7 @@ const RetailerRating = ({ rating }) => {
 
   return (
     <div className="p-2 mb-2 rounded shadow-sm hover:shadow-lg dark:bg-gray-800 dark:hover:shadow-light-lg dark:shadow-light transform duration-100 ease-in-out">
-      <h6>Rating by {rating.user.username}</h6>
+      <h6>Rating by <NavLink to={`/users/${rating.user.id}`}><span className="hover:underline hover:text-green">{rating.user.username}</span></NavLink></h6>
       <p>{rating.rating}</p>
       {rating.user.id === user?.id && (
         <>
