@@ -1,6 +1,14 @@
+const SET_MAX = "meetups/SET_MAX";
 const SET_MEETUPS = "meetups/SET_MEETUPS";
 const SET_MEETUP = "meetups/SET_MEETUP";
 const REMOVE_MEETUP = "meetups/REMOVE_MEETUP";
+
+const setMaxNumberOfMeetups = (number) => {
+  return {
+    type: SET_MAX,
+    number,
+  };
+};
 
 const removeMeetup = (id) => {
   return {
@@ -50,6 +58,13 @@ export const getMeetupLocation = (meetupId) => async (dispatch) => {
   return meetup;
 };
 
+export const getMaxNumberOfMeetups = () => async (dispatch) => {
+  const res = await fetch(`/api/meetups/max`);
+  const number = await res.json();
+  dispatch(setMaxNumberOfMeetups(number.max));
+  return number;
+};
+
 export const createMeetup = (meetupData) => async (dispatch) => {
   const res = await fetch(`/api/meetups`, {
     method: "POST",
@@ -97,6 +112,8 @@ const initialState = {
 
 const meetupsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_MAX:
+      return { ...state, max: action.number };
     case SET_MEETUPS:
       return { ...state, meetups: { ...action.meetups } };
     case SET_MEETUP:
