@@ -51,24 +51,26 @@ const PostsContainer = () => {
   }, [posts]);
 
   useEffect(() => {
-    if (page * 20 > maxPosts) {
+    if (!communityName && page * 20 > maxPosts) {
       setCurrentPosts(prev => prev.concat(Object.values(posts).slice(0, page * 20 % maxPosts || maxPosts)));
     }
-  }, [posts, maxPosts, page]);
+  }, [posts, maxPosts, page, communityName]);
 
   useEffect(() => {
-    const scrollListener = () => {
-      const scroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (scroll / height);
-      if (scrolled > 0.9) {
-        setPage(prev => prev + 1);
-      }
-    };
+    if (!communityName) {
+      const scrollListener = () => {
+        const scroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (scroll / height);
+        if (scrolled > 0.9) {
+          setPage(prev => prev + 1);
+        }
+      };
 
-    window.addEventListener("scroll", scrollListener);
-    return () => window.removeEventListener("scroll", scrollListener);
-  }, [page, maxPosts, posts]);
+      window.addEventListener("scroll", scrollListener);
+      return () => window.removeEventListener("scroll", scrollListener);
+    }
+  }, [page, maxPosts, posts, communityName]);
 
   useEffect(() => {
     if (filterType !== "Filter...") {

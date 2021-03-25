@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import { getUser } from "../../store/users";
 import { getPostsByUser } from "../../store/posts";
@@ -11,20 +11,31 @@ import Comment from "../Comment";
 import Retailer from "../Retailer";
 
 const ProfilePage = () => {
+  const history = useHistory();
   const { userId } = useParams();
+
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const user = useSelector((state) => state.users.users[userId]);
   const posts = useSelector((state) => state.posts.posts);
+  const comments = useSelector((state) => state.comments.comments);
   const retailers = useSelector((state) => state.retailers.retailers);
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [invalidUser, setInvalidUser] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(getUser(userId));
-    dispatch(getPostsByUser(userId));
-    dispatch(getRetailersByUser(userId));
+    (async () => {
+      const user = await dispatch(getUser(userId));
+      if (user.errors) {
+        setInvalidUser(true);
+      } else {
+        await dispatch(getPostsByUser(userId));
+        await dispatch(getRetailersByUser(userId));
+        setIsLoaded(true);
+      }
+    })();
   }, [dispatch, userId]);
 
   useEffect(() => {
@@ -32,10 +43,10 @@ const ProfilePage = () => {
   }, [userId]);
 
   useEffect(() => {
-    if (user) {
-      setIsLoaded(true);
+    if (invalidUser) {
+      history.push("/users/not-found");
     }
-  }, [user]);
+  }, [invalidUser, history]);
 
   if (!isLoaded || !user) {
     return null;
@@ -55,7 +66,7 @@ const ProfilePage = () => {
           ))}
         </>
       )}
-      {user.comments.length > 0 && (
+      {Object.values(comments).length > 0 && (
         <>
           <div className="p-2">
             <h3>Comments</h3>

@@ -18,6 +18,7 @@ import Sidebar from "./components/Sidebar";
 import CollapsedSidebar from "./components/CollpasedSidebar";
 import CommunitiesContainer from "./components/CommunitiesContainer";
 import ProfilePage from "./components/ProfilePage";
+import UserNotFound from "./components/UserNotFound";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -80,8 +81,11 @@ const App = () => {
               <Route path="/search">
                 <SearchResults />
               </Route>
-              <Route path="/users/:userId">
+              <Route path="/users/:userId(\d+)">
                 <ProfilePage />
+              </Route>
+              <Route path="/users/not-found">
+                <UserNotFound />
               </Route>
               <Route>
                 <PageNotFound />

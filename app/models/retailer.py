@@ -13,9 +13,11 @@ class Retailer(db.Model):
     state = db.Column(db.String(25), nullable=False)
     lat = db.Column(db.Numeric(scale=7))
     lng = db.Column(db.Numeric(scale=7))
-    created_at = db.Column(db.DateTime, nullable=False,
+    created_at = db.Column(db.DateTime,
+                           nullable=False,
                            default=datetime.datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullable=False,
+    updated_at = db.Column(db.DateTime,
+                           nullable=False,
                            default=datetime.datetime.utcnow)
 
     user = db.relationship("User", back_populates="retailers")
@@ -34,7 +36,9 @@ class Retailer(db.Model):
             "lng": float(self.lng or 0),
             "created_at": self.created_at,
             "images": [image.image_url for image in self.images],
-            "ratings": [rating.to_dict() for rating in self.ratings],
+            "ratings":
+            {rating.user_id: rating.to_dict()
+             for rating in self.ratings},
         }
 
     def to_simple_dict(self):
