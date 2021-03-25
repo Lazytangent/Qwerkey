@@ -41,6 +41,15 @@ export const getMeetupById = (meetupId) => async (dispatch) => {
   return meetup;
 };
 
+export const getMeetupLocation = (meetupId) => async (dispatch) => {
+  const res = await fetch(`/api/meetups/${meetupId}/location`);
+  const meetup = await res.json();
+  if (!meetup.errors) {
+    dispatch(setMeetup(meetup));
+  }
+  return meetup;
+};
+
 export const createMeetup = (meetupData) => async (dispatch) => {
   const res = await fetch(`/api/meetups`, {
     method: "POST",
