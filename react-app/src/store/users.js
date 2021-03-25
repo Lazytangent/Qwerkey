@@ -45,7 +45,9 @@ export const getUsers = (page) => async (dispatch) => {
 export const getUser = (userId) => async (dispatch) => {
   const res = await fetch(`/api/users/${userId}`);
   const user = await res.json();
-  dispatch(setUser(user));
+  if (!user.errors) {
+    dispatch(setUser(user));
+  }
   return user;
 };
 
