@@ -1,5 +1,7 @@
+import requests
 from flask import Blueprint, request
 
+from app.config import Config
 from app.forms import CreateMeetup
 from app.helpers import validation_errors_to_error_messages
 from app.models import db, Meetup
@@ -55,3 +57,19 @@ def update_meetup(meetup_id):
             return {"message": "Delete Successful"}
         return {"errors": "Invalid Meetup."}
     return "Bad route", 404
+
+
+@meetup_routes.route('/<int:meetup_id>/location')
+def get_meetup_lat_lng(meetup_id):
+    meetup = Meetup.query.get(meetup_id)
+    if meetup:
+        response = requests.get(
+            "https://api/opencagedata.com/geocode/v1/json?" +
+            f"key={Config.OPEN_CAGE_API_KEY}" +
+            f"&q={meetup.city},{meetup.state},USA")
+        data = response.json()
+        meetup.lng = data["results"][0]["geometry"]["lng"]
+        meetup.lat = data["results"][0]["geometry"]["lat"]
+        db.session.commit()
+        return meetup.to_dict()
+    return {"errors": "Invalid meetup ID."}
