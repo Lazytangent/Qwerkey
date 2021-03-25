@@ -2,7 +2,7 @@ const initialState = {
   meetups: {},
 };
 
-const meetupsReducer = (state = initialState, action) {
+const meetupsReducer = (state = initialState, action) => {
   switch (action.type) {
     default:
       return state;
