@@ -19,6 +19,7 @@ import CollapsedSidebar from "./components/CollpasedSidebar";
 import CommunitiesContainer from "./components/CommunitiesContainer";
 import ProfilePage from "./components/ProfilePage";
 import UserNotFound from "./components/UserNotFound";
+import MeetupsContainer from "./components/MeetupsContainer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -86,6 +87,12 @@ const App = () => {
               </Route>
               <Route path="/users/not-found">
                 <UserNotFound />
+              </Route>
+              <Route path="/meetups" exact>
+                <MeetupsContainer />
+              </Route>
+              <Route path="/meetups/:meetupId(\d+)">
+                <MeetupPage />
               </Route>
               <Route>
                 <PageNotFound />
