@@ -1,7 +1,9 @@
-const UserName = () => {
+import { NavLink } from "react-router-dom";
+
+const UserName = ({ username, link }) => {
   return (
     <>
-      <h3>Placeholder for UserName</h3>
+      <NavLink to={link}><span className="underline hover:text-green">{username}</span></NavLink>
     </>
   );
 };
