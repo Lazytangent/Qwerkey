@@ -12,6 +12,7 @@ import Downvote from "../parts/Downvote";
 import Upvote from "../parts/Upvote";
 import Score from "../parts/Score";
 import DivCard from "../parts/DivCard";
+import UserName from "../parts/UserName";
 import options from "../../utils/localeDateString";
 
 const Post = ({ post }) => {
@@ -67,7 +68,7 @@ const Post = ({ post }) => {
       <hr />
       <div className="flex items-center justify-between p-2">
         <p>
-          by <NavLink to={`/users/${post.user.id}`}><span className="hover:text-green hover:underline">{post.user.username}</span></NavLink> on{" "}
+          by <UserName username={post.user.username} link={`/users/${post.user.id}`} /> on{" "}
           <span className="hidden md:block">{new Date(post.created_at).toLocaleString(...options())}</span>
         </p>
         {user && post.user.id === user.id && post.body !== "[DELETED]" && (
