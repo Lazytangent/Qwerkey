@@ -28,10 +28,13 @@ const ProfilePage = () => {
     window.scrollTo(0, 0);
     (async () => {
       const user = await dispatch(getUser(userId));
-      if (user.errors) setInvalidUser(true);
-      await dispatch(getPostsByUser(userId));
-      await dispatch(getRetailersByUser(userId));
-      setIsLoaded(true);
+      if (user.errors) {
+        setInvalidUser(true);
+      } else {
+        await dispatch(getPostsByUser(userId));
+        await dispatch(getRetailersByUser(userId));
+        setIsLoaded(true);
+      }
     })();
   }, [dispatch, userId]);
 

@@ -1,6 +1,6 @@
 const UserNotFound = () => {
   return (
-    <div>
+    <div className="p-2 flex justify-center">
       <h3>User Not Found.</h3>
     </div>
   );
