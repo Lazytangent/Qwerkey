@@ -49,7 +49,9 @@ def update_meetup(meetup_id):
             return meetup.to_dict()
         return {"errors": validation_errors_to_error_messages(form.errors)}
     elif request.method == "DELETE":
-        db.session.delete(meetup)
-        db.session.commit()
-        return "Delete Successful"
+        if meetup:
+            db.session.delete(meetup)
+            db.session.commit()
+            return {"message": "Delete Successful"}
+        return {"errors": "Invalid Meetup."}
     return "Bad route", 404
