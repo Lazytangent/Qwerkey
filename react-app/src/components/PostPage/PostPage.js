@@ -36,7 +36,7 @@ const PostPage = () => {
   return (
     <>
       <Post post={post} />
-      {user && post.user.id !== user.id && (
+      {user && (
         <div>
           <CreateCommentForm userId={user.id} postId={post.id} />
         </div>
