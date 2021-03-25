@@ -16,6 +16,12 @@ def get_meetups():
     return {meetup.id: meetup.to_dict() for meetup in meetups.items}
 
 
+@meetup_routes.route('/max')
+def get_max_number_of_meetups():
+    number = Meetup.query.count()
+    return {"max": number}
+
+
 @meetup_routes.route('', methods=["POST"])
 def create_meetup():
     form = CreateMeetup()
