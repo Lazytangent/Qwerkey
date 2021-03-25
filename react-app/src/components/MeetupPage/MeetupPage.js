@@ -11,7 +11,6 @@ const MeetupPage = () => {
 
   const dispatch = useDispatch();
   const meetup = useSelector((state) => state.meetups.meetups[meetupId]);
-  const user = useSelector((state) => state.session.user);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
