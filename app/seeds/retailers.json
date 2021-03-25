@@ -1,28 +1,28 @@
 [
     {
         "user_id": 1,
-        "name": "context-sensitive",
-        "description": "Phasellus in felis. Donec semper sapien a libero. Nam dui.Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.",
+        "name": "CannonKeys",
+        "description": "When I first started in the Mechanical Keyboard community, I was blown away by the amount of choices available! There are tons of varieties of switches, layouts, and customs that exist, and people can choose from. One big problem I found was that I didn't know what I liked! And in order to find out, I had to spend lots of money on different layouts. Not to mention, most custom products had some element of DIY. I didn't want to spend $200 on a custom, just to ruin it. CannonKeys exists to address that problem. We offer affordable kits that people can use to learn their preferences, and well as gain the soldering skills necessary to put together custom builds. Our kits support both through hole and surface mount parts, so there is learning to be had for newcomers and veterans alike. We also strive to push the envelope, with fresh designs and new features on our customs.",
         "city": "Bradenton",
         "state": "Florida"
     },
     {
         "user_id": 2,
-        "name": "Fundamental",
+        "name": "Keyhive",
         "description": "Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.",
         "city": "Amarillo",
         "state": "Texas"
     },
     {
         "user_id": 3,
-        "name": "executive",
+        "name": "Keebio",
         "description": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
         "city": "Saint Louis",
         "state": "Missouri"
     },
     {
         "user_id": 4,
-        "name": "context-sensitive",
+        "name": "Switch Couture",
         "description": "Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
         "city": "Salt Lake City",
         "state": "Utah"
