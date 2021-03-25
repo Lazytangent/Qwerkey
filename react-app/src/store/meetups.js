@@ -108,6 +108,7 @@ export const deleteMeetup = (meetupId) => async (dispatch) => {
 
 const initialState = {
   meetups: {},
+  max: null,
 };
 
 const meetupsReducer = (state = initialState, action) => {
