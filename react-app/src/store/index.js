@@ -9,6 +9,7 @@ import searchReducer from "./search";
 import communitiesReducer from "./communities";
 import sidebarReducer from "./sidebar";
 import usersReducer from "./users";
+import meetupsReducer from "./meetups";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   communities: communitiesReducer,
   sidebar: sidebarReducer,
   users: usersReducer,
+  meetups: meetupsReducer,
 });
 
 let enhancer;
