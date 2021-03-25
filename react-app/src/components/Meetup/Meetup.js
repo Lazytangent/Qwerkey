@@ -1,8 +1,18 @@
-const Meetup = () => {
+import { NavLink } from "react-router-dom";
+
+import DivCard from "../parts/DivCard";
+
+const Meetup = ({ meetup }) => {
   return (
-    <>
-      <h3>Placeholder for Meetup</h3>
-    </>
+    <DivCard>
+      <h3 className="p-2">
+        <NavLink to={`/meetups/${meetup.id}`}>
+          <span className="hover:underline">
+            {meetup.name}
+          </span>
+        </NavLink>
+      </h3>
+    </DivCard>
   );
 };
 

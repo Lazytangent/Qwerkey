@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 import { getMeetups } from "../../store/meetups";
 import Meetup from "../Meetup";
@@ -15,7 +16,7 @@ const MeetupsContainer = () => {
   return (
     <>
       {Object.values(meetups).map(meetup => (
-        <Meetup meetup={meetup} />
+        <Meetup meetup={meetup} key={uuidv4()} />
       ))}
     </>
   );

@@ -11,6 +11,7 @@ import SaveButton from "../parts/SaveButton";
 import Downvote from "../parts/Downvote";
 import Upvote from "../parts/Upvote";
 import Score from "../parts/Score";
+import DivCard from "../parts/DivCard";
 import options from "../../utils/localeDateString";
 
 const Post = ({ post }) => {
@@ -50,10 +51,7 @@ const Post = ({ post }) => {
   };
 
   return (
-    <div
-      key={post.id}
-      className="p-2 mb-2 rounded shadow-sm hover:shadow-lg dark:bg-gray-800 dark:hover:shadow-light-lg dark:shadow-light transform duration-100 ease-in-out"
-    >
+    <DivCard>
       <h3 className="p-2">
         <NavLink to={`/q/${post.community.name}/${post.id}`}>
           <span className="hover:underline">{post.title}</span>
@@ -102,7 +100,7 @@ const Post = ({ post }) => {
           </div>
         )}
       </div>
-    </div>
+    </DivCard>
   );
 };
 
