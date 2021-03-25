@@ -49,7 +49,7 @@ def generate_location(retailer_id):
     return retailer.to_dict()
 
 
-@retailer_routes.route('/', methods=["POST"])
+@retailer_routes.route('', methods=["POST"])
 def create_retailer():
     form = CreateRetailer()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -78,7 +78,9 @@ def update_or_delete_retailer(retailer_id):
         return {"errors": validation_errors_to_error_messages(form.errors)}
     elif request.method == "DELETE":
         if retailer:
-            pass
+            db.session.delete(retailer)
+            db.session.commit()
+            return {"message": "Delete Successful."}
         return {"errors": "Invalid Retailer."}
     return {"errors": "Invalid route."}, 405
 
