@@ -1,8 +1,8 @@
 const UserNotFound = () => {
   return (
-    <>
-      <h3>Placeholder for UserNotFound</h3>
-    </>
+    <div>
+      <h3>User Not Found.</h3>
+    </div>
   );
 };
 
