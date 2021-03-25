@@ -15,6 +15,24 @@ const setMeetup = (meetup) => {
   };
 };
 
+export const getMeetups = (page) => async (dispatch) => {
+  const res = await fetch(`/api/meetups?page=${page}`);
+  const meetups = await res.json();
+  if (!meetups.errors) {
+    dispatch(setMeetups(meetups));
+  }
+  return meetups;
+};
+
+export const getMeetupById = (meetupId) => async (dispatch) => {
+  const res = await fetch(`/api/meetups/${meetupId}`);
+  const meetup = await res.json();
+  if (!meetup.errors) {
+    dispatch(setMeetup(meetup));
+  }
+  return meetup;
+};
+
 const initialState = {
   meetups: {},
 };
