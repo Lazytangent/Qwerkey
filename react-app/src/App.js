@@ -20,6 +20,7 @@ import CommunitiesContainer from "./components/CommunitiesContainer";
 import ProfilePage from "./components/ProfilePage";
 import UserNotFound from "./components/UserNotFound";
 import MeetupsContainer from "./components/MeetupsContainer";
+import MeetupPage from "./components/MeetupPage";
 
 const App = () => {
   const dispatch = useDispatch();
