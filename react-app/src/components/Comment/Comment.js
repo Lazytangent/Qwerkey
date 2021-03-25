@@ -12,6 +12,7 @@ import Downvote from "../parts/Downvote";
 import Upvote from "../parts/Upvote";
 import Score from "../parts/Score";
 import SaveButton from "../parts/SaveButton";
+import UserName from "../parts/UserName";
 import options from "../../utils/localeDateString";
 
 const Comment = ({ comment, userId }) => {
@@ -65,11 +66,7 @@ const Comment = ({ comment, userId }) => {
       <div className="flex justify-between p-2">
         <p className="p-2">
           by{" "}
-          <NavLink to={`/users/${comment.user.id}`}>
-            <span className="hover:text-green hover:underline">
-              {comment.user.username}
-            </span>
-          </NavLink> on{" "}
+          <UserName link={`/users/${comment.user.id}`} username={comment.user.username} /> on{" "}
           <span className="hidden md:block">{new Date(comment.created_at).toLocaleString(...options())}</span>
         </p>
       {comment.user.id === userId && comment.body !== "[DELETED]" && (
