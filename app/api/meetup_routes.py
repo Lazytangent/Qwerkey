@@ -64,7 +64,7 @@ def get_meetup_lat_lng(meetup_id):
     meetup = Meetup.query.get(meetup_id)
     if meetup:
         response = requests.get(
-            "https://api/opencagedata.com/geocode/v1/json?" +
+            "https://api.opencagedata.com/geocode/v1/json?" +
             f"key={Config.OPEN_CAGE_API_KEY}" +
             f"&q={meetup.city},{meetup.state},USA")
         data = response.json()
