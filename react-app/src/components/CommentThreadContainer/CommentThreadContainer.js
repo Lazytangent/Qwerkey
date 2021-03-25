@@ -9,7 +9,7 @@ const CommentsContainer = () => {
   return (
     <>
       {Object.values(comments).map((comment) =>
-        <Comment key={comment.id} comment={comment} userId={user.id} />
+      <Comment key={comment.id} comment={comment} userId={user ? user.id : 0} />
       )}
     </>
   );
