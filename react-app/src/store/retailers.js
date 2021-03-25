@@ -1,7 +1,15 @@
+const REMOVE_RETAILER = "retailers/REMOVE_RETAILER";
 const SET_MORE_RETAILERS = 'retailers/SET_MORE_RETAILERS';
 const SET_RETAILERS = 'retailers/SET_RETAILERS';
 const SET_RETAILER = 'retailers/SET_RETAILER';
 const SET_MAX = 'retailers/SET_MAX';
+
+const removeRetailer = (id) => {
+  return {
+    type: REMOVE_RETAILER,
+    id,
+  };
+};
 
 const setMaxNumberOfRetailers = (number) => {
   return {
@@ -72,6 +80,47 @@ export const getOneRetailerLocation = (retailerId) => async (dispatch) => {
   return retailer;
 };
 
+export const createRetailer = (retailerData) => async (dispatch) => {
+  const res = await fetch(`/api/retailers`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(retailerData),
+  });
+  const retailer = await res.json();
+  if (!retailer.errors) {
+    dispatch(setRetailer(retailer));
+  }
+  return retailer;
+};
+
+export const updateRetailer = (retailerData) => async (dispatch) => {
+  const res = await fetch(`/api/retailers/${retailerData.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(retailerData),
+  });
+  const retailer = await res.json();
+  if (!retailer.errors) {
+    dispatch(setRetailer(retailer));
+  }
+  return retailer;
+};
+
+export const deleteRetailer = (retailerId) => async (dispatch) => {
+  const res = await fetch(`/api/retailers/${retailerId}`, {
+    method: "DELETE",
+  });
+  const data = await res.json();
+  if (!data.errors) {
+    dispatch(removeRetailer(retailerId));
+  }
+  return data;
+};
+
 export const createRetailerRating = (rating, retailer_id) => async (dispatch) => {
   const res = await fetch(`/api/retailers/${retailer_id}/ratings`, {
     method: "POST",
@@ -128,6 +177,8 @@ const retailersReducer = (state = initialState, action) => {
       return { ...state, retailers: { ...state.retailers, [action.retailer.id]: action.retailer } };
     case SET_MAX:
       return { ...state, max: action.number };
+    case REMOVE_RETAILER:
+      return { ...state, retailers: { ...state.retailers, [action.id]: undefined } };
     default:
       return state;
   }
