@@ -22,6 +22,7 @@ import * as retailerActions from "./store/retailers";
 import * as searchActions from "./store/search";
 import * as communityActions from "./store/communities";
 import * as sidebarActions from "./store/sidebar";
+import * as meetupActions from "./store/meetups";
 
 const store = configureStore();
 
@@ -34,6 +35,7 @@ if (process.env.NODE_ENV !== "production") {
   window.searchActions = searchActions;
   window.communityActions = communityActions;
   window.sidebarActions = sidebarActions;
+  window.meetupActions = meetupActions;
 }
 
 const Root = () => (
