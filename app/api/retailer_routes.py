@@ -4,7 +4,7 @@ from flask import Blueprint, request
 
 from app.config import Config
 from app.helpers import validation_errors_to_error_messages
-from app.forms import CreateRetailerRating
+from app.forms import CreateRetailerRating, CreateRetailer
 from app.models import db, Retailer, RetailerRating
 
 retailer_routes = Blueprint("retailers", __name__)
@@ -47,6 +47,40 @@ def generate_location(retailer_id):
     retailer.lat = data["results"][0]["geometry"]["lat"]
     db.session.commit()
     return retailer.to_dict()
+
+
+@retailer_routes.route('/', methods=["POST"])
+def create_retailer():
+    form = CreateRetailer()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        retailer = Retailer()
+        form.populate_obj(retailer)
+        db.session.add(retailer)
+        db.session.commit()
+        return retailer.to_dict()
+    return {"errors": validation_errors_to_error_messages(form.errors)}
+
+
+@retailer_routes.route('/<int:retailer_id>', methods=["PUT", "DELETE"])
+def update_or_delete_retailer(retailer_id):
+    retailer = Retailer.query.get(retailer_id)
+    if request.method == "PUT":
+        form = CreateRetailer()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            retailer.name = form['name'].data
+            retailer.description = form['description'].data
+            retailer.city = form['city'].data
+            retailer.state = form['state'].data
+            db.session.commit()
+            return retailer.to_dict()
+        return {"errors": validation_errors_to_error_messages(form.errors)}
+    elif request.method == "DELETE":
+        if retailer:
+            pass
+        return {"errors": "Invalid Retailer."}
+    return {"errors": "Invalid route."}, 405
 
 
 @retailer_routes.route('/<int:retailer_id>/ratings', methods=["POST"])
