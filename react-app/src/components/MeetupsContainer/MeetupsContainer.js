@@ -28,6 +28,37 @@ const MeetupsContainer = () => {
     }
   }, [dispatch, page, maxMeetups]);
 
+  useEffect(() => {
+    if (meetups) {
+      setIsLoaded(true);
+      setCurrentMeetups(Object.values(meetups));
+    }
+  }, [meetups]);
+
+  useEffect(() => {
+    if (page * 20 > maxMeetups) {
+      setCurrentMeetups(prev => prev.concat(Object.values(meetups).slice(0, page * 20 % maxMeetups || maxMeetups)));
+    }
+  }, [meetups, maxMeetups, page]);
+
+  useEffect(() => {
+    const scrollListener = () => {
+      const scroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (scroll / height);
+      if (scrolled > 0.9) {
+        setPage(prev => prev + 1);
+      }
+    };
+
+    window.addEventListener("scroll", scrollListener);
+    return () => window.removeEventListener("scroll", scrollListener);
+  }, [page, maxMeetups, meetups]);
+
+  if (!isLoaded) {
+    return null;
+  }
+
   return (
     <>
       {Object.values(meetups).map(meetup => (
