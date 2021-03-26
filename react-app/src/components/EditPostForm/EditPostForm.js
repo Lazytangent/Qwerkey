@@ -7,7 +7,7 @@ import FormErrors from '../parts/FormErrors';
 import InputField from '../parts/InputField';
 import SubmitFormButton from '../parts/SubmitFormButton';
 
-const EditPostForm = ({ postId }) => {
+const EditPostForm = ({ postId, setShowEditModal }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const post = useSelector(state => state.posts.posts[postId]);
@@ -45,6 +45,8 @@ const EditPostForm = ({ postId }) => {
       const newPost = await dispatch(updatePost({ title, body, images: newImages, postId, userId: post.user.id, communityId: post.community.id }));
       if (newPost.errors) {
         setErrors(newPost.errors);
+      } else {
+        setShowEditModal(false);
       }
     }
   };

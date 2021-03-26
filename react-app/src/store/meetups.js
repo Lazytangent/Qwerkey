@@ -1,6 +1,22 @@
+const SET_MAX = "meetups/SET_MAX";
+const SET_MORE_MEETUPS = "meetups/SET_MORE_MEETUPS";
 const SET_MEETUPS = "meetups/SET_MEETUPS";
 const SET_MEETUP = "meetups/SET_MEETUP";
 const REMOVE_MEETUP = "meetups/REMOVE_MEETUP";
+
+const setMoreMeetups = (meetups) => {
+  return {
+    type: SET_MORE_MEETUPS,
+    meetups,
+  };
+};
+
+const setMaxNumberOfMeetups = (number) => {
+  return {
+    type: SET_MAX,
+    number,
+  };
+};
 
 const removeMeetup = (id) => {
   return {
@@ -27,6 +43,19 @@ export const getMeetups = (page) => async (dispatch) => {
   const res = await fetch(`/api/meetups?page=${page}`);
   const meetups = await res.json();
   if (!meetups.errors) {
+    if (page === 1) {
+      dispatch(setMeetups(meetups));
+    } else {
+      dispatch(setMoreMeetups(meetups))
+    }
+  }
+  return meetups;
+};
+
+export const getMeetupsByUser = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/meetups`);
+  const meetups = await res.json();
+  if (!meetups.errors) {
     dispatch(setMeetups(meetups));
   }
   return meetups;
@@ -39,6 +68,22 @@ export const getMeetupById = (meetupId) => async (dispatch) => {
     dispatch(setMeetup(meetup));
   }
   return meetup;
+};
+
+export const getMeetupLocation = (meetupId) => async (dispatch) => {
+  const res = await fetch(`/api/meetups/${meetupId}/location`);
+  const meetup = await res.json();
+  if (!meetup.errors) {
+    dispatch(setMeetup(meetup));
+  }
+  return meetup;
+};
+
+export const getMaxNumberOfMeetups = () => async (dispatch) => {
+  const res = await fetch(`/api/meetups/max`);
+  const number = await res.json();
+  dispatch(setMaxNumberOfMeetups(number.max));
+  return number;
 };
 
 export const createMeetup = (meetupData) => async (dispatch) => {
@@ -84,10 +129,15 @@ export const deleteMeetup = (meetupId) => async (dispatch) => {
 
 const initialState = {
   meetups: {},
+  max: null,
 };
 
 const meetupsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_MAX:
+      return { ...state, max: action.number };
+    case SET_MORE_MEETUPS:
+      return { ...state, meetups: { ...state.meetups, ...action.meetups } };
     case SET_MEETUPS:
       return { ...state, meetups: { ...action.meetups } };
     case SET_MEETUP:

@@ -1,5 +1,7 @@
+import requests
 from flask import Blueprint, request
 
+from app.config import Config
 from app.forms import CreateMeetup
 from app.helpers import validation_errors_to_error_messages
 from app.models import db, Meetup
@@ -14,12 +16,19 @@ def get_meetups():
     return {meetup.id: meetup.to_dict() for meetup in meetups.items}
 
 
+@meetup_routes.route('/max')
+def get_max_number_of_meetups():
+    number = Meetup.query.count()
+    return {"max": number}
+
+
 @meetup_routes.route('', methods=["POST"])
 def create_meetup():
     form = CreateMeetup()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         meetup = Meetup()
+        print(request.form.get('date'))
         form.populate_obj(meetup)
         db.session.add(meetup)
         db.session.commit()
@@ -55,3 +64,19 @@ def update_meetup(meetup_id):
             return {"message": "Delete Successful"}
         return {"errors": "Invalid Meetup."}
     return "Bad route", 404
+
+
+@meetup_routes.route('/<int:meetup_id>/location')
+def get_meetup_lat_lng(meetup_id):
+    meetup = Meetup.query.get(meetup_id)
+    if meetup:
+        response = requests.get(
+            "https://api.opencagedata.com/geocode/v1/json?" +
+            f"key={Config.OPEN_CAGE_API_KEY}" +
+            f"&q={meetup.city},{meetup.state},USA")
+        data = response.json()
+        meetup.lng = data["results"][0]["geometry"]["lng"]
+        meetup.lat = data["results"][0]["geometry"]["lat"]
+        db.session.commit()
+        return meetup.to_dict()
+    return {"errors": "Invalid meetup ID."}

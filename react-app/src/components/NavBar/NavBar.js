@@ -102,6 +102,16 @@ const NavBar = () => {
               Communities
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              className="p-2 align-middle hover:underline hover:text-purple-dark"
+              to="/meetups"
+              exact={true}
+              activeClassName="active"
+            >
+              Meetups
+            </NavLink>
+          </li>
         </div>
         {!authenticated && (
           <div className="flex col-start-6 col-span-2">
