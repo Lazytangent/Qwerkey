@@ -27,7 +27,9 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     if (user) {
-      setIsSaved(user.saved_posts.some(savedPost => savedPost.id === post.id));
+      setIsSaved(
+        user.saved_posts.some((savedPost) => savedPost.id === post.id)
+      );
       if (post.user.id !== user.id && post.ratings && post.ratings[user.id]) {
         setRating(post.ratings[user.id].rating);
       }
@@ -46,7 +48,7 @@ const Post = ({ post }) => {
     const updatedUser = await dispatch(savePost(user.id, post.id));
     if (!updatedUser.errors) {
       if (!(locationArr[1] === "users" && locationArr[2] === String(user.id))) {
-        setIsSaved(prev => !prev);
+        setIsSaved((prev) => !prev);
       }
     }
   };
@@ -68,29 +70,17 @@ const Post = ({ post }) => {
       <hr />
       <div className="flex items-center justify-between p-2">
         <p>
-          by <UserName username={post.user.username} link={`/users/${post.user.id}`} /> on{" "}
-          <span className="hidden md:block">{new Date(post.created_at).toLocaleString(...options())}</span>
+          by{" "}
+          <UserName
+            username={post.user.username}
+            link={`/users/${post.user.id}`}
+          />{" "}
+          on{" "}
+          <span className="hidden md:block">
+            {new Date(post.created_at).toLocaleString(...options())}
+          </span>
         </p>
-        {user && post.user.id === user.id && post.body !== "[DELETED]" && (
-          <div>
-            <EditButton label="Edit Post" onClick={editBtnHandler}>
-              <EditPostModal
-                showEditModal={showEditModal}
-                setShowEditModal={setShowEditModal}
-                postId={post.id}
-              />
-            </EditButton>
-            <DeleteButton label="Delete Post" onClick={deleteBtnHandler}>
-              <DeleteConfirmationModal
-                showDeleteModal={showDeleteModal}
-                setShowDeleteModal={setShowDeleteModal}
-                id={post.id}
-                type="post"
-              />
-            </DeleteButton>
-          </div>
-        )}
-        {user && post.user.id !== user.id && (
+        {user && (
           <div className="flex">
             <div className="flex justify-around p-2">
               <Downvote id={post.id} type="post" rating={rating} />
@@ -101,6 +91,25 @@ const Post = ({ post }) => {
           </div>
         )}
       </div>
+      {user && post.user.id === user.id && post.body !== "[DELETED]" && (
+        <div className="flex justify-end">
+          <EditButton label="Edit Post" onClick={editBtnHandler}>
+            <EditPostModal
+              showEditModal={showEditModal}
+              setShowEditModal={setShowEditModal}
+              postId={post.id}
+            />
+          </EditButton>
+          <DeleteButton label="Delete Post" onClick={deleteBtnHandler}>
+            <DeleteConfirmationModal
+              showDeleteModal={showDeleteModal}
+              setShowDeleteModal={setShowDeleteModal}
+              id={post.id}
+              type="post"
+            />
+          </DeleteButton>
+        </div>
+      )}
     </DivCard>
   );
 };

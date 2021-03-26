@@ -1,0 +1,502 @@
+[
+    {
+        "user_id": 20,
+        "comment_id": 19,
+        "rating": -1
+    },
+    {
+        "user_id": 43,
+        "comment_id": 91,
+        "rating": -1
+    },
+    {
+        "user_id": 33,
+        "comment_id": 61,
+        "rating": 1
+    },
+    {
+        "user_id": 53,
+        "comment_id": 27,
+        "rating": 0
+    },
+    {
+        "user_id": 38,
+        "comment_id": 34,
+        "rating": 1
+    },
+    {
+        "user_id": 11,
+        "comment_id": 29,
+        "rating": 1
+    },
+    {
+        "user_id": 80,
+        "comment_id": 64,
+        "rating": 1
+    },
+    {
+        "user_id": 11,
+        "comment_id": 91,
+        "rating": 1
+    },
+    {
+        "user_id": 69,
+        "comment_id": 28,
+        "rating": -1
+    },
+    {
+        "user_id": 62,
+        "comment_id": 26,
+        "rating": 1
+    },
+    {
+        "user_id": 83,
+        "comment_id": 19,
+        "rating": 1
+    },
+    {
+        "user_id": 66,
+        "comment_id": 70,
+        "rating": -1
+    },
+    {
+        "user_id": 48,
+        "comment_id": 62,
+        "rating": 1
+    },
+    {
+        "user_id": 89,
+        "comment_id": 37,
+        "rating": -1
+    },
+    {
+        "user_id": 15,
+        "comment_id": 19,
+        "rating": 1
+    },
+    {
+        "user_id": 4,
+        "comment_id": 79,
+        "rating": -1
+    },
+    {
+        "user_id": 92,
+        "comment_id": 90,
+        "rating": 0
+    },
+    {
+        "user_id": 92,
+        "comment_id": 43,
+        "rating": -1
+    },
+    {
+        "user_id": 64,
+        "comment_id": 60,
+        "rating": 0
+    },
+    {
+        "user_id": 96,
+        "comment_id": 22,
+        "rating": 1
+    },
+    {
+        "user_id": 70,
+        "comment_id": 69,
+        "rating": 0
+    },
+    {
+        "user_id": 69,
+        "comment_id": 29,
+        "rating": -1
+    },
+    {
+        "user_id": 4,
+        "comment_id": 83,
+        "rating": 0
+    },
+    {
+        "user_id": 68,
+        "comment_id": 37,
+        "rating": 0
+    },
+    {
+        "user_id": 44,
+        "comment_id": 1,
+        "rating": -1
+    },
+    {
+        "user_id": 89,
+        "comment_id": 57,
+        "rating": -1
+    },
+    {
+        "user_id": 29,
+        "comment_id": 37,
+        "rating": 1
+    },
+    {
+        "user_id": 82,
+        "comment_id": 25,
+        "rating": 0
+    },
+    {
+        "user_id": 42,
+        "comment_id": 96,
+        "rating": 1
+    },
+    {
+        "user_id": 27,
+        "comment_id": 26,
+        "rating": -1
+    },
+    {
+        "user_id": 6,
+        "comment_id": 43,
+        "rating": 1
+    },
+    {
+        "user_id": 31,
+        "comment_id": 12,
+        "rating": 1
+    },
+    {
+        "user_id": 83,
+        "comment_id": 92,
+        "rating": 0
+    },
+    {
+        "user_id": 68,
+        "comment_id": 1,
+        "rating": 0
+    },
+    {
+        "user_id": 59,
+        "comment_id": 93,
+        "rating": 1
+    },
+    {
+        "user_id": 85,
+        "comment_id": 3,
+        "rating": 1
+    },
+    {
+        "user_id": 56,
+        "comment_id": 54,
+        "rating": 0
+    },
+    {
+        "user_id": 10,
+        "comment_id": 33,
+        "rating": 0
+    },
+    {
+        "user_id": 67,
+        "comment_id": 70,
+        "rating": 1
+    },
+    {
+        "user_id": 78,
+        "comment_id": 53,
+        "rating": -1
+    },
+    {
+        "user_id": 98,
+        "comment_id": 33,
+        "rating": 0
+    },
+    {
+        "user_id": 22,
+        "comment_id": 19,
+        "rating": 1
+    },
+    {
+        "user_id": 70,
+        "comment_id": 68,
+        "rating": 1
+    },
+    {
+        "user_id": 96,
+        "comment_id": 49,
+        "rating": -1
+    },
+    {
+        "user_id": 13,
+        "comment_id": 47,
+        "rating": 0
+    },
+    {
+        "user_id": 100,
+        "comment_id": 44,
+        "rating": 0
+    },
+    {
+        "user_id": 73,
+        "comment_id": 43,
+        "rating": 0
+    },
+    {
+        "user_id": 23,
+        "comment_id": 61,
+        "rating": 1
+    },
+    {
+        "user_id": 79,
+        "comment_id": 15,
+        "rating": 1
+    },
+    {
+        "user_id": 9,
+        "comment_id": 25,
+        "rating": -1
+    },
+    {
+        "user_id": 35,
+        "comment_id": 67,
+        "rating": -1
+    },
+    {
+        "user_id": 28,
+        "comment_id": 89,
+        "rating": 1
+    },
+    {
+        "user_id": 44,
+        "comment_id": 51,
+        "rating": 1
+    },
+    {
+        "user_id": 53,
+        "comment_id": 53,
+        "rating": 1
+    },
+    {
+        "user_id": 50,
+        "comment_id": 92,
+        "rating": 0
+    },
+    {
+        "user_id": 56,
+        "comment_id": 58,
+        "rating": 0
+    },
+    {
+        "user_id": 75,
+        "comment_id": 6,
+        "rating": 0
+    },
+    {
+        "user_id": 25,
+        "comment_id": 57,
+        "rating": -1
+    },
+    {
+        "user_id": 55,
+        "comment_id": 85,
+        "rating": -1
+    },
+    {
+        "user_id": 23,
+        "comment_id": 6,
+        "rating": -1
+    },
+    {
+        "user_id": 18,
+        "comment_id": 39,
+        "rating": -1
+    },
+    {
+        "user_id": 40,
+        "comment_id": 19,
+        "rating": 0
+    },
+    {
+        "user_id": 29,
+        "comment_id": 81,
+        "rating": -1
+    },
+    {
+        "user_id": 67,
+        "comment_id": 54,
+        "rating": -1
+    },
+    {
+        "user_id": 76,
+        "comment_id": 24,
+        "rating": 0
+    },
+    {
+        "user_id": 56,
+        "comment_id": 13,
+        "rating": 0
+    },
+    {
+        "user_id": 34,
+        "comment_id": 70,
+        "rating": 1
+    },
+    {
+        "user_id": 75,
+        "comment_id": 51,
+        "rating": -1
+    },
+    {
+        "user_id": 79,
+        "comment_id": 98,
+        "rating": -1
+    },
+    {
+        "user_id": 70,
+        "comment_id": 52,
+        "rating": 0
+    },
+    {
+        "user_id": 60,
+        "comment_id": 56,
+        "rating": 1
+    },
+    {
+        "user_id": 11,
+        "comment_id": 59,
+        "rating": -1
+    },
+    {
+        "user_id": 30,
+        "comment_id": 86,
+        "rating": 0
+    },
+    {
+        "user_id": 71,
+        "comment_id": 97,
+        "rating": -1
+    },
+    {
+        "user_id": 3,
+        "comment_id": 66,
+        "rating": 1
+    },
+    {
+        "user_id": 74,
+        "comment_id": 48,
+        "rating": 1
+    },
+    {
+        "user_id": 11,
+        "comment_id": 16,
+        "rating": 0
+    },
+    {
+        "user_id": 88,
+        "comment_id": 51,
+        "rating": -1
+    },
+    {
+        "user_id": 83,
+        "comment_id": 58,
+        "rating": 1
+    },
+    {
+        "user_id": 33,
+        "comment_id": 64,
+        "rating": 0
+    },
+    {
+        "user_id": 91,
+        "comment_id": 36,
+        "rating": -1
+    },
+    {
+        "user_id": 78,
+        "comment_id": 58,
+        "rating": -1
+    },
+    {
+        "user_id": 93,
+        "comment_id": 89,
+        "rating": 1
+    },
+    {
+        "user_id": 79,
+        "comment_id": 83,
+        "rating": 0
+    },
+    {
+        "user_id": 19,
+        "comment_id": 83,
+        "rating": 1
+    },
+    {
+        "user_id": 17,
+        "comment_id": 29,
+        "rating": -1
+    },
+    {
+        "user_id": 59,
+        "comment_id": 78,
+        "rating": -1
+    },
+    {
+        "user_id": 13,
+        "comment_id": 79,
+        "rating": 0
+    },
+    {
+        "user_id": 54,
+        "comment_id": 71,
+        "rating": -1
+    },
+    {
+        "user_id": 96,
+        "comment_id": 22,
+        "rating": 0
+    },
+    {
+        "user_id": 21,
+        "comment_id": 56,
+        "rating": 1
+    },
+    {
+        "user_id": 30,
+        "comment_id": 19,
+        "rating": 0
+    },
+    {
+        "user_id": 22,
+        "comment_id": 99,
+        "rating": 0
+    },
+    {
+        "user_id": 90,
+        "comment_id": 51,
+        "rating": -1
+    },
+    {
+        "user_id": 14,
+        "comment_id": 9,
+        "rating": 1
+    },
+    {
+        "user_id": 84,
+        "comment_id": 59,
+        "rating": -1
+    },
+    {
+        "user_id": 67,
+        "comment_id": 77,
+        "rating": 0
+    },
+    {
+        "user_id": 42,
+        "comment_id": 69,
+        "rating": 1
+    },
+    {
+        "user_id": 46,
+        "comment_id": 7,
+        "rating": -1
+    },
+    {
+        "user_id": 79,
+        "comment_id": 79,
+        "rating": -1
+    }
+]
