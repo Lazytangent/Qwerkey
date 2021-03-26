@@ -42,7 +42,7 @@ const Meetup = ({ meetup }) => {
         Scheduled for {new Date(meetup.date).toLocaleString(...options())} in {meetup.city}, {meetup.state}
       </p>
       {user && meetup.user.id === user.id && (
-        <>
+        <div className="p-2 flex justify-end">
           <EditButton label="Edit Meetup" onClick={editBtnHandler}>
             <EditMeetupModal
               showEditModal={showEditModal}
@@ -58,7 +58,7 @@ const Meetup = ({ meetup }) => {
               type="meetup"
             />
           </DeleteButton>
-        </>
+        </div>
       )}
     </DivCard>
   );
