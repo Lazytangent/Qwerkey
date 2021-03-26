@@ -25,7 +25,6 @@ const ProfilePage = () => {
   const comments = useSelector((state) => state.comments.comments);
   const retailers = useSelector((state) => state.retailers.retailers);
   const meetups = useSelector((state) => state.meetups.meetups);
-  console.log(meetups);
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [invalidUser, setInvalidUser] = useState(false);
