@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 import { getUser } from "../../store/users";
 import { getPostsByUser } from "../../store/posts";
@@ -24,6 +25,7 @@ const ProfilePage = () => {
   const comments = useSelector((state) => state.comments.comments);
   const retailers = useSelector((state) => state.retailers.retailers);
   const meetups = useSelector((state) => state.meetups.meetups);
+  console.log(meetups);
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [invalidUser, setInvalidUser] = useState(false);
@@ -101,7 +103,9 @@ const ProfilePage = () => {
             <hr />
           </div>
           {Object.values(meetups).map((meetup) => (
-            <Meetup meetup={meetup} />
+            <div key={uuidv4()}>
+              {meetup && <Meetup meetup={meetup} />}
+            </div>
           ))}
         </>
       )}

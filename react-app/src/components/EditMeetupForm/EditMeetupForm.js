@@ -25,7 +25,7 @@ const EditMeetupForm = ({ meetupId, setShowEditModal }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setState(csc.getStatesOfCountry("US").find((state) => state.name === meetup.state));
+    setStateCode(csc.getStatesOfCountry("US").find((state) => state.name === meetup.state).isoCode);
   }, [meetup.state]);
 
   useEffect(() => {
