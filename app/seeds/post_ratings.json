@@ -1,0 +1,502 @@
+[
+  {
+    "user_id": 79,
+    "post_id": 91,
+    "rating": -1
+  },
+  {
+    "user_id": 52,
+    "post_id": 22,
+    "rating": 0
+  },
+  {
+    "user_id": 67,
+    "post_id": 73,
+    "rating": 1
+  },
+  {
+    "user_id": 44,
+    "post_id": 68,
+    "rating": -1
+  },
+  {
+    "user_id": 35,
+    "post_id": 31,
+    "rating": -1
+  },
+  {
+    "user_id": 33,
+    "post_id": 40,
+    "rating": 1
+  },
+  {
+    "user_id": 68,
+    "post_id": 73,
+    "rating": 1
+  },
+  {
+    "user_id": 20,
+    "post_id": 71,
+    "rating": 0
+  },
+  {
+    "user_id": 82,
+    "post_id": 89,
+    "rating": 1
+  },
+  {
+    "user_id": 4,
+    "post_id": 88,
+    "rating": -1
+  },
+  {
+    "user_id": 77,
+    "post_id": 7,
+    "rating": 0
+  },
+  {
+    "user_id": 70,
+    "post_id": 29,
+    "rating": 0
+  },
+  {
+    "user_id": 1,
+    "post_id": 91,
+    "rating": 1
+  },
+  {
+    "user_id": 15,
+    "post_id": 42,
+    "rating": 1
+  },
+  {
+    "user_id": 63,
+    "post_id": 81,
+    "rating": -1
+  },
+  {
+    "user_id": 71,
+    "post_id": 51,
+    "rating": 1
+  },
+  {
+    "user_id": 26,
+    "post_id": 62,
+    "rating": 0
+  },
+  {
+    "user_id": 27,
+    "post_id": 52,
+    "rating": -1
+  },
+  {
+    "user_id": 48,
+    "post_id": 76,
+    "rating": -1
+  },
+  {
+    "user_id": 76,
+    "post_id": 92,
+    "rating": 0
+  },
+  {
+    "user_id": 49,
+    "post_id": 14,
+    "rating": -1
+  },
+  {
+    "user_id": 20,
+    "post_id": 82,
+    "rating": 0
+  },
+  {
+    "user_id": 56,
+    "post_id": 5,
+    "rating": 0
+  },
+  {
+    "user_id": 46,
+    "post_id": 53,
+    "rating": -1
+  },
+  {
+    "user_id": 99,
+    "post_id": 81,
+    "rating": 1
+  },
+  {
+    "user_id": 99,
+    "post_id": 87,
+    "rating": 0
+  },
+  {
+    "user_id": 55,
+    "post_id": 68,
+    "rating": -1
+  },
+  {
+    "user_id": 85,
+    "post_id": 54,
+    "rating": 1
+  },
+  {
+    "user_id": 53,
+    "post_id": 21,
+    "rating": 0
+  },
+  {
+    "user_id": 13,
+    "post_id": 79,
+    "rating": 1
+  },
+  {
+    "user_id": 12,
+    "post_id": 65,
+    "rating": -1
+  },
+  {
+    "user_id": 79,
+    "post_id": 44,
+    "rating": 1
+  },
+  {
+    "user_id": 18,
+    "post_id": 23,
+    "rating": 0
+  },
+  {
+    "user_id": 9,
+    "post_id": 2,
+    "rating": 0
+  },
+  {
+    "user_id": 32,
+    "post_id": 90,
+    "rating": -1
+  },
+  {
+    "user_id": 100,
+    "post_id": 93,
+    "rating": 0
+  },
+  {
+    "user_id": 32,
+    "post_id": 20,
+    "rating": -1
+  },
+  {
+    "user_id": 99,
+    "post_id": 50,
+    "rating": 0
+  },
+  {
+    "user_id": 64,
+    "post_id": 33,
+    "rating": -1
+  },
+  {
+    "user_id": 52,
+    "post_id": 21,
+    "rating": 0
+  },
+  {
+    "user_id": 1,
+    "post_id": 53,
+    "rating": 1
+  },
+  {
+    "user_id": 67,
+    "post_id": 98,
+    "rating": -1
+  },
+  {
+    "user_id": 19,
+    "post_id": 81,
+    "rating": 0
+  },
+  {
+    "user_id": 31,
+    "post_id": 100,
+    "rating": 1
+  },
+  {
+    "user_id": 25,
+    "post_id": 52,
+    "rating": -1
+  },
+  {
+    "user_id": 48,
+    "post_id": 13,
+    "rating": 0
+  },
+  {
+    "user_id": 8,
+    "post_id": 33,
+    "rating": 1
+  },
+  {
+    "user_id": 24,
+    "post_id": 20,
+    "rating": 1
+  },
+  {
+    "user_id": 16,
+    "post_id": 75,
+    "rating": 0
+  },
+  {
+    "user_id": 26,
+    "post_id": 3,
+    "rating": -1
+  },
+  {
+    "user_id": 69,
+    "post_id": 72,
+    "rating": -1
+  },
+  {
+    "user_id": 86,
+    "post_id": 92,
+    "rating": 0
+  },
+  {
+    "user_id": 41,
+    "post_id": 10,
+    "rating": 1
+  },
+  {
+    "user_id": 100,
+    "post_id": 49,
+    "rating": 1
+  },
+  {
+    "user_id": 43,
+    "post_id": 66,
+    "rating": -1
+  },
+  {
+    "user_id": 22,
+    "post_id": 37,
+    "rating": 1
+  },
+  {
+    "user_id": 74,
+    "post_id": 25,
+    "rating": 0
+  },
+  {
+    "user_id": 69,
+    "post_id": 87,
+    "rating": 0
+  },
+  {
+    "user_id": 77,
+    "post_id": 44,
+    "rating": 0
+  },
+  {
+    "user_id": 70,
+    "post_id": 16,
+    "rating": 1
+  },
+  {
+    "user_id": 24,
+    "post_id": 33,
+    "rating": -1
+  },
+  {
+    "user_id": 63,
+    "post_id": 91,
+    "rating": 0
+  },
+  {
+    "user_id": 91,
+    "post_id": 15,
+    "rating": 1
+  },
+  {
+    "user_id": 65,
+    "post_id": 82,
+    "rating": -1
+  },
+  {
+    "user_id": 18,
+    "post_id": 68,
+    "rating": -1
+  },
+  {
+    "user_id": 65,
+    "post_id": 86,
+    "rating": 0
+  },
+  {
+    "user_id": 3,
+    "post_id": 96,
+    "rating": 0
+  },
+  {
+    "user_id": 10,
+    "post_id": 87,
+    "rating": 1
+  },
+  {
+    "user_id": 38,
+    "post_id": 62,
+    "rating": 0
+  },
+  {
+    "user_id": 82,
+    "post_id": 87,
+    "rating": 1
+  },
+  {
+    "user_id": 71,
+    "post_id": 80,
+    "rating": -1
+  },
+  {
+    "user_id": 60,
+    "post_id": 94,
+    "rating": -1
+  },
+  {
+    "user_id": 90,
+    "post_id": 69,
+    "rating": 1
+  },
+  {
+    "user_id": 85,
+    "post_id": 60,
+    "rating": -1
+  },
+  {
+    "user_id": 9,
+    "post_id": 17,
+    "rating": -1
+  },
+  {
+    "user_id": 45,
+    "post_id": 95,
+    "rating": 0
+  },
+  {
+    "user_id": 97,
+    "post_id": 25,
+    "rating": -1
+  },
+  {
+    "user_id": 17,
+    "post_id": 74,
+    "rating": 1
+  },
+  {
+    "user_id": 96,
+    "post_id": 82,
+    "rating": 1
+  },
+  {
+    "user_id": 90,
+    "post_id": 28,
+    "rating": 0
+  },
+  {
+    "user_id": 49,
+    "post_id": 44,
+    "rating": -1
+  },
+  {
+    "user_id": 33,
+    "post_id": 54,
+    "rating": 0
+  },
+  {
+    "user_id": 61,
+    "post_id": 32,
+    "rating": -1
+  },
+  {
+    "user_id": 92,
+    "post_id": 95,
+    "rating": -1
+  },
+  {
+    "user_id": 85,
+    "post_id": 96,
+    "rating": 0
+  },
+  {
+    "user_id": 13,
+    "post_id": 81,
+    "rating": 1
+  },
+  {
+    "user_id": 21,
+    "post_id": 63,
+    "rating": 0
+  },
+  {
+    "user_id": 79,
+    "post_id": 45,
+    "rating": 0
+  },
+  {
+    "user_id": 58,
+    "post_id": 5,
+    "rating": 1
+  },
+  {
+    "user_id": 8,
+    "post_id": 86,
+    "rating": 1
+  },
+  {
+    "user_id": 10,
+    "post_id": 42,
+    "rating": 1
+  },
+  {
+    "user_id": 46,
+    "post_id": 36,
+    "rating": 1
+  },
+  {
+    "user_id": 41,
+    "post_id": 36,
+    "rating": 0
+  },
+  {
+    "user_id": 89,
+    "post_id": 35,
+    "rating": 0
+  },
+  {
+    "user_id": 50,
+    "post_id": 90,
+    "rating": -1
+  },
+  {
+    "user_id": 79,
+    "post_id": 54,
+    "rating": 0
+  },
+  {
+    "user_id": 93,
+    "post_id": 18,
+    "rating": 0
+  },
+  {
+    "user_id": 95,
+    "post_id": 23,
+    "rating": 0
+  },
+  {
+    "user_id": 8,
+    "post_id": 7,
+    "rating": -1
+  },
+  {
+    "user_id": 12,
+    "post_id": 99,
+    "rating": -1
+  }
+]
