@@ -34,7 +34,7 @@ const Post = ({ post }) => {
     }
   }, [user, post]);
 
-  const editBtnHandler = async () => {
+  const editBtnHandler = () => {
     setShowEditModal(true);
   };
 

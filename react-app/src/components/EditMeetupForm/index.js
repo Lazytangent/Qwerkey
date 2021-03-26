@@ -1,3 +1,14 @@
+import { Modal } from "../../context/ModalContext";
 import EditMeetupForm from "./EditMeetupForm";
 
-export default EditMeetupForm;
+const EditMeetupModal = ({ setShowEditModal, showEditModal, meetupId }) => {
+  return (
+    <>
+      {showEditModal && (
+        <Modal onClose={() => setShowEditModal(false)}>
+          <EditMeetupForm meetupId={meetupId} setShowEditModal={setShowEditModal} />
+        </Modal>
+      )}
+    </>
+  )
+}
