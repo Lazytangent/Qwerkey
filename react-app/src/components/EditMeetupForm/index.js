@@ -10,5 +10,7 @@ const EditMeetupModal = ({ setShowEditModal, showEditModal, meetupId }) => {
         </Modal>
       )}
     </>
-  )
-}
+  );
+};
+
+export default EditMeetupModal;
