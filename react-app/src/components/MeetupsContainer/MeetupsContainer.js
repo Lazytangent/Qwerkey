@@ -4,11 +4,13 @@ import { v4 as uuidv4 } from "uuid";
 
 import { getMeetups, getMaxNumberOfMeetups } from "../../store/meetups";
 import Meetup from "../Meetup";
+import CreateMeetup from "../CreateMeetup";
 
 const MeetupsContainer = () => {
   const dispatch = useDispatch();
   const meetups = useSelector((state) => state.meetups.meetups);
   const maxMeetups = useSelector((state) => state.meetups.max);
+  const user = useSelector((state) => state.session.user);
 
   const [page, setPage] = useState(1);
   const [currentMeetups, setCurrentMeetups] = useState([]);
@@ -61,6 +63,7 @@ const MeetupsContainer = () => {
 
   return (
     <>
+      {user && <CreateMeetup />}
       {currentMeetups.map(meetup => (
         <Meetup meetup={meetup} key={uuidv4()} />
       ))}
