@@ -47,14 +47,14 @@ const Meetup = ({ meetup }) => {
             <EditMeetupModal
               showEditModal={showEditModal}
               setShowEditModal={setShowEditModal}
-              meetupId={meetupId}
+              meetupId={meetup.id}
             />
           </EditButton>
           <DeleteButton label="Delete Meetup" onClick={deleteBtnHandler}>
             <DeleteConfirmationModal
               showDeleteModal={showDeleteModal}
               setShowDeleteModal={setShowDeleteModal}
-              id={meetupId}
+              id={meetup.id}
               type="meetup"
             />
           </DeleteButton>

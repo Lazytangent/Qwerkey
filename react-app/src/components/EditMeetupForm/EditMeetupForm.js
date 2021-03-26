@@ -15,14 +15,18 @@ const EditMeetupForm = ({ meetupId, setShowEditModal }) => {
 
   const [name, setName] = useState(meetup.name);
   const [description, setDescription] = useState(meetup.description);
-  const [date, setDate] = useState(meetup.date);
-  const [state, setState] = useState(meetup.state);
-  const [stateName, setStateName] = useState("");
+  const [date, setDate] = useState(new Date(meetup.date).toISOString().slice(0, 16));
+  const [state, setState] = useState();
+  const [stateName, setStateName] = useState(meetup.state);
   const [stateCode, setStateCode] = useState("State...");
   const [city, setCity] = useState(meetup.city);
   const [cities, setCities] = useState([]);
   const [errors, setErrors] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setState(csc.getStatesOfCountry("US").find((state) => state.name === meetup.state));
+  }, [meetup.state]);
 
   useEffect(() => {
     if (stateCode !== "State...") {
@@ -95,7 +99,7 @@ const EditMeetupForm = ({ meetupId, setShowEditModal }) => {
   const states = csc.getStatesOfCountry("US");
 
   return (
-    <>
+    <div className="w-screen p-4 bg-white rounded dark:bg-gray-800 dark:text-gray-50 md:w-96">
       <form onSubmit={submitHandler}>
         <FormTitle title="Update Meetup" />
         <FormErrors errors={errors} />
@@ -154,7 +158,7 @@ const EditMeetupForm = ({ meetupId, setShowEditModal }) => {
         </div>
         <SubmitFormButton label="Update Meetup" />
       </form>
-    </>
+    </div>
   );
 };
 

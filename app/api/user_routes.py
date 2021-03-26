@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user
 from app.models import (db, User, Post, Comment, PostRating, CommentRating,
-                        Retailer)
+                        Retailer, Meetup)
 
 user_routes = Blueprint('users', __name__)
 
@@ -43,6 +43,12 @@ def get_users_comments(id_):
 def get_users_retailers(id_):
     retailers = Retailer.query.filter(Retailer.user_id == id_).all()
     return {retailer.id: retailer.to_dict() for retailer in retailers}
+
+
+@user_routes.route('/<int:id_>/meetups')
+def get_users_meetups(id_):
+    meetups = Meetup.query.filter(Meetup.user_id == id_).all()
+    return {meetup.id: meetup.to_dict() for meetup in meetups}
 
 
 @user_routes.route('/<int:user_id>/save/<string:type_>/<int:id>')
