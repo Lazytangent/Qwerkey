@@ -69,8 +69,19 @@ const Comment = ({ comment, userId }) => {
           <UserName link={`/users/${comment.user.id}`} username={comment.user.username} /> on{" "}
           <span className="hidden md:block">{new Date(comment.created_at).toLocaleString(...options())}</span>
         </p>
+      {user && (
+        <div className="flex">
+          <div className="flex justify-around p-2">
+            <Downvote id={comment.id} rating={rating} type="comment" />
+            <Score ratings={comment.ratings} />
+            <Upvote id={comment.id} type="comment" rating={rating} />
+          </div>
+          <SaveButton save={saveThisComment} isSaved={isSaved} />
+        </div>
+      )}
+      </div>
       {comment.user.id === userId && comment.body !== "[DELETED]" && (
-        <div className="flex items-center">
+        <div className="flex justify-end">
           <EditButton label="Edit Comment" onClick={editBtnHandler}>
             <EditCommentModal
               showEditModal={showEditModal}
@@ -87,17 +98,6 @@ const Comment = ({ comment, userId }) => {
           </DeleteButton>
         </div>
       )}
-      {user && comment.user.id !== user.id && (
-        <div className="flex">
-          <div className="flex justify-around p-2">
-            <Downvote id={comment.id} rating={rating} type="comment" />
-            <Score ratings={comment.ratings} />
-            <Upvote id={comment.id} type="comment" rating={rating} />
-          </div>
-          <SaveButton save={saveThisComment} isSaved={isSaved} />
-        </div>
-      )}
-      </div>
       {(location.pathname === "/search" ||
         location.pathname.startsWith("/users")) && (
         <NavLink className="p-2" to={`/q/${comment.post.community}/${comment.post.id}`}>
