@@ -8,7 +8,7 @@ import Meetup from "../Meetup";
 const MeetupsContainer = () => {
   const dispatch = useDispatch();
   const meetups = useSelector((state) => state.meetups.meetups);
-  const maxMeetups = useSelector((state) => state.meeups.max);
+  const maxMeetups = useSelector((state) => state.meetups.max);
 
   const [page, setPage] = useState(1);
   const [currentMeetups, setCurrentMeetups] = useState([]);
@@ -61,7 +61,7 @@ const MeetupsContainer = () => {
 
   return (
     <>
-      {Object.values(meetups).map(meetup => (
+      {currentMeetups.map(meetup => (
         <Meetup meetup={meetup} key={uuidv4()} />
       ))}
     </>
