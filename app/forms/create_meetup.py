@@ -1,6 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, IntegerField
-from wtforms.fields.html5 import DateTimeLocalField
+from wtforms import StringField, TextAreaField, IntegerField, DateTimeField
 from wtforms.validators import DataRequired, ValidationError
 
 
@@ -20,4 +19,4 @@ class CreateMeetup(FlaskForm):
     description = TextAreaField(validators=[DataRequired()])
     city = StringField(validators=[DataRequired(), city_not_default])
     state = StringField(validators=[DataRequired(), state_not_default])
-    date = DateTimeLocalField(validators=[DataRequired()])
+    date = StringField(validators=[DataRequired()])

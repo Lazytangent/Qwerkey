@@ -28,6 +28,7 @@ def create_meetup():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         meetup = Meetup()
+        print(request.form.get('date'))
         form.populate_obj(meetup)
         db.session.add(meetup)
         db.session.commit()

@@ -16,7 +16,7 @@ const CreateMeetup = () => {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState();
+  const [date, setDate] = useState("");
   const [state, setState] = useState("State...");
   const [stateName, setStateName] = useState("");
   const [stateCode, setStateCode] = useState("State...");
@@ -73,6 +73,7 @@ const CreateMeetup = () => {
       city,
       state: stateName,
       user_id: user.id,
+      date: new Date(date).toISOString(),
     };
     const meetup = await dispatch(createMeetup(meetupData));
     if (meetup.errors) {
@@ -113,11 +114,11 @@ const CreateMeetup = () => {
           onChange={updateDate}
           required={true}
         />
-        <div className="justify-center w-3/4 p-2 grid grid-cols-2 gap-2 mx-auto">
+        <div className="justify-center w-3/4 p-2 mx-auto grid grid-cols-2 gap-2">
           <select
             value={stateCode}
             onChange={updateState}
-            className="px-1 py-2 mb-2 border rounded dark:bg-gray-800 dark:text-gray-50 col-start-1"
+            className="px-1 py-2 mb-2 border rounded outline-none dark:bg-gray-800 dark:text-gray-50 col-start-1"
           >
             <option value="State...">State...</option>
             {states &&
