@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { deletePost } from '../../../store/posts';
 import { deleteComment } from "../../../store/comments";
 import { deleteRetailerRating } from "../../../store/retailers";
+import { deleteMeetup } from "../../../store/meetups";
 import DeleteButton from '../DeleteButton';
 import EditButton from '../EditButton';
 
@@ -19,6 +20,9 @@ const DeleteConfirmation = ({ setShowDeleteModal, id, extraId, type }) => {
         break;
       case "retailerRating":
         dispatch(deleteRetailerRating(id, extraId));
+        break;
+      case "meetup":
+        dispatch(deleteMeetup(id));
         break;
       default:
         break;

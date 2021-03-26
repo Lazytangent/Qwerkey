@@ -1,14 +1,13 @@
 import { NavLink } from "react-router-dom";
 
+import UserName from "../parts/UserName";
 import options from "../../utils/localeDateString";
 
 const Retailer = ({ retailer }) => {
   return (
     <div className="p-2 mb-2 rounded shadow hover:shadow-lg dark:bg-gray-800 dark:hover:shadow-light-lg dark:shadow-light transform duration-100 ease-in-out">
       <h2 className="p-2">
-        <NavLink to={`/users/${retailer.owner.id}`}>
-          <span className="hover:underline">{retailer.owner.username}</span>
-        </NavLink>
+        <UserName link={`/users/${retailer.owner.id}`} username={retailer.owner.username} />
         's{" "}
         <NavLink to={`/retailers/${retailer.id}`}>
           <span className="hover:underline">{retailer.name}</span>
