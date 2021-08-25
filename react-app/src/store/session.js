@@ -1,26 +1,10 @@
-export const SET_SESSION = 'session/SET_SESSION';
-export const REMOVE_SESSION = 'session/REMOVE_SESSION';
-
-export const setSession = (user) => {
-  return {
-    type: SET_SESSION,
-    user,
-  };
-};
-
-const removeSession = () => {
-  return {
-    type: REMOVE_SESSION,
-  };
-};
+import api from './api';
+import { SET_SESSION, REMOVE_SESSION } from './constants'
+import { setSession, removeSession } from './actions'
 
 export const authenticate = () => async (dispatch) => {
   try {
-    const response = await fetch('/api/auth/',{
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+    const response = await api('/api/auth');
     const user = await response.json();
     if (!user.errors) {
       dispatch(setSession(user));
@@ -32,16 +16,8 @@ export const authenticate = () => async (dispatch) => {
 };
 
 export const demoUserLogin = () => async (dispatch) => {
-  const response = await fetch('/api/auth/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      credential: 'Demo',
-      password: 'password',
-    })
-  });
+  const payload = { credential: 'Demo', password: 'password' };
+  const response = await api('/api/auth/login', 'POST', payload);
   const user = await response.json();
   if (!user.errors) {
     dispatch(setSession(user));
