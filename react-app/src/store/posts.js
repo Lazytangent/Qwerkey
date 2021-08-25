@@ -1,43 +1,17 @@
-const SET_MORE_POSTS = 'posts/SET_MORE_POSTS';
-const SET_POSTS = 'posts/SET_POSTS';
-const SET_POST = 'posts/SET_POST';
-const SET_MAX = 'posts/SET_MAX';
-const SET_ORDER = 'posts/SET_ORDER';
-
-const setOrderOfPosts = (array) => {
-  return {
-    type: SET_ORDER,
-    array,
-  };
-};
-
-const setMaxNumberOfPosts = (number) => {
-  return {
-    type: SET_MAX,
-    number,
-  };
-};
-
-const setMorePosts = (posts) => {
-  return {
-    type: SET_MORE_POSTS,
-    posts,
-  };
-};
-
-const setPosts = (posts) => {
-  return {
-    type: SET_POSTS,
-    posts,
-  };
-};
-
-const setPost = (post) => {
-  return {
-    type: SET_POST,
-    post,
-  };
-};
+import {
+  SET_MORE_POSTS,
+  SET_POSTS,
+  SET_POST,
+  SET_MAX,
+  SET_ORDER,
+} from "./constants";
+import {
+  setMaxNumberOfPosts,
+  setMorePosts,
+  setPosts,
+  setPost,
+  setOrderOfPosts,
+} from "./actions";
 
 export const getOrder = (type) => async (dispatch) => {
   const res = await fetch(`/api/posts/filter?type=${type}`);
@@ -47,22 +21,27 @@ export const getOrder = (type) => async (dispatch) => {
 };
 
 export const getMaxNumberOfPosts = () => async (dispatch) => {
-  const res = await fetch('/api/posts/max');
+  const res = await fetch("/api/posts/max");
   const number = await res.json();
   dispatch(setMaxNumberOfPosts(number.max));
   return number;
 };
 
-export const getMaxNumberOfPostsByCommunity = (communityName) => async (dispatch) => {
-  const res = await fetch(`/api/posts/max/${communityName}`);
-  const number = await res.json();
-  dispatch(setMaxNumberOfPosts(number.max));
-  return number;
-};
+export const getMaxNumberOfPostsByCommunity =
+  (communityName) => async (dispatch) => {
+    const res = await fetch(`/api/posts/max/${communityName}`);
+    const number = await res.json();
+    dispatch(setMaxNumberOfPosts(number.max));
+    return number;
+  };
 
 export const getPosts = (page, communityName) => async (dispatch) => {
   try {
-    const res = await fetch(`/api/posts?page=${page}${communityName ? `&community_name=${communityName}` : ''}`);
+    const res = await fetch(
+      `/api/posts?page=${page}${
+        communityName ? `&community_name=${communityName}` : ""
+      }`
+    );
     if (!res.ok) throw res;
     const posts = await res.json();
     if (page === 1) {
@@ -97,20 +76,20 @@ export const getPostsByUser = (userId) => async (dispatch) => {
 export const createPost = (post) => async (dispatch) => {
   const { title, body, images, userId, communityId } = post;
   const formData = new FormData();
-  formData.append('title', title);
-  formData.append('body', body);
-  formData.append('user_id', userId);
-  formData.append('community_id', communityId);
+  formData.append("title", title);
+  formData.append("body", body);
+  formData.append("user_id", userId);
+  formData.append("community_id", communityId);
   if (images) {
     for (const list of images) {
       for (let i = 0; i < list.length; i++) {
-        formData.append('images', list[i]);
+        formData.append("images", list[i]);
       }
     }
   }
 
   try {
-    const res = await fetch('/api/posts/', {
+    const res = await fetch("/api/posts/", {
       method: "POST",
       body: formData,
     });
@@ -128,14 +107,14 @@ export const createPost = (post) => async (dispatch) => {
 export const updatePost = (post) => async (dispatch) => {
   const { title, body, images, postId, userId, communityId } = post;
   const formData = new FormData();
-  formData.append('title', title);
-  formData.append('body', body);
-  formData.append('user_id', userId);
-  formData.append('community_id', communityId);
+  formData.append("title", title);
+  formData.append("body", body);
+  formData.append("user_id", userId);
+  formData.append("community_id", communityId);
   if (images) {
     for (const list of images) {
       for (let i = 0; i < list.length; i++) {
-        formData.append('images', list[i]);
+        formData.append("images", list[i]);
       }
     }
   }
@@ -172,23 +151,25 @@ export const deletePost = (postId) => async (dispatch) => {
   }
 };
 
-export const ratePost = ({ rating, userId, postId }) => async (dispatch) => {
-  const res = await fetch(`/api/posts/${postId}/rating`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      rating,
-      user_id: userId,
-    })
-  });
-  const post = await res.json();
-  if (!post.errors) {
-    dispatch(setPost(post));
-  }
-  return post;
-};
+export const ratePost =
+  ({ rating, userId, postId }) =>
+  async (dispatch) => {
+    const res = await fetch(`/api/posts/${postId}/rating`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        rating,
+        user_id: userId,
+      }),
+    });
+    const post = await res.json();
+    if (!post.errors) {
+      dispatch(setPost(post));
+    }
+    return post;
+  };
 
 const initialState = {
   posts: {},
@@ -203,7 +184,10 @@ const postsReducer = (state = initialState, action) => {
     case SET_POSTS:
       return { ...state, posts: { ...action.posts } };
     case SET_POST:
-      return { ...state, posts: { ...state.posts, [action.post.id]: action.post } };
+      return {
+        ...state,
+        posts: { ...state.posts, [action.post.id]: action.post },
+      };
     case SET_MAX:
       return { ...state, max: action.number };
     case SET_ORDER:
