@@ -59,18 +59,18 @@ export const getMaxNumberOfUsers = () => async (dispatch) => {
 };
 
 const initialState = {
-  users: {},
+  byIds: {},
   max: null,
 };
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
-      return { ...state, users: { ...state.users, [action.user.id]: action.user } };
+      return { ...state, byIds: { ...state.byIds, [action.user.id]: action.user } };
     case SET_USERS:
-      return { ...state, users: { ...action.users } };
+      return { ...state, byIds: { ...action.users } };
     case SET_MORE_USERS:
-      return { ...state, users: { ...state.users, ...action.users } };
+      return { ...state, byIds: { ...state.byIds, ...action.users } };
     case SET_MAX:
       return { ...state, max: action.number };
     default:

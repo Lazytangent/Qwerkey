@@ -8,6 +8,7 @@ import { getPostsByUser } from "../../store/posts";
 import { getCommentsByUser } from "../../store/comments";
 import { getRetailersByUser } from "../../store/retailers";
 import { getMeetupsByUser } from "../../store/meetups";
+import { user as userSelectors } from '../../store/selectors';
 import UserCard from "../UserCard";
 import Post from "../Post";
 import Comment from "../Comment";
@@ -20,7 +21,7 @@ const ProfilePage = () => {
 
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const user = useSelector((state) => state.users.users[userId]);
+  const user = useSelector(userSelectors.byId(userId));
   const posts = useSelector((state) => state.posts.posts);
   const comments = useSelector((state) => state.comments.comments);
   const retailers = useSelector((state) => state.retailers.retailers);
