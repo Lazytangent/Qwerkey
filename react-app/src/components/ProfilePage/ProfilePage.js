@@ -4,10 +4,6 @@ import { useParams, useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 import { getUser } from "../../store/users";
-import { getPostsByUser } from "../../store/posts";
-import { getCommentsByUser } from "../../store/comments";
-import { getRetailersByUser } from "../../store/retailers";
-import { getMeetupsByUser } from "../../store/meetups";
 import { user as userSelectors } from '../../store/selectors';
 import UserCard from "../UserCard";
 import Post from "../Post";
@@ -37,8 +33,6 @@ const ProfilePage = () => {
       if (user.errors) {
         setInvalidUser(true);
       } else {
-        // await dispatch(getRetailersByUser(userId));
-        // await dispatch(getMeetupsByUser(userId));
         setIsLoaded(true);
       }
     })();

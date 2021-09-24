@@ -60,15 +60,6 @@ export const getRetailers = (page) => async (dispatch) => {
   return retailers;
 };
 
-export const getRetailersByUser = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}/retailers`);
-  const retailers = await res.json();
-  if (!retailers.errors) {
-    dispatch(setRetailers(retailers));
-  }
-  return retailers;
-};
-
 export const getOneRetailer = (retailerId) => async (dispatch) => {
   const res = await fetch(`/api/retailers/${retailerId}`);
   const retailer = await res.json();

@@ -55,15 +55,6 @@ export const getMeetups = (page) => async (dispatch) => {
   return meetups;
 };
 
-export const getMeetupsByUser = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}/meetups`);
-  const meetups = await res.json();
-  if (!meetups.errors) {
-    dispatch(setMeetups(meetups));
-  }
-  return meetups;
-};
-
 export const getMeetupById = (meetupId) => async (dispatch) => {
   const res = await fetch(`/api/meetups/${meetupId}`);
   const meetup = await res.json();

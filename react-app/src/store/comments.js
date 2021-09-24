@@ -23,15 +23,6 @@ export const getCommentsByPost = (postId) => async (dispatch) => {
   return comments;
 };
 
-export const getCommentsByUser = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}/comments`);
-  const comments = await res.json();
-  if (!comments.errors) {
-    dispatch(setComments(comments));
-  }
-  return comments;
-};
-
 export const createComment = (comment, postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${postId}/comments`, {
     method: "POST",

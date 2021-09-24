@@ -65,15 +65,6 @@ export const getPostById = (id) => async (dispatch) => {
   return post;
 };
 
-export const getPostsByUser = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}/posts`);
-  const posts = await res.json();
-  if (!posts.errors) {
-    dispatch(setPosts(posts));
-  }
-  return posts;
-};
-
 export const createPost = (post) => async (dispatch) => {
   const { title, body, images, userId, communityId } = post;
   const formData = new FormData();
