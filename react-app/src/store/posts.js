@@ -2,8 +2,9 @@ import {
   SET_MORE_POSTS,
   SET_POSTS,
   SET_POST,
-  SET_MAX,
+  SET_MAX_POSTS,
   SET_ORDER,
+  SET_USER,
 } from "./constants";
 import {
   setMaxNumberOfPosts,
@@ -188,10 +189,18 @@ const postsReducer = (state = initialState, action) => {
         ...state,
         posts: { ...state.posts, [action.post.id]: action.post },
       };
-    case SET_MAX:
+    case SET_MAX_POSTS:
       return { ...state, max: action.number };
     case SET_ORDER:
       return { ...state, order: action.array };
+    case SET_USER:
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          ...Object.fromEntries(action.user.posts.map((post) => [post.id, post])),
+        },
+      }
     default:
       return state;
   }

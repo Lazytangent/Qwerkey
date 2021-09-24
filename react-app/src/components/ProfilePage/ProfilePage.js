@@ -22,7 +22,7 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const user = useSelector(userSelectors.byId(userId));
-  const posts = useSelector((state) => state.posts.posts);
+  const posts = useSelector((state) => user ? user.posts.map((id) => state.posts.posts[id]) : []);
   const comments = useSelector((state) => state.comments.comments);
   const retailers = useSelector((state) => state.retailers.retailers);
   const meetups = useSelector((state) => state.meetups.meetups);
@@ -37,7 +37,6 @@ const ProfilePage = () => {
       if (user.errors) {
         setInvalidUser(true);
       } else {
-        await dispatch(getPostsByUser(userId));
         await dispatch(getCommentsByUser(userId));
         await dispatch(getRetailersByUser(userId));
         await dispatch(getMeetupsByUser(userId));

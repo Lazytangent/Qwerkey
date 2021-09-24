@@ -61,7 +61,7 @@ class User(db.Model, UserMixin):
             "saved_comments":
                 [comment.to_search_dict() for comment in self.saved_comments],
             "comments": [comment.id for comment in self.comments],
-            "posts": [post.id for post in self.posts],
+            "posts": [post.to_simple_dict() for post in self.posts],
         }
 
     @classmethod
