@@ -4,7 +4,7 @@ import {
   SET_MORE_POSTS,
   SET_POSTS,
   SET_POST,
-  SET_MAX,
+  SET_MAX_POSTS,
   SET_ORDER,
 } from "./constants";
 
@@ -31,7 +31,7 @@ export const setOrderOfPosts = (array) => {
 
 export const setMaxNumberOfPosts = (number) => {
   return {
-    type: SET_MAX,
+    type: SET_MAX_POSTS,
     number,
   };
 };

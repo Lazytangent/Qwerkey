@@ -1,11 +1,8 @@
-const SET_MORE_USERS = "users/SET_MORE_USERS";
-const SET_USERS = "users/SET_USERS";
-const SET_USER = "users/SET_USER";
-const SET_MAX = "users/SET_MAX";
+import { SET_MORE_USERS, SET_USERS, SET_USER, SET_MAX_USERS } from './constants';
 
 const setMaxNumberOfUsers = (number) => {
   return {
-    type: SET_MAX,
+    type: SET_MAX_USERS,
     number,
   };
 };
@@ -66,12 +63,16 @@ const initialState = {
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
-      return { ...state, byIds: { ...state.byIds, [action.user.id]: action.user } };
+      const user = {
+        ...action.user,
+        posts: action.user.posts.map((post) => post.id),
+      };
+      return { ...state, byIds: { ...state.byIds, [action.user.id]: user } };
     case SET_USERS:
       return { ...state, byIds: { ...action.users } };
     case SET_MORE_USERS:
       return { ...state, byIds: { ...state.byIds, ...action.users } };
-    case SET_MAX:
+    case SET_MAX_USERS:
       return { ...state, max: action.number };
     default:
       return state;
