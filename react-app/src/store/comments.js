@@ -1,4 +1,4 @@
-import { SET_COMMENTS, SET_COMMENT, SET_USER } from './constants';
+import { SET_COMMENTS, SET_COMMENT, SET_USER, SET_SEARCH } from './constants';
 
 const setComments = (comments) => {
   return {
@@ -98,6 +98,14 @@ const commentsReducer = (state = initialState, action) => {
         comments: {
           ...state.comments,
           ...Object.fromEntries(action.user.comments.map((comment) => [comment.id, comment])),
+        },
+      };
+    case SET_SEARCH:
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          ...Object.fromEntries(action.comments.map((comment) => [comment.id, comment])),
         },
       };
     default:

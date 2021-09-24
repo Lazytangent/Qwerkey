@@ -5,6 +5,7 @@ import {
   SET_MAX_RETAILERS,
   REMOVE_RETAILER,
   SET_USER,
+  SET_SEARCH,
 } from "./constants";
 
 const removeRetailer = (id) => {
@@ -200,6 +201,14 @@ const retailersReducer = (state = initialState, action) => {
         retailers: {
           ...state.retailers,
           ...Object.fromEntries(action.user.retailers.map((retailer) => [retailer.id, retailer])),
+        },
+      };
+    case SET_SEARCH:
+      return {
+        ...state,
+        retailers: {
+          ...state.retailers,
+          ...Object.fromEntries(action.retailers.map((retailer) => [retailer.id, retailer])),
         },
       };
     default:

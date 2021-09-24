@@ -1,32 +1,15 @@
-import { SET_MORE_USERS, SET_USERS, SET_USER, SET_MAX_USERS } from './constants';
-
-const setMaxNumberOfUsers = (number) => {
-  return {
-    type: SET_MAX_USERS,
-    number,
-  };
-};
-
-const setUser = (user) => {
-  return {
-    type: SET_USER,
-    user,
-  };
-};
-
-const setUsers = (users) => {
-  return {
-    type: SET_USERS,
-    users,
-  };
-};
-
-const setMoreUsers = (users) => {
-  return {
-    type: SET_MORE_USERS,
-    users,
-  };
-};
+import {
+  SET_MORE_USERS,
+  SET_USERS,
+  SET_USER,
+  SET_MAX_USERS,
+} from "./constants";
+import {
+  setMaxNumberOfUsers,
+  setUser,
+  setUsers,
+  setMoreUsers,
+} from "./actions";
 
 export const getUsers = (page) => async (dispatch) => {
   const res = await fetch(`/api/users?page=${page}`);
@@ -49,7 +32,7 @@ export const getUser = (userId) => async (dispatch) => {
 };
 
 export const getMaxNumberOfUsers = () => async (dispatch) => {
-  const res = await fetch('/api/users/max');
+  const res = await fetch("/api/users/max");
   const number = await res.json();
   dispatch(setMaxNumberOfUsers(number.max));
   return number;

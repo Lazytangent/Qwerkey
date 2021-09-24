@@ -1,11 +1,19 @@
 import {
   SET_SESSION,
   REMOVE_SESSION,
+
   SET_MORE_POSTS,
   SET_POSTS,
   SET_POST,
   SET_MAX_POSTS,
   SET_ORDER,
+
+  SET_MORE_USERS,
+  SET_USERS,
+  SET_USER,
+  SET_MAX_USERS,
+
+  SET_SEARCH,
 } from "./constants";
 
 // Session Actions
@@ -56,3 +64,38 @@ export const setPost = (post) => {
     post,
   };
 };
+
+// Users Actions
+export const setMaxNumberOfUsers = (number) => {
+  return {
+    type: SET_MAX_USERS,
+    number,
+  };
+};
+
+export const setUser = (user) => {
+  return {
+    type: SET_USER,
+    user,
+  };
+};
+
+export const setUsers = (users) => {
+  return {
+    type: SET_USERS,
+    users,
+  };
+};
+
+export const setMoreUsers = (users) => {
+  return {
+    type: SET_MORE_USERS,
+    users,
+  };
+};
+
+// Search Actions
+export const setSearch = (data) => ({
+  type: SET_SEARCH,
+  ...data,
+});

@@ -5,6 +5,7 @@ import {
   SET_MAX_POSTS,
   SET_ORDER,
   SET_USER,
+  SET_SEARCH,
 } from "./constants";
 import {
   setMaxNumberOfPosts,
@@ -39,8 +40,7 @@ export const getMaxNumberOfPostsByCommunity =
 export const getPosts = (page, communityName) => async (dispatch) => {
   try {
     const res = await fetch(
-      `/api/posts?page=${page}${
-        communityName ? `&community_name=${communityName}` : ""
+      `/api/posts?page=${page}${communityName ? `&community_name=${communityName}` : ""
       }`
     );
     if (!res.ok) throw res;
@@ -145,23 +145,23 @@ export const deletePost = (postId) => async (dispatch) => {
 
 export const ratePost =
   ({ rating, userId, postId }) =>
-  async (dispatch) => {
-    const res = await fetch(`/api/posts/${postId}/rating`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        rating,
-        user_id: userId,
-      }),
-    });
-    const post = await res.json();
-    if (!post.errors) {
-      dispatch(setPost(post));
-    }
-    return post;
-  };
+    async (dispatch) => {
+      const res = await fetch(`/api/posts/${postId}/rating`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          rating,
+          user_id: userId,
+        }),
+      });
+      const post = await res.json();
+      if (!post.errors) {
+        dispatch(setPost(post));
+      }
+      return post;
+    };
 
 const initialState = {
   posts: {},
@@ -192,6 +192,14 @@ const postsReducer = (state = initialState, action) => {
           ...Object.fromEntries(action.user.posts.map((post) => [post.id, post])),
         },
       }
+    case SET_SEARCH:
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          ...Object.fromEntries(action.posts.map((post) => [post.id, post])),
+        },
+      };
     default:
       return state;
   }

@@ -32,3 +32,6 @@ export const SET_MORE_MEETUPS = "meetups/SET_MORE_MEETUPS";
 export const SET_MEETUPS = "meetups/SET_MEETUPS";
 export const SET_MEETUP = "meetups/SET_MEETUP";
 export const REMOVE_MEETUP = "meetups/REMOVE_MEETUP";
+
+// Search Constants
+export const SET_SEARCH = "search/setSearch";
