@@ -71,10 +71,10 @@ const App = () => {
               <Route path="/q/:communityName">
                 <PostsContainer />
               </Route>
-              <Route path="/q" exact={true}>
+              <Route path="/q" exact>
                 <CommunitiesContainer />
               </Route>
-              <Route path="/retailers" exact={true}>
+              <Route path="/retailers" exact>
                 <RetailersContainer />
               </Route>
               <Route path="/retailers/:retailerId(\d+)">

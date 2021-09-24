@@ -51,19 +51,18 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         return {
-            "id":
-            self.id,
-            "username":
-            self.username,
-            "email":
-            self.email,
-            "created_at":
-            self.created_at,
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "created_at": self.created_at,
             "meetups": [meetup.to_dict() for meetup in self.meetups],
             "saved_posts":
-            [post.to_simple_dict() for post in self.saved_posts],
+                [post.to_simple_dict() for post in self.saved_posts],
             "saved_comments":
-            [comment.to_search_dict() for comment in self.saved_comments]
+                [comment.to_search_dict() for comment in self.saved_comments],
+            "comments": [comment.to_dict() for comment in self.comments],
+            "posts": [post.to_simple_dict() for post in self.posts],
+            "retailers": [retailer.to_dict() for retailer in self.retailers],
         }
 
     @classmethod

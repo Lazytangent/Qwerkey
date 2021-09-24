@@ -4,10 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 import { getUser } from "../../store/users";
-import { getPostsByUser } from "../../store/posts";
-import { getCommentsByUser } from "../../store/comments";
-import { getRetailersByUser } from "../../store/retailers";
-import { getMeetupsByUser } from "../../store/meetups";
+import { user as userSelectors } from '../../store/selectors';
 import UserCard from "../UserCard";
 import Post from "../Post";
 import Comment from "../Comment";
@@ -20,11 +17,11 @@ const ProfilePage = () => {
 
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const user = useSelector((state) => state.users.users[userId]);
-  const posts = useSelector((state) => state.posts.posts);
-  const comments = useSelector((state) => state.comments.comments);
-  const retailers = useSelector((state) => state.retailers.retailers);
-  const meetups = useSelector((state) => state.meetups.meetups);
+  const user = useSelector(userSelectors.byId(userId));
+  const posts = useSelector((state) => user ? user.posts.map((id) => state.posts.posts[id]) : []);
+  const comments = useSelector((state) => user ? user.comments.map((id) => state.comments.comments[id]) : []);
+  const retailers = useSelector((state) => user ? user.retailers.map((id) => state.retailers.retailers[id]) : []);
+  const meetups = useSelector((state) => user ? user.meetups.map((id) => state.meetups.meetups[id]) : []);
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [invalidUser, setInvalidUser] = useState(false);
@@ -36,10 +33,6 @@ const ProfilePage = () => {
       if (user.errors) {
         setInvalidUser(true);
       } else {
-        await dispatch(getPostsByUser(userId));
-        await dispatch(getCommentsByUser(userId));
-        await dispatch(getRetailersByUser(userId));
-        await dispatch(getMeetupsByUser(userId));
         setIsLoaded(true);
       }
     })();
