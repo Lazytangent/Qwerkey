@@ -15,7 +15,7 @@ import SaveButton from "../parts/SaveButton";
 import UserName from "../parts/UserName";
 import options from "../../utils/localeDateString";
 
-const Comment = ({ comment, userId }) => {
+const Comment = ({ comment }) => {
   const location = useLocation();
   const locationArr = location.pathname.split("/");
 
@@ -80,7 +80,7 @@ const Comment = ({ comment, userId }) => {
         </div>
       )}
       </div>
-      {comment.user.id === userId && comment.body !== "[DELETED]" && (
+      {comment.user.id === user?.id && comment.body !== "[DELETED]" && (
         <div className="flex justify-end">
           <EditButton label="Edit Comment" onClick={editBtnHandler}>
             <EditCommentModal

@@ -15,8 +15,9 @@ const SearchResults = () => {
 
   const { searched, setSearched } = useSearchContext();
   const results = useSelector((state) => state.search);
-  const user = useSelector((state) => state.session.user);
-  const { posts, comments, retailers } = results;
+  const posts = useSelector((state) => results.posts.map((id) => state.posts.posts[id]))
+  const comments = useSelector((state) => results.comments.map((id) => state.comments.comments[id]))
+  const retailers = useSelector((state) => results.retailers.map((id) => state.retailers.retailers[id]))
 
   const [noResults, setNoResults] = useState(false);
 
@@ -69,7 +70,7 @@ const SearchResults = () => {
             <hr />
           </div>
           {comments.map((comment) => (
-            <Comment comment={comment} key={comment.id} userId={user.id} />
+            <Comment comment={comment} key={comment.id} />
           ))}
         </>
       )}

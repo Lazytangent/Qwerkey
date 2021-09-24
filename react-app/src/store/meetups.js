@@ -6,41 +6,13 @@ import {
   REMOVE_MEETUP,
   SET_USER,
 } from "./constants";
-
-const setMoreMeetups = (meetups) => {
-  return {
-    type: SET_MORE_MEETUPS,
-    meetups,
-  };
-};
-
-const setMaxNumberOfMeetups = (number) => {
-  return {
-    type: SET_MAX_MEETUPS,
-    number,
-  };
-};
-
-const removeMeetup = (id) => {
-  return {
-    type: REMOVE_MEETUP,
-    id,
-  };
-};
-
-const setMeetups = (meetups) => {
-  return {
-    type: SET_MEETUPS,
-    meetups,
-  };
-};
-
-const setMeetup = (meetup) => {
-  return {
-    type: SET_MEETUP,
-    meetup,
-  };
-};
+import {
+  setMoreMeetups,
+  setMaxNumberOfMeetups,
+  removeMeetup,
+  setMeetups,
+  setMeetup,
+} from './actions';
 
 export const getMeetups = (page) => async (dispatch) => {
   const res = await fetch(`/api/meetups?page=${page}`);

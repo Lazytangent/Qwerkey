@@ -1,18 +1,5 @@
-import { SET_COMMENTS, SET_COMMENT, SET_USER } from './constants';
-
-const setComments = (comments) => {
-  return {
-    type: SET_COMMENTS,
-    comments,
-  };
-};
-
-const setComment = (comment) => {
-  return {
-    type: SET_COMMENT,
-    comment,
-  };
-};
+import { SET_COMMENTS, SET_COMMENT, SET_USER, SET_SEARCH } from './constants';
+import { setComments, setComment } from './actions';
 
 export const getCommentsByPost = (postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${postId}/comments`);
@@ -98,6 +85,14 @@ const commentsReducer = (state = initialState, action) => {
         comments: {
           ...state.comments,
           ...Object.fromEntries(action.user.comments.map((comment) => [comment.id, comment])),
+        },
+      };
+    case SET_SEARCH:
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          ...Object.fromEntries(action.comments.map((comment) => [comment.id, comment])),
         },
       };
     default:

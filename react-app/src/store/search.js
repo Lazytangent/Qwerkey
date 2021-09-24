@@ -1,50 +1,16 @@
-const SET_POSTS = "search/SET_POSTS";
-const SET_COMMENTS = "search/SET_COMMENTS";
-const SET_RETAILERS = "search/SET_RETAILERS";
-
-const setPosts = (posts) => {
-  return {
-    type: SET_POSTS,
-    posts,
-  };
-};
-
-const setComments = (comments) => {
-  return {
-    type: SET_COMMENTS,
-    comments,
-  };
-};
-
-const setRetailers = (retailers) => {
-  return {
-    type: SET_RETAILERS,
-    retailers,
-  };
-};
+import { SET_SEARCH } from './constants';
+import { setSearch } from './actions';
 
 export const getQuery = (queryString, type, field, state, city) => async (dispatch) => {
   const res = await fetch(`/api/search?query=${queryString}${type ? `&type=${type}` : ""}${field ? `&field=${field}` : ""}${city ? `&city=${city}` : ""}${state ? `&state=${state}` : ""}`);
   const data = await res.json();
+  const searchData = {};
 
-  if (data.posts) {
-    dispatch(setPosts(data.posts));
-  } else {
-    dispatch(setPosts([]));
-  }
+  searchData.posts = data.posts || [];
+  searchData.comments = data.comments || [];
+  searchData.retailers = data.retailers || [];
 
-  if (data.comments) {
-    dispatch(setComments(data.comments));
-  } else {
-    dispatch(setComments([]));
-  }
-
-  if (data.retailers) {
-    dispatch(setRetailers(data.retailers));
-  } else {
-    dispatch(setRetailers([]));
-  }
-
+  dispatch(setSearch(searchData));
   return data;
 };
 
@@ -56,12 +22,13 @@ const initialState = {
 
 const searchReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_POSTS:
-      return { ...state, posts: action.posts };
-    case SET_COMMENTS:
-      return { ...state, comments: action.comments };
-    case SET_RETAILERS:
-      return { ...state, retailers: action.retailers };
+    case SET_SEARCH:
+      return {
+        ...state,
+        posts: action.posts.map((post) => post.id),
+        comments: action.comments.map((comment) => comment.id),
+        retailers: action.retailers.map((retailer) => retailer.id),
+      };
     default:
       return state;
   }

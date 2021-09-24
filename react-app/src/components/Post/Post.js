@@ -56,7 +56,7 @@ const Post = ({ post }) => {
   return (
     <DivCard>
       <h3 className="p-2">
-        <NavLink to={`/q/${post.community.name}/${post.id}`}>
+        <NavLink to={`/q/${post.community?.name}/${post.id}`}>
           <span className="hover:underline">{post.title}</span>
         </NavLink>
       </h3>

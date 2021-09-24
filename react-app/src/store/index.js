@@ -1,26 +1,26 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
-import sessionReducer from './session';
-import postsReducer from './posts';
-import commentsReducer from "./comments";
-import retailersReducer from './retailers';
-import searchReducer from "./search";
-import communitiesReducer from "./communities";
-import sidebarReducer from "./sidebar";
-import usersReducer from "./users";
-import meetupsReducer from "./meetups";
+import session from './session';
+import posts from './posts';
+import comments from "./comments";
+import retailers from './retailers';
+import search from "./search";
+import communities from "./communities";
+import sidebar from "./sidebar";
+import users from "./users";
+import meetups from "./meetups";
 
 const rootReducer = combineReducers({
-  session: sessionReducer,
-  posts: postsReducer,
-  comments: commentsReducer,
-  retailers: retailersReducer,
-  search: searchReducer,
-  communities: communitiesReducer,
-  sidebar: sidebarReducer,
-  users: usersReducer,
-  meetups: meetupsReducer,
+  session,
+  posts,
+  comments,
+  retailers,
+  search,
+  communities,
+  sidebar,
+  users,
+  meetups,
 });
 
 let enhancer;
