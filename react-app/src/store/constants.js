@@ -35,3 +35,7 @@ export const REMOVE_MEETUP = "meetups/REMOVE_MEETUP";
 
 // Search Constants
 export const SET_SEARCH = "search/setSearch";
+
+// Communities Constants
+export const SET_COMMUNITIES = 'communities/SET_COMMUNITIES';
+export const SET_COMMUNITY = 'communities/SET_COMMUNITY';

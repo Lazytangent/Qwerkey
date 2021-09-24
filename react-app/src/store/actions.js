@@ -14,6 +14,24 @@ import {
   SET_MAX_USERS,
 
   SET_SEARCH,
+
+  SET_MORE_MEETUPS,
+  SET_MAX_MEETUPS,
+  REMOVE_MEETUP,
+  SET_MEETUPS,
+  SET_MEETUP,
+
+  SET_MORE_RETAILERS,
+  SET_RETAILER,
+  SET_RETAILERS,
+  SET_MAX_RETAILERS,
+  REMOVE_RETAILER,
+
+  SET_COMMUNITIES,
+  SET_COMMUNITY,
+
+  SET_COMMENTS,
+  SET_COMMENT,
 } from "./constants";
 
 // Session Actions
@@ -30,6 +48,7 @@ export const removeSession = () => {
   };
 };
 
+// Posts Actions
 export const setOrderOfPosts = (array) => {
   return {
     type: SET_ORDER,
@@ -62,6 +81,21 @@ export const setPost = (post) => {
   return {
     type: SET_POST,
     post,
+  };
+};
+
+// Comments Actions
+export const setComments = (comments) => {
+  return {
+    type: SET_COMMENTS,
+    comments,
+  };
+};
+
+export const setComment = (comment) => {
+  return {
+    type: SET_COMMENT,
+    comment,
   };
 };
 
@@ -99,3 +133,90 @@ export const setSearch = (data) => ({
   type: SET_SEARCH,
   ...data,
 });
+
+// Meetup Actions
+export const setMoreMeetups = (meetups) => {
+  return {
+    type: SET_MORE_MEETUPS,
+    meetups,
+  };
+};
+
+export const setMaxNumberOfMeetups = (number) => {
+  return {
+    type: SET_MAX_MEETUPS,
+    number,
+  };
+};
+
+export const removeMeetup = (id) => {
+  return {
+    type: REMOVE_MEETUP,
+    id,
+  };
+};
+
+export const setMeetups = (meetups) => {
+  return {
+    type: SET_MEETUPS,
+    meetups,
+  };
+};
+
+export const setMeetup = (meetup) => {
+  return {
+    type: SET_MEETUP,
+    meetup,
+  };
+};
+
+// Retailer Actions
+export const removeRetailer = (id) => {
+  return {
+    type: REMOVE_RETAILER,
+    id,
+  };
+};
+
+export const setMaxNumberOfRetailers = (number) => {
+  return {
+    type: SET_MAX_RETAILERS,
+    number,
+  };
+};
+
+export const setMoreRetailers = (retailers) => {
+  return {
+    type: SET_MORE_RETAILERS,
+    retailers,
+  };
+};
+
+export const setRetailers = (retailers) => {
+  return {
+    type: SET_RETAILERS,
+    retailers,
+  };
+};
+
+export const setRetailer = (retailer) => {
+  return {
+    type: SET_RETAILER,
+    retailer,
+  };
+};
+
+// Communities Actions
+export const setCommunities = (communities) => {
+  return {
+    type: SET_COMMUNITIES,
+    communities,
+  };
+};
+
+export const setCommunity = (community) => {
+  return {
+    type: SET_COMMUNITY,
+    community,
+  };
+};

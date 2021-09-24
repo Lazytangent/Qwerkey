@@ -7,41 +7,13 @@ import {
   SET_USER,
   SET_SEARCH,
 } from "./constants";
-
-const removeRetailer = (id) => {
-  return {
-    type: REMOVE_RETAILER,
-    id,
-  };
-};
-
-const setMaxNumberOfRetailers = (number) => {
-  return {
-    type: SET_MAX_RETAILERS,
-    number,
-  };
-};
-
-const setMoreRetailers = (retailers) => {
-  return {
-    type: SET_MORE_RETAILERS,
-    retailers,
-  };
-};
-
-const setRetailers = (retailers) => {
-  return {
-    type: SET_RETAILERS,
-    retailers,
-  };
-};
-
-const setRetailer = (retailer) => {
-  return {
-    type: SET_RETAILER,
-    retailer,
-  };
-};
+import {
+  setMaxNumberOfRetailers,
+  setRetailers,
+  setMoreRetailers,
+  setRetailer,
+  removeRetailer,
+} from './actions';
 
 export const getMaxNumberOfRetailers = () => async (dispatch) => {
   const res = await fetch("/api/retailers/max");

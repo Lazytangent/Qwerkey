@@ -1,19 +1,5 @@
-const SET_COMMUNITIES = 'communities/SET_COMMUNITIES';
-const SET_COMMUNITY = 'communities/SET_COMMUNITY';
-
-const setCommunities = (communities) => {
-  return {
-    type: SET_COMMUNITIES,
-    communities,
-  };
-};
-
-const setCommunity = (community) => {
-  return {
-    type: SET_COMMUNITY,
-    community,
-  };
-};
+import { SET_COMMUNITIES, SET_COMMUNITY } from './constants';
+import { setCommunities, setCommunity } from './actions';
 
 export const getCommunities = () => async (dispatch) => {
   const res = await fetch(`/api/communities`);

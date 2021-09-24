@@ -1,18 +1,5 @@
 import { SET_COMMENTS, SET_COMMENT, SET_USER, SET_SEARCH } from './constants';
-
-const setComments = (comments) => {
-  return {
-    type: SET_COMMENTS,
-    comments,
-  };
-};
-
-const setComment = (comment) => {
-  return {
-    type: SET_COMMENT,
-    comment,
-  };
-};
+import { setComments, setComment } from './actions';
 
 export const getCommentsByPost = (postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${postId}/comments`);

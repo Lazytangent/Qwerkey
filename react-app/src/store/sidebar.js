@@ -1,5 +1,11 @@
+const SET_SIDEBAR = 'sidebar/setSidebar';
 const SET_COMMUNITIES = 'sidebar/SET_COMMUNITIES';
 const SET_COMMUNITY = "sidebar/SET_COMMUNITY";
+
+const setSidebar = (data) => ({
+  type: SET_SIDEBAR,
+  ...data,
+});
 
 const setCommunities = (communities) => {
   return {
