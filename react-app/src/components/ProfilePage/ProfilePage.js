@@ -23,9 +23,9 @@ const ProfilePage = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const user = useSelector(userSelectors.byId(userId));
   const posts = useSelector((state) => user ? user.posts.map((id) => state.posts.posts[id]) : []);
-  const comments = useSelector((state) => state.comments.comments);
-  const retailers = useSelector((state) => state.retailers.retailers);
-  const meetups = useSelector((state) => state.meetups.meetups);
+  const comments = useSelector((state) => user ? user.comments.map((id) => state.comments.comments[id]) : []);
+  const retailers = useSelector((state) => user ? user.retailers.map((id) => state.retailers.retailers[id]) : []);
+  const meetups = useSelector((state) => user ? user.meetups.map((id) => state.meetups.meetups[id]) : []);
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [invalidUser, setInvalidUser] = useState(false);
@@ -37,9 +37,8 @@ const ProfilePage = () => {
       if (user.errors) {
         setInvalidUser(true);
       } else {
-        await dispatch(getCommentsByUser(userId));
-        await dispatch(getRetailersByUser(userId));
-        await dispatch(getMeetupsByUser(userId));
+        // await dispatch(getRetailersByUser(userId));
+        // await dispatch(getMeetupsByUser(userId));
         setIsLoaded(true);
       }
     })();

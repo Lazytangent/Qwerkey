@@ -66,6 +66,9 @@ const usersReducer = (state = initialState, action) => {
       const user = {
         ...action.user,
         posts: action.user.posts.map((post) => post.id),
+        comments: action.user.comments.map((comment) => comment.id),
+        retailers: action.user.retailers.map((retailer) => retailer.id),
+        meetups: action.user.meetups.map((meetup) => meetup.id),
       };
       return { ...state, byIds: { ...state.byIds, [action.user.id]: user } };
     case SET_USERS:

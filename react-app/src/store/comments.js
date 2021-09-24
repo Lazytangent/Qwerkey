@@ -1,5 +1,4 @@
-const SET_COMMENTS = "comments/SET_COMMENTS";
-const SET_COMMENT = "comments/SET_COMMENT";
+import { SET_COMMENTS, SET_COMMENT, SET_USER } from './constants';
 
 const setComments = (comments) => {
   return {
@@ -102,6 +101,14 @@ const commentsReducer = (state = initialState, action) => {
       return { ...state, comments: { ...action.comments } };
     case SET_COMMENT:
       return { ...state, comments: { ...state.comments, [action.comment.id]: action.comment } };
+    case SET_USER:
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          ...Object.fromEntries(action.user.comments.map((comment) => [comment.id, comment])),
+        },
+      };
     default:
       return state;
   }

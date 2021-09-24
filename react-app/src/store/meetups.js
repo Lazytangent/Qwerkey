@@ -1,8 +1,11 @@
-const SET_MAX = "meetups/SET_MAX";
-const SET_MORE_MEETUPS = "meetups/SET_MORE_MEETUPS";
-const SET_MEETUPS = "meetups/SET_MEETUPS";
-const SET_MEETUP = "meetups/SET_MEETUP";
-const REMOVE_MEETUP = "meetups/REMOVE_MEETUP";
+import {
+  SET_MEETUPS,
+  SET_MORE_MEETUPS,
+  SET_MEETUP,
+  SET_MAX_MEETUPS,
+  REMOVE_MEETUP,
+  SET_USER,
+} from "./constants";
 
 const setMoreMeetups = (meetups) => {
   return {
@@ -13,7 +16,7 @@ const setMoreMeetups = (meetups) => {
 
 const setMaxNumberOfMeetups = (number) => {
   return {
-    type: SET_MAX,
+    type: SET_MAX_MEETUPS,
     number,
   };
 };
@@ -46,7 +49,7 @@ export const getMeetups = (page) => async (dispatch) => {
     if (page === 1) {
       dispatch(setMeetups(meetups));
     } else {
-      dispatch(setMoreMeetups(meetups))
+      dispatch(setMoreMeetups(meetups));
     }
   }
   return meetups;
@@ -134,16 +137,30 @@ const initialState = {
 
 const meetupsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_MAX:
+    case SET_MAX_MEETUPS:
       return { ...state, max: action.number };
     case SET_MORE_MEETUPS:
       return { ...state, meetups: { ...state.meetups, ...action.meetups } };
     case SET_MEETUPS:
       return { ...state, meetups: { ...action.meetups } };
     case SET_MEETUP:
-      return { ...state, meetups: { ...state.meetups, [action.meetup.id]: action.meetup } };
+      return {
+        ...state,
+        meetups: { ...state.meetups, [action.meetup.id]: action.meetup },
+      };
     case REMOVE_MEETUP:
-      return { ...state, meetups: { ...state.meetups, [action.id]: undefined } };
+      return {
+        ...state,
+        meetups: { ...state.meetups, [action.id]: undefined },
+      };
+    case SET_USER:
+      return {
+        ...state,
+        meetups: {
+          ...state.meetups,
+          ...Object.fromEntries(action.user.meetups.map((meetup) => [meetup.id, meetup])),
+        },
+      };
     default:
       return state;
   }
