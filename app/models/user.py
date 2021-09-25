@@ -65,6 +65,9 @@ class User(db.Model, UserMixin):
             "retailers": [retailer.to_dict() for retailer in self.retailers],
         }
 
+    def __repr__(self):
+        return f"<User ID:{self.id} Username:{self.username}>"
+
     @classmethod
     def create(cls, username, email, password):
         user = cls(username=username, email=email, password=password)
