@@ -32,6 +32,9 @@ import {
 
   SET_COMMENTS,
   SET_COMMENT,
+
+  SET_SIDEBAR_COMMUNITY,
+  SET_SIDEBAR_COMMUNITIES,
 } from "./constants";
 
 // Session Actions
@@ -217,6 +220,21 @@ export const setCommunities = (communities) => {
 export const setCommunity = (community) => {
   return {
     type: SET_COMMUNITY,
+    community,
+  };
+};
+
+// Sidebar Actions
+export const setSidebarCommunities = (communities) => {
+  return {
+    type: SET_SIDEBAR_COMMUNITIES,
+    communities,
+  };
+};
+
+export const setSidebarCommunity = (community) => {
+  return {
+    type: SET_SIDEBAR_COMMUNITY,
     community,
   };
 };

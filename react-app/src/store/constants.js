@@ -39,3 +39,7 @@ export const SET_SEARCH = "search/setSearch";
 // Communities Constants
 export const SET_COMMUNITIES = 'communities/SET_COMMUNITIES';
 export const SET_COMMUNITY = 'communities/SET_COMMUNITY';
+
+// Sidebar Constants
+export const SET_SIDEBAR_COMMUNITIES = 'sidebar/SET_COMMUNITIES';
+export const SET_SIDEBAR_COMMUNITY = "sidebar/SET_COMMUNITY";

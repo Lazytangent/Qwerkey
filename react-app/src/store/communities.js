@@ -1,4 +1,4 @@
-import { SET_COMMUNITIES, SET_COMMUNITY } from './constants';
+import { SET_COMMUNITIES, SET_COMMUNITY, SET_SIDEBAR_COMMUNITY, SET_SIDEBAR_COMMUNITIES } from './constants';
 import { setCommunities, setCommunity } from './actions';
 
 export const getCommunities = () => async (dispatch) => {
@@ -60,8 +60,13 @@ const initialState = {};
 
 const communityReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_SIDEBAR_COMMUNITIES:
     case SET_COMMUNITIES:
-      return { ...action.communities };
+      return {
+        ...state,
+        ...Object.fromEntries(action.communities.map((community) => [community.id, community]))
+      };
+    case SET_SIDEBAR_COMMUNITY:
     case SET_COMMUNITY:
       return { ...state, [action.community.id]: action.community };
     default:
