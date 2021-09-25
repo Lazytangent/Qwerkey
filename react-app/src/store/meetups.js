@@ -94,7 +94,7 @@ export const deleteMeetup = (meetupId) => async (dispatch) => {
 };
 
 const initialState = {
-  meetups: {},
+  byIds: {},
   max: null,
 };
 
@@ -103,24 +103,24 @@ const meetupsReducer = (state = initialState, action) => {
     case SET_MAX_MEETUPS:
       return { ...state, max: action.number };
     case SET_MORE_MEETUPS:
-      return { ...state, meetups: { ...state.meetups, ...action.meetups } };
+      return { ...state, byIds: { ...state.byIds, ...action.meetups } };
     case SET_MEETUPS:
-      return { ...state, meetups: { ...action.meetups } };
+      return { ...state, byIds: { ...action.meetups } };
     case SET_MEETUP:
       return {
         ...state,
-        meetups: { ...state.meetups, [action.meetup.id]: action.meetup },
+        byIds: { ...state.byIds, [action.meetup.id]: action.meetup },
       };
     case REMOVE_MEETUP:
       return {
         ...state,
-        meetups: { ...state.meetups, [action.id]: undefined },
+        byIds: { ...state.byIds, [action.id]: undefined },
       };
     case SET_USER:
       return {
         ...state,
-        meetups: {
-          ...state.meetups,
+        byIds: {
+          ...state.byIds,
           ...Object.fromEntries(action.user.meetups.map((meetup) => [meetup.id, meetup])),
         },
       };
