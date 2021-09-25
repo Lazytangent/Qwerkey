@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
@@ -35,7 +35,6 @@ const ProfilePage = () => {
     (async () => {
       const user = await dispatch(getUser(userId));
       if (user.errors) {
-        // setInvalidUser(true);
         history.push("/users/not-found");
       }
     })();

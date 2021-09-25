@@ -16,6 +16,7 @@ export const posts = {
 
 export const comments = {
   byUser: (user) => (state) => user ? user.comments.map((id) => state.comments.comments[id]) : [],
+  all: () => (state) => state.comments.comments,
 };
 
 export const retailers = {
@@ -29,8 +30,21 @@ export const meetups = {
   byId: (id) => (state) => state.meetups.meetups[id],
   byUser: (user) => (state) => user ? user.meetups.map((id) => state.meetups.meetups[id]) : [],
   all: () => (state) => state.meetups.meetups,
+  max: () => (state) => state.meetups.max,
 };
 
 export const communities = {
   all: () => (state) => state.communities,
+};
+
+export const sidebar = {
+  popularCommunities: () => (state) => state.sidebar.popular.map((id) => state.communities[id]),
+  currentCommunity: () => (state) => state.communities[state.sidebar.community],
+};
+
+export const search = {
+  results: () => (state) => state.search,
+  posts: ({ posts = [] }) => (state) => posts.map((id) => state.posts.posts[id]),
+  comments: ({ comments = [] }) => (state) => comments.map((id) => state.comments.comments[id]),
+  retailers: ({ retailers = [] }) => (state) => retailers.map((id) => state.retailers.retailers[id]),
 };

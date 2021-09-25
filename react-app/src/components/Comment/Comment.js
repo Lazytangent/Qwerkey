@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, NavLink } from "react-router-dom";
 
+import { session } from '../../store/selectors';
 import { saveComment } from "../../store/session";
 import { useCommentContext } from "../../context/CommentContext";
 import EditButton from "../parts/EditButton";
@@ -20,7 +21,7 @@ const Comment = ({ comment }) => {
   const locationArr = location.pathname.split("/");
 
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
+  const user = useSelector(session.user());
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);

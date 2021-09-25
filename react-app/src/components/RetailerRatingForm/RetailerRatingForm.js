@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { session } from '../../store/selectors';
 import { createRetailerRating } from "../../store/retailers";
 import FormTitle from "../parts/FormTitle";
 import InputField from "../parts/InputField";
@@ -9,7 +10,7 @@ import SubmitFormButton from "../parts/SubmitFormButton";
 
 const RetailerRatingForm = ({ retailerId }) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
+  const user = useSelector(session.user());
 
   const [rating, setRating] = useState(1);
   const [errors, setErrors] = useState([]);
