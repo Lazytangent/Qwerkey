@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from "uuid";
 
 import { getOrder, getPosts, getMaxNumberOfPosts, getMaxNumberOfPostsByCommunity } from '../../store/posts';
-import { getCommunityByName } from "../../store/sidebar";
+import { getSidebarCommunity } from "../../store/sidebar";
 import Post from '../Post';
 
 const PostsContainer = () => {
@@ -38,7 +38,7 @@ const PostsContainer = () => {
 
   useEffect(() => {
     if (communityName) {
-      dispatch(getCommunityByName(communityName));
+      dispatch(getSidebarCommunity(communityName));
       dispatch(getMaxNumberOfPostsByCommunity(communityName));
     }
   }, [dispatch, communityName]);

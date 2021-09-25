@@ -1,21 +1,29 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 
-import { getPopularCommunities } from "../../store/sidebar";
+import { getSidebarCommunity, getSidebarPopularCommunities } from "../../store/sidebar";
 import About from "../About";
 
 const Sidebar = () => {
   const location = useLocation();
+  const { communityName } = useParams();
+
   const dispatch = useDispatch();
-  const popularCommunities = useSelector((state) => state.sidebar.popular);
-  const currentCommunity = useSelector((state) => state.sidebar.community);
+  const popularCommunities = useSelector((state) => state.sidebar.popular.map((id) => state.communities[id]));
+  const currentCommunity = useSelector((state) => state.communities[state.sidebar.community]);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(getPopularCommunities());
+    dispatch(getSidebarPopularCommunities());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (communityName && !currentCommunity) {
+      dispatch(getSidebarCommunity(communityName));
+    }
+  }, [dispatch, communityName, currentCommunity]);
 
   useEffect(() => {
     if (popularCommunities) {

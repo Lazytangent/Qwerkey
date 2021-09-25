@@ -9,8 +9,8 @@ import NavButton from "../parts/NavButton";
 
 const CollapsedSidebar = () => {
   const { showCollapsedSidebar, setShowCollapsedSidebar } = useCollapsedSidebarContext();
-  const popularCommunities = useSelector(state => state.sidebar.popular);
-  const currentCommunity = useSelector(state => state.sidebar.community);
+  const popularCommunities = useSelector(state => state.sidebar.popular.map((id) => state.communities[id]));
+  const currentCommunity = useSelector(state => state.communities[state.sidebar.community]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {

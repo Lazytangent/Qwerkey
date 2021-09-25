@@ -1,38 +1,18 @@
-const SET_SIDEBAR = 'sidebar/setSidebar';
-const SET_COMMUNITIES = 'sidebar/SET_COMMUNITIES';
-const SET_COMMUNITY = "sidebar/SET_COMMUNITY";
+import { SET_SIDEBAR_COMMUNITY, SET_SIDEBAR_COMMUNITIES } from './constants';
+import { setSidebarCommunity, setSidebarCommunities } from './actions';
 
-const setSidebar = (data) => ({
-  type: SET_SIDEBAR,
-  ...data,
-});
-
-const setCommunities = (communities) => {
-  return {
-    type: SET_COMMUNITIES,
-    communities,
-  };
-};
-
-const setCommunity = (community) => {
-  return {
-    type: SET_COMMUNITY,
-    community,
-  };
-};
-
-export const getPopularCommunities = () => async (dispatch) => {
+export const getSidebarPopularCommunities = () => async (dispatch) => {
   const res = await fetch(`/api/communities/popular`);
   const communities = await res.json();
-  dispatch(setCommunities(communities));
+  dispatch(setSidebarCommunities(communities));
   return communities;
 };
 
-export const getCommunityByName = (name) => async (dispatch) => {
+export const getSidebarCommunity = (name) => async (dispatch) => {
   const res = await fetch(`/api/communities/${name}`);
   const community = await res.json();
   if (!community.errors) {
-    dispatch(setCommunity(community));
+    dispatch(setSidebarCommunity(community));
   }
   return community;
 };
@@ -44,10 +24,10 @@ const initialState = {
 
 const sidebarReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_COMMUNITIES:
-      return { ...state, popular: action.communities };
-    case SET_COMMUNITY:
-      return { ...state, community: action.community };
+    case SET_SIDEBAR_COMMUNITIES:
+      return { ...state, popular: action.communities.map(({ id }) => id) };
+    case SET_SIDEBAR_COMMUNITY:
+      return { ...state, community: action.community.id };
     default:
       return state;
   }
