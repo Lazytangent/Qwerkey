@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { session } from '../../store/selectors';
 import { updateRetailerRating } from "../../store/retailers";
 import { useRetailerRatingContext } from "../../context/RetailerRatingContext";
 import FormTitle from "../parts/FormTitle";
@@ -10,7 +11,7 @@ import convertFormErrors from "../../utils/convertFormErrors";
 
 const EditRetailerRatingForm = ({ setShowEditModal }) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
+  const user = useSelector(session.user());
 
   const { retailerRating } = useRetailerRatingContext();
   const [rating, setRating] = useState(retailerRating.rating);
