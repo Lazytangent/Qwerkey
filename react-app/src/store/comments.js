@@ -70,28 +70,28 @@ export const rateComment = ({ rating, userId, commentId }) => async (dispatch) =
 };
 
 const initialState = {
-  comments: {},
+  byIds: {},
 };
 
 const commentsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_COMMENTS:
-      return { ...state, comments: { ...action.comments } };
+      return { ...state, byIds: { ...action.comments } };
     case SET_COMMENT:
-      return { ...state, comments: { ...state.comments, [action.comment.id]: action.comment } };
+      return { ...state, byIds: { ...state.byIds, [action.comment.id]: action.comment } };
     case SET_USER:
       return {
         ...state,
-        comments: {
-          ...state.comments,
+        byIds: {
+          ...state.byIds,
           ...Object.fromEntries(action.user.comments.map((comment) => [comment.id, comment])),
         },
       };
     case SET_SEARCH:
       return {
         ...state,
-        comments: {
-          ...state.comments,
+        byIds: {
+          ...state.byIds,
           ...Object.fromEntries(action.comments.map((comment) => [comment.id, comment])),
         },
       };
