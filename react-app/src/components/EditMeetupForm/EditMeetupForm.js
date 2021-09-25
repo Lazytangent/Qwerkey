@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import csc from "country-state-city";
 
+import { session, meetups } from '../../store/selectors';
 import { updateMeetup } from "../../store/meetups";
 import FormTitle from "../parts/FormTitle";
 import FormErrors from "../parts/FormErrors";
@@ -10,8 +11,8 @@ import SubmitFormButton from "../parts/SubmitFormButton";
 
 const EditMeetupForm = ({ meetupId, setShowEditModal }) => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
-  const meetup = useSelector((state) => state.meetups.meetups[meetupId]);
+  const user = useSelector(session.user());
+  const meetup = useSelector(meetups.byId(meetupId));
 
   const [name, setName] = useState(meetup.name);
   const [description, setDescription] = useState(meetup.description);

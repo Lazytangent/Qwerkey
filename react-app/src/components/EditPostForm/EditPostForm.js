@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { session, posts } from '../../store/selectors';
 import { updatePost } from '../../store/posts';
 import FormTitle from '../parts/FormTitle';
 import FormErrors from '../parts/FormErrors';
@@ -9,8 +10,8 @@ import SubmitFormButton from '../parts/SubmitFormButton';
 
 const EditPostForm = ({ postId, setShowEditModal }) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
-  const post = useSelector(state => state.posts.posts[postId]);
+  const user = useSelector(session.user());
+  const post = useSelector(posts.byId(postId));
 
   const [title, setTitle] = useState(post.title);
   const [body, setBody] = useState(post.body);

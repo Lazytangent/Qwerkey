@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from "uuid";
 
+import { session, posts as postsSelectors } from '../../store/selectors'
 import { getOrder, getPosts, getMaxNumberOfPosts, getMaxNumberOfPostsByCommunity } from '../../store/posts';
 import { getSidebarCommunity } from "../../store/sidebar";
 import Post from '../Post';
@@ -11,10 +12,10 @@ const PostsContainer = () => {
   const { communityName } = useParams();
   const dispatch = useDispatch();
 
-  const user = useSelector(state => state.session.user);
-  const posts = useSelector(state => state.posts.posts);
-  const maxPosts = useSelector(state => state.posts.max);
-  const order = useSelector(state => state.posts.order);
+  const user = useSelector(session.user());
+  const posts = useSelector(postsSelectors.all());
+  const maxPosts = useSelector(postsSelectors.max());
+  const order = useSelector(postsSelectors.order());
 
   const [page, setPage] = useState(1);
   const [currentPosts, setCurrentPosts] = useState([]);

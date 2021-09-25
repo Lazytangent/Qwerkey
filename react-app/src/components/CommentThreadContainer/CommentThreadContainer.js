@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
 
+import { session, comments as commentsSelectors } from '../../store/selectors';
 import Comment from "../Comment";
 
 const CommentsContainer = () => {
-  const user = useSelector(state => state.session.user);
-  const comments = useSelector(state => state.comments.comments);
+  const user = useSelector(session.user());
+  const comments = useSelector(commentsSelectors.all());
 
   return (
     <>

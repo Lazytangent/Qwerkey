@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 
+import { session } from '../../store/selectors';
 import { savePost } from "../../store/session";
 import EditButton from "../parts/EditButton";
 import DeleteButton from "../parts/DeleteButton";
@@ -18,7 +19,7 @@ import options from "../../utils/localeDateString";
 const Post = ({ post }) => {
   const locationArr = useLocation().pathname.split("/");
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
+  const user = useSelector(session.user());
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
+import { sidebar } from '../../store/selectors';
 import { useCollapsedSidebarContext } from "../../context/CollapsedSidebarContext";
 import SearchBar from "../SearchBar";
 import About from "../About";
@@ -9,8 +10,8 @@ import NavButton from "../parts/NavButton";
 
 const CollapsedSidebar = () => {
   const { showCollapsedSidebar, setShowCollapsedSidebar } = useCollapsedSidebarContext();
-  const popularCommunities = useSelector(state => state.sidebar.popular.map((id) => state.communities[id]));
-  const currentCommunity = useSelector(state => state.communities[state.sidebar.community]);
+  const popularCommunities = useSelector(sidebar.popularCommunities());
+  const currentCommunity = useSelector(sidebar.currentCommunity());
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {

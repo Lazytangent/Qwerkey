@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
+import { session } from '../../../store/selectors';
 import DarkModeToggle from "../../DarkModeToggle";
 import LogoutButton from "../../LogoutButton";
 import NavButton from "../NavButton";
 
 const UserMenu = ({ createPostBtnHandler, userMenuRef }) => {
-  const user = useSelector(state => state.session.user);
+  const user = useSelector(session.user());
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {

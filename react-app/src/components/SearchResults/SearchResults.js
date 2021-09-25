@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-import { useSearchContext } from "../../context/SearchContext";
+import { search } from '../../store/selectors'
 import { getQuery } from "../../store/search";
+import { useSearchContext } from "../../context/SearchContext";
 import Post from "../Post";
 import Comment from "../Comment";
 import Retailer from "../Retailer";
@@ -14,10 +15,10 @@ const SearchResults = () => {
   const dispatch = useDispatch();
 
   const { searched, setSearched } = useSearchContext();
-  const results = useSelector((state) => state.search);
-  const posts = useSelector((state) => results.posts.map((id) => state.posts.posts[id]))
-  const comments = useSelector((state) => results.comments.map((id) => state.comments.comments[id]))
-  const retailers = useSelector((state) => results.retailers.map((id) => state.retailers.retailers[id]))
+  const results = useSelector(search.results());
+  const posts = useSelector(search.posts(results));
+  const comments = useSelector(search.comments(results));
+  const retailers = useSelector(search.retailers(results));
 
   const [noResults, setNoResults] = useState(false);
 

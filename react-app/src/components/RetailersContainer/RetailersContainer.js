@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
+import { retailers as retailersSelectors } from '../../store/selectors';
 import { getRetailers, getMaxNumberOfRetailers } from "../../store/retailers";
 import Retailer from "../Retailer";
 
 const RetailersContainer = () => {
   const dispatch = useDispatch();
-  const retailers = useSelector((state) => state.retailers.retailers);
-  const maxRetailers = useSelector(state => state.retailers.max);
+  const retailers = useSelector(retailersSelectors.all());
+  const maxRetailers = useSelector(retailersSelectors.max());
 
   const [page, setPage] = useState(1);
   const [currentRetailers, setCurrentRetailers] = useState([]);

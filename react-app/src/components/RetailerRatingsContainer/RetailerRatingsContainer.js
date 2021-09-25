@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
+import { retailers } from '../../store/selectors';
 import RetailerRating from "../RetailerRating";
 
 const RetailerRatingsContainer = ({ retailerId }) => {
-  const retailer = useSelector(state => state.retailers.retailers[retailerId]);
+  const retailer = useSelector(retailers.byId(retailerId));
 
   const [isLoaded, setIsLoaded] = useState(false);
 

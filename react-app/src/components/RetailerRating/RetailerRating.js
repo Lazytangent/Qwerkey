@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
+import { session } from '../../store/selectors';
 import { useRetailerRatingContext } from "../../context/RetailerRatingContext";
 import EditButton from "../parts/EditButton";
 import EditRetailerRatingModal from "../EditRetailerRatingForm";
@@ -9,7 +10,7 @@ import DeleteButton from "../parts/DeleteButton";
 import DeleteConfirmationModal from "../parts/DeleteConfirmation";
 
 const RetailerRating = ({ rating }) => {
-  const user = useSelector(state => state.session.user);
+  const user = useSelector(session.user());
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);

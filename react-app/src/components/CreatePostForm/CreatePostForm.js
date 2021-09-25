@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { session, communities as communitiesSelectors } from '../../store/selectors'
 import { createPost } from '../../store/posts';
 import { getCommunities } from "../../store/communities";
 import { useCreatePostContext } from '../../context/CreatePostContext';
@@ -11,8 +12,8 @@ import SubmitFormButton from '../parts/SubmitFormButton';
 
 const CreatePostForm = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
-  const communities = useSelector(state => state.communities);
+  const user = useSelector(session.user());
+  const communities = useSelector(communitiesSelectors.all());
 
   const { setShowCreatePostModal } = useCreatePostContext();
 

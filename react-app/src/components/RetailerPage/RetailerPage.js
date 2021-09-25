@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
+import { session, retailers } from '../../store/selectors';
 import { getOneRetailer, getOneRetailerLocation } from "../../store/retailers";
 import Retailer from "../Retailer";
 import RetailerRatingsContainer from "../RetailerRatingsContainer";
@@ -11,10 +12,8 @@ import Map from "../Map";
 const RetailerPage = () => {
   const { retailerId } = useParams();
   const dispatch = useDispatch();
-  const retailer = useSelector(
-    (state) => state.retailers.retailers[retailerId]
-  );
-  const user = useSelector((state) => state.session.user);
+  const retailer = useSelector(retailers.byId(retailerId));
+  const user = useSelector(session.user());
 
   const [isLoaded, setIsLoaded] = useState(false);
 

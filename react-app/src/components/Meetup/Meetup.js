@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
+import { session } from '../../store/selectors';
 import EditButton from "../parts/EditButton";
 import DeleteButton from "../parts/DeleteButton";
 import DeleteConfirmationModal from "../parts/DeleteConfirmation";
@@ -11,7 +12,7 @@ import UserName from "../parts/UserName";
 import options from "../../utils/localeDateString";
 
 const Meetup = ({ meetup }) => {
-  const user = useSelector((state) => state.session.user);
+  const user = useSelector(session.user());
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);

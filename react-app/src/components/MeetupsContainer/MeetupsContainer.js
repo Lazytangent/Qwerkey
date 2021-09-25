@@ -2,15 +2,16 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
+import { session, meetups as meetupsSelectors } from '../../store/selectors'
 import { getMeetups, getMaxNumberOfMeetups } from "../../store/meetups";
 import Meetup from "../Meetup";
 import CreateMeetup from "../CreateMeetup";
 
 const MeetupsContainer = () => {
   const dispatch = useDispatch();
-  const meetups = useSelector((state) => state.meetups.meetups);
-  const maxMeetups = useSelector((state) => state.meetups.max);
-  const user = useSelector((state) => state.session.user);
+  const meetups = useSelector(meetupsSelectors.all());
+  const maxMeetups = useSelector(meetupsSelectors.max());
+  const user = useSelector(session.user());
 
   const [page, setPage] = useState(1);
   const [currentMeetups, setCurrentMeetups] = useState([]);

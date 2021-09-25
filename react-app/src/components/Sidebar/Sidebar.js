@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 
+import { sidebar } from '../../store/selectors';
 import { getSidebarCommunity, getSidebarPopularCommunities } from "../../store/sidebar";
 import About from "../About";
 
@@ -10,8 +11,8 @@ const Sidebar = () => {
   const { communityName } = useParams();
 
   const dispatch = useDispatch();
-  const popularCommunities = useSelector((state) => state.sidebar.popular.map((id) => state.communities[id]));
-  const currentCommunity = useSelector((state) => state.communities[state.sidebar.community]);
+  const popularCommunities = useSelector(sidebar.popularCommunities());
+  const currentCommunity = useSelector(sidebar.currentCommunity());
 
   const [isLoaded, setIsLoaded] = useState(false);
 

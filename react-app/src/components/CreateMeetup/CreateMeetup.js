@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import csc from "country-state-city";
 
+import { session } from '../../store/selectors';
 import { createMeetup } from "../../store/meetups";
 import FormTitle from "../parts/FormTitle";
 import FormErrors from "../parts/FormErrors";
@@ -12,7 +13,7 @@ import SubmitFormButton from "../parts/SubmitFormButton";
 const CreateMeetup = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
+  const user = useSelector(session.user());
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
