@@ -2,12 +2,13 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { ArrowDownward } from "@material-ui/icons";
 
+import { session } from '../../../store/selectors';
 import { ratePost } from "../../../store/posts";
 import { rateComment } from "../../../store/comments";
 
 const Downvote = ({ id, type, rating }) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
+  const user = useSelector(session.user());
 
   const onDownvote = () => {
     switch (type) {

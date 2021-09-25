@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
+import { session, posts } from '../../store/selectors';
 import { getPostById } from "../../store/posts";
 import { getCommentsByPost } from "../../store/comments";
 import Post from "../Post";
@@ -12,8 +13,8 @@ const PostPage = () => {
   const { postId } = useParams();
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.session.user);
-  const post = useSelector((state) => state.posts.posts[postId]);
+  const user = useSelector(session.user());
+  const post = useSelector(posts.byId(postId));
 
   const [isLoaded, setIsLoaded] = useState(false);
 
