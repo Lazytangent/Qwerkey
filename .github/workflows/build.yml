@@ -16,7 +16,7 @@ jobs:
         
     defaults:
       run:
-        working-directory: ./react-app
+        working-directory: react-app
 
     steps:
     - uses: actions/checkout@v2
