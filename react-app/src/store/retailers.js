@@ -139,24 +139,24 @@ export const deleteRetailerRating =
   };
 
 const initialState = {
-  byIds: {},
+  retailers: {},
   max: null,
 };
 
 const retailersReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_RETAILERS:
-      return { ...state, byIds: { ...action.retailers } };
+      return { ...state, retailers: { ...action.retailers } };
     case SET_MORE_RETAILERS:
       return {
         ...state,
-        byIds: { ...state.byIds, ...action.retailers },
+        retailers: { ...state.retailers, ...action.retailers },
       };
     case SET_RETAILER:
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
+        retailers: {
+          ...state.retailers,
           [action.retailer.id]: action.retailer,
         },
       };
@@ -165,21 +165,21 @@ const retailersReducer = (state = initialState, action) => {
     case REMOVE_RETAILER:
       return {
         ...state,
-        byIds: { ...state.byIds, [action.id]: undefined },
+        retailers: { ...state.retailers, [action.id]: undefined },
       };
     case SET_USER:
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
+        retailers: {
+          ...state.retailers,
           ...Object.fromEntries(action.user.retailers.map((retailer) => [retailer.id, retailer])),
         },
       };
     case SET_SEARCH:
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
+        retailers: {
+          ...state.retailers,
           ...Object.fromEntries(action.retailers.map((retailer) => [retailer.id, retailer])),
         },
       };

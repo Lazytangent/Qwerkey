@@ -56,9 +56,7 @@ export const deleteCommunity = (communityId) => async (dispatch) => {
   return communities;
 };
 
-const initialState = {
-  byIds: {},
-};
+const initialState = {};
 
 const communityReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -66,20 +64,11 @@ const communityReducer = (state = initialState, action) => {
     case SET_COMMUNITIES:
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
-          ...Object.fromEntries(action.communities.map((community) => [community.id, community]))
-        },
+        ...Object.fromEntries(action.communities.map((community) => [community.id, community]))
       };
     case SET_SIDEBAR_COMMUNITY:
     case SET_COMMUNITY:
-      return {
-        ...state,
-        byIds: {
-          ...state.byIds,
-          [action.community.id]: action.community
-        },
-      };
+      return { ...state, [action.community.id]: action.community };
     default:
       return state;
   }

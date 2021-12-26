@@ -164,7 +164,7 @@ export const ratePost =
     };
 
 const initialState = {
-  byIds: {},
+  posts: {},
   max: null,
   order: [],
 };
@@ -172,13 +172,13 @@ const initialState = {
 const postsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MORE_POSTS:
-      return { ...state, byIds: { ...state.byIds, ...action.posts } };
+      return { ...state, posts: { ...state.posts, ...action.posts } };
     case SET_POSTS:
-      return { ...state, byIds: { ...action.byIds } };
+      return { ...state, posts: { ...action.posts } };
     case SET_POST:
       return {
         ...state,
-        byIds: { ...state.byIds, [action.post.id]: action.post },
+        posts: { ...state.posts, [action.post.id]: action.post },
       };
     case SET_MAX_POSTS:
       return { ...state, max: action.number };
@@ -187,16 +187,16 @@ const postsReducer = (state = initialState, action) => {
     case SET_USER:
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
+        posts: {
+          ...state.posts,
           ...Object.fromEntries(action.user.posts.map((post) => [post.id, post])),
         },
       }
     case SET_SEARCH:
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
+        posts: {
+          ...state.posts,
           ...Object.fromEntries(action.posts.map((post) => [post.id, post])),
         },
       };
