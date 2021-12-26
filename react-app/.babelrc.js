@@ -9,7 +9,7 @@ const plugins = [
     'core'
   ],
   [
-    'bable-plugin-import',
+    'babel-plugin-import',
     {
       'libraryName': '@material-ui/icons',
       'libraryDirectory': 'esm',
