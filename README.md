@@ -6,7 +6,7 @@
 
 ## Live Links
 
-* [Link link](https://qwerkey.herokuapp.com)
+* [Live link](https://qwerkey.herokuapp.com)
 * [Feature List](https://github.com/Lazytangent/Qwerkey/wiki/MVP-Features-List)
 
 ## Technologies
@@ -49,7 +49,3 @@ Qwerkey is a social media site for connecting with other mechanical keyboard ent
 11. In your terminal in the `react-app`, run `npm start`.
 12. Your app should open in your default browser.
 13. If you are planning on developing, please make a fork and create pull requests as necessary.
-
-## Challenges
-
-## Code Snippets
