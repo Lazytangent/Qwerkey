@@ -1,9 +1,4 @@
-import pytest
-
-from werkzeug.security import generate_password_hash, check_password_hash
-
-from app.models import db, User
-from .utils import client
+from app.models import User
 
 
 def test_valid_login(client):

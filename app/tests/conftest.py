@@ -4,7 +4,7 @@ from app import app
 from app.models import db, User
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def client():
     app.config['TESTING'] = True
     with app.test_client() as client:
@@ -14,7 +14,7 @@ def client():
             yield client
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def login_test_user(client):
     email = 'john@test.com'
     username = 'johnthetester'
@@ -30,4 +30,3 @@ def login_test_user(client):
     })
     json_login_response = login_response.get_json()
     return json_login_response['access_token']
-
