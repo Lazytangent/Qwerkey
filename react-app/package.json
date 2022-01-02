@@ -53,5 +53,8 @@
     "redux-logger": "^3.0.6",
     "tailwindcss": "^3.0.7"
   },
+  "jest": {
+    "globalSetup": "./global-setup.js"
+  },
   "proxy": "http://localhost:5000"
 }
