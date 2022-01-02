@@ -1,12 +1,16 @@
 import pytest
+import os
 
 from app import app
 from app.models import db, User
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def client():
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    db_uri = 'sqlite:///' + os.path.join(basedir, 'test.db')
     app.config['TESTING'] = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     with app.test_client() as client:
         with app.app_context():
             db.drop_all()
@@ -14,7 +18,7 @@ def client():
             yield client
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def login_test_user(client):
     email = 'john@test.com'
     username = 'johnthetester'
@@ -30,4 +34,3 @@ def login_test_user(client):
     })
     json_login_response = login_response.get_json()
     return json_login_response['access_token']
-
