@@ -14,7 +14,7 @@ describe("The Post component", () => {
         id: 1,
         title: "Test post",
         body: "Test post body",
-        created_at: "Wed, 02 March 2021 02:06:09 GMT",
+        created_at: "Tue, 02 March 2021 02:06:09 GMT",
         images: [],
         tags: [
           "Good",
@@ -49,8 +49,8 @@ describe("The Post component", () => {
     });
 
     test("the Post timestamp", () => {
-      const body = screen.getByText("Monday, March 1, 2021, 08:06:09 PM");
-      expect(body).toHaveTextContent("Monday, March 1, 2021, 08:06:09 PM");
+      const body = screen.getByText("Tuesday, March 2, 2021, 02:06:09 AM");
+      expect(body).toHaveTextContent("Tuesday, March 2, 2021, 02:06:09 AM");
     });
 
     test("the Post tags", () => {
