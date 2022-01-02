@@ -49,8 +49,8 @@ describe("The Post component", () => {
     });
 
     test("the Post timestamp", () => {
-      const body = screen.getByText("by on Monday, March 1, 2021, 08:06:09 PM");
-      expect(body).toHaveTextContent("by on Monday, March 1, 2021, 08:06:09 PM");
+      const body = screen.getByText("Monday, March 1, 2021, 08:06:09 PM");
+      expect(body).toHaveTextContent("Monday, March 1, 2021, 08:06:09 PM");
     });
 
     test("the Post tags", () => {
