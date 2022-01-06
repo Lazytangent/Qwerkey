@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { updateComment } from "../../store/comments";
-import { useCommentContext } from "../../context/CommentContext";
-import FormTitle from "../parts/FormTitle";
-import SubmitFormButton from "../parts/SubmitFormButton";
+import { updateComment } from '../../store/comments';
+import { useCommentContext } from '../../context/CommentContext';
+import FormTitle from '../parts/FormTitle';
+import SubmitFormButton from '../parts/SubmitFormButton';
 
 const EditCommentForm = ({ setShowEditModal }) => {
   const dispatch = useDispatch();
@@ -34,10 +34,10 @@ const EditCommentForm = ({ setShowEditModal }) => {
     };
     const post = await dispatch(updateComment(updatedComment));
     if (!post.errors) {
-      setBody("");
+      setBody('');
       setShowEditModal(false);
     } else {
-      setErrors(["A body is required to make a comment."]);
+      setErrors(['A body is required to make a comment.']);
     }
   };
 

@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useLocation, useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 
 import { sidebar } from '../../store/selectors';
-import { getSidebarCommunity, getSidebarPopularCommunities } from "../../store/sidebar";
-import About from "../About";
+import {
+  getSidebarCommunity,
+  getSidebarPopularCommunities,
+} from '../../store/sidebar';
+import About from '../About';
 
 const Sidebar = () => {
   const location = useLocation();
@@ -38,7 +41,7 @@ const Sidebar = () => {
 
   return (
     <div className="fixed max-w-xs p-2 pt-0">
-      {location.pathname.startsWith("/q") && currentCommunity && (
+      {location.pathname.startsWith('/q') && currentCommunity && (
         <div className="max-w-md p-2 border border-gray-600 rounded">
           <h3 className="text-center">{currentCommunity.name}</h3>
           <p className="p-2">{currentCommunity.description}</p>

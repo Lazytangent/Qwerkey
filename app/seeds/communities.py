@@ -4,7 +4,7 @@ from app.models import db, Community
 
 def seed_communities():
     new_communities = []
-    with open('./app/seeds/communities.json') as f:
+    with open("./app/seeds/communities.json") as f:
         data = json.load(f)
         for community in data:
             new_community = Community(**community)
@@ -15,5 +15,5 @@ def seed_communities():
 
 
 def undo_communities():
-    db.session.execute('TRUNCATE communities RESTART IDENTITY CASCADE')
+    db.session.execute("TRUNCATE communities RESTART IDENTITY CASCADE")
     db.session.commit()

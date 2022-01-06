@@ -9,10 +9,12 @@ class PostRating(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False,
-                           default=datetime.datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullable=False,
-                           default=datetime.datetime.utcnow)
+    created_at = db.Column(
+        db.DateTime, nullable=False, default=datetime.datetime.utcnow
+    )
+    updated_at = db.Column(
+        db.DateTime, nullable=False, default=datetime.datetime.utcnow
+    )
 
     user = db.relationship("User")
     post = db.relationship("Post", back_populates="ratings")

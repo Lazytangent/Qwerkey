@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const FormErrors = ({ errors }) => {
   const [formattedErrors, setFormattedErrors] = useState([]);
 
   useEffect(() => {
     const result = errors.map((error) => {
-      const arr = error.split(":")[0].trim();
+      const arr = error.split(':')[0].trim();
       return arr[0].toUpperCase() + arr.slice(1);
     });
     setFormattedErrors(result);

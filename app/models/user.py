@@ -7,7 +7,7 @@ from .saved_comment import saved_comments
 
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
@@ -23,12 +23,12 @@ class User(db.Model, UserMixin):
     saved_posts = db.relationship("Post", secondary=saved_posts)
     saved_comments = db.relationship("Comment", secondary=saved_comments)
     meetups = db.relationship("Meetup", back_populates="user")
-    sent_messages = db.relationship("Message",
-                                    foreign_keys="Message.sender_id",
-                                    back_populates="sender")
-    received_messages = db.relationship("Message",
-                                        foreign_keys="Message.recipient_id",
-                                        back_populates="recipient")
+    sent_messages = db.relationship(
+        "Message", foreign_keys="Message.sender_id", back_populates="sender"
+    )
+    received_messages = db.relationship(
+        "Message", foreign_keys="Message.recipient_id", back_populates="recipient"
+    )
 
     @property
     def password(self):
@@ -46,7 +46,7 @@ class User(db.Model, UserMixin):
             "id": self.id,
             "username": self.username,
             "email": self.email,
-            "created_at": self.created_at
+            "created_at": self.created_at,
         }
 
     def to_dict(self):
@@ -56,10 +56,10 @@ class User(db.Model, UserMixin):
             "email": self.email,
             "created_at": self.created_at,
             "meetups": [meetup.to_dict() for meetup in self.meetups],
-            "saved_posts":
-                [post.to_simple_dict() for post in self.saved_posts],
-            "saved_comments":
-                [comment.to_search_dict() for comment in self.saved_comments],
+            "saved_posts": [post.to_simple_dict() for post in self.saved_posts],
+            "saved_comments": [
+                comment.to_search_dict() for comment in self.saved_comments
+            ],
             "comments": [comment.to_dict() for comment in self.comments],
             "posts": [post.to_simple_dict() for post in self.posts],
             "retailers": [retailer.to_dict() for retailer in self.retailers],

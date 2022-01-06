@@ -1,3 +1,3 @@
-import CommunitiesContainer from "./CommunitiesContainer";
+import CommunitiesContainer from './CommunitiesContainer';
 
 export default CommunitiesContainer;

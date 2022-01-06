@@ -1,24 +1,24 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, NavLink } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, NavLink } from 'react-router-dom';
 
 import { session } from '../../store/selectors';
-import { saveComment } from "../../store/session";
-import { useCommentContext } from "../../context/CommentContext";
-import EditButton from "../parts/EditButton";
-import DeleteButton from "../parts/DeleteButton";
-import EditCommentModal from "../EditCommentForm";
-import DeleteConfirmationModal from "../parts/DeleteConfirmation";
-import Downvote from "../parts/Downvote";
-import Upvote from "../parts/Upvote";
-import Score from "../parts/Score";
-import SaveButton from "../parts/SaveButton";
-import UserName from "../parts/UserName";
-import options from "../../utils/localeDateString";
+import { saveComment } from '../../store/session';
+import { useCommentContext } from '../../context/CommentContext';
+import EditButton from '../parts/EditButton';
+import DeleteButton from '../parts/DeleteButton';
+import EditCommentModal from '../EditCommentForm';
+import DeleteConfirmationModal from '../parts/DeleteConfirmation';
+import Downvote from '../parts/Downvote';
+import Upvote from '../parts/Upvote';
+import Score from '../parts/Score';
+import SaveButton from '../parts/SaveButton';
+import UserName from '../parts/UserName';
+import options from '../../utils/localeDateString';
 
 const Comment = ({ comment }) => {
   const location = useLocation();
-  const locationArr = location.pathname.split("/");
+  const locationArr = location.pathname.split('/');
 
   const dispatch = useDispatch();
   const user = useSelector(session.user());
@@ -32,8 +32,16 @@ const Comment = ({ comment }) => {
 
   useEffect(() => {
     if (user) {
-      setIsSaved(user.saved_comments.find(savedComment => savedComment.id === comment.id));
-      if (comment.user.id !== user.id && comment.ratings && comment.ratings[user.id]) {
+      setIsSaved(
+        user.saved_comments.find(
+          (savedComment) => savedComment.id === comment.id
+        )
+      );
+      if (
+        comment.user.id !== user.id &&
+        comment.ratings &&
+        comment.ratings[user.id]
+      ) {
         setRating(comment.ratings[user.id].rating);
       }
     }
@@ -51,7 +59,7 @@ const Comment = ({ comment }) => {
   const saveThisComment = async () => {
     const updatedUser = await dispatch(saveComment(user.id, comment.id));
     if (!updatedUser.errors) {
-      if (!(locationArr[1] === "users" && locationArr[2] === String(user.id))) {
+      if (!(locationArr[1] === 'users' && locationArr[2] === String(user.id))) {
         setIsSaved((prev) => !prev);
       }
     }
@@ -66,22 +74,28 @@ const Comment = ({ comment }) => {
       <hr />
       <div className="flex justify-between p-2">
         <p className="p-2">
-          by{" "}
-          <UserName link={`/users/${comment.user.id}`} username={comment.user.username} /> on{" "}
-          <span className="hidden md:block">{new Date(comment.created_at).toLocaleString(...options())}</span>
+          by{' '}
+          <UserName
+            link={`/users/${comment.user.id}`}
+            username={comment.user.username}
+          />{' '}
+          on{' '}
+          <span className="hidden md:block">
+            {new Date(comment.created_at).toLocaleString(...options())}
+          </span>
         </p>
-      {user && (
-        <div className="flex">
-          <div className="flex justify-around p-2">
-            <Downvote id={comment.id} rating={rating} type="comment" />
-            <Score ratings={comment.ratings} />
-            <Upvote id={comment.id} type="comment" rating={rating} />
+        {user && (
+          <div className="flex">
+            <div className="flex justify-around p-2">
+              <Downvote id={comment.id} rating={rating} type="comment" />
+              <Score ratings={comment.ratings} />
+              <Upvote id={comment.id} type="comment" rating={rating} />
+            </div>
+            <SaveButton save={saveThisComment} isSaved={isSaved} />
           </div>
-          <SaveButton save={saveThisComment} isSaved={isSaved} />
-        </div>
-      )}
+        )}
       </div>
-      {comment.user.id === user?.id && comment.body !== "[DELETED]" && (
+      {comment.user.id === user?.id && comment.body !== '[DELETED]' && (
         <div className="flex justify-end">
           <EditButton label="Edit Comment" onClick={editBtnHandler}>
             <EditCommentModal
@@ -99,9 +113,12 @@ const Comment = ({ comment }) => {
           </DeleteButton>
         </div>
       )}
-      {(location.pathname === "/search" ||
-        location.pathname.startsWith("/users")) && (
-        <NavLink className="p-2" to={`/q/${comment.post.community}/${comment.post.id}`}>
+      {(location.pathname === '/search' ||
+        location.pathname.startsWith('/users')) && (
+        <NavLink
+          className="p-2"
+          to={`/q/${comment.post.community}/${comment.post.id}`}
+        >
           <span className="p-2 hover:text-green">Go to Post</span>
         </NavLink>
       )}

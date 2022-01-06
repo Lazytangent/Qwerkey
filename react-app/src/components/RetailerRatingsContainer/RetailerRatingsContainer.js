@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { retailers } from '../../store/selectors';
-import RetailerRating from "../RetailerRating";
+import RetailerRating from '../RetailerRating';
 
 const RetailerRatingsContainer = ({ retailerId }) => {
   const retailer = useSelector(retailers.byId(retailerId));
@@ -21,7 +21,7 @@ const RetailerRatingsContainer = ({ retailerId }) => {
 
   return (
     <div className="mt-2">
-      {Object.values(retailer.ratings).map(rating => (
+      {Object.values(retailer.ratings).map((rating) => (
         <RetailerRating key={rating.id} rating={rating} />
       ))}
     </div>

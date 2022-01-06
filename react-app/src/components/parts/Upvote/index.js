@@ -1,3 +1,3 @@
-import Upvote from "./Upvote";
+import Upvote from './Upvote';
 
 export default Upvote;

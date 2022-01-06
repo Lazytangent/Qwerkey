@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
-import { getUser } from "../../store/users";
+import { getUser } from '../../store/users';
 import {
   users,
   session,
@@ -11,12 +11,12 @@ import {
   comments as commentsSelectors,
   retailers as retailersSelectors,
   meetups as meetupsSelectors,
-} from "../../store/selectors";
-import UserCard from "../UserCard";
-import Post from "../Post";
-import Comment from "../Comment";
-import Retailer from "../Retailer";
-import Meetup from "../Meetup";
+} from '../../store/selectors';
+import UserCard from '../UserCard';
+import Post from '../Post';
+import Comment from '../Comment';
+import Retailer from '../Retailer';
+import Meetup from '../Meetup';
 
 const ProfilePage = () => {
   const history = useHistory();
@@ -35,7 +35,7 @@ const ProfilePage = () => {
     (async () => {
       const user = await dispatch(getUser(userId));
       if (user.errors) {
-        history.push("/users/not-found");
+        history.push('/users/not-found');
       }
     })();
   }, [dispatch, userId, history]);

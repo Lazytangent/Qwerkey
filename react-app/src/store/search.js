@@ -1,8 +1,14 @@
 import { SET_SEARCH } from './constants';
 import { setSearch } from './actions';
 
-export const getQuery = (queryString, type, field, state, city) => async (dispatch) => {
-  const res = await fetch(`/api/search?query=${queryString}${type ? `&type=${type}` : ""}${field ? `&field=${field}` : ""}${city ? `&city=${city}` : ""}${state ? `&state=${state}` : ""}`);
+export const getQuery = (queryString, type, field, state, city) => async (
+  dispatch
+) => {
+  const res = await fetch(
+    `/api/search?query=${queryString}${type ? `&type=${type}` : ''}${
+      field ? `&field=${field}` : ''
+    }${city ? `&city=${city}` : ''}${state ? `&state=${state}` : ''}`
+  );
   const data = await res.json();
   const searchData = {};
 

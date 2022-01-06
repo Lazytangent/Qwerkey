@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
-import { search } from '../../store/selectors'
-import { getQuery } from "../../store/search";
-import { useSearchContext } from "../../context/SearchContext";
-import Post from "../Post";
-import Comment from "../Comment";
-import Retailer from "../Retailer";
-import AdvSearchBar from "../AdvSearchBar";
+import { search } from '../../store/selectors';
+import { getQuery } from '../../store/search';
+import { useSearchContext } from '../../context/SearchContext';
+import Post from '../Post';
+import Comment from '../Comment';
+import Retailer from '../Retailer';
+import AdvSearchBar from '../AdvSearchBar';
 
 const SearchResults = () => {
   const location = useLocation();
@@ -27,8 +27,8 @@ const SearchResults = () => {
       (async () => {
         const queryString = location.search.slice(1);
         const queryArr = queryString
-          .split("&")
-          .map((chunk) => chunk.split("=")[1]);
+          .split('&')
+          .map((chunk) => chunk.split('=')[1]);
         await dispatch(getQuery(...queryArr));
         setSearched(true);
       })();
