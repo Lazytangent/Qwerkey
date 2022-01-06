@@ -1,3 +1,3 @@
-import CreateMeetup from "./CreateMeetup";
+import CreateMeetup from './CreateMeetup';
 
 export default CreateMeetup;

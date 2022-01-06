@@ -1,3 +1,3 @@
-import MeetupsContainer from "./MeetupsContainer";
+import MeetupsContainer from './MeetupsContainer';
 
 export default MeetupsContainer;

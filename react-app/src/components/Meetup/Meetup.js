@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import { session } from '../../store/selectors';
-import EditButton from "../parts/EditButton";
-import DeleteButton from "../parts/DeleteButton";
-import DeleteConfirmationModal from "../parts/DeleteConfirmation";
-import EditMeetupModal from "../EditMeetupForm";
-import DivCard from "../parts/DivCard";
-import UserName from "../parts/UserName";
-import options from "../../utils/localeDateString";
+import EditButton from '../parts/EditButton';
+import DeleteButton from '../parts/DeleteButton';
+import DeleteConfirmationModal from '../parts/DeleteConfirmation';
+import EditMeetupModal from '../EditMeetupForm';
+import DivCard from '../parts/DivCard';
+import UserName from '../parts/UserName';
+import options from '../../utils/localeDateString';
 
 const Meetup = ({ meetup }) => {
   const user = useSelector(session.user());
@@ -29,18 +29,21 @@ const Meetup = ({ meetup }) => {
     <DivCard>
       <h3 className="p-2">
         <NavLink to={`/meetups/${meetup.id}`}>
-          <span className="hover:underline">
-            {meetup.name}
-          </span>
+          <span className="hover:underline">{meetup.name}</span>
         </NavLink>
       </h3>
       <p className="p-2">{meetup.description}</p>
       <hr />
       <p className="p-2">
-        Organized by <UserName link={`/users/${meetup.user.id}`} username={meetup.user.username} />
+        Organized by{' '}
+        <UserName
+          link={`/users/${meetup.user.id}`}
+          username={meetup.user.username}
+        />
       </p>
       <p className="p-2">
-        Scheduled for {new Date(meetup.date).toLocaleString(...options())} in {meetup.city}, {meetup.state}
+        Scheduled for {new Date(meetup.date).toLocaleString(...options())} in{' '}
+        {meetup.city}, {meetup.state}
       </p>
       {user && meetup.user.id === user.id && (
         <div className="p-2 flex justify-end">

@@ -1,26 +1,26 @@
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Switch, Route, useLocation } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Switch, Route, useLocation } from 'react-router-dom';
 
-import { useAuthContext } from "./context/AuthContext";
-import { useDarkModeContext } from "./context/DarkModeContext";
-import { useCollapsedSidebarContext } from "./context/CollapsedSidebarContext";
-import { useSearchContext } from "./context/SearchContext";
-import { authenticate } from "./store/session";
-import NavBar from "./components/NavBar";
-import PostsContainer from "./components/PostsContainer";
-import PostPage from "./components/PostPage";
-import RetailersContainer from "./components/RetailersContainer";
-import RetailerPage from "./components/RetailerPage";
-import SearchResults from "./components/SearchResults";
-import PageNotFound from "./components/PageNotFound";
-import Sidebar from "./components/Sidebar";
-import CollapsedSidebar from "./components/CollpasedSidebar";
-import CommunitiesContainer from "./components/CommunitiesContainer";
-import ProfilePage from "./components/ProfilePage";
-import UserNotFound from "./components/UserNotFound";
-import MeetupsContainer from "./components/MeetupsContainer";
-import MeetupPage from "./components/MeetupPage";
+import { useAuthContext } from './context/AuthContext';
+import { useDarkModeContext } from './context/DarkModeContext';
+import { useCollapsedSidebarContext } from './context/CollapsedSidebarContext';
+import { useSearchContext } from './context/SearchContext';
+import { authenticate } from './store/session';
+import NavBar from './components/NavBar';
+import PostsContainer from './components/PostsContainer';
+import PostPage from './components/PostPage';
+import RetailersContainer from './components/RetailersContainer';
+import RetailerPage from './components/RetailerPage';
+import SearchResults from './components/SearchResults';
+import PageNotFound from './components/PageNotFound';
+import Sidebar from './components/Sidebar';
+import CollapsedSidebar from './components/CollpasedSidebar';
+import CommunitiesContainer from './components/CommunitiesContainer';
+import ProfilePage from './components/ProfilePage';
+import UserNotFound from './components/UserNotFound';
+import MeetupsContainer from './components/MeetupsContainer';
+import MeetupPage from './components/MeetupPage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -43,8 +43,8 @@ const App = () => {
   }, [setAuthenticated, dispatch]);
 
   useEffect(() => {
-    if (location.pathname !== "/search") {
-      setSearchInput("");
+    if (location.pathname !== '/search') {
+      setSearchInput('');
     }
   }, [location, setSearchInput]);
 
@@ -53,9 +53,13 @@ const App = () => {
   }
 
   return (
-    <div className={`max-w-screen ${isDarkMode ? "dark bg-gray-800" : ""}`}>
+    <div className={`max-w-screen ${isDarkMode ? 'dark bg-gray-800' : ''}`}>
       <CollapsedSidebar />
-      <div className={`grid grid-rows-layout ${isDarkMode ? "dark bg-gray-800" : ""} ${showCollapsedSidebar ? "ml-52 md:ml-0" : "ml-0"} duration-500`}>
+      <div
+        className={`grid grid-rows-layout ${
+          isDarkMode ? 'dark bg-gray-800' : ''
+        } ${showCollapsedSidebar ? 'ml-52 md:ml-0' : 'ml-0'} duration-500`}
+      >
         <div className="z-10 w-screen row-span-1">
           <NavBar setAuthenticated={setAuthenticated} />
         </div>

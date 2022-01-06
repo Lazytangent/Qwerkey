@@ -20,5 +20,5 @@ class PostsImage(db.Model):
             "image_url": self.image_url,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
-            "post": self.post.to_dict()
+            "post": self.post.to_dict(),
         }

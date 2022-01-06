@@ -8,8 +8,10 @@ const CreatePostProvider = ({ children }) => {
   const [showCreatePostModal, setShowCreatePostModal] = useState(false);
 
   return (
-    <CreatePostContext.Provider value={{ showCreatePostModal, setShowCreatePostModal }}>
-      { children }
+    <CreatePostContext.Provider
+      value={{ showCreatePostModal, setShowCreatePostModal }}
+    >
+      {children}
     </CreatePostContext.Provider>
   );
 };

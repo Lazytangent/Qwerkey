@@ -1,3 +1,3 @@
-import AdvSearchBar from "./AdvSearchBar";
+import AdvSearchBar from './AdvSearchBar';
 
 export default AdvSearchBar;

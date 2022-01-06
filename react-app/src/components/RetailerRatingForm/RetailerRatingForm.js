@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { session } from '../../store/selectors';
-import { createRetailerRating } from "../../store/retailers";
-import FormTitle from "../parts/FormTitle";
-import InputField from "../parts/InputField";
-import FormErrors from "../parts/FormErrors";
-import SubmitFormButton from "../parts/SubmitFormButton";
+import { createRetailerRating } from '../../store/retailers';
+import FormTitle from '../parts/FormTitle';
+import InputField from '../parts/InputField';
+import FormErrors from '../parts/FormErrors';
+import SubmitFormButton from '../parts/SubmitFormButton';
 
 const RetailerRatingForm = ({ retailerId }) => {
   const dispatch = useDispatch();
@@ -21,7 +21,9 @@ const RetailerRatingForm = ({ retailerId }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const retailer = await dispatch(createRetailerRating({ rating, user_id: user.id }, retailerId));
+    const retailer = await dispatch(
+      createRetailerRating({ rating, user_id: user.id }, retailerId)
+    );
     if (retailer.errors) {
       setErrors(retailer.errors);
     } else {

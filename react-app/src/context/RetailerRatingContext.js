@@ -1,4 +1,4 @@
-import { useContext, useState, createContext } from "react";
+import { useContext, useState, createContext } from 'react';
 
 const RetailerRatingContext = createContext();
 
@@ -8,8 +8,10 @@ const RetailerRatingProvider = ({ children }) => {
   const [retailerRating, setRetailerRating] = useState();
 
   return (
-    <RetailerRatingContext.Provider value={{ retailerRating, setRetailerRating }}>
-      { children }
+    <RetailerRatingContext.Provider
+      value={{ retailerRating, setRetailerRating }}
+    >
+      {children}
     </RetailerRatingContext.Provider>
   );
 };

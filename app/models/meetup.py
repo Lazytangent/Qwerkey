@@ -14,10 +14,12 @@ class Meetup(db.Model):
     lat = db.Column(db.Numeric(scale=7))
     lng = db.Column(db.Numeric(scale=7))
     date = db.Column(db.DateTime, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False,
-                           default=datetime.datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullable=False,
-                           default=datetime.datetime.utcnow)
+    created_at = db.Column(
+        db.DateTime, nullable=False, default=datetime.datetime.utcnow
+    )
+    updated_at = db.Column(
+        db.DateTime, nullable=False, default=datetime.datetime.utcnow
+    )
 
     user = db.relationship("User", back_populates="meetups")
 
@@ -33,5 +35,5 @@ class Meetup(db.Model):
             "lng": float(self.lng or 0),
             "date": self.date,
             "created_at": self.created_at,
-            "updated_at": self.updated_at
+            "updated_at": self.updated_at,
         }

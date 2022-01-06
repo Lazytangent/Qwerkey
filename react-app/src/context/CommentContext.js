@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 
 const CommentContext = createContext();
 
@@ -9,7 +9,7 @@ const CommentProvider = ({ children }) => {
 
   return (
     <CommentContext.Provider value={{ comment, setComment }}>
-      { children }
+      {children}
     </CommentContext.Provider>
   );
 };

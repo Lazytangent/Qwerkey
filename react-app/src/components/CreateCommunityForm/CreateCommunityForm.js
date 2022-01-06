@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import { createCommunity } from "../../store/communities";
-import FormTitle from "../parts/FormTitle";
-import FormErrors from "../parts/FormErrors";
-import InputField from "../parts/InputField";
-import SubmitFormButton from "../parts/SubmitFormButton";
+import { createCommunity } from '../../store/communities';
+import FormTitle from '../parts/FormTitle';
+import FormErrors from '../parts/FormErrors';
+import InputField from '../parts/InputField';
+import SubmitFormButton from '../parts/SubmitFormButton';
 
 const CreateCommunityForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [errors, setErrors] = useState([]);
 
   const updateName = (e) => {

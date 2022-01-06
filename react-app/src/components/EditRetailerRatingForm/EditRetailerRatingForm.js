@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { session } from '../../store/selectors';
-import { updateRetailerRating } from "../../store/retailers";
-import { useRetailerRatingContext } from "../../context/RetailerRatingContext";
-import FormTitle from "../parts/FormTitle";
-import InputField from "../parts/InputField";
-import SubmitFormButton from "../parts/SubmitFormButton";
-import convertFormErrors from "../../utils/convertFormErrors";
+import { updateRetailerRating } from '../../store/retailers';
+import { useRetailerRatingContext } from '../../context/RetailerRatingContext';
+import FormTitle from '../parts/FormTitle';
+import InputField from '../parts/InputField';
+import SubmitFormButton from '../parts/SubmitFormButton';
+import convertFormErrors from '../../utils/convertFormErrors';
 
 const EditRetailerRatingForm = ({ setShowEditModal }) => {
   const dispatch = useDispatch();
@@ -26,9 +26,11 @@ const EditRetailerRatingForm = ({ setShowEditModal }) => {
     const updatedRating = {
       rating,
       user_id: user.id,
-      id: retailerRating.id
+      id: retailerRating.id,
     };
-    const retailer = await dispatch(updateRetailerRating(updatedRating, retailerRating.retailer_id));
+    const retailer = await dispatch(
+      updateRetailerRating(updatedRating, retailerRating.retailer_id)
+    );
     if (!retailer.errors) {
       setShowEditModal(false);
     } else {
@@ -44,7 +46,9 @@ const EditRetailerRatingForm = ({ setShowEditModal }) => {
         <FormTitle title="Update your Rating" />
         {errors.length > 0 && (
           <div className="flex flex-col items-center text-red-600">
-            {errors.map(error => (<p>{error}</p>))}
+            {errors.map((error) => (
+              <p>{error}</p>
+            ))}
           </div>
         )}
         <InputField

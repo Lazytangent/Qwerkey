@@ -1,31 +1,28 @@
-import { render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-import configureStore from "../../store";
-import Post from "../Post";
+import configureStore from '../../store';
+import Post from '../Post';
 
 const store = configureStore();
 
-describe("The Post component", () => {
-  describe("renders", () => {
+describe('The Post component', () => {
+  describe('renders', () => {
     beforeEach(() => {
       const post = {
         id: 1,
-        title: "Test post",
-        body: "Test post body",
-        created_at: "Tue, 02 March 2021 02:06:09 GMT",
+        title: 'Test post',
+        body: 'Test post body',
+        created_at: 'Tue, 02 March 2021 02:06:09 GMT',
         images: [],
-        tags: [
-          "Good",
-          "New",
-        ],
+        tags: ['Good', 'New'],
         community: {
-          name: "Test Community",
+          name: 'Test Community',
         },
         user: {
           id: 1,
-          name: "testuser",
+          name: 'testuser',
         },
       };
 
@@ -38,27 +35,24 @@ describe("The Post component", () => {
       );
     });
 
-    test("the Post title", () => {
-      const title = screen.getByText("Test post");
-      expect(title).toHaveTextContent("Test post");
+    test('the Post title', () => {
+      const title = screen.getByText('Test post');
+      expect(title).toHaveTextContent('Test post');
     });
 
-    test("the Post body", () => {
-      const body = screen.getByText("Test post body");
-      expect(body).toHaveTextContent("Test post body");
+    test('the Post body', () => {
+      const body = screen.getByText('Test post body');
+      expect(body).toHaveTextContent('Test post body');
     });
 
-    test("the Post timestamp", () => {
-      const body = screen.getByText("Tuesday, March 2, 2021, 02:06:09 AM");
-      expect(body).toHaveTextContent("Tuesday, March 2, 2021, 02:06:09 AM");
+    test('the Post timestamp', () => {
+      const body = screen.getByText('Tuesday, March 2, 2021, 02:06:09 AM');
+      expect(body).toHaveTextContent('Tuesday, March 2, 2021, 02:06:09 AM');
     });
 
-    test("the Post tags", () => {
-      const expectedTags = [
-        "Good",
-        "New",
-      ];
-      expectedTags.forEach(tag => {
+    test('the Post tags', () => {
+      const expectedTags = ['Good', 'New'];
+      expectedTags.forEach((tag) => {
         const tagText = screen.getByText(tag);
         expect(tagText).not.toBeNull();
       });

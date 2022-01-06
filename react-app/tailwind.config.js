@@ -1,5 +1,5 @@
-const colors = require("tailwindcss/colors");
-const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require('tailwindcss/colors');
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
@@ -7,8 +7,10 @@ module.exports = {
   theme: {
     boxShadow: {
       ...defaultTheme.boxShadow,
-      light: '0 1px 3px 0 rgba(255, 255, 255, 0.1), 0 1px 2px 0 rgba(255, 255, 255, 0.06)',
-      'light-lg': '0 10px 15px 3px rgba(255, 255, 255, 0.1), 0 4px 6px -2px rgba(255, 255, 255, 0.06)',
+      light:
+        '0 1px 3px 0 rgba(255, 255, 255, 0.1), 0 1px 2px 0 rgba(255, 255, 255, 0.06)',
+      'light-lg':
+        '0 10px 15px 3px rgba(255, 255, 255, 0.1), 0 4px 6px -2px rgba(255, 255, 255, 0.06)',
     },
     colors: {
       ...colors,
@@ -23,11 +25,11 @@ module.exports = {
     },
     fontFamily: {
       big: ['Montserrat', ...defaultTheme.fontFamily.sans],
-      sans: ['"Carrois Gothic"', ...defaultTheme.fontFamily.sans]
+      sans: ['"Carrois Gothic"', ...defaultTheme.fontFamily.sans],
     },
     extend: {
       gridTemplateRows: {
-        'layout': 'auto minmax(98vh, 1fr) auto',
+        layout: 'auto minmax(98vh, 1fr) auto',
       },
     },
   },
@@ -43,4 +45,4 @@ module.exports = {
   corePlugins: {
     ringColor: false,
   },
-}
+};

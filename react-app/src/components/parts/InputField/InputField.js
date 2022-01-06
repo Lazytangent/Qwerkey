@@ -1,5 +1,5 @@
 const InputField = ({ name, type, placeholder, value, onChange }) => {
-  if (type === "textarea") {
+  if (type === 'textarea') {
     return (
       <div className="flex justify-center p-2">
         <textarea

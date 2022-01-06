@@ -1,3 +1,3 @@
-import CreateCommunityForm from "./CreateCommunityForm";
+import CreateCommunityForm from './CreateCommunityForm';
 
 export default CreateCommunityForm;
