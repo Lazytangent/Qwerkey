@@ -10,38 +10,39 @@ from app.models import db, Retailer, RetailerRating
 retailer_routes = Blueprint("retailers", __name__)
 
 
-@retailer_routes.route('')
+@retailer_routes.route("")
 def get_paginated_retailers():
-    page = int(request.args.get('page', 0))
+    page = int(request.args.get("page", 0))
     retailers = Retailer.query.paginate(page=page, per_page=20)
     return {retailer.id: retailer.to_dict() for retailer in retailers.items}
 
 
-@retailer_routes.route('/')
+@retailer_routes.route("/")
 def get_retailers():
     retailers = Retailer.query.limit(20).all()
     return {retailer.id: retailer.to_dict() for retailer in retailers}
 
 
-@retailer_routes.route('/max')
+@retailer_routes.route("/max")
 def get_max_number_of_retailers():
     number = Retailer.query.count()
     return {"max": number}
 
 
-@retailer_routes.route('/<int:retailer_id>')
+@retailer_routes.route("/<int:retailer_id>")
 def get_one_retailer(retailer_id):
     retailer = Retailer.query.get(retailer_id)
     return retailer.to_dict()
 
 
-@retailer_routes.route('/<int:retailer_id>/location')
+@retailer_routes.route("/<int:retailer_id>/location")
 def generate_location(retailer_id):
     retailer = Retailer.query.get(retailer_id)
     response = requests.get(
-        "https://api.opencagedata.com/geocode/v1/json?" +
-        f"key={Config.OPEN_CAGE_API_KEY}" +
-        f"&q={retailer.city},{retailer.state},USA")
+        "https://api.opencagedata.com/geocode/v1/json?"
+        + f"key={Config.OPEN_CAGE_API_KEY}"
+        + f"&q={retailer.city},{retailer.state},USA"
+    )
     data = response.json()
     retailer.lng = data["results"][0]["geometry"]["lng"]
     retailer.lat = data["results"][0]["geometry"]["lat"]
@@ -49,10 +50,10 @@ def generate_location(retailer_id):
     return retailer.to_dict()
 
 
-@retailer_routes.route('', methods=["POST"])
+@retailer_routes.route("", methods=["POST"])
 def create_retailer():
     form = CreateRetailer()
-    form['csrf_token'].data = request.cookies['csrf_token']
+    form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         retailer = Retailer()
         form.populate_obj(retailer)
@@ -62,17 +63,17 @@ def create_retailer():
     return {"errors": validation_errors_to_error_messages(form.errors)}
 
 
-@retailer_routes.route('/<int:retailer_id>', methods=["PUT", "DELETE"])
+@retailer_routes.route("/<int:retailer_id>", methods=["PUT", "DELETE"])
 def update_or_delete_retailer(retailer_id):
     retailer = Retailer.query.get(retailer_id)
     if request.method == "PUT":
         form = CreateRetailer()
-        form['csrf_token'].data = request.cookies['csrf_token']
+        form["csrf_token"].data = request.cookies["csrf_token"]
         if form.validate_on_submit():
-            retailer.name = form['name'].data
-            retailer.description = form['description'].data
-            retailer.city = form['city'].data
-            retailer.state = form['state'].data
+            retailer.name = form["name"].data
+            retailer.description = form["description"].data
+            retailer.city = form["city"].data
+            retailer.state = form["state"].data
             db.session.commit()
             return retailer.to_dict()
         return {"errors": validation_errors_to_error_messages(form.errors)}
@@ -85,22 +86,21 @@ def update_or_delete_retailer(retailer_id):
     return {"errors": "Invalid route."}, 405
 
 
-@retailer_routes.route('/<int:retailer_id>/ratings', methods=["POST"])
+@retailer_routes.route("/<int:retailer_id>/ratings", methods=["POST"])
 def post_rating(retailer_id):
     retailer = Retailer.query.get(retailer_id)
     form = CreateRetailerRating()
-    form['csrf_token'].data = request.cookies['csrf_token']
+    form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        rating = \
-            RetailerRating.query.filter_by(user_id=form['user_id'].data).first()
+        rating = RetailerRating.query.filter_by(user_id=form["user_id"].data).first()
         if rating:
-            rating.rating = form['rating'].data
+            rating.rating = form["rating"].data
             db.session.commit()
             return retailer.to_dict()
         rating = RetailerRating(
-            user_id=form['user_id'].data,
+            user_id=form["user_id"].data,
             retailer_id=retailer_id,
-            rating=form['rating'].data
+            rating=form["rating"].data,
         )
         db.session.add(rating)
         db.session.commit()
@@ -108,16 +108,17 @@ def post_rating(retailer_id):
     return {"errors": form.errors}
 
 
-@retailer_routes.route('/<int:retailer_id>/ratings/<int:rating_id>',
-                       methods=["PUT", "DELETE"])
+@retailer_routes.route(
+    "/<int:retailer_id>/ratings/<int:rating_id>", methods=["PUT", "DELETE"]
+)
 def update_rating(retailer_id, rating_id):
     retailer = Retailer.query.get(retailer_id)
     rating = RetailerRating.query.get(rating_id)
     if request.method == "PUT":
         form = CreateRetailerRating()
-        form['csrf_token'].data = request.cookies['csrf_token']
+        form["csrf_token"].data = request.cookies["csrf_token"]
         if form.validate_on_submit():
-            rating.rating = form['rating'].data
+            rating.rating = form["rating"].data
             rating.updated_at = datetime.utcnow()
             db.session.commit()
             return retailer.to_dict()

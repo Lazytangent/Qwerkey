@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
 import { session, comments as commentsSelectors } from '../../store/selectors';
-import Comment from "../Comment";
+import Comment from '../Comment';
 
 const CommentsContainer = () => {
   const user = useSelector(session.user());
@@ -9,9 +9,13 @@ const CommentsContainer = () => {
 
   return (
     <>
-      {Object.values(comments).map((comment) =>
-      <Comment key={comment.id} comment={comment} userId={user ? user.id : 0} />
-      )}
+      {Object.values(comments).map((comment) => (
+        <Comment
+          key={comment.id}
+          comment={comment}
+          userId={user ? user.id : 0}
+        />
+      ))}
     </>
   );
 };

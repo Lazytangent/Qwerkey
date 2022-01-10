@@ -1,3 +1,3 @@
-import DivCard from "./DivCard";
+import DivCard from './DivCard';
 
 export default DivCard;

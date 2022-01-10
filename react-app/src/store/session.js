@@ -1,6 +1,6 @@
 import api from './api';
-import { SET_SESSION, REMOVE_SESSION } from './constants'
-import { setSession, removeSession } from './actions'
+import { SET_SESSION, REMOVE_SESSION } from './constants';
+import { setSession, removeSession } from './actions';
 
 export const authenticate = () => async (dispatch) => {
   try {
@@ -29,12 +29,12 @@ export const login = (credential, password) => async (dispatch) => {
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       credential,
-      password
-    })
+      password,
+    }),
   });
   const user = await response.json();
   if (!user.errors) {
@@ -44,10 +44,10 @@ export const login = (credential, password) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  const response = await fetch("/api/auth/logout", {
+  const response = await fetch('/api/auth/logout', {
     headers: {
-      "Content-Type": "application/json",
-    }
+      'Content-Type': 'application/json',
+    },
   });
   if (response.ok) {
     dispatch(removeSession());
@@ -55,17 +55,19 @@ export const logout = () => async (dispatch) => {
   return await response.json();
 };
 
-export const signUp = (username, email, password, confirm) => async (dispatch) => {
-  const response = await fetch("/api/auth/signup", {
-    method: "POST",
+export const signUp = (username, email, password, confirm) => async (
+  dispatch
+) => {
+  const response = await fetch('/api/auth/signup', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       username,
       email,
       password,
-      confirm
+      confirm,
     }),
   });
   const user = await response.json();

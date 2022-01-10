@@ -1,3 +1,3 @@
-import MeetupPage from "./MeetupPage";
+import MeetupPage from './MeetupPage';
 
 export default MeetupPage;

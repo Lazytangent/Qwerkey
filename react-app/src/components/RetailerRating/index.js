@@ -1,3 +1,3 @@
-import RetailerRating from "./RetailerRating";
+import RetailerRating from './RetailerRating';
 
 export default RetailerRating;

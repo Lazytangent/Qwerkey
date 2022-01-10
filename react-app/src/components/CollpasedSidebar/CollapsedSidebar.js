@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import { sidebar } from '../../store/selectors';
-import { useCollapsedSidebarContext } from "../../context/CollapsedSidebarContext";
-import SearchBar from "../SearchBar";
-import About from "../About";
-import NavButton from "../parts/NavButton";
+import { useCollapsedSidebarContext } from '../../context/CollapsedSidebarContext';
+import SearchBar from '../SearchBar';
+import About from '../About';
+import NavButton from '../parts/NavButton';
 
 const CollapsedSidebar = () => {
-  const { showCollapsedSidebar, setShowCollapsedSidebar } = useCollapsedSidebarContext();
+  const {
+    showCollapsedSidebar,
+    setShowCollapsedSidebar,
+  } = useCollapsedSidebarContext();
   const popularCommunities = useSelector(sidebar.popularCommunities());
   const currentCommunity = useSelector(sidebar.currentCommunity());
   const [isLoaded, setIsLoaded] = useState(false);
@@ -31,14 +34,11 @@ const CollapsedSidebar = () => {
   return (
     <div
       className={`fixed top-0 left-0 ${
-        showCollapsedSidebar ? "w-52 md:w-0" : "w-0"
+        showCollapsedSidebar ? 'w-52 md:w-0' : 'w-0'
       } h-screen pt-12 overflow-x-hidden bg-gray-100 z-1 duration-500 dark:bg-gray-600 dark:text-gray-50`}
     >
       <div className="p-2">
-        <NavButton
-          name="Close"
-          onClick={closeBtnHandler}
-        />
+        <NavButton name="Close" onClick={closeBtnHandler} />
       </div>
       <div className="p-2">
         <h5>Navigation</h5>

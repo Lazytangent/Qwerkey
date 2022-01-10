@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import csc from "country-state-city";
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import csc from 'country-state-city';
 
 import { session, meetups } from '../../store/selectors';
-import { updateMeetup } from "../../store/meetups";
-import FormTitle from "../parts/FormTitle";
-import FormErrors from "../parts/FormErrors";
-import InputField from "../parts/InputField";
-import SubmitFormButton from "../parts/SubmitFormButton";
+import { updateMeetup } from '../../store/meetups';
+import FormTitle from '../parts/FormTitle';
+import FormErrors from '../parts/FormErrors';
+import InputField from '../parts/InputField';
+import SubmitFormButton from '../parts/SubmitFormButton';
 
 const EditMeetupForm = ({ meetupId, setShowEditModal }) => {
   const dispatch = useDispatch();
@@ -16,29 +16,34 @@ const EditMeetupForm = ({ meetupId, setShowEditModal }) => {
 
   const [name, setName] = useState(meetup.name);
   const [description, setDescription] = useState(meetup.description);
-  const [date, setDate] = useState(new Date(meetup.date).toISOString().slice(0, 16));
+  const [date, setDate] = useState(
+    new Date(meetup.date).toISOString().slice(0, 16)
+  );
   const [state, setState] = useState();
   const [stateName, setStateName] = useState(meetup.state);
-  const [stateCode, setStateCode] = useState("State...");
+  const [stateCode, setStateCode] = useState('State...');
   const [city, setCity] = useState(meetup.city);
   const [cities, setCities] = useState([]);
   const [errors, setErrors] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setStateCode(csc.getStatesOfCountry("US").find((state) => state.name === meetup.state).isoCode);
+    setStateCode(
+      csc.getStatesOfCountry('US').find((state) => state.name === meetup.state)
+        .isoCode
+    );
   }, [meetup.state]);
 
   useEffect(() => {
-    if (stateCode !== "State...") {
-      setCities(csc.getCitiesOfState("US", stateCode));
+    if (stateCode !== 'State...') {
+      setCities(csc.getCitiesOfState('US', stateCode));
       setState(
         csc
-          .getStatesOfCountry("US")
+          .getStatesOfCountry('US')
           .find((state) => state.isoCode === stateCode)
       );
     } else {
-      setState("");
+      setState('');
     }
   }, [stateCode]);
 
@@ -46,7 +51,7 @@ const EditMeetupForm = ({ meetupId, setShowEditModal }) => {
     if (state) {
       setStateName(state.name);
     } else {
-      setStateName("");
+      setStateName('');
     }
   }, [state]);
 
@@ -97,7 +102,7 @@ const EditMeetupForm = ({ meetupId, setShowEditModal }) => {
     return null;
   }
 
-  const states = csc.getStatesOfCountry("US");
+  const states = csc.getStatesOfCountry('US');
 
   return (
     <div className="w-screen p-4 bg-white rounded dark:bg-gray-800 dark:text-gray-50 md:w-96">
@@ -136,13 +141,13 @@ const EditMeetupForm = ({ meetupId, setShowEditModal }) => {
           >
             <option value="State...">State...</option>
             {states &&
-                states.map((state) => (
-                  <option value={state.isoCode} key={state.name}>
-                    {state.name}
-                  </option>
-                ))}
+              states.map((state) => (
+                <option value={state.isoCode} key={state.name}>
+                  {state.name}
+                </option>
+              ))}
           </select>
-          {stateCode !== "State..." && (
+          {stateCode !== 'State...' && (
             <select
               value={city}
               onChange={updateCity}

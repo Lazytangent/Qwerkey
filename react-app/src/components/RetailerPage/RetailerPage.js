@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { session, retailers } from '../../store/selectors';
-import { getOneRetailer, getOneRetailerLocation } from "../../store/retailers";
-import Retailer from "../Retailer";
-import RetailerRatingsContainer from "../RetailerRatingsContainer";
-import RetailerRatingForm from "../RetailerRatingForm";
-import Map from "../Map";
+import { getOneRetailer, getOneRetailerLocation } from '../../store/retailers';
+import Retailer from '../Retailer';
+import RetailerRatingsContainer from '../RetailerRatingsContainer';
+import RetailerRatingForm from '../RetailerRatingForm';
+import Map from '../Map';
 
 const RetailerPage = () => {
   const { retailerId } = useParams();
@@ -44,9 +44,11 @@ const RetailerPage = () => {
           {retailer.lat && retailer.lng && (
             <Map long={retailer.lng} lat={retailer.lat} />
           )}
-          {user && retailer.owner.id !== user.id && !(user.id in retailer.ratings) && (
-            <RetailerRatingForm retailerId={retailer.id} />
-          )}
+          {user &&
+            retailer.owner.id !== user.id &&
+            !(user.id in retailer.ratings) && (
+              <RetailerRatingForm retailerId={retailer.id} />
+            )}
           <RetailerRatingsContainer retailerId={retailer.id} />
         </>
       )}

@@ -1,3 +1,3 @@
-import UserMenu from "./UserMenu";
+import UserMenu from './UserMenu';
 
 export default UserMenu;

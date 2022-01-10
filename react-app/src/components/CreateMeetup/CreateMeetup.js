@@ -1,40 +1,40 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import csc from "country-state-city";
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import csc from 'country-state-city';
 
 import { session } from '../../store/selectors';
-import { createMeetup } from "../../store/meetups";
-import FormTitle from "../parts/FormTitle";
-import FormErrors from "../parts/FormErrors";
-import InputField from "../parts/InputField";
-import SubmitFormButton from "../parts/SubmitFormButton";
+import { createMeetup } from '../../store/meetups';
+import FormTitle from '../parts/FormTitle';
+import FormErrors from '../parts/FormErrors';
+import InputField from '../parts/InputField';
+import SubmitFormButton from '../parts/SubmitFormButton';
 
 const CreateMeetup = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector(session.user());
 
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
-  const [state, setState] = useState("State...");
-  const [stateName, setStateName] = useState("");
-  const [stateCode, setStateCode] = useState("State...");
-  const [city, setCity] = useState("City...");
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [date, setDate] = useState('');
+  const [state, setState] = useState('State...');
+  const [stateName, setStateName] = useState('');
+  const [stateCode, setStateCode] = useState('State...');
+  const [city, setCity] = useState('City...');
   const [cities, setCities] = useState([]);
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
-    if (stateCode !== "State...") {
-      setCities(csc.getCitiesOfState("US", stateCode));
+    if (stateCode !== 'State...') {
+      setCities(csc.getCitiesOfState('US', stateCode));
       setState(
         csc
-          .getStatesOfCountry("US")
+          .getStatesOfCountry('US')
           .find((state) => state.isoCode === stateCode)
       );
     } else {
-      setState("");
+      setState('');
     }
   }, [stateCode]);
 
@@ -42,7 +42,7 @@ const CreateMeetup = () => {
     if (state) {
       setStateName(state.name);
     } else {
-      setStateName("");
+      setStateName('');
     }
   }, [state]);
 
@@ -84,7 +84,7 @@ const CreateMeetup = () => {
     }
   };
 
-  const states = csc.getStatesOfCountry("US");
+  const states = csc.getStatesOfCountry('US');
 
   return (
     <>
@@ -123,13 +123,13 @@ const CreateMeetup = () => {
           >
             <option value="State...">State...</option>
             {states &&
-                states.map((state) => (
-                  <option value={state.isoCode} key={state.name}>
-                    {state.name}
-                  </option>
-                ))}
+              states.map((state) => (
+                <option value={state.isoCode} key={state.name}>
+                  {state.name}
+                </option>
+              ))}
           </select>
-          {stateCode !== "State..." && (
+          {stateCode !== 'State...' && (
             <select
               value={city}
               onChange={updateCity}

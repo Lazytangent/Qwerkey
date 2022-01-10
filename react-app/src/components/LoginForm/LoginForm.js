@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { Redirect } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import { login, demoUserLogin } from "../../store/session";
-import { useAuthContext } from "../../context/AuthContext";
+import { login, demoUserLogin } from '../../store/session';
+import { useAuthContext } from '../../context/AuthContext';
 import FormTitle from '../parts/FormTitle';
-import InputField from "../parts/InputField";
-import SubmitFormButton from "../parts/SubmitFormButton";
+import InputField from '../parts/InputField';
+import SubmitFormButton from '../parts/SubmitFormButton';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -18,8 +18,8 @@ const LoginForm = () => {
     setAuthenticated,
   } = useAuthContext();
   const [errors, setErrors] = useState([]);
-  const [credential, setCredential] = useState("");
-  const [password, setPassword] = useState("");
+  const [credential, setCredential] = useState('');
+  const [password, setPassword] = useState('');
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -57,7 +57,10 @@ const LoginForm = () => {
 
   return (
     <div className="p-4 bg-white rounded dark:bg-gray-800 dark:text-gray-50">
-      <form className="p-2 bg-white rounded dark:bg-gray-800 dark:text-gray-50" onSubmit={onLogin}>
+      <form
+        className="p-2 bg-white rounded dark:bg-gray-800 dark:text-gray-50"
+        onSubmit={onLogin}
+      >
         <FormTitle title="Login" />
         {errors.length > 0 && (
           <div className="flex justify-center text-red-600">
@@ -81,7 +84,7 @@ const LoginForm = () => {
         <SubmitFormButton label="Login" />
       </form>
       <div className="text-center">
-        Don't have an account?{" "}
+        Don't have an account?{' '}
         <span
           className="text-blue-500 cursor-pointer hover:underline"
           onClick={openSignUp}
@@ -90,7 +93,7 @@ const LoginForm = () => {
         </span>
       </div>
       <div className="text-center">
-        Want to try out our app?{" "}
+        Want to try out our app?{' '}
         <span
           className="cursor-pointer text-green hover:underline"
           onClick={demoLogin}

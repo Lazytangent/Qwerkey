@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-import { signUp, demoUserLogin } from "../../store/session";
-import { useAuthContext } from "../../context/AuthContext";
+import { signUp, demoUserLogin } from '../../store/session';
+import { useAuthContext } from '../../context/AuthContext';
 import FormTitle from '../parts/FormTitle';
-import InputField from "../parts/InputField";
-import SubmitFormButton from "../parts/SubmitFormButton";
-import FormErrors from "../parts/FormErrors";
+import InputField from '../parts/InputField';
+import SubmitFormButton from '../parts/SubmitFormButton';
+import FormErrors from '../parts/FormErrors';
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -18,16 +18,18 @@ const SignUpForm = () => {
     authenticated,
     setAuthenticated,
   } = useAuthContext();
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await dispatch(signUp(username, email, password, repeatPassword));
+      const user = await dispatch(
+        signUp(username, email, password, repeatPassword)
+      );
       if (!user.errors) {
         setAuthenticated(true);
         setShowSignUpModal(false);
@@ -70,7 +72,10 @@ const SignUpForm = () => {
 
   return (
     <div className="p-4 bg-white rounded dark:bg-gray-800 dark:text-gray-50">
-      <form onSubmit={onSignUp} className="p-2 bg-white rounded dark:bg-gray-800 dark:text-gray-50">
+      <form
+        onSubmit={onSignUp}
+        className="p-2 bg-white rounded dark:bg-gray-800 dark:text-gray-50"
+      >
         <FormTitle title="Sign Up" />
         <FormErrors errors={errors} />
         <InputField
@@ -108,7 +113,7 @@ const SignUpForm = () => {
         <SubmitFormButton label="Sign Up" />
       </form>
       <div className="text-center">
-        Already have an account?{" "}
+        Already have an account?{' '}
         <span
           className="text-blue-500 cursor-pointer hover:underline"
           onClick={openLogin}
@@ -117,7 +122,7 @@ const SignUpForm = () => {
         </span>
       </div>
       <div className="text-center">
-        Want to try out our app?{" "}
+        Want to try out our app?{' '}
         <span
           className="cursor-pointer text-green hover:underline"
           onClick={demoLogin}

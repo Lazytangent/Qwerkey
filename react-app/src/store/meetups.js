@@ -5,7 +5,7 @@ import {
   SET_MAX_MEETUPS,
   REMOVE_MEETUP,
   SET_USER,
-} from "./constants";
+} from './constants';
 import {
   setMoreMeetups,
   setMaxNumberOfMeetups,
@@ -54,9 +54,9 @@ export const getMaxNumberOfMeetups = () => async (dispatch) => {
 
 export const createMeetup = (meetupData) => async (dispatch) => {
   const res = await fetch(`/api/meetups`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(meetupData),
   });
@@ -69,9 +69,9 @@ export const createMeetup = (meetupData) => async (dispatch) => {
 
 export const updateMeetup = (meetupData) => async (dispatch) => {
   const res = await fetch(`/api/meetups/${meetupData.id}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(meetupData),
   });
@@ -84,7 +84,7 @@ export const updateMeetup = (meetupData) => async (dispatch) => {
 
 export const deleteMeetup = (meetupId) => async (dispatch) => {
   const res = await fetch(`/api/meetups/${meetupId}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const data = await res.json();
   if (!data.errors) {
@@ -121,7 +121,9 @@ const meetupsReducer = (state = initialState, action) => {
         ...state,
         meetups: {
           ...state.meetups,
-          ...Object.fromEntries(action.user.meetups.map((meetup) => [meetup.id, meetup])),
+          ...Object.fromEntries(
+            action.user.meetups.map((meetup) => [meetup.id, meetup])
+          ),
         },
       };
     default:

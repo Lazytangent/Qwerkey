@@ -1,35 +1,35 @@
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import csc from "country-state-city";
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import csc from 'country-state-city';
 
-import { getQuery } from "../../store/search";
-import { useSearchContext } from "../../context/SearchContext";
+import { getQuery } from '../../store/search';
+import { useSearchContext } from '../../context/SearchContext';
 
 const AdvSearchBar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { setSearched } = useSearchContext();
 
-  const [searchInput, setSearchInput] = useState("");
-  const [type, setType] = useState("Type...");
-  const [field, setField] = useState("Field...");
-  const [state, setState] = useState("State...");
-  const [stateName, setStateName] = useState("");
-  const [stateCode, setStateCode] = useState("State...");
-  const [city, setCity] = useState("City...");
+  const [searchInput, setSearchInput] = useState('');
+  const [type, setType] = useState('Type...');
+  const [field, setField] = useState('Field...');
+  const [state, setState] = useState('State...');
+  const [stateName, setStateName] = useState('');
+  const [stateCode, setStateCode] = useState('State...');
+  const [city, setCity] = useState('City...');
   const [cities, setCities] = useState([]);
 
   useEffect(() => {
-    if (stateCode !== "State...") {
-      setCities(csc.getCitiesOfState("US", stateCode));
+    if (stateCode !== 'State...') {
+      setCities(csc.getCitiesOfState('US', stateCode));
       setState(
         csc
-          .getStatesOfCountry("US")
+          .getStatesOfCountry('US')
           .find((state) => state.isoCode === stateCode)
       );
     } else {
-      setState("");
+      setState('');
     }
   }, [stateCode]);
 
@@ -37,7 +37,7 @@ const AdvSearchBar = () => {
     if (state) {
       setStateName(state.name);
     } else {
-      setStateName("");
+      setStateName('');
     }
   }, [state]);
 
@@ -63,32 +63,40 @@ const AdvSearchBar = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    await dispatch(getQuery(searchInput, type, field, stateName, city !== "City..." ? city : undefined));
+    await dispatch(
+      getQuery(
+        searchInput,
+        type,
+        field,
+        stateName,
+        city !== 'City...' ? city : undefined
+      )
+    );
     history.push(
       `/search?query=${searchInput}${
-        type !== "Type..." ? `&type=${type}` : ""
-      }${field !== "Field..." ? `&field=${field}` : ""}${
-        stateName && field === "Location" ? `&state=${stateName}` : ""
-      }${city !== "City..." ? `&city=${city}` : ""}`
+        type !== 'Type...' ? `&type=${type}` : ''
+      }${field !== 'Field...' ? `&field=${field}` : ''}${
+        stateName && field === 'Location' ? `&state=${stateName}` : ''
+      }${city !== 'City...' ? `&city=${city}` : ''}`
     );
     setSearched(true);
   };
 
-  const types = ["Post", "Comment", "Retailer"];
-  const postFields = ["Title", "Body"];
-  const commentFields = ["Body"];
-  const retailerFields = ["Name", "Description", "Rating", "Location"];
-  const states = csc.getStatesOfCountry("US");
+  const types = ['Post', 'Comment', 'Retailer'];
+  const postFields = ['Title', 'Body'];
+  const commentFields = ['Body'];
+  const retailerFields = ['Name', 'Description', 'Rating', 'Location'];
+  const states = csc.getStatesOfCountry('US');
 
   return (
     <div className="p-2">
       <form onSubmit={submitHandler} className="flex flex-col items-center">
         <input
           className="w-3/4 p-2 mx-2 mb-2 border rounded outline-none disabled:opacity-50 disabled:cursor-not-allowed focus:border-green dark:bg-gray-800 dark:text-gray-50"
-          type={field === "Rating" ? "number" : "text"}
+          type={field === 'Rating' ? 'number' : 'text'}
           value={searchInput}
           placeholder="Advanced Search..."
-          disabled={type === "Retailer" && field === "Location"}
+          disabled={type === 'Retailer' && field === 'Location'}
           onChange={updateSearchInput}
         />
         <div className="w-3/4 grid grid-cols-2 gap-2">
@@ -106,7 +114,7 @@ const AdvSearchBar = () => {
               </option>
             ))}
           </select>
-          {type !== "Type..." && (
+          {type !== 'Type...' && (
             <select
               value={field}
               onChange={updateField}
@@ -115,7 +123,7 @@ const AdvSearchBar = () => {
               <option disabled={true} value="Field...">
                 Field...
               </option>
-              {type === "Post" && (
+              {type === 'Post' && (
                 <>
                   {postFields.map((field) => (
                     <option value={field} key={field}>
@@ -124,7 +132,7 @@ const AdvSearchBar = () => {
                   ))}
                 </>
               )}
-              {type === "Comment" && (
+              {type === 'Comment' && (
                 <>
                   {commentFields.map((field) => (
                     <option value={field} key={field}>
@@ -133,7 +141,7 @@ const AdvSearchBar = () => {
                   ))}
                 </>
               )}
-              {type === "Retailer" && (
+              {type === 'Retailer' && (
                 <>
                   {retailerFields.map((field) => (
                     <option value={field} key={field}>
@@ -146,15 +154,13 @@ const AdvSearchBar = () => {
           )}
         </div>
         <div className="w-3/4 grid grid-cols-2 gap-2">
-          {type === "Retailer" && field === "Location" && (
+          {type === 'Retailer' && field === 'Location' && (
             <select
               value={stateCode}
               onChange={updateState}
               className="px-1 py-2 mb-2 border rounded dark:bg-gray-800 dark:text-gray-50 col-start-1"
             >
-              <option value="State...">
-                State...
-              </option>
+              <option value="State...">State...</option>
               {states &&
                 states.map((state) => (
                   <option value={state.isoCode} key={state.name}>
@@ -163,15 +169,13 @@ const AdvSearchBar = () => {
                 ))}
             </select>
           )}
-          {stateCode !== "State..." && (
+          {stateCode !== 'State...' && (
             <select
               value={city}
               onChange={updateCity}
               className="px-1 py-2 mb-2 border rounded dark:bg-gray-800 dark:text-gray-50 col-start-2"
             >
-              <option value="City...">
-                City...
-              </option>
+              <option value="City...">City...</option>
               {cities.map((city) => (
                 <option value={city.name} key={city.name}>
                   {city.name}
@@ -180,7 +184,10 @@ const AdvSearchBar = () => {
             </select>
           )}
         </div>
-        <button disabled={field === "Location" && stateName.length === 0} className="w-1/4 p-2 mx-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed disabled:border-gray-500 hover:border-green focus:bg-green">
+        <button
+          disabled={field === 'Location' && stateName.length === 0}
+          className="w-1/4 p-2 mx-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed disabled:border-gray-500 hover:border-green focus:bg-green"
+        >
           Search
         </button>
       </form>

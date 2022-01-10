@@ -1,3 +1,3 @@
-import Downvote from "./Downvote";
+import Downvote from './Downvote';
 
 export default Downvote;

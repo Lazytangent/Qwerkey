@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { createComment } from "../../store/comments";
-import InputField from "../parts/InputField";
-import SubmitFormButton from "../parts/SubmitFormButton";
+import { createComment } from '../../store/comments';
+import InputField from '../parts/InputField';
+import SubmitFormButton from '../parts/SubmitFormButton';
 
 const CreateCommentForm = ({ userId, postId }) => {
   const dispatch = useDispatch();
-  const [body, setBody] = useState("");
+  const [body, setBody] = useState('');
   const [errors, setErrors] = useState([]);
 
   const updateBody = (e) => {
@@ -22,9 +22,9 @@ const CreateCommentForm = ({ userId, postId }) => {
     };
     const post = await dispatch(createComment(comment, postId));
     if (post.errors) {
-      setErrors(["A body is required to make a comment."]);
+      setErrors(['A body is required to make a comment.']);
     } else {
-      setBody("");
+      setBody('');
     }
   };
 
@@ -33,7 +33,7 @@ const CreateCommentForm = ({ userId, postId }) => {
       <form onSubmit={submitComment}>
         {errors.length > 0 && (
           <div className="flex flex-col items-center text-red-600">
-            {errors.map(error => (
+            {errors.map((error) => (
               <p key={error}>{error}</p>
             ))}
           </div>

@@ -7,26 +7,23 @@ class Comment(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    thread_id = db.Column(db.Integer,
-                          db.ForeignKey("threads.id"),
-                          nullable=False)
-    comment_id = db.Column(db.Integer,
-                           db.ForeignKey("comments.id"),
-                           nullable=True)
+    thread_id = db.Column(db.Integer, db.ForeignKey("threads.id"), nullable=False)
+    comment_id = db.Column(db.Integer, db.ForeignKey("comments.id"), nullable=True)
     path = db.Column(db.String(255), nullable=False)
     level = db.Column(db.Integer, nullable=False)
     body = db.Column(db.Text, nullable=False)
-    created_at = db.Column(db.DateTime,
-                           nullable=False,
-                           default=datetime.datetime.utcnow)
-    updated_at = db.Column(db.DateTime,
-                           nullable=False,
-                           default=datetime.datetime.utcnow)
+    created_at = db.Column(
+        db.DateTime, nullable=False, default=datetime.datetime.utcnow
+    )
+    updated_at = db.Column(
+        db.DateTime, nullable=False, default=datetime.datetime.utcnow
+    )
 
     thread = db.relationship("Thread", back_populates="comments")
     user = db.relationship("User", back_populates="comments")
-    children = db.relationship("Comment",
-                               backref=db.backref("parent", remote_side=[id]))
+    children = db.relationship(
+        "Comment", backref=db.backref("parent", remote_side=[id])
+    )
     ratings = db.relationship("CommentRating", back_populates="comment")
 
     def to_simple_dict(self):
@@ -43,9 +40,7 @@ class Comment(db.Model):
             "body": self.body,
             "user": self.user.to_simple_dict(),
             "post": self.thread.post.to_search_dict(),
-            "ratings":
-            {rating.user_id: rating.to_dict()
-             for rating in self.ratings},
+            "ratings": {rating.user_id: rating.to_dict() for rating in self.ratings},
             "created_at": self.created_at,
         }
 
@@ -60,8 +55,6 @@ class Comment(db.Model):
             "created_at": self.created_at,
             "updated_at": self.updated_at,
             "children": [child.to_simple_dict() for child in self.children],
-            "ratings":
-            {rating.user_id: rating.to_dict()
-             for rating in self.ratings},
+            "ratings": {rating.user_id: rating.to_dict() for rating in self.ratings},
             "post": self.thread.post.to_search_dict(),
         }

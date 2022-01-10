@@ -10,8 +10,17 @@ const AuthProvider = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(false);
 
   return (
-    <AuthContext.Provider value={{ showLoginModal, setShowLoginModal, showSignUpModal, setShowSignUpModal, authenticated, setAuthenticated }}>
-      { children }
+    <AuthContext.Provider
+      value={{
+        showLoginModal,
+        setShowLoginModal,
+        showSignUpModal,
+        setShowSignUpModal,
+        authenticated,
+        setAuthenticated,
+      }}
+    >
+      {children}
     </AuthContext.Provider>
   );
 };
