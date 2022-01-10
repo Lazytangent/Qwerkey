@@ -1,7 +1,7 @@
 import pytest
 import os
 
-from app import app
+from app import create_app
 from app.models import db, User
 
 
@@ -9,6 +9,8 @@ from app.models import db, User
 def client():
     basedir = os.path.abspath(os.path.dirname(__file__))
     db_uri = "sqlite:///" + os.path.join(basedir, "test.db")
+    app = create_app()
+
     app.config["TESTING"] = True
     app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     with app.test_client() as client:
