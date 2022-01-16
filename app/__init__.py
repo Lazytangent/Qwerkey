@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import generate_csrf
 
 from .api import api
-from .config import Config
+from .config import ProductionConfig, DevelopmentConfig, TestingConfig
 from .models import User, db
 from .seeds import seed_commands
 
@@ -21,18 +21,24 @@ def create_app(testing=False):
 
     is_production = os.environ.get("FLASK_ENV", "development") == "production"
 
+    if testing:
+        app.config.from_object(TestingConfig)
+    elif is_production:
+        app.config.from_object(ProductionConfig)
+    else:
+        app.config.from_object(DevelopmentConfig)
+
     @login.user_loader
     def load_user(id):
         return User.query.get(int(id))
 
     app.cli.add_command(seed_commands)
 
-    app.config.from_object(Config)
-    app.register_blueprint(api, url_prefix="/api")
     db.init_app(app)
     Migrate(app, db)
-
     CORS(app)
+
+    app.register_blueprint(api, url_prefix="/api")
 
     @app.before_request
     def https_redirect():
