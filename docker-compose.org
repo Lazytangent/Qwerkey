@@ -21,3 +21,8 @@ create database qwerkey_app with owner qwerkey_app;
 docker-compose -f docker-compose-dev.yml exec server sh
 flask db upgrade
 #+end_src
+** Seed the database
+#+begin_src bash
+docker-compose -f docker-compose-dev.yml exec server sh
+flask seed all
+#+end_src
