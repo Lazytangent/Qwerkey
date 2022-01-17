@@ -1,0 +1,24 @@
+volumes:
+  postgres-data: {}
+
+services:
+  server:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src/app
+    environment:
+      PORT: 8000
+      SECRET_KEY: 481284c381c6e4b9a520739cfbb74fa755b9520467187a35cac9468e82fe603c
+      DATABASE_URL: postgresql://qwerkey_app:notsecret@postgres:5432/qwerkey_app
+  postgres:
+    image: "postgres:alpine"
+    environment:
+      POSTGRES_DB: qwerkey_app
+      POSTGRES_USER: qwerkey_app
+      POSTGRES_PASSWORD: notsecret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgres/data
