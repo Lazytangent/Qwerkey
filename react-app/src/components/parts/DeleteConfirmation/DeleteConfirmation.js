@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 
 import { deletePost } from '../../../store/posts';
-import { deleteComment } from "../../../store/comments";
-import { deleteRetailerRating } from "../../../store/retailers";
-import { deleteMeetup } from "../../../store/meetups";
+import { deleteComment } from '../../../store/comments';
+import { deleteRetailerRating } from '../../../store/retailers';
+import { deleteMeetup } from '../../../store/meetups';
 import DeleteButton from '../DeleteButton';
 import EditButton from '../EditButton';
 
@@ -12,16 +12,16 @@ const DeleteConfirmation = ({ setShowDeleteModal, id, extraId, type }) => {
 
   const deleteHandler = () => {
     switch (type) {
-      case "post":
+      case 'post':
         dispatch(deletePost(id));
         break;
-      case "comment":
+      case 'comment':
         dispatch(deleteComment(id));
         break;
-      case "retailerRating":
+      case 'retailerRating':
         dispatch(deleteRetailerRating(id, extraId));
         break;
-      case "meetup":
+      case 'meetup':
         dispatch(deleteMeetup(id));
         break;
       default:
@@ -40,8 +40,16 @@ const DeleteConfirmation = ({ setShowDeleteModal, id, extraId, type }) => {
         <h4>Are you sure?</h4>
       </div>
       <div className="flex justify-around">
-        <DeleteButton className="w-1/3 hover:bg-red-500" onClick={deleteHandler} label="Yes" />
-        <EditButton className="w-1/3 hover:bg-yellow-500" onClick={cancelDeleteHandler} label="No" />
+        <DeleteButton
+          className="w-1/3 hover:bg-red-500"
+          onClick={deleteHandler}
+          label="Yes"
+        />
+        <EditButton
+          className="w-1/3 hover:bg-yellow-500"
+          onClick={cancelDeleteHandler}
+          label="No"
+        />
       </div>
     </div>
   );

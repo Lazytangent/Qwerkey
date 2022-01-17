@@ -1,23 +1,23 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useLocation } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import { session } from '../../store/selectors';
-import { savePost } from "../../store/session";
-import EditButton from "../parts/EditButton";
-import DeleteButton from "../parts/DeleteButton";
-import EditPostModal from "../EditPostForm";
-import DeleteConfirmationModal from "../parts/DeleteConfirmation";
-import SaveButton from "../parts/SaveButton";
-import Downvote from "../parts/Downvote";
-import Upvote from "../parts/Upvote";
-import Score from "../parts/Score";
-import DivCard from "../parts/DivCard";
-import UserName from "../parts/UserName";
-import options from "../../utils/localeDateString";
+import { savePost } from '../../store/session';
+import EditButton from '../parts/EditButton';
+import DeleteButton from '../parts/DeleteButton';
+import EditPostModal from '../EditPostForm';
+import DeleteConfirmationModal from '../parts/DeleteConfirmation';
+import SaveButton from '../parts/SaveButton';
+import Downvote from '../parts/Downvote';
+import Upvote from '../parts/Upvote';
+import Score from '../parts/Score';
+import DivCard from '../parts/DivCard';
+import UserName from '../parts/UserName';
+import options from '../../utils/localeDateString';
 
 const Post = ({ post }) => {
-  const locationArr = useLocation().pathname.split("/");
+  const locationArr = useLocation().pathname.split('/');
   const dispatch = useDispatch();
   const user = useSelector(session.user());
 
@@ -48,7 +48,7 @@ const Post = ({ post }) => {
   const saveThisPost = async () => {
     const updatedUser = await dispatch(savePost(user.id, post.id));
     if (!updatedUser.errors) {
-      if (!(locationArr[1] === "users" && locationArr[2] === String(user.id))) {
+      if (!(locationArr[1] === 'users' && locationArr[2] === String(user.id))) {
         setIsSaved((prev) => !prev);
       }
     }
@@ -71,12 +71,12 @@ const Post = ({ post }) => {
       <hr />
       <div className="flex items-center justify-between p-2">
         <p>
-          by{" "}
+          by{' '}
           <UserName
             username={post.user.username}
             link={`/users/${post.user.id}`}
-          />{" "}
-          on{" "}
+          />{' '}
+          on{' '}
           <span className="hidden md:block">
             {new Date(post.created_at).toLocaleString(...options())}
           </span>
@@ -92,7 +92,7 @@ const Post = ({ post }) => {
           </div>
         )}
       </div>
-      {user && post.user.id === user.id && post.body !== "[DELETED]" && (
+      {user && post.user.id === user.id && post.body !== '[DELETED]' && (
         <div className="flex justify-end">
           <EditButton label="Edit Post" onClick={editBtnHandler}>
             <EditPostModal

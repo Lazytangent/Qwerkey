@@ -1,6 +1,6 @@
-import { GitHub, Code, LinkedIn, FolderShared } from "@material-ui/icons";
+import { GitHub, Code, LinkedIn, FolderShared } from '@material-ui/icons';
 
-import logo from "../../images/logo.png";
+import logo from '../../images/logo.png';
 
 const About = () => {
   return (
@@ -9,10 +9,24 @@ const About = () => {
         <h5>Created by Peter Mai &copy; 2021</h5>
       </div>
       <div className="flex justify-around p-2">
-        <a className="hover:text-green" href="https://github.com/Lazytangent"><GitHub /></a>
-        <a className="hover:text-green" href="https://github.com/Lazytangent/Qwerkey"><Code /></a>
-        <a className="hover:text-green" href="https://www.linkedin.com/in/petertnmai/"><LinkedIn /></a>
-        <a className="hover:text-green" href="https://lazytangent.github.io"><FolderShared /></a>
+        <a className="hover:text-green" href="https://github.com/Lazytangent">
+          <GitHub />
+        </a>
+        <a
+          className="hover:text-green"
+          href="https://github.com/Lazytangent/Qwerkey"
+        >
+          <Code />
+        </a>
+        <a
+          className="hover:text-green"
+          href="https://www.linkedin.com/in/petertnmai/"
+        >
+          <LinkedIn />
+        </a>
+        <a className="hover:text-green" href="https://lazytangent.github.io">
+          <FolderShared />
+        </a>
       </div>
       <div>
         <img src={logo} alt="Logo" />

@@ -6,7 +6,7 @@ import {
   REMOVE_RETAILER,
   SET_USER,
   SET_SEARCH,
-} from "./constants";
+} from './constants';
 import {
   setMaxNumberOfRetailers,
   setRetailers,
@@ -16,14 +16,14 @@ import {
 } from './actions';
 
 export const getMaxNumberOfRetailers = () => async (dispatch) => {
-  const res = await fetch("/api/retailers/max");
+  const res = await fetch('/api/retailers/max');
   const number = await res.json();
   dispatch(setMaxNumberOfRetailers(number.max));
   return number;
 };
 
 export const getRetailers = (page) => async (dispatch) => {
-  const res = await fetch(`/api/retailers${page ? `?page=${page}` : ""}`);
+  const res = await fetch(`/api/retailers${page ? `?page=${page}` : ''}`);
   const retailers = await res.json();
   if (page === 1) {
     dispatch(setRetailers(retailers));
@@ -49,9 +49,9 @@ export const getOneRetailerLocation = (retailerId) => async (dispatch) => {
 
 export const createRetailer = (retailerData) => async (dispatch) => {
   const res = await fetch(`/api/retailers`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(retailerData),
   });
@@ -64,9 +64,9 @@ export const createRetailer = (retailerData) => async (dispatch) => {
 
 export const updateRetailer = (retailerData) => async (dispatch) => {
   const res = await fetch(`/api/retailers/${retailerData.id}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(retailerData),
   });
@@ -79,7 +79,7 @@ export const updateRetailer = (retailerData) => async (dispatch) => {
 
 export const deleteRetailer = (retailerId) => async (dispatch) => {
   const res = await fetch(`/api/retailers/${retailerId}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const data = await res.json();
   if (!data.errors) {
@@ -88,75 +88,78 @@ export const deleteRetailer = (retailerId) => async (dispatch) => {
   return data;
 };
 
-export const createRetailerRating =
-  (rating, retailer_id) => async (dispatch) => {
-    const res = await fetch(`/api/retailers/${retailer_id}/ratings`, {
-      method: "POST",
+export const createRetailerRating = (rating, retailer_id) => async (
+  dispatch
+) => {
+  const res = await fetch(`/api/retailers/${retailer_id}/ratings`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(rating),
+  });
+  const retailer = await res.json();
+  if (!retailer.errors) {
+    dispatch(setRetailer(retailer));
+  }
+  return retailer;
+};
+
+export const updateRetailerRating = (rating, retailer_id) => async (
+  dispatch
+) => {
+  const res = await fetch(
+    `/api/retailers/${retailer_id}/ratings/${rating.id}`,
+    {
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(rating),
-    });
-    const retailer = await res.json();
-    if (!retailer.errors) {
-      dispatch(setRetailer(retailer));
     }
-    return retailer;
-  };
+  );
+  const retailer = await res.json();
+  if (!retailer.errors) {
+    dispatch(setRetailer(retailer));
+  }
+  return retailer;
+};
 
-export const updateRetailerRating =
-  (rating, retailer_id) => async (dispatch) => {
-    const res = await fetch(
-      `/api/retailers/${retailer_id}/ratings/${rating.id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(rating),
-      }
-    );
-    const retailer = await res.json();
-    if (!retailer.errors) {
-      dispatch(setRetailer(retailer));
+export const deleteRetailerRating = (rating_id, retailer_id) => async (
+  dispatch
+) => {
+  const res = await fetch(
+    `/api/retailers/${retailer_id}/ratings/${rating_id}`,
+    {
+      method: 'DELETE',
     }
-    return retailer;
-  };
-
-export const deleteRetailerRating =
-  (rating_id, retailer_id) => async (dispatch) => {
-    const res = await fetch(
-      `/api/retailers/${retailer_id}/ratings/${rating_id}`,
-      {
-        method: "DELETE",
-      }
-    );
-    const retailer = await res.json();
-    if (!retailer.errors) {
-      dispatch(setRetailer(retailer));
-    }
-    return retailer;
-  };
+  );
+  const retailer = await res.json();
+  if (!retailer.errors) {
+    dispatch(setRetailer(retailer));
+  }
+  return retailer;
+};
 
 const initialState = {
-  byIds: {},
+  retailers: {},
   max: null,
 };
 
 const retailersReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_RETAILERS:
-      return { ...state, byIds: { ...action.retailers } };
+      return { ...state, retailers: { ...action.retailers } };
     case SET_MORE_RETAILERS:
       return {
         ...state,
-        byIds: { ...state.byIds, ...action.retailers },
+        retailers: { ...state.retailers, ...action.retailers },
       };
     case SET_RETAILER:
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
+        retailers: {
+          ...state.retailers,
           [action.retailer.id]: action.retailer,
         },
       };
@@ -165,22 +168,26 @@ const retailersReducer = (state = initialState, action) => {
     case REMOVE_RETAILER:
       return {
         ...state,
-        byIds: { ...state.byIds, [action.id]: undefined },
+        retailers: { ...state.retailers, [action.id]: undefined },
       };
     case SET_USER:
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
-          ...Object.fromEntries(action.user.retailers.map((retailer) => [retailer.id, retailer])),
+        retailers: {
+          ...state.retailers,
+          ...Object.fromEntries(
+            action.user.retailers.map((retailer) => [retailer.id, retailer])
+          ),
         },
       };
     case SET_SEARCH:
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
-          ...Object.fromEntries(action.retailers.map((retailer) => [retailer.id, retailer])),
+        retailers: {
+          ...state.retailers,
+          ...Object.fromEntries(
+            action.retailers.map((retailer) => [retailer.id, retailer])
+          ),
         },
       };
     default:

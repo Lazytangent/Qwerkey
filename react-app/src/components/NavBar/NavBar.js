@@ -1,18 +1,18 @@
-import { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useEffect, useRef } from 'react';
+import { NavLink } from 'react-router-dom';
 
-import { Person, Menu } from "@material-ui/icons";
+import { Person, Menu } from '@material-ui/icons';
 
-import { useAuthContext } from "../../context/AuthContext";
-import { useCreatePostContext } from "../../context/CreatePostContext";
-import { useCollapsedSidebarContext } from "../../context/CollapsedSidebarContext";
-import LoginModal from "../LoginForm";
-import SignUpModal from "../SignUpForm";
-import NavButton from "../parts/NavButton";
-import UserMenu from "../parts/UserMenu";
-import SearchBar from "../SearchBar";
-import DarkModeToggle from "../DarkModeToggle";
-import CreatePostModal from "../CreatePostForm";
+import { useAuthContext } from '../../context/AuthContext';
+import { useCreatePostContext } from '../../context/CreatePostContext';
+import { useCollapsedSidebarContext } from '../../context/CollapsedSidebarContext';
+import LoginModal from '../LoginForm';
+import SignUpModal from '../SignUpForm';
+import NavButton from '../parts/NavButton';
+import UserMenu from '../parts/UserMenu';
+import SearchBar from '../SearchBar';
+import DarkModeToggle from '../DarkModeToggle';
+import CreatePostModal from '../CreatePostForm';
 
 const NavBar = () => {
   const {
@@ -33,9 +33,9 @@ const NavBar = () => {
     };
 
     if (showUserMenu) {
-      document.addEventListener("click", closeUserMenu);
+      document.addEventListener('click', closeUserMenu);
     }
-    return () => document.removeEventListener("click", closeUserMenu);
+    return () => document.removeEventListener('click', closeUserMenu);
   }, [showUserMenu]);
 
   useEffect(() => {
@@ -142,13 +142,14 @@ const NavBar = () => {
               </div>
             </li>
             {showUserMenu && (
-              <UserMenu userMenuRef={userMenuRef} createPostBtnHandler={createPostBtnHandler} />
+              <UserMenu
+                userMenuRef={userMenuRef}
+                createPostBtnHandler={createPostBtnHandler}
+              />
             )}
           </div>
         )}
-        {authenticated && setShowCreatePostModal && (
-          <CreatePostModal />
-        )}
+        {authenticated && setShowCreatePostModal && <CreatePostModal />}
       </ul>
     </nav>
   );

@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { session, posts } from '../../store/selectors';
-import { getPostById } from "../../store/posts";
-import { getCommentsByPost } from "../../store/comments";
-import Post from "../Post";
-import CommentThreadContainer from "../CommentThreadContainer";
-import CreateCommentForm from "../CreateCommentForm";
+import { getPostById } from '../../store/posts';
+import { getCommentsByPost } from '../../store/comments';
+import Post from '../Post';
+import CommentThreadContainer from '../CommentThreadContainer';
+import CreateCommentForm from '../CreateCommentForm';
 
 const PostPage = () => {
   const { postId } = useParams();

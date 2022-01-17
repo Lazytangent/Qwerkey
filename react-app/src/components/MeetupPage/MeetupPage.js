@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-import { meetups } from '../../store/selectors'
-import { getMeetupById, getMeetupLocation } from "../../store/meetups";
-import Meetup from "../Meetup";
-import Map from "../Map";
+import { meetups } from '../../store/selectors';
+import { getMeetupById, getMeetupLocation } from '../../store/meetups';
+import Meetup from '../Meetup';
+import Map from '../Map';
 
 const MeetupPage = () => {
   const { meetupId } = useParams();
@@ -37,9 +37,7 @@ const MeetupPage = () => {
   return (
     <>
       <Meetup meetup={meetup} />
-      {meetup.lng && meetup.lat && (
-        <Map long={meetup.lng} lat={meetup.lat} />
-      )}
+      {meetup.lng && meetup.lat && <Map long={meetup.lng} lat={meetup.lat} />}
     </>
   );
 };

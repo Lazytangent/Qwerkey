@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
-import { session, meetups as meetupsSelectors } from '../../store/selectors'
-import { getMeetups, getMaxNumberOfMeetups } from "../../store/meetups";
-import Meetup from "../Meetup";
-import CreateMeetup from "../CreateMeetup";
+import { session, meetups as meetupsSelectors } from '../../store/selectors';
+import { getMeetups, getMaxNumberOfMeetups } from '../../store/meetups';
+import Meetup from '../Meetup';
+import CreateMeetup from '../CreateMeetup';
 
 const MeetupsContainer = () => {
   const dispatch = useDispatch();
@@ -40,22 +40,32 @@ const MeetupsContainer = () => {
 
   useEffect(() => {
     if (page * 20 > maxMeetups) {
-      setCurrentMeetups(prev => prev.concat(Object.values(meetups).slice(0, page * 20 % maxMeetups || maxMeetups)));
+      setCurrentMeetups((prev) =>
+        prev.concat(
+          Object.values(meetups).slice(
+            0,
+            (page * 20) % maxMeetups || maxMeetups
+          )
+        )
+      );
     }
   }, [meetups, maxMeetups, page]);
 
   useEffect(() => {
     const scrollListener = () => {
-      const scroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (scroll / height);
+      const scroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = scroll / height;
       if (scrolled > 0.9) {
-        setPage(prev => prev + 1);
+        setPage((prev) => prev + 1);
       }
     };
 
-    window.addEventListener("scroll", scrollListener);
-    return () => window.removeEventListener("scroll", scrollListener);
+    window.addEventListener('scroll', scrollListener);
+    return () => window.removeEventListener('scroll', scrollListener);
   }, [page, maxMeetups, meetups]);
 
   if (!isLoaded) {
@@ -65,7 +75,7 @@ const MeetupsContainer = () => {
   return (
     <>
       {user && <CreateMeetup />}
-      {currentMeetups.map(meetup => (
+      {currentMeetups.map((meetup) => (
         <Meetup meetup={meetup} key={uuidv4()} />
       ))}
     </>

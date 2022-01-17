@@ -1,4 +1,9 @@
-import { SET_COMMUNITIES, SET_COMMUNITY, SET_SIDEBAR_COMMUNITY, SET_SIDEBAR_COMMUNITIES } from './constants';
+import {
+  SET_COMMUNITIES,
+  SET_COMMUNITY,
+  SET_SIDEBAR_COMMUNITY,
+  SET_SIDEBAR_COMMUNITIES,
+} from './constants';
 import { setCommunities, setCommunity } from './actions';
 
 export const getCommunities = () => async (dispatch) => {
@@ -17,9 +22,9 @@ export const getCommunity = (communityId) => async (dispatch) => {
 
 export const createCommunity = (community) => async (dispatch) => {
   const res = await fetch('/api/communities/', {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(community),
   });
@@ -32,9 +37,9 @@ export const createCommunity = (community) => async (dispatch) => {
 
 export const updateCommunity = (community) => async (dispatch) => {
   const res = await fetch(`/api/communities/${community.id}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(community),
   });
@@ -47,7 +52,7 @@ export const updateCommunity = (community) => async (dispatch) => {
 
 export const deleteCommunity = (communityId) => async (dispatch) => {
   const res = await fetch(`/api/communities/${communityId}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const communities = await res.json();
   if (!communities.errors) {
@@ -56,9 +61,7 @@ export const deleteCommunity = (communityId) => async (dispatch) => {
   return communities;
 };
 
-const initialState = {
-  byIds: {},
-};
+const initialState = {};
 
 const communityReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -66,20 +69,13 @@ const communityReducer = (state = initialState, action) => {
     case SET_COMMUNITIES:
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
-          ...Object.fromEntries(action.communities.map((community) => [community.id, community]))
-        },
+        ...Object.fromEntries(
+          action.communities.map((community) => [community.id, community])
+        ),
       };
     case SET_SIDEBAR_COMMUNITY:
     case SET_COMMUNITY:
-      return {
-        ...state,
-        byIds: {
-          ...state.byIds,
-          [action.community.id]: action.community
-        },
-      };
+      return { ...state, [action.community.id]: action.community };
     default:
       return state;
   }

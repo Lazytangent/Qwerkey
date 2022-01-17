@@ -12,9 +12,9 @@ export const getCommentsByPost = (postId) => async (dispatch) => {
 
 export const createComment = (comment, postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${postId}/comments`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(comment),
   });
@@ -27,22 +27,22 @@ export const createComment = (comment, postId) => async (dispatch) => {
 
 export const updateComment = (comment) => async (dispatch) => {
   const res = await fetch(`/api/comments/${comment.id}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(comment),
   });
   const updatedComment = await res.json();
   if (!updatedComment.errors) {
-    dispatch(setComment(updatedComment))
+    dispatch(setComment(updatedComment));
   }
   return updatedComment;
 };
 
 export const deleteComment = (commentId) => async (dispatch) => {
   const res = await fetch(`/api/comments/${commentId}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const deletedComment = await res.json();
   if (!deletedComment.errors) {
@@ -51,11 +51,13 @@ export const deleteComment = (commentId) => async (dispatch) => {
   return deletedComment;
 };
 
-export const rateComment = ({ rating, userId, commentId }) => async (dispatch) => {
+export const rateComment = ({ rating, userId, commentId }) => async (
+  dispatch
+) => {
   const res = await fetch(`/api/comments/${commentId}/rating`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       rating,
@@ -70,29 +72,36 @@ export const rateComment = ({ rating, userId, commentId }) => async (dispatch) =
 };
 
 const initialState = {
-  byIds: {},
+  comments: {},
 };
 
 const commentsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_COMMENTS:
-      return { ...state, byIds: { ...action.comments } };
+      return { ...state, comments: { ...action.comments } };
     case SET_COMMENT:
-      return { ...state, byIds: { ...state.byIds, [action.comment.id]: action.comment } };
+      return {
+        ...state,
+        comments: { ...state.comments, [action.comment.id]: action.comment },
+      };
     case SET_USER:
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
-          ...Object.fromEntries(action.user.comments.map((comment) => [comment.id, comment])),
+        comments: {
+          ...state.comments,
+          ...Object.fromEntries(
+            action.user.comments.map((comment) => [comment.id, comment])
+          ),
         },
       };
     case SET_SEARCH:
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
-          ...Object.fromEntries(action.comments.map((comment) => [comment.id, comment])),
+        comments: {
+          ...state.comments,
+          ...Object.fromEntries(
+            action.comments.map((comment) => [comment.id, comment])
+          ),
         },
       };
     default:

@@ -3,13 +3,13 @@ import thunk from 'redux-thunk';
 
 import session from './session';
 import posts from './posts';
-import comments from "./comments";
+import comments from './comments';
 import retailers from './retailers';
-import search from "./search";
-import communities from "./communities";
-import sidebar from "./sidebar";
-import users from "./users";
-import meetups from "./meetups";
+import search from './search';
+import communities from './communities';
+import sidebar from './sidebar';
+import users from './users';
+import meetups from './meetups';
 
 const rootReducer = combineReducers({
   session,

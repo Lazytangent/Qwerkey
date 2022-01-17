@@ -2,21 +2,21 @@ const plugins = [
   [
     'babel-plugin-import',
     {
-      'libraryName': '@material-ui/core',
-      'libraryDirectory': 'esm',
-      'camel2DashComponentName': false
+      libraryName: '@material-ui/core',
+      libraryDirectory: 'esm',
+      camel2DashComponentName: false,
     },
-    'core'
+    'core',
   ],
   [
-    'bable-plugin-import',
+    'babel-plugin-import',
     {
-      'libraryName': '@material-ui/icons',
-      'libraryDirectory': 'esm',
-      'camel2DashComponentName': false
+      libraryName: '@material-ui/icons',
+      libraryDirectory: 'esm',
+      camel2DashComponentName: false,
     },
-    'icons'
-  ]
+    'icons',
+  ],
 ];
 
 module.exports = { plugins };

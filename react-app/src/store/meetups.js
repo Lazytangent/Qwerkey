@@ -5,7 +5,7 @@ import {
   SET_MAX_MEETUPS,
   REMOVE_MEETUP,
   SET_USER,
-} from "./constants";
+} from './constants';
 import {
   setMoreMeetups,
   setMaxNumberOfMeetups,
@@ -54,9 +54,9 @@ export const getMaxNumberOfMeetups = () => async (dispatch) => {
 
 export const createMeetup = (meetupData) => async (dispatch) => {
   const res = await fetch(`/api/meetups`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(meetupData),
   });
@@ -69,9 +69,9 @@ export const createMeetup = (meetupData) => async (dispatch) => {
 
 export const updateMeetup = (meetupData) => async (dispatch) => {
   const res = await fetch(`/api/meetups/${meetupData.id}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(meetupData),
   });
@@ -84,7 +84,7 @@ export const updateMeetup = (meetupData) => async (dispatch) => {
 
 export const deleteMeetup = (meetupId) => async (dispatch) => {
   const res = await fetch(`/api/meetups/${meetupId}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   const data = await res.json();
   if (!data.errors) {
@@ -94,7 +94,7 @@ export const deleteMeetup = (meetupId) => async (dispatch) => {
 };
 
 const initialState = {
-  byIds: {},
+  meetups: {},
   max: null,
 };
 
@@ -103,25 +103,27 @@ const meetupsReducer = (state = initialState, action) => {
     case SET_MAX_MEETUPS:
       return { ...state, max: action.number };
     case SET_MORE_MEETUPS:
-      return { ...state, byIds: { ...state.byIds, ...action.meetups } };
+      return { ...state, meetups: { ...state.meetups, ...action.meetups } };
     case SET_MEETUPS:
-      return { ...state, byIds: { ...action.meetups } };
+      return { ...state, meetups: { ...action.meetups } };
     case SET_MEETUP:
       return {
         ...state,
-        byIds: { ...state.byIds, [action.meetup.id]: action.meetup },
+        meetups: { ...state.meetups, [action.meetup.id]: action.meetup },
       };
     case REMOVE_MEETUP:
       return {
         ...state,
-        byIds: { ...state.byIds, [action.id]: undefined },
+        meetups: { ...state.meetups, [action.id]: undefined },
       };
     case SET_USER:
       return {
         ...state,
-        byIds: {
-          ...state.byIds,
-          ...Object.fromEntries(action.user.meetups.map((meetup) => [meetup.id, meetup])),
+        meetups: {
+          ...state.meetups,
+          ...Object.fromEntries(
+            action.user.meetups.map((meetup) => [meetup.id, meetup])
+          ),
         },
       };
     default:

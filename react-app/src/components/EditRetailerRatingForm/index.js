@@ -1,5 +1,5 @@
-import { Modal } from "../../context/ModalContext";
-import EditRetailerRatingForm from "./EditRetailerRatingForm";
+import { Modal } from '../../context/ModalContext';
+import EditRetailerRatingForm from './EditRetailerRatingForm';
 
 const EditRetailerRatingModal = ({ showEditModal, setShowEditModal }) => {
   return (

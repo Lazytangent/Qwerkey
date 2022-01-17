@@ -33,17 +33,26 @@ const EditPostForm = ({ postId, setShowEditModal }) => {
 
   const updateNewImages = (e) => {
     const files = e.target.files;
-    if (files) setNewImages(prev => [...prev, files]);
+    if (files) setNewImages((prev) => [...prev, files]);
   };
 
   const chooseAdditionalImage = () => {
-    document.getElementById("image-upload-edit-post").click();
+    document.getElementById('image-upload-edit-post').click();
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
     if (body || newImages.length) {
-      const newPost = await dispatch(updatePost({ title, body, images: newImages, postId, userId: post.user.id, communityId: post.community.id }));
+      const newPost = await dispatch(
+        updatePost({
+          title,
+          body,
+          images: newImages,
+          postId,
+          userId: post.user.id,
+          communityId: post.community.id,
+        })
+      );
       if (newPost.errors) {
         setErrors(newPost.errors);
       } else {
@@ -78,18 +87,36 @@ const EditPostForm = ({ postId, setShowEditModal }) => {
         />
         <div className="flex flex-col items-center">
           <h5>Images Chosen</h5>
-          {post.images && post.images.map(imageUrl => {
-            return <div key={imageUrl}><img src={imageUrl} alt={imageUrl} /></div>;
-          })}
-          {newImages && newImages.map(fileList => (
-            Array.from(fileList).map(image => (
-              <div key={image.name}>{image.name}</div>
-            ))
-          ))}
+          {post.images &&
+            post.images.map((imageUrl) => {
+              return (
+                <div key={imageUrl}>
+                  <img src={imageUrl} alt={imageUrl} />
+                </div>
+              );
+            })}
+          {newImages &&
+            newImages.map((fileList) =>
+              Array.from(fileList).map((image) => (
+                <div key={image.name}>{image.name}</div>
+              ))
+            )}
         </div>
         <div className="flex justify-center">
-          <button type="button" onClick={chooseAdditionalImage} className="p-2 border rounded hover:border-green">Upload Images</button>
-          <input type="file" onChange={updateNewImages} id="image-upload-edit-post" multiple={true} className="hidden" />
+          <button
+            type="button"
+            onClick={chooseAdditionalImage}
+            className="p-2 border rounded hover:border-green"
+          >
+            Upload Images
+          </button>
+          <input
+            type="file"
+            onChange={updateNewImages}
+            id="image-upload-edit-post"
+            multiple={true}
+            className="hidden"
+          />
         </div>
         <SubmitFormButton label="Edit your Post" />
       </form>
