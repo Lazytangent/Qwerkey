@@ -36,7 +36,6 @@ const EditRetailerRatingForm = ({ setShowEditModal }) => {
     } else {
       const newErrors = convertFormErrors(retailer.errors);
       setErrors(newErrors);
-      console.log(errors);
     }
   };
 
