@@ -11,7 +11,6 @@ def users_username_exists(form, field):
 
 
 def users_email_exists(form, field):
-    print("Checking if user exits", field.data)
     email = field.data
     user = User.query.filter(User.email == email).first()
     if user:
