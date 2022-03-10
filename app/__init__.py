@@ -6,10 +6,10 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_wtf.csrf import generate_csrf
 
-from .api import api
-from .config import Config
-from .models import User, db
-from .seeds import seed_commands
+from app.api import api
+from app.config import Config
+from app.models import User, db
+from app.seeds import seed_commands
 
 
 def create_app(testing=False):

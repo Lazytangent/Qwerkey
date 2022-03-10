@@ -1,5 +1,5 @@
 import datetime
-from .db import db
+from app.models.db import db
 
 
 class Meetup(db.Model):

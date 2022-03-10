@@ -1,6 +1,6 @@
 import datetime
-from .db import db
-from .posts_tag import posts_tags
+from app.models.db import db
+from app.models.posts_tag import posts_tags
 
 
 class Post(db.Model):

@@ -1,9 +1,9 @@
 import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from .db import db
-from .saved_post import saved_posts
-from .saved_comment import saved_comments
+from app.models.db import db
+from app.models.saved_post import saved_posts
+from app.models.saved_comment import saved_comments
 
 
 class User(db.Model, UserMixin):
