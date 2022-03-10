@@ -16,6 +16,19 @@ class Config:
 
     OPEN_CAGE_API_KEY = os.environ.get("OPEN_CAGE_API_KEY")
 
+    def __new__(cls, testing):
+        is_production = os.environ.get("FLASK_ENV", "development") == "production"
+
+        if testing:
+            return TestingConfig
+        elif is_production:
+            return ProductionConfig
+        else:
+            return DevelopmentConfig
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
 
 class ProductionConfig(Config):
     pass
