@@ -46,6 +46,7 @@ pyparsing = "==2.4.7"
 s3transfer = "==0.3.4"
 toml = "==0.10.2"
 urllib3 = "==1.26.3"
+pydantic = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
