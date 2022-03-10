@@ -1,5 +1,6 @@
 import json
-from app.models import db, Post
+
+from app.models import Post, db
 
 
 def seed_posts():

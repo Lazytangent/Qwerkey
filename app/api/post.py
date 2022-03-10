@@ -2,19 +2,19 @@ from flask import Blueprint, jsonify, request
 from sqlalchemy import desc, func
 
 from app.config import Config
-from app.forms import CreatePost, CreateComment, CreatePostRating
+from app.forms import CreateComment, CreatePost, CreatePostRating
 from app.helpers import (
-    upload_file_to_s3,
     allowed_file,
-    validation_errors_to_error_messages,
     get_unique_filename,
+    upload_file_to_s3,
+    validation_errors_to_error_messages,
 )
-from app.models import db, Post, PostsImage, Community, Comment, Thread, PostRating
+from app.models import Comment, Community, Post, PostRating, PostsImage, Thread, db
 
-post_routes = Blueprint("posts", __name__)
+post = Blueprint("posts", __name__)
 
 
-@post_routes.route("")
+@post.route("")
 def get_paginated_posts():
     page = int(request.args.get("page", 0))
     community_name = request.args.get("community_name", "")
@@ -31,26 +31,26 @@ def get_paginated_posts():
     return {post.id: post.to_dict() for post in posts.items}
 
 
-@post_routes.route("/")
+@post.route("/")
 def get_posts():
     posts = Post.query.limit(20).all()
     return {post.id: post.to_dict() for post in posts}
 
 
-@post_routes.route("/max")
+@post.route("/max")
 def max_number_of_posts():
     number = Post.query.count()
     return {"max": number}
 
 
-@post_routes.route("/max/<string:community_name>")
+@post.route("/max/<string:community_name>")
 def max_number_of_posts_by_community(community_name):
     community = Community.query.filter(Community.name == community_name).first()
     number = Post.query.filter(Post.community_id == community.id).count()
     return {"max": number}
 
 
-@post_routes.route("/filter")
+@post.route("/filter")
 def filter_posts():
     type_ = request.args.get("type")
     if type_ == "new":
@@ -74,7 +74,7 @@ def filter_posts():
     return "Invalid type.", 405
 
 
-@post_routes.route("/", methods=["POST"])
+@post.route("/", methods=["POST"])
 def create_post():
     form = CreatePost()
     form["csrf_token"].data = request.cookies["csrf_token"]
@@ -97,7 +97,7 @@ def create_post():
     return {"errors": validation_errors_to_error_messages(form.errors)}
 
 
-@post_routes.route("/<int:post_id>", methods=["GET", "PUT", "DELETE"])
+@post.route("/<int:post_id>", methods=["GET", "PUT", "DELETE"])
 def post_by_id(post_id):
     post = Post.query.get(post_id)
     if request.method == "GET":
@@ -132,7 +132,7 @@ def post_by_id(post_id):
     return post.to_dict()
 
 
-@post_routes.route("/<int:post_id>/comments")
+@post.route("/<int:post_id>/comments")
 def get_comments_on_post(post_id):
     post = Post.query.get(post_id)
     return {
@@ -142,7 +142,7 @@ def get_comments_on_post(post_id):
     }
 
 
-@post_routes.route("/<int:post_id>/comments", methods=["POST"])
+@post.route("/<int:post_id>/comments", methods=["POST"])
 def create_comment(post_id):
     post = Post.query.get(post_id)
     form = CreateComment()
@@ -163,7 +163,7 @@ def create_comment(post_id):
     return {"errors": validation_errors_to_error_messages(form.errors)}
 
 
-@post_routes.route("/<int:post_id>/rating", methods=["POST"])
+@post.route("/<int:post_id>/rating", methods=["POST"])
 def rate_post(post_id):
     post = Post.query.get(post_id)
     form = CreatePostRating()

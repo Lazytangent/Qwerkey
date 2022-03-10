@@ -1,7 +1,9 @@
-import boto3
-import botocore
 import uuid
-from .config import Config
+
+import boto3
+import botocore  # noqa
+
+from app.config import Config
 
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "svg"}
 

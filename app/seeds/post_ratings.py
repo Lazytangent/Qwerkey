@@ -1,5 +1,6 @@
 import json
-from app.models import db, PostRating
+
+from app.models import PostRating, db
 
 
 def seed_post_ratings():

@@ -1,4 +1,4 @@
-from .db import db
+from app.models.db import db
 
 
 class Thread(db.Model):

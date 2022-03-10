@@ -1,5 +1,6 @@
 import json
-from app.models import db, Meetup
+
+from app.models import Meetup, db
 
 
 def seed_meetups():
