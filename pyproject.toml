@@ -1,0 +1,5 @@
+[tool.black]
+extend-exclude = 'migrations/versions'
+
+[tool.isort]
+profile = 'black'
