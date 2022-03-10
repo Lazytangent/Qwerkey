@@ -4,7 +4,7 @@ from flask import Blueprint, request
 from app.config import Config
 from app.forms import CreateMeetup
 from app.helpers import validation_errors_to_error_messages
-from app.models import db, Meetup
+from app.models import Meetup, db
 
 meetup_routes = Blueprint("meetups", __name__)
 

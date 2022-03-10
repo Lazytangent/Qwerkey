@@ -1,10 +1,10 @@
-from app.forms.login_form import LoginForm
-from app.forms.signup_form import SignUpForm
-from app.forms.create_post import CreatePost
-from app.forms.create_comment import CreateComment
-from app.forms.create_retailer import CreateRetailer
-from app.forms.create_retailer_rating import CreateRetailerRating
-from app.forms.create_community import CreateCommunity
-from app.forms.create_post_rating import CreatePostRating
-from app.forms.create_meetup import CreateMeetup
-from app.forms.create_comment_rating import CreateCommentRating
+from app.forms.create_comment import CreateComment  # noqa
+from app.forms.create_comment_rating import CreateCommentRating  # noqa
+from app.forms.create_community import CreateCommunity  # noqa
+from app.forms.create_meetup import CreateMeetup  # noqa
+from app.forms.create_post import CreatePost  # noqa
+from app.forms.create_post_rating import CreatePostRating  # noqa
+from app.forms.create_retailer import CreateRetailer  # noqa
+from app.forms.create_retailer_rating import CreateRetailerRating  # noqa
+from app.forms.login_form import LoginForm  # noqa
+from app.forms.signup_form import SignUpForm  # noqa

@@ -1,6 +1,5 @@
 from app.models.db import db
 
-
 posts_tags = db.Table(
     "posts_tags",
     db.Model.metadata,

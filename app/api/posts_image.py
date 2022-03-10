@@ -1,5 +1,6 @@
 from flask import Blueprint
-from app.models import db, Post, PostsImage
+
+from app.models import Post, PostsImage, db
 
 posts_image_routes = Blueprint("posts_image", __name__)
 

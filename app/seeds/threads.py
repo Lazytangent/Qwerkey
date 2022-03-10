@@ -1,5 +1,6 @@
 import json
-from app.models import db, Thread
+
+from app.models import Thread, db
 
 
 def seed_threads():

@@ -1,10 +1,10 @@
-from flask import Blueprint, jsonify, session, request
-from flask_login import current_user, login_user, logout_user, login_required
+from flask import Blueprint, request
+from flask_login import current_user, login_user, logout_user
 from sqlalchemy import or_
 
 from app.forms import LoginForm, SignUpForm
-from app.models import User, db
 from app.helpers import validation_errors_to_error_messages
+from app.models import User, db
 
 auth_routes = Blueprint("auth", __name__)
 

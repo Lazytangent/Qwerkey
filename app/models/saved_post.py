@@ -1,6 +1,5 @@
 from app.models.db import db
 
-
 saved_posts = db.Table(
     "saved_posts",
     db.Model.metadata,

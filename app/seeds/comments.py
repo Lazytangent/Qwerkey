@@ -1,5 +1,6 @@
 import json
-from app.models import db, Comment
+
+from app.models import Comment, db
 
 
 def seed_comments():

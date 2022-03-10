@@ -1,5 +1,6 @@
 import json
-from app.models import db, PostsImage
+
+from app.models import PostsImage, db
 
 
 def seed_post_images():

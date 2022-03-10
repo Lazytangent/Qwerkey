@@ -1,8 +1,9 @@
-import pytest
 import os
 
+import pytest
+
 from app import create_app
-from app.models import db, User
+from app.models import User, db
 
 
 @pytest.fixture(scope="session")

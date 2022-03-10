@@ -1,7 +1,7 @@
 from flask import Blueprint, request
-from sqlalchemy import or_, func
+from sqlalchemy import func, or_
 
-from app.models import Post, Comment, Retailer, RetailerRating
+from app.models import Comment, Post, Retailer, RetailerRating
 
 search_routes = Blueprint("search", __name__)
 

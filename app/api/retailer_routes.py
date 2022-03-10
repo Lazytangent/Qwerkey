@@ -1,11 +1,12 @@
-import requests
 from datetime import datetime
+
+import requests
 from flask import Blueprint, request
 
 from app.config import Config
+from app.forms import CreateRetailer, CreateRetailerRating
 from app.helpers import validation_errors_to_error_messages
-from app.forms import CreateRetailerRating, CreateRetailer
-from app.models import db, Retailer, RetailerRating
+from app.models import Retailer, RetailerRating, db
 
 retailer_routes = Blueprint("retailers", __name__)
 

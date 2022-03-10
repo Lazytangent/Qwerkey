@@ -1,5 +1,6 @@
 import json
-from app.models import db, CommentRating
+
+from app.models import CommentRating, db
 
 
 def seed_comment_ratings():

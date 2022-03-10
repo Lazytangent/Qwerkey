@@ -2,7 +2,7 @@ from flask import Blueprint, request
 
 from app.forms import CreateComment, CreateCommentRating
 from app.helpers import validation_errors_to_error_messages
-from app.models import db, Comment, Post, CommentRating
+from app.models import Comment, CommentRating, db
 
 comment_routes = Blueprint("comments", __name__)
 
