@@ -6,5 +6,5 @@ from app.forms.create_post import CreatePost  # noqa
 from app.forms.create_post_rating import CreatePostRating  # noqa
 from app.forms.create_retailer import CreateRetailer  # noqa
 from app.forms.create_retailer_rating import CreateRetailerRating  # noqa
-from app.forms.login_form import LoginForm  # noqa
-from app.forms.signup_form import SignUpForm  # noqa
+from app.forms.login import LoginForm  # noqa
+from app.forms.signup import SignUpForm  # noqa

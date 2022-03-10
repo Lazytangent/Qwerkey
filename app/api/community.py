@@ -5,22 +5,22 @@ from app.forms import CreateCommunity
 from app.helpers import validation_errors_to_error_messages
 from app.models import Community, Post, db
 
-community_routes = Blueprint("communities", __name__)
+community = Blueprint("communities", __name__)
 
 
-@community_routes.route("")
+@community.route("")
 def get_communities():
     communities = Community.query.all()
     return {community.id: community.to_dict() for community in communities}
 
 
-@community_routes.route("/max")
+@community.route("/max")
 def get_max_number_of_communities():
     number = Community.query.count()
     return {"max": number}
 
 
-@community_routes.route("/popular")
+@community.route("/popular")
 def get_popular_communities():
     communities = (
         Community.query.join(Post)
@@ -32,19 +32,19 @@ def get_popular_communities():
     return jsonify([community.to_simple_dict() for community in communities])
 
 
-@community_routes.route("/<int:community_id>")
+@community.route("/<int:community_id>")
 def get_community(community_id):
     community = Community.query.get(community_id)
     return community.to_dict()
 
 
-@community_routes.route("/<string:community_name>")
+@community.route("/<string:community_name>")
 def get_community_by_name(community_name):
     community = Community.query.filter_by(name=community_name).first()
     return community.to_dict()
 
 
-@community_routes.route("/", methods=["POST"])
+@community.route("/", methods=["POST"])
 def create_community():
     form = CreateCommunity()
     form["csrf_token"].data = request.cookies["csrf_token"]
@@ -57,7 +57,7 @@ def create_community():
     return {"errors": validation_errors_to_error_messages(form.errors)}
 
 
-@community_routes.route("/<int:community_id>", methods=["PUT", "DELETE"])
+@community.route("/<int:community_id>", methods=["PUT", "DELETE"])
 def update_community(community_id):
     if community_id == 1:
         return {"errors": ["The first community cannot be deleted."]}

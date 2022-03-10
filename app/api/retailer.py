@@ -8,35 +8,35 @@ from app.forms import CreateRetailer, CreateRetailerRating
 from app.helpers import validation_errors_to_error_messages
 from app.models import Retailer, RetailerRating, db
 
-retailer_routes = Blueprint("retailers", __name__)
+retailer = Blueprint("retailers", __name__)
 
 
-@retailer_routes.route("")
+@retailer.route("")
 def get_paginated_retailers():
     page = int(request.args.get("page", 0))
     retailers = Retailer.query.paginate(page=page, per_page=20)
     return {retailer.id: retailer.to_dict() for retailer in retailers.items}
 
 
-@retailer_routes.route("/")
+@retailer.route("/")
 def get_retailers():
     retailers = Retailer.query.limit(20).all()
     return {retailer.id: retailer.to_dict() for retailer in retailers}
 
 
-@retailer_routes.route("/max")
+@retailer.route("/max")
 def get_max_number_of_retailers():
     number = Retailer.query.count()
     return {"max": number}
 
 
-@retailer_routes.route("/<int:retailer_id>")
+@retailer.route("/<int:retailer_id>")
 def get_one_retailer(retailer_id):
     retailer = Retailer.query.get(retailer_id)
     return retailer.to_dict()
 
 
-@retailer_routes.route("/<int:retailer_id>/location")
+@retailer.route("/<int:retailer_id>/location")
 def generate_location(retailer_id):
     retailer = Retailer.query.get(retailer_id)
     response = requests.get(
@@ -51,7 +51,7 @@ def generate_location(retailer_id):
     return retailer.to_dict()
 
 
-@retailer_routes.route("", methods=["POST"])
+@retailer.route("", methods=["POST"])
 def create_retailer():
     form = CreateRetailer()
     form["csrf_token"].data = request.cookies["csrf_token"]
@@ -64,7 +64,7 @@ def create_retailer():
     return {"errors": validation_errors_to_error_messages(form.errors)}
 
 
-@retailer_routes.route("/<int:retailer_id>", methods=["PUT", "DELETE"])
+@retailer.route("/<int:retailer_id>", methods=["PUT", "DELETE"])
 def update_or_delete_retailer(retailer_id):
     retailer = Retailer.query.get(retailer_id)
     if request.method == "PUT":
@@ -87,7 +87,7 @@ def update_or_delete_retailer(retailer_id):
     return {"errors": "Invalid route."}, 405
 
 
-@retailer_routes.route("/<int:retailer_id>/ratings", methods=["POST"])
+@retailer.route("/<int:retailer_id>/ratings", methods=["POST"])
 def post_rating(retailer_id):
     retailer = Retailer.query.get(retailer_id)
     form = CreateRetailerRating()
@@ -109,9 +109,7 @@ def post_rating(retailer_id):
     return {"errors": form.errors}
 
 
-@retailer_routes.route(
-    "/<int:retailer_id>/ratings/<int:rating_id>", methods=["PUT", "DELETE"]
-)
+@retailer.route("/<int:retailer_id>/ratings/<int:rating_id>", methods=["PUT", "DELETE"])
 def update_rating(retailer_id, rating_id):
     retailer = Retailer.query.get(retailer_id)
     rating = RetailerRating.query.get(rating_id)
