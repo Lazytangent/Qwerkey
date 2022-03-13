@@ -1,19 +1,26 @@
 import Cookies from 'js-cookie';
 
-export default function api(url, method = 'GET', body, isFormData = false) {
+const defaultOptions = { headers: {} };
+
+export default function api(url, options = defaultOptions, isFormData = false) {
   if (!isFormData) {
     return fetch(url, {
-      method,
+      method: 'GET',
+      ...options,
       headers: {
         'Content-Type': 'application/json',
         'X-CSRFToken': Cookies.get('csrf_token'),
+        ...options.headers,
       },
-      body: JSON.stringify(body),
     });
   } else {
     return fetch(url, {
-      method,
-      body,
+      method: 'GET',
+      ...options,
+      headers: {
+        'X-CSRFToken': Cookies.get('csrf_token'),
+        ...options.headers,
+      },
     });
   }
 }
