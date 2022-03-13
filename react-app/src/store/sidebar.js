@@ -1,15 +1,16 @@
 import { SET_SIDEBAR_COMMUNITY, SET_SIDEBAR_COMMUNITIES } from './constants';
 import { setSidebarCommunity, setSidebarCommunities } from './actions';
+import api from './api';
 
 export const getSidebarPopularCommunities = () => async (dispatch) => {
-  const res = await fetch(`/api/communities/popular`);
+  const res = await api(`/api/communities/popular`);
   const communities = await res.json();
   dispatch(setSidebarCommunities(communities));
   return communities;
 };
 
 export const getSidebarCommunity = (name) => async (dispatch) => {
-  const res = await fetch(`/api/communities/${name}`);
+  const res = await api(`/api/communities/${name}`);
   const community = await res.json();
   if (!community.errors) {
     dispatch(setSidebarCommunity(community));
