@@ -47,7 +47,6 @@ def get_community_by_name(community_name):
 @community.route("/", methods=["POST"])
 def create_community():
     form = CreateCommunity()
-    form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         community = Community()
         form.populate_obj(community)
@@ -64,7 +63,6 @@ def update_community(community_id):
     community = Community.query.get(community_id)
     if request.method == "PUT":
         form = CreateCommunity()
-        form["csrf_token"].data = request.cookies["csrf_token"]
         if form.validate_on_submit():
             community.name = form["name"].data
             community.description = form["description"].data
