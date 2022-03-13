@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_wtf.csrf import CSRFProtect
 
 from app.config import Config
 from app.models import User, db
@@ -27,6 +28,7 @@ def create_app(testing=False):
     db.init_app(app)
     Migrate(app, db)
     CORS(app)
+    CSRFProtect(app)
 
     app.register_blueprint(routes)
 
