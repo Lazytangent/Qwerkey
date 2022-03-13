@@ -2,7 +2,8 @@ import os
 
 from flask import Blueprint, redirect, request
 from flask_wtf.csrf import generate_csrf
-from routes.api import api
+
+from app.routes.api import api
 
 routes = Blueprint("routes", __name__)
 

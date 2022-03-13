@@ -1,15 +1,15 @@
 from flask import Blueprint
 
-from app.api.auth import auth
-from app.api.comment import comment
-from app.api.community import community
-from app.api.lat_long import lat_long
-from app.api.meetup import meetup
-from app.api.post import post
-from app.api.posts_image import posts_image
-from app.api.retailer import retailer
-from app.api.search import search
-from app.api.user import user
+from app.routes.api.auth import auth
+from app.routes.api.comment import comment
+from app.routes.api.community import community
+from app.routes.api.lat_long import lat_long
+from app.routes.api.meetup import meetup
+from app.routes.api.post import post
+from app.routes.api.posts_image import posts_image
+from app.routes.api.retailer import retailer
+from app.routes.api.search import search
+from app.routes.api.user import user
 
 api = Blueprint("api", __name__)
 
