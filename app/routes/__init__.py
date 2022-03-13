@@ -5,7 +5,7 @@ from flask_wtf.csrf import generate_csrf
 
 from app.routes.api import api
 
-routes = Blueprint("routes", __name__)
+routes = Blueprint("routes", __name__, static_folder="/static")
 
 routes.register_blueprint(api, url_prefix="/api")
 is_production = os.environ.get("FLASK_ENV", "development") == "production"
@@ -27,7 +27,6 @@ def inject_csrf_token(response):
         generate_csrf(),
         secure=True if is_production else False,
         samesite="Strict" if is_production else None,
-        httponly=True,
     )
     return response
 
