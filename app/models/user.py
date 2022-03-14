@@ -1,4 +1,5 @@
 import datetime
+from typing import Type, TypeVar
 
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -6,6 +7,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from app.models.db import db
 from app.models.saved_comment import saved_comments
 from app.models.saved_post import saved_posts
+
+T = TypeVar("T", bound="User")
 
 
 class User(db.Model, UserMixin):
@@ -33,14 +36,14 @@ class User(db.Model, UserMixin):
     )
 
     @property
-    def password(self):
+    def password(self) -> str:
         return self.hashed_password
 
     @password.setter
-    def password(self, password):
+    def password(self, password: str) -> None:
         self.hashed_password = generate_password_hash(password)
 
-    def check_password(self, password):
+    def check_password(self, password: str) -> bool:
         return check_password_hash(self.password, password)
 
     def to_simple_dict(self):
@@ -71,7 +74,7 @@ class User(db.Model, UserMixin):
         return f"<User ID:{self.id} Username:{self.username}>"
 
     @classmethod
-    def create(cls, username, email, password):
+    def create(cls: Type[T], username, email, password) -> T:
         user = cls(username=username, email=email, password=password)
         db.session.add(user)
         db.session.commit()
