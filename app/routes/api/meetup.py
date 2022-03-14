@@ -25,7 +25,6 @@ def get_max_number_of_meetups():
 @meetup.route("", methods=["POST"])
 def create_meetup():
     form = CreateMeetup()
-    form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         meetup = Meetup()
         print(request.form.get("date"))
@@ -47,7 +46,6 @@ def update_meetup(meetup_id):
     meetup = Meetup.query.get(meetup_id)
     if request.method == "PUT":
         form = CreateMeetup()
-        form["csrf_token"].data = request.cookies["csrf_token"]
         if form.validate_on_submit():
             meetup.name = form["name"].data
             meetup.description = form["description"].data

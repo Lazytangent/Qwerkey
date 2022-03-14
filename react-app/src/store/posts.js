@@ -14,16 +14,17 @@ import {
   setPost,
   setOrderOfPosts,
 } from './actions';
+import api from './api';
 
 export const getOrder = (type) => async (dispatch) => {
-  const res = await fetch(`/api/posts/filter?type=${type}`);
+  const res = await api(`/api/posts/filter?type=${type}`);
   const array = await res.json();
   dispatch(setOrderOfPosts(array));
   return array;
 };
 
 export const getMaxNumberOfPosts = () => async (dispatch) => {
-  const res = await fetch('/api/posts/max');
+  const res = await api('/api/posts/max');
   const number = await res.json();
   dispatch(setMaxNumberOfPosts(number.max));
   return number;
@@ -32,7 +33,7 @@ export const getMaxNumberOfPosts = () => async (dispatch) => {
 export const getMaxNumberOfPostsByCommunity = (communityName) => async (
   dispatch
 ) => {
-  const res = await fetch(`/api/posts/max/${communityName}`);
+  const res = await api(`/api/posts/max/${communityName}`);
   const number = await res.json();
   dispatch(setMaxNumberOfPosts(number.max));
   return number;
@@ -40,7 +41,7 @@ export const getMaxNumberOfPostsByCommunity = (communityName) => async (
 
 export const getPosts = (page, communityName) => async (dispatch) => {
   try {
-    const res = await fetch(
+    const res = await api(
       `/api/posts?page=${page}${
         communityName ? `&community_name=${communityName}` : ''
       }`
@@ -59,7 +60,7 @@ export const getPosts = (page, communityName) => async (dispatch) => {
 };
 
 export const getPostById = (id) => async (dispatch) => {
-  const res = await fetch(`/api/posts/${id}`);
+  const res = await api(`/api/posts/${id}`);
   const post = await res.json();
   if (!post.errors) {
     dispatch(setPost(post));
@@ -83,7 +84,7 @@ export const createPost = (post) => async (dispatch) => {
   }
 
   try {
-    const res = await fetch('/api/posts/', {
+    const res = await api('/api/posts/', {
       method: 'POST',
       body: formData,
     });
@@ -114,7 +115,7 @@ export const updatePost = (post) => async (dispatch) => {
   }
 
   try {
-    const res = await fetch(`/api/posts/${postId}`, {
+    const res = await api(`/api/posts/${postId}`, {
       method: 'PUT',
       body: formData,
     });
@@ -131,7 +132,7 @@ export const updatePost = (post) => async (dispatch) => {
 
 export const deletePost = (postId) => async (dispatch) => {
   try {
-    const res = await fetch(`/api/posts/${postId}`, {
+    const res = await api(`/api/posts/${postId}`, {
       method: 'DELETE',
     });
     if (!res.ok) throw res;
@@ -146,7 +147,7 @@ export const deletePost = (postId) => async (dispatch) => {
 };
 
 export const ratePost = ({ rating, userId, postId }) => async (dispatch) => {
-  const res = await fetch(`/api/posts/${postId}/rating`, {
+  const res = await api(`/api/posts/${postId}/rating`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

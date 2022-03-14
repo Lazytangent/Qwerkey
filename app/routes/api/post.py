@@ -77,7 +77,6 @@ def filter_posts():
 @post.route("/", methods=["POST"])
 def create_post():
     form = CreatePost()
-    form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         post = Post()
         form.populate_obj(post)
@@ -104,7 +103,6 @@ def post_by_id(post_id):
         return post.to_dict()
     elif request.method == "PUT":
         form = CreatePost()
-        form["csrf_token"].data = request.cookies["csrf_token"]
         if form.validate_on_submit():
             form.populate_obj(post)
             db.session.commit()
@@ -146,7 +144,6 @@ def get_comments_on_post(post_id):
 def create_comment(post_id):
     post = Post.query.get(post_id)
     form = CreateComment()
-    form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         comment = Comment()
         if not form["comment_id"].data:
@@ -167,7 +164,6 @@ def create_comment(post_id):
 def rate_post(post_id):
     post = Post.query.get(post_id)
     form = CreatePostRating()
-    form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         user_id = form["user_id"].data
         post_rating = PostRating.query.filter(

@@ -5,23 +5,24 @@ import {
   SET_SIDEBAR_COMMUNITIES,
 } from './constants';
 import { setCommunities, setCommunity } from './actions';
+import api from './api';
 
 export const getCommunities = () => async (dispatch) => {
-  const res = await fetch(`/api/communities`);
+  const res = await api(`/api/communities`);
   const communities = await res.json();
   dispatch(setCommunities(communities));
   return communities;
 };
 
 export const getCommunity = (communityId) => async (dispatch) => {
-  const res = await fetch(`/api/communities/${communityId}`);
+  const res = await api(`/api/communities/${communityId}`);
   const community = await res.json();
   dispatch(setCommunity(community));
   return community;
 };
 
 export const createCommunity = (community) => async (dispatch) => {
-  const res = await fetch('/api/communities/', {
+  const res = await api('/api/communities/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -36,7 +37,7 @@ export const createCommunity = (community) => async (dispatch) => {
 };
 
 export const updateCommunity = (community) => async (dispatch) => {
-  const res = await fetch(`/api/communities/${community.id}`, {
+  const res = await api(`/api/communities/${community.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -51,7 +52,7 @@ export const updateCommunity = (community) => async (dispatch) => {
 };
 
 export const deleteCommunity = (communityId) => async (dispatch) => {
-  const res = await fetch(`/api/communities/${communityId}`, {
+  const res = await api(`/api/communities/${communityId}`, {
     method: 'DELETE',
   });
   const communities = await res.json();

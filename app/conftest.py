@@ -1,5 +1,3 @@
-import os
-
 import pytest
 
 from app import create_app
@@ -7,13 +5,13 @@ from app.models import User, db
 
 
 @pytest.fixture(scope="session")
-def client():
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    db_uri = "sqlite:///" + os.path.join(basedir, "test.db")
-    app = create_app()
+def app():
+    app = create_app(testing=True)
+    yield app
 
-    app.config["TESTING"] = True
-    app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+
+@pytest.fixture(scope="session")
+def client(app):
     with app.test_client() as client:
         with app.app_context():
             db.drop_all()

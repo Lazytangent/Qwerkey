@@ -12,7 +12,6 @@ def update_comment(comment_id):
     comment = Comment.query.get(comment_id)
     if request.method == "PUT":
         form = CreateComment()
-        form["csrf_token"].data = request.cookies["csrf_token"]
         if form.validate_on_submit():
             form["thread_id"].data = comment.thread_id
             form["path"].data = comment.path
@@ -32,7 +31,6 @@ def update_comment(comment_id):
 def rate_comment(comment_id):
     comment = Comment.query.get(comment_id)
     form = CreateCommentRating()
-    form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         user_id = form["user_id"].data
         comment_rating = CommentRating.query.filter(

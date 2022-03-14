@@ -17,7 +17,10 @@ export const authenticate = () => async (dispatch) => {
 
 export const demoUserLogin = () => async (dispatch) => {
   const payload = { credential: 'Demo', password: 'password' };
-  const response = await api('/api/auth/login', 'POST', payload);
+  const response = await api('/api/auth/login', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
   const user = await response.json();
   if (!user.errors) {
     dispatch(setSession(user));
@@ -26,11 +29,8 @@ export const demoUserLogin = () => async (dispatch) => {
 };
 
 export const login = (credential, password) => async (dispatch) => {
-  const response = await fetch('/api/auth/login', {
+  const response = await api('/api/auth/login', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
     body: JSON.stringify({
       credential,
       password,
@@ -44,11 +44,7 @@ export const login = (credential, password) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  const response = await fetch('/api/auth/logout', {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  const response = await api('/api/auth/logout');
   if (response.ok) {
     dispatch(removeSession());
   }
@@ -58,11 +54,8 @@ export const logout = () => async (dispatch) => {
 export const signUp = (username, email, password, confirm) => async (
   dispatch
 ) => {
-  const response = await fetch('/api/auth/signup', {
+  const response = await api('/api/auth/signup', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
     body: JSON.stringify({
       username,
       email,
@@ -78,7 +71,7 @@ export const signUp = (username, email, password, confirm) => async (
 };
 
 export const savePost = (userId, postId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}/save/post/${postId}`);
+  const res = await api(`/api/users/${userId}/save/post/${postId}`);
   const user = await res.json();
   if (!user.errors) {
     dispatch(setSession(user));
@@ -87,7 +80,7 @@ export const savePost = (userId, postId) => async (dispatch) => {
 };
 
 export const saveComment = (userId, commentId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}/save/comment/${commentId}`);
+  const res = await api(`/api/users/${userId}/save/comment/${commentId}`);
   const user = await res.json();
   if (!user.errors) {
     dispatch(setSession(user));

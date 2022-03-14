@@ -54,7 +54,6 @@ def generate_location(retailer_id):
 @retailer.route("", methods=["POST"])
 def create_retailer():
     form = CreateRetailer()
-    form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         retailer = Retailer()
         form.populate_obj(retailer)
@@ -69,7 +68,6 @@ def update_or_delete_retailer(retailer_id):
     retailer = Retailer.query.get(retailer_id)
     if request.method == "PUT":
         form = CreateRetailer()
-        form["csrf_token"].data = request.cookies["csrf_token"]
         if form.validate_on_submit():
             retailer.name = form["name"].data
             retailer.description = form["description"].data
@@ -91,7 +89,6 @@ def update_or_delete_retailer(retailer_id):
 def post_rating(retailer_id):
     retailer = Retailer.query.get(retailer_id)
     form = CreateRetailerRating()
-    form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         rating = RetailerRating.query.filter_by(user_id=form["user_id"].data).first()
         if rating:
@@ -115,7 +112,6 @@ def update_rating(retailer_id, rating_id):
     rating = RetailerRating.query.get(rating_id)
     if request.method == "PUT":
         form = CreateRetailerRating()
-        form["csrf_token"].data = request.cookies["csrf_token"]
         if form.validate_on_submit():
             rating.rating = form["rating"].data
             rating.updated_at = datetime.utcnow()

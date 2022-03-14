@@ -13,9 +13,10 @@ import {
   setMeetups,
   setMeetup,
 } from './actions';
+import api from './api';
 
 export const getMeetups = (page) => async (dispatch) => {
-  const res = await fetch(`/api/meetups?page=${page}`);
+  const res = await api(`/api/meetups?page=${page}`);
   const meetups = await res.json();
   if (!meetups.errors) {
     if (page === 1) {
@@ -28,7 +29,7 @@ export const getMeetups = (page) => async (dispatch) => {
 };
 
 export const getMeetupById = (meetupId) => async (dispatch) => {
-  const res = await fetch(`/api/meetups/${meetupId}`);
+  const res = await api(`/api/meetups/${meetupId}`);
   const meetup = await res.json();
   if (!meetup.errors) {
     dispatch(setMeetup(meetup));
@@ -37,7 +38,7 @@ export const getMeetupById = (meetupId) => async (dispatch) => {
 };
 
 export const getMeetupLocation = (meetupId) => async (dispatch) => {
-  const res = await fetch(`/api/meetups/${meetupId}/location`);
+  const res = await api(`/api/meetups/${meetupId}/location`);
   const meetup = await res.json();
   if (!meetup.errors) {
     dispatch(setMeetup(meetup));
@@ -46,14 +47,14 @@ export const getMeetupLocation = (meetupId) => async (dispatch) => {
 };
 
 export const getMaxNumberOfMeetups = () => async (dispatch) => {
-  const res = await fetch(`/api/meetups/max`);
+  const res = await api(`/api/meetups/max`);
   const number = await res.json();
   dispatch(setMaxNumberOfMeetups(number.max));
   return number;
 };
 
 export const createMeetup = (meetupData) => async (dispatch) => {
-  const res = await fetch(`/api/meetups`, {
+  const res = await api(`/api/meetups`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -68,7 +69,7 @@ export const createMeetup = (meetupData) => async (dispatch) => {
 };
 
 export const updateMeetup = (meetupData) => async (dispatch) => {
-  const res = await fetch(`/api/meetups/${meetupData.id}`, {
+  const res = await api(`/api/meetups/${meetupData.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -83,7 +84,7 @@ export const updateMeetup = (meetupData) => async (dispatch) => {
 };
 
 export const deleteMeetup = (meetupId) => async (dispatch) => {
-  const res = await fetch(`/api/meetups/${meetupId}`, {
+  const res = await api(`/api/meetups/${meetupId}`, {
     method: 'DELETE',
   });
   const data = await res.json();

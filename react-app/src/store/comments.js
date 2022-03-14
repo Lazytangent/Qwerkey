@@ -1,8 +1,9 @@
 import { SET_COMMENTS, SET_COMMENT, SET_USER, SET_SEARCH } from './constants';
 import { setComments, setComment } from './actions';
+import api from './api';
 
 export const getCommentsByPost = (postId) => async (dispatch) => {
-  const res = await fetch(`/api/posts/${postId}/comments`);
+  const res = await api(`/api/posts/${postId}/comments`);
   const comments = await res.json();
   if (!comments.errors) {
     dispatch(setComments(comments));
@@ -11,7 +12,7 @@ export const getCommentsByPost = (postId) => async (dispatch) => {
 };
 
 export const createComment = (comment, postId) => async (dispatch) => {
-  const res = await fetch(`/api/posts/${postId}/comments`, {
+  const res = await api(`/api/posts/${postId}/comments`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -26,7 +27,7 @@ export const createComment = (comment, postId) => async (dispatch) => {
 };
 
 export const updateComment = (comment) => async (dispatch) => {
-  const res = await fetch(`/api/comments/${comment.id}`, {
+  const res = await api(`/api/comments/${comment.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -41,7 +42,7 @@ export const updateComment = (comment) => async (dispatch) => {
 };
 
 export const deleteComment = (commentId) => async (dispatch) => {
-  const res = await fetch(`/api/comments/${commentId}`, {
+  const res = await api(`/api/comments/${commentId}`, {
     method: 'DELETE',
   });
   const deletedComment = await res.json();
@@ -54,7 +55,7 @@ export const deleteComment = (commentId) => async (dispatch) => {
 export const rateComment = ({ rating, userId, commentId }) => async (
   dispatch
 ) => {
-  const res = await fetch(`/api/comments/${commentId}/rating`, {
+  const res = await api(`/api/comments/${commentId}/rating`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -10,9 +10,10 @@ import {
   setUsers,
   setMoreUsers,
 } from './actions';
+import api from './api';
 
 export const getUsers = (page) => async (dispatch) => {
-  const res = await fetch(`/api/users?page=${page}`);
+  const res = await api(`/api/users?page=${page}`);
   const users = await res.json();
   if (page === 1) {
     dispatch(setUsers(users));
@@ -23,7 +24,7 @@ export const getUsers = (page) => async (dispatch) => {
 };
 
 export const getUser = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}`);
+  const res = await api(`/api/users/${userId}`);
   const user = await res.json();
   if (!user.errors) {
     dispatch(setUser(user));
@@ -32,7 +33,7 @@ export const getUser = (userId) => async (dispatch) => {
 };
 
 export const getMaxNumberOfUsers = () => async (dispatch) => {
-  const res = await fetch('/api/users/max');
+  const res = await api('/api/users/max');
   const number = await res.json();
   dispatch(setMaxNumberOfUsers(number.max));
   return number;
