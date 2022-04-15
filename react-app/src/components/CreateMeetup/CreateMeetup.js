@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import csc from 'country-state-city';
 
 import { session } from '../../store/selectors';
@@ -11,7 +11,7 @@ import InputField from '../parts/InputField';
 import SubmitFormButton from '../parts/SubmitFormButton';
 
 const CreateMeetup = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(session.user());
 
@@ -80,7 +80,7 @@ const CreateMeetup = () => {
     if (meetup.errors) {
       setErrors(meetup.errors);
     } else {
-      history.push(`/meetups/${meetup.id}`);
+      navigate(`/meetups/${meetup.id}`);
     }
   };
 

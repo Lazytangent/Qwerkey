@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { createCommunity } from '../../store/communities';
 import FormTitle from '../parts/FormTitle';
@@ -9,7 +9,7 @@ import InputField from '../parts/InputField';
 import SubmitFormButton from '../parts/SubmitFormButton';
 
 const CreateCommunityForm = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
@@ -34,7 +34,7 @@ const CreateCommunityForm = () => {
     if (newCommunity.errors) {
       setErrors(newCommunity.errors);
     } else {
-      history.push(`/q/${newCommunity.name}`);
+      navigate(`/q/${newCommunity.name}`);
     }
   };
 

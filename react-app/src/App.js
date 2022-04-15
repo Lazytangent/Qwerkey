@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Switch, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 import { useAuthContext } from './context/AuthContext';
 import { useDarkModeContext } from './context/DarkModeContext';
@@ -65,44 +65,26 @@ const App = () => {
         </div>
         <div className="relative w-screen p-2 mx-auto row-span-1 dark:text-gray-50 max-w-screen-lg md:grid md:grid-cols-3">
           <div className="col-span-2">
-            <Switch>
-              <Route path="/" exact>
-                <PostsContainer />
-              </Route>
-              <Route path="/q/:communityName/:postId(\d+)">
-                <PostPage />
-              </Route>
-              <Route path="/q/:communityName">
-                <PostsContainer />
-              </Route>
-              <Route path="/q" exact>
-                <CommunitiesContainer />
-              </Route>
-              <Route path="/retailers" exact>
-                <RetailersContainer />
-              </Route>
-              <Route path="/retailers/:retailerId(\d+)">
-                <RetailerPage />
-              </Route>
-              <Route path="/search">
-                <SearchResults />
-              </Route>
-              <Route path="/users/:userId(\d+)">
-                <ProfilePage />
-              </Route>
-              <Route path="/users/not-found">
-                <UserNotFound />
-              </Route>
-              <Route path="/meetups" exact>
-                <MeetupsContainer />
-              </Route>
-              <Route path="/meetups/:meetupId(\d+)">
-                <MeetupPage />
-              </Route>
-              <Route>
-                <PageNotFound />
-              </Route>
-            </Switch>
+            <Routes>
+              <Route path="/" element={<PostsContainer />} />
+              <Route
+                path="/q/:communityName/:postId(\d+)"
+                element={<PostPage />}
+              />
+              <Route path="/q/:communityName" element={<PostsContainer />} />
+              <Route path="/q" element={<CommunitiesContainer />} />
+              <Route path="/retailers" element={<RetailersContainer />} />
+              <Route
+                path="/retailers/:retailerId(\d+)"
+                element={<RetailerPage />}
+              />
+              <Route path="/search" element={<SearchResults />} />
+              <Route path="/users/:userId(\d+)" element={<ProfilePage />} />
+              <Route path="/users/not-found" element={<UserNotFound />} />
+              <Route path="/meetups" element={<MeetupsContainer />} />
+              <Route path="/meetups/:meetupId(\d+)" element={<MeetupPage />} />
+              <Route element={<PageNotFound />} />
+            </Routes>
           </div>
           <div className="hidden p-2 col-span-1 md:block">
             <Sidebar />

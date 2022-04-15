@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { getQuery } from '../../store/search';
 import { useSearchContext } from '../../context/SearchContext';
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { searchInput, setSearchInput, setSearched } = useSearchContext();
 
   const updateSearchInput = (e) => {
@@ -17,7 +17,7 @@ const SearchBar = () => {
     e.preventDefault();
     dispatch(getQuery(searchInput));
     setSearched(true);
-    history.push(`/search?query=${searchInput}`);
+    navigate(`/search?query=${searchInput}`);
   };
 
   return (
