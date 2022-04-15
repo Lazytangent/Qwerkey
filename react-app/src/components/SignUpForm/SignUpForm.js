@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { signUp, demoUserLogin } from '../../store/session';
 import { useAuthContext } from '../../context/AuthContext';
@@ -67,7 +67,7 @@ const SignUpForm = () => {
   };
 
   if (authenticated) {
-    return <Redirect to="/" />;
+    return <Navigate to="/" />;
   }
 
   return (

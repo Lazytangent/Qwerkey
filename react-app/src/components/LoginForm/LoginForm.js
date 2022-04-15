@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { login, demoUserLogin } from '../../store/session';
@@ -52,7 +52,7 @@ const LoginForm = () => {
   };
 
   if (authenticated) {
-    return <Redirect to="/" />;
+    return <Navigate to="/" />;
   }
 
   return (
