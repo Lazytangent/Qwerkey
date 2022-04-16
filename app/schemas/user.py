@@ -1,38 +1,27 @@
 from datetime import datetime
 
-from pydantic import BaseModel
-
-# from app.schemas.config import Config
-# from app.schemas.comment import MinimalCommentResponse
-# from app.schemas.meetup import MinimalMeetupResponse
-# from app.schemas.post import MinimalPostResponse
+from app.schemas.comment import MinimalCommentResponse
+from app.schemas.config import BaseORMModeModel
+from app.schemas.meetup import MinimalMeetupResponse
+from app.schemas.post import MinimalPostResponse
 from app.schemas.retailer import MinimalRetailerResponse
 
 
-class MinimalOrmObjectResponse(BaseModel):
+class MinimalOrmObjectResponse(BaseORMModeModel):
     id: int
 
-    class Config:
-        orm_mode = True
 
-
-class MinimalUserResponse(BaseModel):
+class MinimalUserResponse(BaseORMModeModel):
     id: int
     username: str
     email: str
     created_at: datetime
 
-    class Config:
-        orm_mode = True
-
 
 class FullUserResponse(MinimalUserResponse):
-    meetups: list[MinimalOrmObjectResponse]
-    saved_posts: list[MinimalOrmObjectResponse]
-    saved_comments: list[MinimalOrmObjectResponse]
-    comments: list[MinimalOrmObjectResponse]
-    posts: list[MinimalOrmObjectResponse]
+    meetups: list[MinimalMeetupResponse]
+    saved_posts: list[MinimalPostResponse]
+    saved_comments: list[MinimalCommentResponse]
+    comments: list[MinimalCommentResponse]
+    posts: list[MinimalPostResponse]
     retailers: list[MinimalRetailerResponse]
-
-    class Config:
-        orm_mode = True

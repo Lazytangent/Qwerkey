@@ -1,5 +1,6 @@
-from pydantic import BaseModel
+from app.schemas.config import BaseORMModeModel
 
 
-class MinimalcommunityResponse(BaseModel):
-    pass
+class MinimalCommunityResponse(BaseORMModeModel):
+    id: int
+    name: str

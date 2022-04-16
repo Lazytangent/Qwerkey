@@ -1,13 +1,10 @@
 from datetime import datetime
 
-from pydantic import BaseModel
-
-# from app.schemas.user import MinimalUserResponse
+from app.schemas.config import BaseORMModeModel
 
 
-class MinimalRetailerRatingResponse(BaseModel):
+class MinimalRetailerRatingResponse(BaseORMModeModel):
     id: int
-    # user: MinimalUserResponse
     rating: int
 
 
@@ -23,21 +20,15 @@ class MinimalRetailerImageResponse:
     created_at: datetime
 
 
-class MinimalRetailerResponse(BaseModel):
+class MinimalRetailerResponse(BaseORMModeModel):
     id: int
-    # owner: MinimalUserResponse
     name: str
     description: str
     city: str
     state: str
     created_at: datetime
-    # ratings: list[MinimalRetailerRatingResponse]
-
-    class Config:
-        orm_mode = True
 
 
 class FullRetailerResponse(MinimalRetailerResponse):
     lat: float
     lng: float
-    # images: list[MinimalRetailerImageResponse]

@@ -1,32 +1,22 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel
-from pydantic.dataclasses import dataclass
-
-from app.schemas.config import Config
-
-# from app.schemas.user import MinimalUserResponse
-# from app.schemas.post import MinimalPostResponse
+from app.schemas.config import BaseORMModeModel
 
 
-class CommentRatingResponse(BaseModel):
+class CommentRatingResponse(BaseORMModeModel):
     id: int
-    # user: MinimalUserResponse
     comment_id: int
     rating: int
 
 
-@dataclass(config=Config)
-class MinimalCommentResponse(BaseModel):
+class MinimalCommentResponse(BaseORMModeModel):
     id: int
     body: str
-    # user: MinimalUserResponse
     comment_id: Optional[int]
 
 
 class SearchCommentResponse(MinimalCommentResponse):
-    # post: MinimalPostResponse
     ratings: list[CommentRatingResponse]
     created_at: datetime
 
