@@ -2,12 +2,12 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
-from app.schemas.user import MinimalUserResponse
+# from app.schemas.user import MinimalUserResponse
 
 
 class MinimalRetailerRatingResponse(BaseModel):
     id: int
-    user: MinimalUserResponse
+    # user: MinimalUserResponse
     rating: int
 
 
@@ -25,16 +25,19 @@ class MinimalRetailerImageResponse:
 
 class MinimalRetailerResponse(BaseModel):
     id: int
-    owner: MinimalUserResponse
+    # owner: MinimalUserResponse
     name: str
     description: str
     city: str
     state: str
     created_at: datetime
-    ratings: list[MinimalRetailerRatingResponse]
+    # ratings: list[MinimalRetailerRatingResponse]
+
+    class Config:
+        orm_mode = True
 
 
 class FullRetailerResponse(MinimalRetailerResponse):
     lat: float
     lng: float
-    images: list[MinimalRetailerImageResponse]
+    # images: list[MinimalRetailerImageResponse]

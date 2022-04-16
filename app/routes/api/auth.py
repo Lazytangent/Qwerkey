@@ -5,6 +5,8 @@ from sqlalchemy import or_
 from app.forms import LoginForm, SignUpForm
 from app.helpers import validation_errors_to_error_messages
 from app.models import User, db
+from app.schemas.responses import UnauthenticatedErrorsResponse
+from app.schemas.user import FullUserResponse
 
 auth = Blueprint("auth", __name__)
 
@@ -15,8 +17,9 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
-        return current_user.to_dict()
-    return {"errors": ["Unauthorized"]}
+        return FullUserResponse.from_orm(current_user).dict()
+    response = UnauthenticatedErrorsResponse(errors=["Unauthorized"]).dict()
+    return response, response["status"]
 
 
 @auth.route("/login", methods=["POST"])
@@ -25,8 +28,6 @@ def login():
     Logs a user in
     """
     form = LoginForm()
-    # Get the csrf_token from the request cookie and put it into the
-    # form manually to validate_on_submit can be used
     if form.validate_on_submit():
         credential = form.data["credential"]
         user = User.query.filter(
