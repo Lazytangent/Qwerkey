@@ -1,6 +1,7 @@
 import datetime
 
 from app.models.db import db
+from app.schemas.user import MinimalUserResponse
 
 
 class Message(db.Model):
@@ -27,7 +28,7 @@ class Message(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "sender": self.sender.to_simple_dict(),
-            "recipient": self.recipient.to_simple_dict(),
+            "sender": MinimalUserResponse.from_orm(self.sender).dict(),
+            "recipient": MinimalUserResponse.from_orm(self.recipient).dict(),
             "created_at": self.created_at,
         }

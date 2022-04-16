@@ -1,6 +1,7 @@
 import datetime
 
 from app.models.db import db
+from app.schemas.user import MinimalUserResponse
 
 
 class Meetup(db.Model):
@@ -27,7 +28,7 @@ class Meetup(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "user": self.user.to_simple_dict(),
+            "user": MinimalUserResponse.from_orm(self.user).dict(),
             "name": self.name,
             "description": self.description,
             "city": self.city,

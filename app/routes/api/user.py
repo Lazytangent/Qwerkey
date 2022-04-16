@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import current_user
 
 from app.models import Comment, Meetup, Post, Retailer, User, db
+from app.schemas.user import FullUserResponse
 
 user = Blueprint("users", __name__)
 
@@ -10,14 +11,14 @@ user = Blueprint("users", __name__)
 def users():
     page = int(request.args.get("page", 1))
     users = User.query.paginate(page=page, per_page=20)
-    return {user.id: user.to_dict() for user in users.items}
+    return {user.id: FullUserResponse.from_orm(user).dict() for user in users.items}
 
 
 @user.route("/<int:id>")
 def user_by_id(id):
     user = User.query.get(id)
     if user:
-        return user.to_dict()
+        return FullUserResponse.from_orm(user).dict()
     return {"errors": ["Invalid User."]}
 
 
@@ -69,4 +70,4 @@ def save_something(user_id, type_, id):
         else:
             user.saved_comments.append(comment)
     db.session.commit()
-    return user.to_dict()
+    return FullUserResponse.from_orm(user).dict()
