@@ -27,17 +27,6 @@ class TestUserModel:
     ):
         assert test_user.check_password(input_password) == expected_bool
 
-    def test__user_to_simple_dict_method__returns_dict(self, test_user):
-        assert test_user.to_simple_dict() == {
-            "id": test_user.id,
-            "username": test_user.username,
-            "email": test_user.email,
-            "created_at": test_user.created_at,
-        }
-
-        assert "password" not in test_user.to_simple_dict()
-        assert "hashed_password" not in test_user.to_simple_dict()
-
 
 @pytest.fixture
 def test_user():
