@@ -5,7 +5,7 @@ from sqlalchemy import or_
 from app.forms import LoginForm, SignUpForm
 from app.helpers import validation_errors_to_error_messages
 from app.models import User, db
-from app.schemas.responses import UnauthenticatedErrorsResponse
+from app.schemas.responses import LogoutResponse, UnauthenticatedErrorsResponse
 from app.schemas.user import FullUserResponse
 
 auth = Blueprint("auth", __name__)
@@ -34,8 +34,11 @@ def login():
             or_(User.email == credential, User.username == credential)
         ).first()
         login_user(user)
-        return user.to_dict()
-    return {"errors": validation_errors_to_error_messages(form.errors)}
+        return FullUserResponse.from_orm(user).dict()
+    response = UnauthenticatedErrorsResponse(
+        errors=validation_errors_to_error_messages(form.errors)
+    ).dict()
+    return response, response["status"]
 
 
 @auth.route("/logout")
@@ -44,7 +47,7 @@ def logout():
     Logs a user out
     """
     logout_user()
-    return {"message": "User logged out"}
+    return LogoutResponse().dict()
 
 
 @auth.route("/signup", methods=["POST"])
@@ -62,8 +65,11 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        return user.to_dict()
-    return {"errors": validation_errors_to_error_messages(form.errors)}
+        return FullUserResponse.from_orm(user).dict()
+    response = UnauthenticatedErrorsResponse(
+        errors=validation_errors_to_error_messages(form.errors)
+    ).dict()
+    return response, response["status"]
 
 
 @auth.route("/unauthorized")
@@ -71,4 +77,5 @@ def unauthorized():
     """
     Returns unauthorized JSON when flask-login authentication fails
     """
-    return {"errors": ["Unauthorized"]}
+    response = UnauthenticatedErrorsResponse().dict()
+    return response, response["status"]
