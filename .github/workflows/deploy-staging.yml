@@ -18,6 +18,6 @@ jobs:
       - name: Log into the Heroku Container Registry
         run: heroku container:login
       - name: Build and push image
-        run: heroku container:push -a qwerkey-stage web
+        run: heroku container:push -a qwerkey-staging web
       - name: Release image
-        run: heroku container:release -a qwerkey-stage web
+        run: heroku container:release -a qwerkey-staging web
