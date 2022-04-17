@@ -1,12 +1,12 @@
 FROM node:12 AS build-stage
 
 WORKDIR /react-app
-COPY package.json package-lock.json ./
+COPY react-app/package.json react-app/package-lock.json ./
 
 RUN npm install
-RUN npm run build
 
-COPY . .
+COPY react-app/ ./
+RUN npm run build
 
 FROM python:3.10
 
