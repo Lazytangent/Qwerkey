@@ -11,6 +11,7 @@ class BaseErrorsResponse(BaseResponse):
 
 
 class UnauthenticatedErrorsResponse(BaseResponse):
+    errors: list[str] = ["Unauthenticated"]
     status: int = 401
     message: str = "Not Authenticated"
 
