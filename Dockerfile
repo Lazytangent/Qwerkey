@@ -1,14 +1,12 @@
 FROM node:12 AS build-stage
 
 WORKDIR /react-app
-COPY react-app/. .
+COPY package.json package-lock.json ./
 
-# You have to set this because it should be set during build time.
-ENV REACT_APP_BASE_URL=https://qwerkey.herokuapp.com/
-
-# Build our React App
 RUN npm install
 RUN npm run build
+
+COPY . .
 
 FROM python:3.10
 
@@ -20,12 +18,14 @@ ENV SQLALCHEMY_ECHO=True
 EXPOSE 8000
 
 WORKDIR /var/www
-COPY . .
-COPY --from=build-stage /react-app/build/* app/static/
+COPY requirements.txt .
 
 # Install Python Dependencies
 RUN pip install -r requirements.txt
 RUN pip install psycopg2
+
+COPY . .
+COPY --from=build-stage /react-app/build/* app/static/
 
 # Run flask environment
 CMD gunicorn --bind 0.0.0.0:$PORT 'app:create_app()'
