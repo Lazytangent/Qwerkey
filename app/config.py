@@ -9,6 +9,9 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     SQLALCHEMY_ECHO = False
 
+    LOCALSTACK = os.environ.get("LOCALSTACK")
+    LOCALSTACK_URL = os.environ.get("LOCALSTACK_URL")
+
     S3_BUCKET = os.environ.get("S3_BUCKET_NAME")
     S3_KEY = os.environ.get("S3_ACCESS_KEY")
     S3_SECRET = os.environ.get("S3_SECRET_ACCESS_KEY")
