@@ -7,9 +7,12 @@ from app.config import Config
 
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "svg"}
 
-s3 = boto3.client(
-    "s3", aws_access_key_id=Config.S3_KEY, aws_secret_access_key=Config.S3_SECRET
-)
+if Config.LOCALSTACK:
+    s3 = boto3.client("s3", endpoint_url=Config.LOCALSTACK_URL)
+else:
+    s3 = boto3.client(
+        "s3", aws_access_key_id=Config.S3_KEY, aws_secret_access_key=Config.S3_SECRET
+    )
 
 
 def upload_file_to_s3(file, bucket_name, acl="public-read"):
