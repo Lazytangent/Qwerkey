@@ -30,3 +30,7 @@ repos:
           - staging
           - --branch
           - main
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.62.0
+    hooks:
+      - id: terraform_fmt
