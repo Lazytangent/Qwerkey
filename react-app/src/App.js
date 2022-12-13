@@ -68,21 +68,21 @@ const App = () => {
             <Routes>
               <Route path="/" element={<PostsContainer />} />
               <Route
-                path="/q/:communityName/:postId(\d+)"
+                path="/q/:communityName/:postId"
                 element={<PostPage />}
               />
               <Route path="/q/:communityName" element={<PostsContainer />} />
               <Route path="/q" element={<CommunitiesContainer />} />
               <Route path="/retailers" element={<RetailersContainer />} />
               <Route
-                path="/retailers/:retailerId(\d+)"
+                path="/retailers/:retailerId"
                 element={<RetailerPage />}
               />
               <Route path="/search" element={<SearchResults />} />
-              <Route path="/users/:userId(\d+)" element={<ProfilePage />} />
+              <Route path="/users/:userId" element={<ProfilePage />} />
               <Route path="/users/not-found" element={<UserNotFound />} />
               <Route path="/meetups" element={<MeetupsContainer />} />
-              <Route path="/meetups/:meetupId(\d+)" element={<MeetupPage />} />
+              <Route path="/meetups/:meetupId" element={<MeetupPage />} />
               <Route element={<PageNotFound />} />
             </Routes>
           </div>
