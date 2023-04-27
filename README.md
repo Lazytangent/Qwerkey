@@ -6,7 +6,7 @@
 
 ## Live Links
 
-- [Live link](https://qwerkey.herokuapp.com)
+- [Live link](https://qwerkey.onrender.com)
 - [Feature List](https://github.com/Lazytangent/Qwerkey/wiki/MVP-Features-List)
 
 ## Technologies
