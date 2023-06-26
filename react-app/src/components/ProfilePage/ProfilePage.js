@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 import { getUser } from '../../store/users';
@@ -19,7 +19,7 @@ import Retailer from '../Retailer';
 import Meetup from '../Meetup';
 
 const ProfilePage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { userId } = useParams();
 
   const dispatch = useDispatch();
@@ -35,10 +35,10 @@ const ProfilePage = () => {
     (async () => {
       const user = await dispatch(getUser(userId));
       if (user.errors) {
-        history.push('/users/not-found');
+        navigate('/users/not-found');
       }
     })();
-  }, [dispatch, userId, history]);
+  }, [dispatch, userId, navigate]);
 
   if (!user) {
     return null;

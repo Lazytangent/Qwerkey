@@ -1,5 +1,7 @@
 import datetime
-from .db import db
+
+from app.models.db import db
+from app.schemas.user import MinimalUserResponse
 
 
 class RetailerRating(db.Model):
@@ -22,7 +24,7 @@ class RetailerRating(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "user": self.user.to_simple_dict(),
+            "user": MinimalUserResponse.from_orm(self.user).dict(),
             "retailer_id": self.retailer_id,
             "rating": self.rating,
             "created_at": self.created_at,
@@ -31,6 +33,6 @@ class RetailerRating(db.Model):
     def to_simple_dict(self):
         return {
             "id": self.id,
-            "user": self.user.to_simple_dict(),
+            "user": MinimalUserResponse.from_orm(self.user).dict(),
             "rating": self.rating,
         }

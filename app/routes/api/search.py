@@ -1,12 +1,12 @@
 from flask import Blueprint, request
-from sqlalchemy import or_, func
+from sqlalchemy import func, or_
 
-from app.models import Post, Comment, Retailer, RetailerRating
+from app.models import Comment, Post, Retailer, RetailerRating
 
-search_routes = Blueprint("search", __name__)
+search = Blueprint("search", __name__)
 
 
-@search_routes.route("")
+@search.route("")
 def search_function():
     query = request.args.get("query")
     type_ = request.args.get("type", "all")

@@ -1,18 +1,18 @@
-from .db import db
-from .user import User
-from .comment import Comment
-from .comment_rating import CommentRating
-from .community import Community
-from .meetup import Meetup
-from .message import Message
-from .post import Post
-from .post_image import PostsImage
-from .post_rating import PostRating
-from .posts_tag import posts_tags
-from .retailer import Retailer
-from .retailer_image import RetailerImage
-from .retailer_rating import RetailerRating
-from .saved_comment import saved_comments
-from .saved_post import saved_posts
-from .tag import Tag
-from .thread import Thread
+from app.models.comment import Comment  # noqa
+from app.models.comment_rating import CommentRating  # noqa
+from app.models.community import Community  # noqa
+from app.models.db import db  # noqa
+from app.models.meetup import Meetup  # noqa
+from app.models.message import Message  # noqa
+from app.models.post import Post  # noqa
+from app.models.post_image import PostsImage  # noqa
+from app.models.post_rating import PostRating  # noqa
+from app.models.posts_tag import posts_tags  # noqa
+from app.models.retailer import Retailer  # noqa
+from app.models.retailer_image import RetailerImage  # noqa
+from app.models.retailer_rating import RetailerRating  # noqa
+from app.models.saved_comment import saved_comments  # noqa
+from app.models.saved_post import saved_posts  # noqa
+from app.models.tag import Tag  # noqa
+from app.models.thread import Thread  # noqa
+from app.models.user import User  # noqa

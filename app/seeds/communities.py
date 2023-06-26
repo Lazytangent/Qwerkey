@@ -1,5 +1,6 @@
 import json
-from app.models import db, Community
+
+from app.models import Community, db
 
 
 def seed_communities():

@@ -2,17 +2,16 @@ from flask import Blueprint, request
 
 from app.forms import CreateComment, CreateCommentRating
 from app.helpers import validation_errors_to_error_messages
-from app.models import db, Comment, Post, CommentRating
+from app.models import Comment, CommentRating, db
 
-comment_routes = Blueprint("comments", __name__)
+comment = Blueprint("comments", __name__)
 
 
-@comment_routes.route("/<int:comment_id>", methods=["PUT", "DELETE"])
+@comment.route("/<int:comment_id>", methods=["PUT", "DELETE"])
 def update_comment(comment_id):
     comment = Comment.query.get(comment_id)
     if request.method == "PUT":
         form = CreateComment()
-        form["csrf_token"].data = request.cookies["csrf_token"]
         if form.validate_on_submit():
             form["thread_id"].data = comment.thread_id
             form["path"].data = comment.path
@@ -28,11 +27,10 @@ def update_comment(comment_id):
     return "Bad route", 404
 
 
-@comment_routes.route("/<int:comment_id>/rating", methods=["POST"])
+@comment.route("/<int:comment_id>/rating", methods=["POST"])
 def rate_comment(comment_id):
     comment = Comment.query.get(comment_id)
     form = CreateCommentRating()
-    form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         user_id = form["user_id"].data
         comment_rating = CommentRating.query.filter(

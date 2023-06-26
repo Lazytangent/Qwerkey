@@ -1,6 +1,8 @@
 import datetime
-from .db import db
-from .posts_tag import posts_tags
+
+from app.models.db import db
+from app.models.posts_tag import posts_tags
+from app.schemas.user import MinimalUserResponse
 
 
 class Post(db.Model):
@@ -30,7 +32,7 @@ class Post(db.Model):
             "images": [image.image_url for image in self.images],
             "community": self.community.to_simple_dict(),
             "tags": [tag.name for tag in self.tags],
-            "user": self.user.to_simple_dict(),
+            "user": MinimalUserResponse.from_orm(self.user).dict(),
             "created_at": self.created_at,
         }
 
@@ -49,7 +51,7 @@ class Post(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "user": self.user.to_simple_dict(),
+            "user": MinimalUserResponse.from_orm(self.user).dict(),
             "community": self.community.to_simple_dict(),
             "title": self.title,
             "body": self.body,

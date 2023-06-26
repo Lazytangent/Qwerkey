@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
-from wtforms.validators import DataRequired, Email, ValidationError, EqualTo
+from wtforms import PasswordField, StringField
+from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
+
 from app.models import User
 
 
@@ -11,7 +12,6 @@ def users_username_exists(form, field):
 
 
 def users_email_exists(form, field):
-    print("Checking if user exits", field.data)
     email = field.data
     user = User.query.filter(User.email == email).first()
     if user:

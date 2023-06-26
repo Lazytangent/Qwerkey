@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import csc from 'country-state-city';
 
 import { getQuery } from '../../store/search';
@@ -8,7 +8,7 @@ import { useSearchContext } from '../../context/SearchContext';
 
 const AdvSearchBar = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { setSearched } = useSearchContext();
 
   const [searchInput, setSearchInput] = useState('');
@@ -72,7 +72,7 @@ const AdvSearchBar = () => {
         city !== 'City...' ? city : undefined
       )
     );
-    history.push(
+    navigate(
       `/search?query=${searchInput}${
         type !== 'Type...' ? `&type=${type}` : ''
       }${field !== 'Field...' ? `&field=${field}` : ''}${

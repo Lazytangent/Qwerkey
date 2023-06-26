@@ -1,5 +1,7 @@
 import datetime
-from .db import db
+
+from app.models.db import db
+from app.schemas.user import MinimalUserResponse
 
 
 class Comment(db.Model):
@@ -30,7 +32,7 @@ class Comment(db.Model):
         return {
             "id": self.id,
             "body": self.body,
-            "user": self.user.to_simple_dict(),
+            "user": MinimalUserResponse.from_orm(self.user).dict(),
             "comment_id": self.comment_id,
         }
 
@@ -38,7 +40,7 @@ class Comment(db.Model):
         return {
             "id": self.id,
             "body": self.body,
-            "user": self.user.to_simple_dict(),
+            "user": MinimalUserResponse.from_orm(self.user).dict(),
             "post": self.thread.post.to_search_dict(),
             "ratings": {rating.user_id: rating.to_dict() for rating in self.ratings},
             "created_at": self.created_at,
@@ -47,7 +49,7 @@ class Comment(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "user": self.user.to_simple_dict(),
+            "user": MinimalUserResponse.from_orm(self.user).dict(),
             "body": self.body,
             "thread_id": self.thread_id,
             "path": self.path,

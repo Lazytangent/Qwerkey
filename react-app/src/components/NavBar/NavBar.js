@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { Person, Menu } from '@material-ui/icons';
+import { Person, Menu } from '@mui/icons-material';
 
 import { useAuthContext } from '../../context/AuthContext';
 import { useCreatePostContext } from '../../context/CreatePostContext';

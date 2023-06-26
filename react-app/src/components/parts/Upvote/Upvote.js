@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { ArrowUpward } from '@material-ui/icons';
+import { ArrowUpward } from '@mui/icons-material';
 
 import { session } from '../../../store/selectors';
 import { ratePost } from '../../../store/posts';

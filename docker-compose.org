@@ -1,0 +1,28 @@
+#+title: Docker-Compose
+
+** Running the Images
+#+begin_src bash
+docker-compose -f docker-compose-dev.yml up
+#+end_src
+** Set up Postgres Container
+#+begin_src bash
+docker-compose -f docker-compose-dev.yml exec postgres sh
+
+psql -U postgres
+#+end_src
+
+#+begin_src sql
+create user qwerkey_app with password 'notsecret';
+
+create database qwerkey_app with owner qwerkey_app;
+#+end_src
+** Apply Migrations
+#+begin_src bash
+docker-compose -f docker-compose-dev.yml exec server sh
+flask db upgrade
+#+end_src
+** Seed the database
+#+begin_src bash
+docker-compose -f docker-compose-dev.yml exec server sh
+flask seed all
+#+end_src

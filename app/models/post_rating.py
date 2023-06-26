@@ -1,5 +1,7 @@
 import datetime
-from .db import db
+
+from app.models.db import db
+from app.schemas.user import MinimalUserResponse
 
 
 class PostRating(db.Model):
@@ -28,7 +30,7 @@ class PostRating(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "user": self.user.to_simple_dict(),
+            "user": MinimalUserResponse.from_orm(self.user).dict(),
             "post": self.post.to_simple_dict(),
             "rating": self.rating,
         }

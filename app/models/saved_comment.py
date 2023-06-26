@@ -1,4 +1,4 @@
-from .db import db
+from app.models.db import db
 
 saved_comments = db.Table(
     "saved_comments",

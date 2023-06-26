@@ -14,16 +14,17 @@ import {
   setRetailer,
   removeRetailer,
 } from './actions';
+import api from './api';
 
 export const getMaxNumberOfRetailers = () => async (dispatch) => {
-  const res = await fetch('/api/retailers/max');
+  const res = await api('/api/retailers/max');
   const number = await res.json();
   dispatch(setMaxNumberOfRetailers(number.max));
   return number;
 };
 
 export const getRetailers = (page) => async (dispatch) => {
-  const res = await fetch(`/api/retailers${page ? `?page=${page}` : ''}`);
+  const res = await api(`/api/retailers${page ? `?page=${page}` : ''}`);
   const retailers = await res.json();
   if (page === 1) {
     dispatch(setRetailers(retailers));
@@ -34,21 +35,21 @@ export const getRetailers = (page) => async (dispatch) => {
 };
 
 export const getOneRetailer = (retailerId) => async (dispatch) => {
-  const res = await fetch(`/api/retailers/${retailerId}`);
+  const res = await api(`/api/retailers/${retailerId}`);
   const retailer = await res.json();
   dispatch(setRetailer(retailer));
   return retailer;
 };
 
 export const getOneRetailerLocation = (retailerId) => async (dispatch) => {
-  const res = await fetch(`/api/retailers/${retailerId}/location`);
+  const res = await api(`/api/retailers/${retailerId}/location`);
   const retailer = await res.json();
   dispatch(setRetailer(retailer));
   return retailer;
 };
 
 export const createRetailer = (retailerData) => async (dispatch) => {
-  const res = await fetch(`/api/retailers`, {
+  const res = await api(`/api/retailers`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -63,7 +64,7 @@ export const createRetailer = (retailerData) => async (dispatch) => {
 };
 
 export const updateRetailer = (retailerData) => async (dispatch) => {
-  const res = await fetch(`/api/retailers/${retailerData.id}`, {
+  const res = await api(`/api/retailers/${retailerData.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -78,7 +79,7 @@ export const updateRetailer = (retailerData) => async (dispatch) => {
 };
 
 export const deleteRetailer = (retailerId) => async (dispatch) => {
-  const res = await fetch(`/api/retailers/${retailerId}`, {
+  const res = await api(`/api/retailers/${retailerId}`, {
     method: 'DELETE',
   });
   const data = await res.json();
@@ -91,7 +92,7 @@ export const deleteRetailer = (retailerId) => async (dispatch) => {
 export const createRetailerRating = (rating, retailer_id) => async (
   dispatch
 ) => {
-  const res = await fetch(`/api/retailers/${retailer_id}/ratings`, {
+  const res = await api(`/api/retailers/${retailer_id}/ratings`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -108,16 +109,13 @@ export const createRetailerRating = (rating, retailer_id) => async (
 export const updateRetailerRating = (rating, retailer_id) => async (
   dispatch
 ) => {
-  const res = await fetch(
-    `/api/retailers/${retailer_id}/ratings/${rating.id}`,
-    {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(rating),
-    }
-  );
+  const res = await api(`/api/retailers/${retailer_id}/ratings/${rating.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(rating),
+  });
   const retailer = await res.json();
   if (!retailer.errors) {
     dispatch(setRetailer(retailer));
@@ -128,12 +126,9 @@ export const updateRetailerRating = (rating, retailer_id) => async (
 export const deleteRetailerRating = (rating_id, retailer_id) => async (
   dispatch
 ) => {
-  const res = await fetch(
-    `/api/retailers/${retailer_id}/ratings/${rating_id}`,
-    {
-      method: 'DELETE',
-    }
-  );
+  const res = await api(`/api/retailers/${retailer_id}/ratings/${rating_id}`, {
+    method: 'DELETE',
+  });
   const retailer = await res.json();
   if (!retailer.errors) {
     dispatch(setRetailer(retailer));

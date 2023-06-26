@@ -1,5 +1,6 @@
 import json
-from app.models import db, Retailer
+
+from app.models import Retailer, db
 
 
 def seed_retailers():

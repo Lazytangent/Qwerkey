@@ -1,9 +1,14 @@
 import datetime
-from werkzeug.security import generate_password_hash, check_password_hash
+from typing import Type, TypeVar
+
 from flask_login import UserMixin
-from .db import db
-from .saved_post import saved_posts
-from .saved_comment import saved_comments
+from werkzeug.security import check_password_hash, generate_password_hash
+
+from app.models.db import db
+from app.models.saved_comment import saved_comments
+from app.models.saved_post import saved_posts
+
+T = TypeVar("T", bound="User")
 
 
 class User(db.Model, UserMixin):
@@ -31,45 +36,21 @@ class User(db.Model, UserMixin):
     )
 
     @property
-    def password(self):
+    def password(self) -> str:
         return self.hashed_password
 
     @password.setter
-    def password(self, password):
+    def password(self, password: str) -> None:
         self.hashed_password = generate_password_hash(password)
 
-    def check_password(self, password):
+    def check_password(self, password: str) -> bool:
         return check_password_hash(self.password, password)
-
-    def to_simple_dict(self):
-        return {
-            "id": self.id,
-            "username": self.username,
-            "email": self.email,
-            "created_at": self.created_at,
-        }
-
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "username": self.username,
-            "email": self.email,
-            "created_at": self.created_at,
-            "meetups": [meetup.to_dict() for meetup in self.meetups],
-            "saved_posts": [post.to_simple_dict() for post in self.saved_posts],
-            "saved_comments": [
-                comment.to_search_dict() for comment in self.saved_comments
-            ],
-            "comments": [comment.to_dict() for comment in self.comments],
-            "posts": [post.to_simple_dict() for post in self.posts],
-            "retailers": [retailer.to_dict() for retailer in self.retailers],
-        }
 
     def __repr__(self):
         return f"<User ID:{self.id} Username:{self.username}>"
 
     @classmethod
-    def create(cls, username, email, password):
+    def create(cls: Type[T], username, email, password) -> T:
         user = cls(username=username, email=email, password=password)
         db.session.add(user)
         db.session.commit()
