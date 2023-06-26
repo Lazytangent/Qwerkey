@@ -1,4 +1,4 @@
-import { BookmarkBorder, Bookmark } from '@material-ui/icons';
+import { BookmarkBorder, Bookmark } from '@mui/icons-material';
 
 const SaveButton = ({ save, isSaved }) => {
   return (

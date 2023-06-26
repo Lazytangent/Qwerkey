@@ -1,4 +1,4 @@
-import { GitHub, Code, LinkedIn, FolderShared } from '@material-ui/icons';
+import { GitHub, Code, LinkedIn, FolderShared } from '@mui/icons-material';
 
 import logo from '../../images/logo.png';
 

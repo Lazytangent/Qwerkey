@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { Brightness2, Brightness7 } from '@material-ui/icons';
+import { Brightness2, Brightness7 } from '@mui/icons-material';
 
 import { useDarkModeContext } from '../../context/DarkModeContext';
 
