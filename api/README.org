@@ -1,0 +1,19 @@
+#+title: FastAPI Application
+
+An endeavor to migrate the existing Flask application over to FastAPI.
+
+** Install Dependencies and Enter Pipenv
+#+begin_src shell
+  % pipenv install --dev
+  % pipenv shell
+#+end_src
+
+** Running the application
+*** From the root of the project
+#+begin_src shell
+  % uvicorn api.main:app --reload
+#+end_src
+*** From within the =api= directory
+#+begin_src shell
+  % uvicorn main:app --reload
+#+end_src
