@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastpi.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 
 from settings import settings
 

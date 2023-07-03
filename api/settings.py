@@ -11,14 +11,21 @@ class EnvEnum(str, Enum):
 
 
 class SqlalchemySettings(BaseSettings):
-    model_config = SettingsConfigDict(env_prefix="sqlalchemy_")
+    model_config = SettingsConfigDict(
+        env_prefix="sqla_",
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+    )
 
     track_modifications: bool = False
     echo: bool = False
 
 
 class AwsS3Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_prefix="s3_")
+    model_config = SettingsConfigDict(
+        env_prefix="s3_", env_file=".env", env_file_encoding="utf-8", extra="ignore"
+    )
 
     bucket: str
     access_key: str
@@ -31,7 +38,7 @@ class AwsS3Settings(BaseSettings):
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
     environment: EnvEnum = EnvEnum.dev
     secret_key: str
