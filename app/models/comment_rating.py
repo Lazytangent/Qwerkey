@@ -22,7 +22,9 @@ class CommentRating(db.Model):
     )
 
     user: Mapped["models.user.User"] = db.relationship(back_populates="rated_comments")
-    comment: Mapped["models.comment.Comment"] = db.relationship(back_populates="ratings")
+    comment: Mapped["models.comment.Comment"] = db.relationship(
+        back_populates="ratings"
+    )
 
     def to_dict(self):
         return {
