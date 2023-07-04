@@ -3,10 +3,8 @@ import { useCreatePostContext } from '../../context/CreatePostContext';
 import CreatePostForm from './CreatePostForm';
 
 const CreatePostModal = () => {
-  const {
-    showCreatePostModal,
-    setShowCreatePostModal,
-  } = useCreatePostContext();
+  const { showCreatePostModal, setShowCreatePostModal } =
+    useCreatePostContext();
 
   return (
     <>
