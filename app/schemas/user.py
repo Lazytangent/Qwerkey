@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from pydantic import ConfigDict
+
 from app.schemas.comment import MinimalCommentResponse
 from app.schemas.config import BaseORMModeModel
 from app.schemas.meetup import MinimalMeetupResponse
@@ -25,3 +27,5 @@ class FullUserResponse(MinimalUserResponse):
     comments: list[MinimalCommentResponse]
     posts: list[MinimalPostResponse]
     retailers: list[MinimalRetailerResponse]
+
+    model_config = ConfigDict(from_attributes=True)

@@ -18,7 +18,7 @@ class PostRating(db.Model):
         db.DateTime, nullable=False, default=datetime.datetime.utcnow
     )
 
-    user = db.relationship("User")
+    user = db.relationship("User", back_populates="rated_posts")
     post = db.relationship("Post", back_populates="ratings")
 
     def to_simple_dict(self):

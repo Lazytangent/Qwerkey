@@ -1,5 +1,8 @@
 import datetime
 
+from sqlalchemy.orm import Mapped
+
+from app import models
 from app.models.db import db
 from app.schemas.user import MinimalUserResponse
 
@@ -18,8 +21,10 @@ class CommentRating(db.Model):
         db.DateTime, nullable=False, default=datetime.datetime.utcnow
     )
 
-    user = db.relationship("User")
-    comment = db.relationship("Comment", back_populates="ratings")
+    user: Mapped["models.user.User"] = db.relationship(back_populates="rated_comments")
+    comment: Mapped["models.comment.Comment"] = db.relationship(
+        back_populates="ratings"
+    )
 
     def to_dict(self):
         return {
