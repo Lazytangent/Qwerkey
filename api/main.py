@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from api.routers import api
 from api.settings import settings
 
 app = FastAPI()
@@ -17,6 +18,8 @@ if settings.is_dev:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+app.include_router(api.router)
 
 
 @app.get("/")
