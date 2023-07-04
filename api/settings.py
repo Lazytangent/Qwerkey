@@ -27,7 +27,7 @@ class AwsS3Settings(BaseSettings):
         env_prefix="s3_", env_file=".env", env_file_encoding="utf-8", extra="ignore"
     )
 
-    bucket: str
+    bucket_name: str
     access_key: str
     secret_access_key: str
 
