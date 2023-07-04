@@ -55,6 +55,7 @@ psycopg2-binary = "==2.9.6"
 autopep8 = "*"
 pylint = "*"
 httpx = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.11"

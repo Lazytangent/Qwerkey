@@ -30,4 +30,4 @@ jobs:
       - name: Install dependencies
         run: pipenv install --deploy --dev
       - name: Run pytest
-        run: pytest
+        run: pipenv run pytest

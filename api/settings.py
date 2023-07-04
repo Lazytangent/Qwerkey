@@ -20,6 +20,8 @@ class SqlalchemySettings(BaseSettings):
 
     track_modifications: bool = False
     echo: bool = False
+    autocommit: bool = False
+    autoflush: bool = False
 
 
 class AwsS3Settings(BaseSettings):
@@ -31,7 +33,7 @@ class AwsS3Settings(BaseSettings):
     access_key: str
     secret_access_key: str
 
-    @computed_field
+    @computed_field(repr=False)
     @property
     def location(self) -> str:
         return f"http://{self.bucket}.s3.amazonaws.com/"
