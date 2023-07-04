@@ -89,52 +89,55 @@ export const deleteRetailer = (retailerId) => async (dispatch) => {
   return data;
 };
 
-export const createRetailerRating = (rating, retailer_id) => async (
-  dispatch
-) => {
-  const res = await api(`/api/retailers/${retailer_id}/ratings`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(rating),
-  });
-  const retailer = await res.json();
-  if (!retailer.errors) {
-    dispatch(setRetailer(retailer));
-  }
-  return retailer;
-};
+export const createRetailerRating =
+  (rating, retailer_id) => async (dispatch) => {
+    const res = await api(`/api/retailers/${retailer_id}/ratings`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(rating),
+    });
+    const retailer = await res.json();
+    if (!retailer.errors) {
+      dispatch(setRetailer(retailer));
+    }
+    return retailer;
+  };
 
-export const updateRetailerRating = (rating, retailer_id) => async (
-  dispatch
-) => {
-  const res = await api(`/api/retailers/${retailer_id}/ratings/${rating.id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(rating),
-  });
-  const retailer = await res.json();
-  if (!retailer.errors) {
-    dispatch(setRetailer(retailer));
-  }
-  return retailer;
-};
+export const updateRetailerRating =
+  (rating, retailer_id) => async (dispatch) => {
+    const res = await api(
+      `/api/retailers/${retailer_id}/ratings/${rating.id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(rating),
+      }
+    );
+    const retailer = await res.json();
+    if (!retailer.errors) {
+      dispatch(setRetailer(retailer));
+    }
+    return retailer;
+  };
 
-export const deleteRetailerRating = (rating_id, retailer_id) => async (
-  dispatch
-) => {
-  const res = await api(`/api/retailers/${retailer_id}/ratings/${rating_id}`, {
-    method: 'DELETE',
-  });
-  const retailer = await res.json();
-  if (!retailer.errors) {
-    dispatch(setRetailer(retailer));
-  }
-  return retailer;
-};
+export const deleteRetailerRating =
+  (rating_id, retailer_id) => async (dispatch) => {
+    const res = await api(
+      `/api/retailers/${retailer_id}/ratings/${rating_id}`,
+      {
+        method: 'DELETE',
+      }
+    );
+    const retailer = await res.json();
+    if (!retailer.errors) {
+      dispatch(setRetailer(retailer));
+    }
+    return retailer;
+  };
 
 const initialState = {
   retailers: {},

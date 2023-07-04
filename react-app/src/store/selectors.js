@@ -49,10 +49,16 @@ export const sidebar = {
 
 export const search = {
   results: () => (state) => state.search,
-  posts: ({ posts = [] }) => (state) =>
-    posts.map((id) => state.posts.posts[id]),
-  comments: ({ comments = [] }) => (state) =>
-    comments.map((id) => state.comments.comments[id]),
-  retailers: ({ retailers = [] }) => (state) =>
-    retailers.map((id) => state.retailers.retailers[id]),
+  posts:
+    ({ posts = [] }) =>
+    (state) =>
+      posts.map((id) => state.posts.posts[id]),
+  comments:
+    ({ comments = [] }) =>
+    (state) =>
+      comments.map((id) => state.comments.comments[id]),
+  retailers:
+    ({ retailers = [] }) =>
+    (state) =>
+      retailers.map((id) => state.retailers.retailers[id]),
 };

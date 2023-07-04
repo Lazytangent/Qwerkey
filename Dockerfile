@@ -1,4 +1,4 @@
-FROM node:12 AS build-stage
+FROM node:18 AS build-stage
 
 WORKDIR /react-app
 COPY react-app/package.json react-app/package-lock.json ./
@@ -8,7 +8,7 @@ RUN npm install
 COPY react-app/ ./
 RUN npm run build
 
-FROM python:3.10
+FROM python:3.11
 
 # Setup Flask environment
 ENV FLASK_APP=app

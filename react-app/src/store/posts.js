@@ -30,14 +30,13 @@ export const getMaxNumberOfPosts = () => async (dispatch) => {
   return number;
 };
 
-export const getMaxNumberOfPostsByCommunity = (communityName) => async (
-  dispatch
-) => {
-  const res = await api(`/api/posts/max/${communityName}`);
-  const number = await res.json();
-  dispatch(setMaxNumberOfPosts(number.max));
-  return number;
-};
+export const getMaxNumberOfPostsByCommunity =
+  (communityName) => async (dispatch) => {
+    const res = await api(`/api/posts/max/${communityName}`);
+    const number = await res.json();
+    dispatch(setMaxNumberOfPosts(number.max));
+    return number;
+  };
 
 export const getPosts = (page, communityName) => async (dispatch) => {
   try {
@@ -146,23 +145,25 @@ export const deletePost = (postId) => async (dispatch) => {
   }
 };
 
-export const ratePost = ({ rating, userId, postId }) => async (dispatch) => {
-  const res = await api(`/api/posts/${postId}/rating`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      rating,
-      user_id: userId,
-    }),
-  });
-  const post = await res.json();
-  if (!post.errors) {
-    dispatch(setPost(post));
-  }
-  return post;
-};
+export const ratePost =
+  ({ rating, userId, postId }) =>
+  async (dispatch) => {
+    const res = await api(`/api/posts/${postId}/rating`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        rating,
+        user_id: userId,
+      }),
+    });
+    const post = await res.json();
+    if (!post.errors) {
+      dispatch(setPost(post));
+    }
+    return post;
+  };
 
 const initialState = {
   posts: {},
