@@ -34,7 +34,7 @@ def login():
             or_(User.email == credential, User.username == credential)
         ).first()
         login_user(user)
-        return FullUserResponse.from_orm(user).dict()
+        return FullUserResponse.model_validate(user).dict()
     response = UnauthenticatedErrorsResponse(
         errors=validation_errors_to_error_messages(form.errors)
     ).dict()
