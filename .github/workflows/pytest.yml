@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      S3_BUCKET_NAME: test
+      S3_ACCESS_KEY: test
+      S3_SECRET_ACCESS_KEY: test
+      DATABASE_URL: "postgresql://test:test@localhost/test"
+      OPEN_CAGE_API_KEY: test
 
     steps:
       - uses: actions/checkout@v3
