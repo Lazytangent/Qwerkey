@@ -51,24 +51,23 @@ export const logout = () => async (dispatch) => {
   return await response.json();
 };
 
-export const signUp = (username, email, password, confirm) => async (
-  dispatch
-) => {
-  const response = await api('/api/auth/signup', {
-    method: 'POST',
-    body: JSON.stringify({
-      username,
-      email,
-      password,
-      confirm,
-    }),
-  });
-  const user = await response.json();
-  if (!user.errors) {
-    dispatch(setSession(user));
-  }
-  return user;
-};
+export const signUp =
+  (username, email, password, confirm) => async (dispatch) => {
+    const response = await api('/api/auth/signup', {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+        confirm,
+      }),
+    });
+    const user = await response.json();
+    if (!user.errors) {
+      dispatch(setSession(user));
+    }
+    return user;
+  };
 
 export const savePost = (userId, postId) => async (dispatch) => {
   const res = await api(`/api/users/${userId}/save/post/${postId}`);

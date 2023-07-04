@@ -15,11 +15,8 @@ import DarkModeToggle from '../DarkModeToggle';
 import CreatePostModal from '../CreatePostForm';
 
 const NavBar = () => {
-  const {
-    setShowLoginModal,
-    setShowSignUpModal,
-    authenticated,
-  } = useAuthContext();
+  const { setShowLoginModal, setShowSignUpModal, authenticated } =
+    useAuthContext();
   const { setShowCreatePostModal } = useCreatePostContext();
   const { setShowCollapsedSidebar } = useCollapsedSidebarContext();
   const [showUserMenu, setShowUserMenu] = useState(false);

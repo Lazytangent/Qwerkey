@@ -9,10 +9,8 @@ import About from '../About';
 import NavButton from '../parts/NavButton';
 
 const CollapsedSidebar = () => {
-  const {
-    showCollapsedSidebar,
-    setShowCollapsedSidebar,
-  } = useCollapsedSidebarContext();
+  const { showCollapsedSidebar, setShowCollapsedSidebar } =
+    useCollapsedSidebarContext();
   const popularCommunities = useSelector(sidebar.popularCommunities());
   const currentCommunity = useSelector(sidebar.currentCommunity());
   const [isLoaded, setIsLoaded] = useState(false);
