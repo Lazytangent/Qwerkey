@@ -9,9 +9,11 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.6",
     "@mui/styles": "^5.13.2",
+    "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
+    "caniuse-lite": "^1.0.30001512",
     "country-state-city": "^2.0.0",
     "js-cookie": "^3.0.1",
     "leaflet": "^1.7.1",
@@ -22,7 +24,6 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.0"
   },
@@ -60,5 +61,5 @@
   "jest": {
     "globalSetup": "./global-setup.js"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://127.0.0.1:5000"
 }

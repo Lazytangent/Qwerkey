@@ -1,14 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import './index.css';
 import App from './App';
-import configureStore from './store';
+import { store } from './store';
 import ContextProvider from './context';
-
-const store = configureStore();
 
 if (process.env.NODE_ENV !== 'production') {
   window.store = store;
@@ -24,9 +22,10 @@ const Root = () => (
   </BrowserRouter>
 );
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root'));
+
+root.render(
   <React.StrictMode>
     <Root />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
