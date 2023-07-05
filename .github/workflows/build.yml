@@ -1,6 +1,3 @@
-# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: Build Test
 
 on:
@@ -25,5 +22,6 @@ jobs:
           node-version: 18
           cache: "npm"
           cache-dependency-path: react-app/package-lock.json
-      - run: npm ci
+      # This isn't my best idea...
+      - run: npm install --force
       - run: npm run build --if-present
