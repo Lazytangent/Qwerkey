@@ -1,4 +1,5 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 
 import session from './session';
@@ -10,6 +11,20 @@ import communities from './communities';
 import sidebar from './sidebar';
 import users from './users';
 import meetups from './meetups';
+
+export const store = configureStore({
+  reducer: {
+    session,
+    posts,
+    comments,
+    retailers,
+    search,
+    communities,
+    sidebar,
+    users,
+    meetups,
+  },
+});
 
 const rootReducer = combineReducers({
   session,
@@ -34,8 +49,8 @@ if (process.env.NODE_ENV === 'production') {
   enhancer = composeEnhancers(applyMiddleware(thunk, logger));
 }
 
-const configureStore = (preloadedState) => {
-  return createStore(rootReducer, preloadedState, enhancer);
-};
+/* const configureStore = (preloadedState) => { */
+/*   return createStore(rootReducer, preloadedState, enhancer); */
+/* }; */
 
-export default configureStore;
+/* export default configureStore; */

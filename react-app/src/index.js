@@ -5,10 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import './index.css';
 import App from './App';
-import configureStore from './store';
+import { store } from './store';
 import ContextProvider from './context';
-
-const store = configureStore();
 
 if (process.env.NODE_ENV !== 'production') {
   window.store = store;
